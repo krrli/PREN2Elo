@@ -5,6 +5,8 @@
  *      Author: pirmin
  */
 
+#include "program.h"
+
 void start(void){
 	for(;;);
 }

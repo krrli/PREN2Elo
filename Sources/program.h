@@ -5,8 +5,8 @@
  *      Author: pirmin
  */
 
-#ifndef SOURCES_PREN2_H_
-#define SOURCES_PREN2_H_
+#ifndef SOURCES_PROGRAM_H_
+#define SOURCES_PROGRAM_H_
 
 /*
  * Type Definitions
@@ -35,4 +35,4 @@ enum serialCommands
  */
 void start(void);
 
-#endif /* SOURCES_PREN2_H_ */
+#endif /* SOURCES_PROGRAM_H_ */
