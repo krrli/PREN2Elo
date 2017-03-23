@@ -30,12 +30,25 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
+#include "CLS1.h"
+#include "WAIT1.h"
+#include "MCUC1.h"
+#include "UTIL1.h"
+#include "XF1.h"
+#include "CS1.h"
+#include "AS1.h"
+#include "ASerialLdd1.h"
+#include "CLS2.h"
+#include "AS2.h"
+#include "ASerialLdd2.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
+
+#include "PREN2.h"
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -49,6 +62,8 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
+
+  start();
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/

@@ -121,3 +121,4 @@ ENV/
 *.out
 *.app
 
+/Debug/

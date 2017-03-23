@@ -33,6 +33,17 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "CLS1.h"
+#include "WAIT1.h"
+#include "MCUC1.h"
+#include "UTIL1.h"
+#include "XF1.h"
+#include "CS1.h"
+#include "AS1.h"
+#include "ASerialLdd1.h"
+#include "CLS2.h"
+#include "AS2.h"
+#include "ASerialLdd2.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-23, 10:05, # CodeGen: 0
+**     Date/Time   : 2017-03-23, 11:03, # CodeGen: 2
 **     Abstract    :
 **
 **     Settings    :
@@ -61,6 +61,17 @@
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
+#include "CLS1.h"
+#include "WAIT1.h"
+#include "MCUC1.h"
+#include "UTIL1.h"
+#include "XF1.h"
+#include "CS1.h"
+#include "AS1.h"
+#include "ASerialLdd1.h"
+#include "CLS2.h"
+#include "AS2.h"
+#include "ASerialLdd2.h"
 
 
 /*
