@@ -24,6 +24,20 @@
 \page page_components Components 
 - \subpage ASerialLdd1
 - \subpage ASerialLdd2
+- \subpage MT1_IN1
+- \subpage MT1_IN2
+- \subpage MT1_IN3
+- \subpage MT1_IN4
+- \subpage MT2_IN1
+- \subpage MT2_IN2
+- \subpage MT2_IN3
+- \subpage MT2_IN4
+- \subpage TPM0
+- \subpage PwmLdd1
+- \subpage PwmLdd2
+- \subpage PwmLdd3
+- \subpage PwmLdd4
+- \subpage test
 
 */
 

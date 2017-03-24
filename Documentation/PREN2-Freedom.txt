@@ -209,6 +209,239 @@ Module "AS2"       (component AsynchroSerial)
    - AS2_GetCharsInTxBuf -Returns the number of characters in the output buffer. This method is available only if the 
                 transmitter property is enabled.
 
+Module "MT1_IN1"   (component BitIO_LDD)
+   - MT1_IN1_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the "Enable in init. code" is set to "yes" value 
+                then the device is also enabled(see the description of the Enable() method). In this case the Enable() method 
+                is not necessary and needn't to be generated.
+   - MT1_IN1_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+                returned. If the direction is [output] then the last written value is read and returned (see <Safe mode> 
+                property for limitations). This method cannot be disabled if direction is [input].
+   - MT1_IN1_PutVal -The specified output value is set. If the direction is <b>input</b>, the component saves the value to a 
+                memory or a register and this value will be written to the pin after switching to the output mode (using 
+                <tt>SetDir(TRUE)</tt>; see <a href="BitIOProperties.html#SafeMode">Safe mode</a> property for limitations). If 
+                the direction is <b>output</b>, it writes the value to the pin. (Method is available only if the direction = 
+                <u><tt>output</tt></u> or <u><tt>input/output</tt></u>).
+   - MT1_IN1_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT1_IN1_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
+
+Module "MT1_IN2"   (component BitIO_LDD)
+   - MT1_IN2_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the "Enable in init. code" is set to "yes" value 
+                then the device is also enabled(see the description of the Enable() method). In this case the Enable() method 
+                is not necessary and needn't to be generated.
+   - MT1_IN2_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+                returned. If the direction is [output] then the last written value is read and returned (see <Safe mode> 
+                property for limitations). This method cannot be disabled if direction is [input].
+   - MT1_IN2_PutVal -The specified output value is set. If the direction is <b>input</b>, the component saves the value to a 
+                memory or a register and this value will be written to the pin after switching to the output mode (using 
+                <tt>SetDir(TRUE)</tt>; see <a href="BitIOProperties.html#SafeMode">Safe mode</a> property for limitations). If 
+                the direction is <b>output</b>, it writes the value to the pin. (Method is available only if the direction = 
+                <u><tt>output</tt></u> or <u><tt>input/output</tt></u>).
+   - MT1_IN2_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT1_IN2_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
+
+Module "MT1_IN3"   (component BitIO_LDD)
+   - MT1_IN3_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the "Enable in init. code" is set to "yes" value 
+                then the device is also enabled(see the description of the Enable() method). In this case the Enable() method 
+                is not necessary and needn't to be generated.
+   - MT1_IN3_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+                returned. If the direction is [output] then the last written value is read and returned (see <Safe mode> 
+                property for limitations). This method cannot be disabled if direction is [input].
+   - MT1_IN3_PutVal -The specified output value is set. If the direction is <b>input</b>, the component saves the value to a 
+                memory or a register and this value will be written to the pin after switching to the output mode (using 
+                <tt>SetDir(TRUE)</tt>; see <a href="BitIOProperties.html#SafeMode">Safe mode</a> property for limitations). If 
+                the direction is <b>output</b>, it writes the value to the pin. (Method is available only if the direction = 
+                <u><tt>output</tt></u> or <u><tt>input/output</tt></u>).
+   - MT1_IN3_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT1_IN3_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
+
+Module "MT1_IN4"   (component BitIO_LDD)
+   - MT1_IN4_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the "Enable in init. code" is set to "yes" value 
+                then the device is also enabled(see the description of the Enable() method). In this case the Enable() method 
+                is not necessary and needn't to be generated.
+   - MT1_IN4_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+                returned. If the direction is [output] then the last written value is read and returned (see <Safe mode> 
+                property for limitations). This method cannot be disabled if direction is [input].
+   - MT1_IN4_PutVal -The specified output value is set. If the direction is <b>input</b>, the component saves the value to a 
+                memory or a register and this value will be written to the pin after switching to the output mode (using 
+                <tt>SetDir(TRUE)</tt>; see <a href="BitIOProperties.html#SafeMode">Safe mode</a> property for limitations). If 
+                the direction is <b>output</b>, it writes the value to the pin. (Method is available only if the direction = 
+                <u><tt>output</tt></u> or <u><tt>input/output</tt></u>).
+   - MT1_IN4_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT1_IN4_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
+
+Module "MT2_IN1"   (component BitIO_LDD)
+   - MT2_IN1_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the "Enable in init. code" is set to "yes" value 
+                then the device is also enabled(see the description of the Enable() method). In this case the Enable() method 
+                is not necessary and needn't to be generated.
+   - MT2_IN1_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+                returned. If the direction is [output] then the last written value is read and returned (see <Safe mode> 
+                property for limitations). This method cannot be disabled if direction is [input].
+   - MT2_IN1_PutVal -The specified output value is set. If the direction is <b>input</b>, the component saves the value to a 
+                memory or a register and this value will be written to the pin after switching to the output mode (using 
+                <tt>SetDir(TRUE)</tt>; see <a href="BitIOProperties.html#SafeMode">Safe mode</a> property for limitations). If 
+                the direction is <b>output</b>, it writes the value to the pin. (Method is available only if the direction = 
+                <u><tt>output</tt></u> or <u><tt>input/output</tt></u>).
+   - MT2_IN1_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT2_IN1_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
+
+Module "MT2_IN2"   (component BitIO_LDD)
+   - MT2_IN2_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the "Enable in init. code" is set to "yes" value 
+                then the device is also enabled(see the description of the Enable() method). In this case the Enable() method 
+                is not necessary and needn't to be generated.
+   - MT2_IN2_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+                returned. If the direction is [output] then the last written value is read and returned (see <Safe mode> 
+                property for limitations). This method cannot be disabled if direction is [input].
+   - MT2_IN2_PutVal -The specified output value is set. If the direction is <b>input</b>, the component saves the value to a 
+                memory or a register and this value will be written to the pin after switching to the output mode (using 
+                <tt>SetDir(TRUE)</tt>; see <a href="BitIOProperties.html#SafeMode">Safe mode</a> property for limitations). If 
+                the direction is <b>output</b>, it writes the value to the pin. (Method is available only if the direction = 
+                <u><tt>output</tt></u> or <u><tt>input/output</tt></u>).
+   - MT2_IN2_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT2_IN2_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
+
+Module "MT2_IN3"   (component BitIO_LDD)
+   - MT2_IN3_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the "Enable in init. code" is set to "yes" value 
+                then the device is also enabled(see the description of the Enable() method). In this case the Enable() method 
+                is not necessary and needn't to be generated.
+   - MT2_IN3_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+                returned. If the direction is [output] then the last written value is read and returned (see <Safe mode> 
+                property for limitations). This method cannot be disabled if direction is [input].
+   - MT2_IN3_PutVal -The specified output value is set. If the direction is <b>input</b>, the component saves the value to a 
+                memory or a register and this value will be written to the pin after switching to the output mode (using 
+                <tt>SetDir(TRUE)</tt>; see <a href="BitIOProperties.html#SafeMode">Safe mode</a> property for limitations). If 
+                the direction is <b>output</b>, it writes the value to the pin. (Method is available only if the direction = 
+                <u><tt>output</tt></u> or <u><tt>input/output</tt></u>).
+   - MT2_IN3_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT2_IN3_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
+
+Module "MT2_IN4"   (component BitIO_LDD)
+   - MT2_IN4_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the "Enable in init. code" is set to "yes" value 
+                then the device is also enabled(see the description of the Enable() method). In this case the Enable() method 
+                is not necessary and needn't to be generated.
+   - MT2_IN4_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+                returned. If the direction is [output] then the last written value is read and returned (see <Safe mode> 
+                property for limitations). This method cannot be disabled if direction is [input].
+   - MT2_IN4_PutVal -The specified output value is set. If the direction is <b>input</b>, the component saves the value to a 
+                memory or a register and this value will be written to the pin after switching to the output mode (using 
+                <tt>SetDir(TRUE)</tt>; see <a href="BitIOProperties.html#SafeMode">Safe mode</a> property for limitations). If 
+                the direction is <b>output</b>, it writes the value to the pin. (Method is available only if the direction = 
+                <u><tt>output</tt></u> or <u><tt>input/output</tt></u>).
+   - MT2_IN4_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT2_IN4_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
+
+Module "MT1_PWM1"  (component PWM)
+   - MT1_PWM1_SetRatio16 -This method sets a new duty-cycle ratio. Ratio is expressed as a 16-bit unsigned integer number. 0 - 
+                FFFF value is proportional to ratio 0 - 100%. The method is available only if it is not selected list of 
+                predefined values in <Starting pulse width> property.   Note: Calculated duty depends on the timer 
+                possibilities and on the selected period.
+   - MT1_PWM1_SetDutyUS -This method sets the new duty value of the output signal. The duty is expressed in microseconds as a 
+                16-bit unsigned integer number. The method is available only if it is not selected list of predefined values in 
+                <Starting pulse width> property.
+   - MT1_PWM1_SetDutyMS -This method sets the new duty value of the output signal. The duty is expressed in milliseconds as a 
+                16-bit unsigned integer number. The method is available only if it is not selected list of predefined values in 
+                <Starting pulse width> property.
+
+Module "TPM0"      (component TimerUnit_LDD)
+   - TPM0_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the property <"Enable in init. code"> is set to 
+                "yes" value then the device is also enabled (see the description of the <Enable> method). In this case the 
+                <Enable> method is not necessary and needn't to be generated. This method can be called only once. Before the 
+                second call of Init the <Deinit> must be called first.
+   - TPM0_GetPeriodTicks -Returns the number of counter ticks before re-initialization. See also method <SetPeriodTicks>. This 
+                method is available only if the property <"Counter restart"> is switched to 'on-match' value.
+   - TPM0_GetCounterValue -Returns the content of counter register. This method can be used both if counter is enabled and if 
+                counter is disabled. The method is not available if HW doesn't allow reading of the counter.
+   - TPM0_SetOffsetTicks -Sets the new offset value to channel specified by the parameter ChannelIdx. It is user responsibility 
+                to use value below selected period. This method is available when at least one channel is configured.
+   - TPM0_GetOffsetTicks -Returns the number of counter ticks to compare match channel specified by the parameter ChannelIdx. 
+                See also method <SetOffsetTicks>. This method is available when at least one channel is configured.
+   - TPM0_SelectOutputAction -Sets the type of compare match and counter overflow action on channel output. This method is 
+                available when at least one channel is configured.
+
+Module "MT1_PWM2"  (component PWM)
+   - MT1_PWM2_SetRatio16 -This method sets a new duty-cycle ratio. Ratio is expressed as a 16-bit unsigned integer number. 0 - 
+                FFFF value is proportional to ratio 0 - 100%. The method is available only if it is not selected list of 
+                predefined values in <Starting pulse width> property.   Note: Calculated duty depends on the timer 
+                possibilities and on the selected period.
+   - MT1_PWM2_SetDutyUS -This method sets the new duty value of the output signal. The duty is expressed in microseconds as a 
+                16-bit unsigned integer number. The method is available only if it is not selected list of predefined values in 
+                <Starting pulse width> property.
+   - MT1_PWM2_SetDutyMS -This method sets the new duty value of the output signal. The duty is expressed in milliseconds as a 
+                16-bit unsigned integer number. The method is available only if it is not selected list of predefined values in 
+                <Starting pulse width> property.
+
+Module "MT2_PWM1"  (component PWM)
+   - MT2_PWM1_SetRatio16 -This method sets a new duty-cycle ratio. Ratio is expressed as a 16-bit unsigned integer number. 0 - 
+                FFFF value is proportional to ratio 0 - 100%. The method is available only if it is not selected list of 
+                predefined values in <Starting pulse width> property.   Note: Calculated duty depends on the timer 
+                possibilities and on the selected period.
+   - MT2_PWM1_SetDutyUS -This method sets the new duty value of the output signal. The duty is expressed in microseconds as a 
+                16-bit unsigned integer number. The method is available only if it is not selected list of predefined values in 
+                <Starting pulse width> property.
+   - MT2_PWM1_SetDutyMS -This method sets the new duty value of the output signal. The duty is expressed in milliseconds as a 
+                16-bit unsigned integer number. The method is available only if it is not selected list of predefined values in 
+                <Starting pulse width> property.
+
+Module "MT2_PWM2"  (component PWM)
+   - MT2_PWM2_SetRatio16 -This method sets a new duty-cycle ratio. Ratio is expressed as a 16-bit unsigned integer number. 0 - 
+                FFFF value is proportional to ratio 0 - 100%. The method is available only if it is not selected list of 
+                predefined values in <Starting pulse width> property.   Note: Calculated duty depends on the timer 
+                possibilities and on the selected period.
+   - MT2_PWM2_SetDutyUS -This method sets the new duty value of the output signal. The duty is expressed in microseconds as a 
+                16-bit unsigned integer number. The method is available only if it is not selected list of predefined values in 
+                <Starting pulse width> property.
+   - MT2_PWM2_SetDutyMS -This method sets the new duty value of the output signal. The duty is expressed in milliseconds as a 
+                16-bit unsigned integer number. The method is available only if it is not selected list of predefined values in 
+                <Starting pulse width> property.
+
+Module "test"      (component BitsIO_LDD)
+   - test_Init -This method initializes the associated peripheral(s) and the component internal variables. The method is called 
+                automatically as a part of the application initialization code.
+   - test_SetDir -Sets a direction for the pins (available only if Direction = _[input/output]_).
+   - test_SetInput -Sets a direction to input for the pins (available only if Direction = _[input/output]_).
+   - test_GetVal -Returns the value of the Input/Output component. If the direction is [input] then reads the input value of 
+                the pins and returns it. If the direction is [output] then returns the last written value (see <Safe mode> 
+                property for limitations).
+   - test_PutVal -Specified value is passed to the Input/Output component. If the direction is [input] saves the value to a 
+                memory or a register, this value will be written to the pins after switching to the output mode - using 
+                [SetDir(TRUE)] (see <Safe mode> property for limitations). If the direction is [output] it writes the value to 
+                the pins. (Method is available only if the Direction = _[output]_ or _[input/output]_).
+   - test_GetBit -Returns the value of the specified bit/pin of the Input/Output component. If the direction is [input] then it 
+                reads the input value of the pin and returns it. If the direction is [output] then it returns the last written 
+                value (see <Safe mode> property for limitations).
+   - test_PutBit -Specified value is passed to the specified bit/pin of the Input/Output component. If the direction is [input] 
+                it saves the value to a memory or register, this value will be written to the pin after switching to the output 
+                mode - using [SetDir(TRUE)] (see <Safe mode> property for limitations). If the direction is [output] it writes 
+                the value to the pin. (Method is available only if the Direction = _[output]_ or _[input/output]_).
+   - test_SetBit -Sets (to one) the specified bit of the Input/Output component. It is the same as [PutBit(Bit, TRUE)]. (Method 
+                is available only if the Direction = _[output]_ or _[input/output]_).
+   - test_ClrBit -Clears (sets to zero) the specified bit of the Input/Output component. It is the same as [PutBit(Bit, FALSE)].
+                (Method is available only if the Direction = _[output]_ or _[input/output]_).
+
 Module "Cpu"       (component MKL25Z128LK4)
 
 ===================================================================================

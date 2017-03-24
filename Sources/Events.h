@@ -61,6 +61,7 @@
 #include "PwmLdd3.h"
 #include "MT2_PWM2.h"
 #include "PwmLdd4.h"
+#include "test.h"
 
 #ifdef __cplusplus
 extern "C" {

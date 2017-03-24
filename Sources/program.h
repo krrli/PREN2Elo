@@ -87,6 +87,9 @@ enum driveDistance
 };
 
 /*
+ * method declarations
+ */
+/*
  * program.c
  */
 void start(void); // init method
@@ -94,5 +97,10 @@ void serialRxInt(uint8_t ch, uint8_t port); // called from Hardware Interrupt
 void serialSend(uint8_t ch, uint8_t port); // sends byte to serial port
 void simulateParcour(void); // method to simulate the serial communication of a complete parcour
 void mainLoop(void); // main loop for driving
+
+/*
+ * tof.c
+ */
+void initToF(void);
 
 #endif /* SOURCES_PROGRAM_H_ */

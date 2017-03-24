@@ -58,6 +58,7 @@
 #include "PwmLdd3.h"
 #include "MT2_PWM2.h"
 #include "PwmLdd4.h"
+#include "test.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"

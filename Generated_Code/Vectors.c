@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-24, 13:10, # CodeGen: 10
+**     Date/Time   : 2017-03-24, 15:21, # CodeGen: 11
 **     Abstract    :
 **
 **     Settings    :
@@ -66,6 +66,24 @@
   #include "CLS2.h"
   #include "AS2.h"
   #include "ASerialLdd2.h"
+  #include "MT1_IN1.h"
+  #include "MT1_IN2.h"
+  #include "MT1_IN3.h"
+  #include "MT1_IN4.h"
+  #include "MT2_IN1.h"
+  #include "MT2_IN2.h"
+  #include "MT2_IN3.h"
+  #include "MT2_IN4.h"
+  #include "MT1_PWM1.h"
+  #include "PwmLdd1.h"
+  #include "TPM0.h"
+  #include "MT1_PWM2.h"
+  #include "PwmLdd2.h"
+  #include "MT2_PWM1.h"
+  #include "PwmLdd3.h"
+  #include "MT2_PWM2.h"
+  #include "PwmLdd4.h"
+  #include "test.h"
   #include "Events.h"
 
 
