@@ -67,7 +67,7 @@
       <File Name="Sources/Events.h" FileDate="2017-03-24, 09:10:05" FileAge="1490343005000" FileType="131328" />
       <File Name="Project_Settings/Startup_Code/startup.c" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="16384" CompNumb="2" />
       <File Name="Generated_Code/CS1.c" FileDate="2017-03-23, 11:00:55" FileAge="1490263255000" FileType="45637" CompNumb="9" />
-      <File Name="Sources/Events.c" FileDate="2017-03-24, 09:10:05" FileAge="1490343005000" FileType="131328" />
+      <File Name="Sources/Events.c" FileDate="2017-03-24, 11:17:20" FileAge="1490350640000" FileType="131328" />
       <File Name="Documentation/doxygen/PREN2-Freedom_project.txt" FileDate="2017-03-23, 11:03:04" FileAge="1490263384000" FileType="45637" CompNumb="2" />
       <File Name="Static_Code/PDD/DMA_PDD.h" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="1048576" />
       <File Name="Static_Code/PDD/SPI_PDD.h" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="1048576" />
@@ -81,7 +81,7 @@
       <File Name="Generated_Code/Vectors.c" FileDate="2017-03-24, 09:10:05" FileAge="1490343005000" FileType="45637" CompNumb="2" />
       <File Name="Generated_Code/WAIT1.h" FileDate="2017-03-23, 11:00:55" FileAge="1490263255000" FileType="45637" CompNumb="4" />
       <File Name="Generated_Code/WAIT1.c" FileDate="2017-03-23, 11:00:55" FileAge="1490263255000" FileType="45637" CompNumb="4" />
-      <File Name="Documentation/PREN2-Freedom_SIGNALS.txt" FileDate="2017-03-24, 09:10:05" FileAge="1490343005000" FileType="3072" />
+      <File Name="Documentation/PREN2-Freedom_SIGNALS.txt" FileDate="2017-03-24, 11:18:10" FileAge="1490350690000" FileType="3072" />
       <File Name="Documentation/doxygen/RoutingReport_component.txt" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="45637" CompNumb="2" />
       <File Name="Generated_Code/ASerialLdd2.h" FileDate="2017-03-24, 09:10:05" FileAge="1490343005000" FileType="45637" CompNumb="14" />
       <File Name="Generated_Code/UTIL1.h" FileDate="2017-03-23, 11:00:55" FileAge="1490263255000" FileType="45637" CompNumb="7" />
@@ -92,8 +92,8 @@
       <File Name="Generated_Code/UTIL1.c" FileDate="2017-03-23, 11:00:55" FileAge="1490263255000" FileType="45637" CompNumb="7" />
       <File Name="Generated_Code/AS2.h" FileDate="2017-03-24, 09:10:05" FileAge="1490343005000" FileType="45637" CompNumb="13" />
       <File Name="Documentation/doxygen/ASerialLdd2_component.txt" FileDate="2017-03-24, 09:10:05" FileAge="1490343005000" FileType="45637" CompNumb="14" />
-      <File Name="Static_Code/PDD/PIT_PDD.h" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="1048576" />
       <File Name="Generated_Code/ASerialLdd1.c" FileDate="2017-03-24, 09:09:50" FileAge="1490342990000" FileType="45637" CompNumb="11" />
+      <File Name="Static_Code/PDD/PIT_PDD.h" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="1048576" />
       <File Name="ProjectInfo.xml" FileDate="2017-03-24, 08:49:36" FileAge="1490341776000" FileType="45637" />
       <File Name="Generated_Code/AS2.c" FileDate="2017-03-24, 09:10:05" FileAge="1490343005000" FileType="45637" CompNumb="13" />
       <File Name="Generated_Code/AS1.h" FileDate="2017-03-24, 09:09:50" FileAge="1490342990000" FileType="45637" CompNumb="10" />
@@ -102,5 +102,5 @@
       <File Name="Generated_Code/AS1.c" FileDate="2017-03-24, 09:09:50" FileAge="1490342990000" FileType="45637" CompNumb="10" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>6</CodeGenReference>
+  <CodeGenReference>8</CodeGenReference>
 </CodeGenerationInfo>
