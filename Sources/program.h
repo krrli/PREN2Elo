@@ -9,13 +9,18 @@
 #define SOURCES_PROGRAM_H_
 
 /*
- * Type Definitions
+ * External Includes
  */
-typedef unsigned char uint8;
+#include "Events.h" // Used for indirect Includes of Hardware Components
 
 /*
- * Declaration of Commands and Responses on the Serial Interface
+ * Declaration of Constants used for the serial Interfaces
  */
+enum serialPort
+{
+	PC,
+	RasPi
+};
 enum serialResponse
 {
 	ACKNOWLEDGE = 0x20,
@@ -23,16 +28,18 @@ enum serialResponse
 };
 enum serialCommands
 {
-	START = 0x80,
-	ROMAN_NUMERAL_REQUEST = 0x40,
-	CURVE = 0x08,
-	PAUSE = 0xC0,
-	RESUME = 0x60
-};
+	START = 0x80, // RPi to FD
+	ROMAN_NUMERAL_REQUEST = 0x40, // FD to RPi
+	CURVE = 0x08, // FD to RPi
+	PAUSE = 0xC0, // RPi to FD !!!ERROR!!!*
+	RESUME = 0x60 // RPi to FD !!!ERROR!!!*
+}; // *: If this values are sent, the Rx interrupt will never be called! Why?
 
 /*
  * program.c
  */
-void start(void);
+void start(void); // init method
+void serialRxInt(uint8_t ch, uint8_t port); // called from Hardware Interrupt
+void serialSend(uint8_t ch, uint8_t port); // sends byte to serial port
 
 #endif /* SOURCES_PROGRAM_H_ */

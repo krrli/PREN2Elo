@@ -7,7 +7,7 @@
 **     Version     : Component 02.611, Driver 01.01, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-23, 11:00, # CodeGen: 1
+**     Date/Time   : 2017-03-24, 09:09, # CodeGen: 4
 **     Abstract    :
 **         This component "AsynchroSerial" implements an asynchronous serial
 **         communication. The component supports different settings of
@@ -18,7 +18,18 @@
 **     Settings    :
 **          Component name                                 : AS1
 **          Channel                                        : UART0
-**          Interrupt service/event                        : Disabled
+**          Interrupt service/event                        : Enabled
+**            Interrupt RxD                                : INT_UART0
+**            Interrupt RxD priority                       : medium priority
+**            Interrupt TxD                                : INT_UART0
+**            Interrupt TxD priority                       : medium priority
+**            Interrupt Error                              : INT_UART0
+**            Interrupt Error priority                     : medium priority
+**            Input buffer size                            : 0
+**            Output buffer size                           : 0
+**            Handshake                                    : 
+**              CTS                                        : Disabled
+**              RTS                                        : Disabled
 **          Settings                                       : 
 **            Parity                                       : even (hw or sw)
 **            Width                                        : 8 bits
@@ -102,6 +113,7 @@
 /* MODULE AS1. */
 
 #include "AS1.h"
+#include "Events.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -118,6 +130,7 @@ extern "C" {
 #define NOISE_ERR        0x80U         /* Noise error flag bit      */
 #define IDLE_ERR         0x0100U       /* Idle character flag bit   */
 #define BREAK_ERR        0x0200U       /* Break detect              */
+#define COMMON_ERR       0x0800U       /* Common error of RX       */
 
 LDD_TDeviceData *ASerialLdd1_DeviceDataPtr; /* Device data pointer */
 static word SerFlag;                   /* Flags for serial communication */
@@ -126,7 +139,7 @@ static word SerFlag;                   /* Flags for serial communication */
                                        /*       2 - Parity error */
                                        /*       3 - Char in RX buffer */
                                        /*       4 - Full TX buffer */
-                                       /*       5 - Unused */
+                                       /*       5 - Running int from TX */
                                        /*       6 - Full RX buffer */
                                        /*       7 - Noise error */
                                        /*       8 - Idle character  */
@@ -187,21 +200,15 @@ static void HWEnDi(void)
 byte AS1_RecvChar(AS1_TComData *Chr)
 {
   byte Result = ERR_OK;                /* Return error code */
-  LDD_SERIAL_TError SerialErrorMask;   /* Serial error mask variable */
 
-  ASerialLdd1_Main(ASerialLdd1_DeviceDataPtr);
-  if (ASerialLdd1_GetError(ASerialLdd1_DeviceDataPtr, &SerialErrorMask) == ERR_OK) { /* Get error state */
-    if (SerialErrorMask != 0U) {
-      Result = ERR_COMMON;             /* If yes then set common error value */
-    } else {
-      if (ASerialLdd1_GetReceivedDataNum(ASerialLdd1_DeviceDataPtr) == 0U) { /* Is not received char? */
-        return ERR_RXEMPTY;            /* If yes then error is returned */
-      }
-    }
+  if ((SerFlag & CHAR_IN_RX) == 0U) {  /* Is any char in RX buffer? */
+    return ERR_RXEMPTY;                /* If no then error */
   }
-  *Chr = BufferRead;                   /* Read the char */
-  (void)ASerialLdd1_ReceiveBlock(ASerialLdd1_DeviceDataPtr, &BufferRead, 1U); /* Receive one data byte */
-  ASerialLdd1_Main(ASerialLdd1_DeviceDataPtr);
+  EnterCritical();                     /* Disable global interrupts */
+  *Chr = BufferRead;                   /* Received char */
+  Result = (byte)((SerFlag & (OVERRUN_ERR|COMMON_ERR))? ERR_COMMON : ERR_OK);
+  SerFlag &= (word)~(word)(OVERRUN_ERR|COMMON_ERR|CHAR_IN_RX); /* Clear all errors in the status variable */
+  ExitCritical();                      /* Enable global interrupts */
   return Result;                       /* Return error code */
 }
 
@@ -229,15 +236,14 @@ byte AS1_RecvChar(AS1_TComData *Chr)
 */
 byte AS1_SendChar(AS1_TComData Chr)
 {
-  AS1_TComData TmpChr = OutBuffer;     /* Save OutBuffer value */
-
-  ASerialLdd1_Main(ASerialLdd1_DeviceDataPtr);
-  OutBuffer = Chr;                     /* Save character */
-  if (ASerialLdd1_SendBlock(ASerialLdd1_DeviceDataPtr, (LDD_TData *)&OutBuffer, 1U) == ERR_BUSY) { /* Send one data byte */
-    OutBuffer = TmpChr;                /* If is device busy, restore OutBuffer value */
-    return ERR_TXFULL;
+  if ((SerFlag & FULL_TX) != 0U) {     /* Is any char is in TX buffer */
+    return ERR_TXFULL;                 /* If yes then error */
   }
-  ASerialLdd1_Main(ASerialLdd1_DeviceDataPtr);
+  EnterCritical();                     /* Disable global interrupts */
+  OutBuffer = Chr;                     /* Store char to temporary variable */
+  (void)ASerialLdd1_SendBlock(ASerialLdd1_DeviceDataPtr, (LDD_TData *)&OutBuffer, 1U); /* Send one data byte */
+  SerFlag |= (FULL_TX);                /* Set the flag "full TX buffer" */
+  ExitCritical();                      /* Enable global interrupts */
   return ERR_OK;                       /* OK */
 }
 
@@ -255,8 +261,7 @@ byte AS1_SendChar(AS1_TComData Chr)
 */
 word AS1_GetCharsInRxBuf(void)
 {
-  ASerialLdd1_Main(ASerialLdd1_DeviceDataPtr);
-  return (word)ASerialLdd1_GetReceivedDataNum(ASerialLdd1_DeviceDataPtr); /* Return number of chars in the receive buffer */
+  return (word)(((SerFlag & CHAR_IN_RX) != 0U)? 1U : 0U); /* Return number of chars in receive buffer */
 }
 
 /*
@@ -274,8 +279,7 @@ word AS1_GetCharsInRxBuf(void)
 */
 word AS1_GetCharsInTxBuf(void)
 {
-  ASerialLdd1_Main(ASerialLdd1_DeviceDataPtr);
-  return ((word)(ASerialLdd1_GetSentDataNum(ASerialLdd1_DeviceDataPtr) != 0x00U) ? 0U:1U); /* Return number of chars in the transmit buffer */
+  return (word)(((SerFlag & FULL_TX) != 0U)? 1U : 0U); /* Return number of chars in the transmitter buffer */
 }
 
 /*
@@ -294,6 +298,88 @@ void AS1_Init(void)
   SerFlag = 0x00U;                     /* Reset flags */
   ASerialLdd1_DeviceDataPtr = ASerialLdd1_Init(NULL); /* Calling init method of the inherited component */
   HWEnDi();                            /* Enable/disable device according to status flags */
+}
+
+#define ON_ERROR    0x01U
+#define ON_FULL_RX  0x02U
+#define ON_RX_CHAR  0x04U
+/*
+** ===================================================================
+**     Method      :  AS1_ASerialLdd1_OnBlockReceived (component AsynchroSerial)
+**
+**     Description :
+**         This event is called when the requested number of data is 
+**         moved to the input buffer.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+void ASerialLdd1_OnBlockReceived(LDD_TUserData *UserDataPtr)
+{
+  register byte Flags = 0U;            /* Temporary variable for flags */
+
+  (void)UserDataPtr;                   /* Parameter is not used, suppress unused argument warning */
+  if ((SerFlag & CHAR_IN_RX) != 0U) {  /* Is the overrun error flag set? */
+    SerFlag |= OVERRUN_ERR;            /* If yes then set the Error flag for RecvChar/Block method */
+    Flags |= ON_ERROR;                 /* If yes then set the OnError flag */
+  }
+  SerFlag |= CHAR_IN_RX;               /* Set flag "char in RX buffer" */
+  if ((Flags & ON_ERROR) != 0U) {      /* Is any error flag set? */
+    AS1_OnError();                     /* Invoke user event */
+  } else {
+    AS1_OnRxChar();                    /* Invoke user event */
+  }
+  (void)ASerialLdd1_ReceiveBlock(ASerialLdd1_DeviceDataPtr, &BufferRead, 1U); /* Receive one data byte */
+}
+
+#define ON_FREE_TX  0x01U
+#define ON_TX_CHAR  0x02U
+/*
+** ===================================================================
+**     Method      :  AS1_ASerialLdd1_OnBlockSent (component AsynchroSerial)
+**
+**     Description :
+**         This event is called after the last character from the output 
+**         buffer is moved to the transmitter.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+void ASerialLdd1_OnBlockSent(LDD_TUserData *UserDataPtr)
+{
+  word OnFlags = 0x00U;                /* Temporary variable for flags */
+
+  (void)UserDataPtr;                   /* Parameter is not used, suppress unused argument warning */
+  if ((SerFlag & FULL_TX) != 0U) {     /* Is any char already present in the transmit buffer? */
+    OnFlags |= ON_TX_CHAR;             /* Set flag "OnTxChar" */
+  }
+  SerFlag &= (word)~(word)(FULL_TX);   /* Reset flag "full TX buffer" */
+  if ((OnFlags & ON_TX_CHAR) != 0x00U) { /* Is flag "OnTxChar" set? */
+    AS1_OnTxChar();                    /* If yes then invoke user event */
+  }
+}
+
+/*
+** ===================================================================
+**     Method      :  AS1_ASerialLdd1_OnError (component AsynchroSerial)
+**
+**     Description :
+**         This event is called when a channel error (not the error 
+**         returned by a given method) occurs.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+void ASerialLdd1_OnError(LDD_TUserData *UserDataPtr)
+{
+  LDD_SERIAL_TError SerialErrorMask;   /* Serial error mask variable */
+
+  (void)UserDataPtr;                   /* Parameter is not used, suppress unused argument warning */
+  (void)ASerialLdd1_GetError(ASerialLdd1_DeviceDataPtr, &SerialErrorMask); /* Get error state */
+  if (SerialErrorMask != 0U) {
+    SerFlag |= (((SerialErrorMask & LDD_SERIAL_PARITY_ERROR) != 0U ) ? PARITY_ERR : 0U);
+    SerFlag |= (((SerialErrorMask & LDD_SERIAL_NOISE_ERROR) != 0U ) ? NOISE_ERR : 0U);
+    SerFlag |= (((SerialErrorMask & LDD_SERIAL_RX_OVERRUN) != 0U ) ? OVERRUN_ERR : 0U);
+    SerFlag |= (((SerialErrorMask & LDD_SERIAL_FRAMING_ERROR) != 0U ) ? FRAMING_ERR : 0U);
+  }
+  AS1_OnError();                       /* Invoke user event */
 }
 
 /*
