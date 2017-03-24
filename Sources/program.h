@@ -26,13 +26,13 @@ enum serialResponse
 	ACKNOWLEDGE = 0x20,
 	ERROR = 0x10
 };
-enum serialCommands
+enum serialCommands // !!!ERROR!!! not every value may be used, serial Rx interrupt isn't called with every byte
 {
 	START = 0x80, // RPi to FD
 	ROMAN_NUMERAL_REQUEST = 0x40, // FD to RPi
 	CURVE = 0x08, // FD to RPi
-	PAUSE = 0xC0, // RPi to FD !!!ERROR!!!*
-	RESUME = 0x60 // RPi to FD !!!ERROR!!!*
+	PAUSE = 0xB0, // RPi to FD !!!ERROR!!!*
+	RESUME = 0x70 // RPi to FD !!!ERROR!!!*
 }; // *: If this values are sent, the Rx interrupt will never be called! Why?
 
 /*
