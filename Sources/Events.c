@@ -92,7 +92,7 @@ void AS1_OnError(void)
 */
 void AS1_OnRxChar(void)
 {
-	// UART0: PC Interface
+	/* UART0: PC Interface */
 	uint8_t ch;
 	CLS1_ReadChar(&ch);
 	serialRxInt(ch, PC);
@@ -151,7 +151,7 @@ void AS2_OnError(void)
 */
 void AS2_OnRxChar(void)
 {
-	// UART1: RasPi Interface
+	/* UART1: RasPi Interface */
 	uint8_t ch;
 	CLS2_ReadChar(&ch);
 	serialRxInt(ch, RasPi);
