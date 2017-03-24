@@ -33,7 +33,7 @@
       <File Name="Documentation/doxygen/MT2_IN2_component.txt" FileDate="2017-03-24, 15:21:27" FileAge="1490365287000" FileType="45637" CompNumb="20" />
       <File Name="Documentation/doxygen/PwmLdd4_component.txt" FileDate="2017-03-24, 15:21:27" FileAge="1490365287000" FileType="45637" CompNumb="31" />
       <File Name="Project_Settings/Startup_Code/startup.c" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="16384" CompNumb="2" />
-      <File Name="Documentation/PREN2-Freedom_SIGNALS.txt" FileDate="2017-03-24, 16:48:13" FileAge="1490370493000" FileType="3072" />
+      <File Name="Documentation/PREN2-Freedom_SIGNALS.txt" FileDate="2017-03-24, 17:36:18" FileAge="1490373378000" FileType="3072" />
       <File Name="Static_Code/PDD/SysTick_PDD.h" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="1048576" />
       <File Name="Generated_Code/XF1config.h" FileDate="2017-03-24, 13:10:05" FileAge="1490357405000" FileType="45637" CompNumb="8" />
       <File Name="Static_Code/PDD/FTFA_PDD.h" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="1048576" />
@@ -103,7 +103,7 @@
       <File Name="Generated_Code/PwmLdd3.c" FileDate="2017-03-24, 15:21:27" FileAge="1490365287000" FileType="45637" CompNumb="29" />
       <File Name="Generated_Code/PwmLdd1.h" FileDate="2017-03-24, 15:21:27" FileAge="1490365287000" FileType="45637" CompNumb="24" />
       <File Name="Generated_Code/PwmLdd1.c" FileDate="2017-03-24, 15:21:27" FileAge="1490365287000" FileType="45637" CompNumb="24" />
-      <File Name="Documentation/PREN2-Freedom_Settings.xml" FileDate="2017-03-24, 16:48:14" FileAge="1490370494000" FileType="3072" />
+      <File Name="Documentation/PREN2-Freedom_Settings.xml" FileDate="2017-03-24, 17:35:12" FileAge="1490373312000" FileType="3072" />
       <File Name="Generated_Code/MCUC1.h" FileDate="2017-03-24, 13:10:05" FileAge="1490357405000" FileType="45637" CompNumb="6" />
       <File Name="Generated_Code/MT1_PWM1.h" FileDate="2017-03-24, 15:21:27" FileAge="1490365287000" FileType="45637" CompNumb="23" />
       <File Name="Generated_Code/MCUC1.c" FileDate="2017-03-24, 13:10:05" FileAge="1490357405000" FileType="45637" CompNumb="6" />
@@ -184,5 +184,5 @@
       <File Name="Generated_Code/GenI2C_ToF.c" FileDate="2017-03-24, 16:17:35" FileAge="1490368655000" FileType="45637" CompNumb="33" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>16</CodeGenReference>
+  <CodeGenReference>20</CodeGenReference>
 </CodeGenerationInfo>

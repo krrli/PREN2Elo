@@ -467,7 +467,7 @@
     </GenFiles>
     <SignalListFile>Documentation\PREN2-Freedom_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>12</ProjectModificationStamp>
+    <ProjectModificationStamp>13</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>

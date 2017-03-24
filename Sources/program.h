@@ -66,9 +66,15 @@ enum driveDistance {
  * declarations for the tof sensors
  */
 #define NUMBER_OF_SENSORS 2
-#define DEFAULT_TOF_ADDRESS 0x29
+#define ERROR_WRONG_SENSOR_NUMBER 0xff
 enum tofAddresses {
-	TOF1 = 0x02, TOF2 = 0x03, TOF3 = 0x04, TOF4 = 0x05, TOF5 = 0x06, TOF6 = 0x07
+	TOF_DEFAULT = 0x29,
+	TOF1 = 0x02,
+	TOF2 = 0x03,
+	TOF3 = 0x04,
+	TOF4 = 0x05,
+	TOF5 = 0x06,
+	TOF6 = 0x07
 };
 enum regAddr {
 	IDENTIFICATION__MODEL_ID = 0x000,
@@ -185,5 +191,11 @@ void mainLoop(void); // main loop for driving
  */
 uint8_t initToF(void); // init tof sensors
 uint8_t getToFValue(uint8_t sens, uint8_t * val); // get value val of sensor sens
+void enableToF(uint8_t sens); // enable / disable sensor sens via chip enable pin
+void disableToF(uint8_t sens);
+uint8_t writeRegister16bit(uint8_t ad, uint16_t reg, uint16_t val); // i2c stuff
+uint8_t writeRegister8bit(uint8_t ad, uint16_t reg, uint8_t val);
+uint8_t readRegister16bit(uint8_t ad, uint16_t reg, uint16_t * val);
+uint8_t readRegister8bit(uint8_t ad, uint16_t reg, uint8_t * val);
 
 #endif /* SOURCES_PROGRAM_H_ */

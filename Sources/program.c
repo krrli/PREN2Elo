@@ -28,6 +28,8 @@ void start(void) {
 	/* init variables for buttons */
 	button = BUTTON3;
 	btnchk = BUTTON_UNCHECKED;
+	/* init tof sensors */
+	//initToF();
 	/* temporary simulation of parcour to test serial interface protocol */
 	//simulateParcour();
 	/* start mainloop */
