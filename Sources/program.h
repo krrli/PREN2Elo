@@ -31,9 +31,9 @@ enum serialCommands // !!!ERROR!!! not every value may be used, serial Rx interr
 	START = 0x80, // RPi to FD
 	ROMAN_NUMERAL_REQUEST = 0x40, // FD to RPi
 	CURVE = 0x08, // FD to RPi
-	PAUSE = 0xB0, // RPi to FD !!!ERROR!!!*
-	RESUME = 0x70 // RPi to FD !!!ERROR!!!*
-}; // *: If this values are sent, the Rx interrupt will never be called! Why?
+	PAUSE = 0xB0, // RPi to FD
+	RESUME = 0x70 // RPi to FD
+};
 
 /*
  * program.c

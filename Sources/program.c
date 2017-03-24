@@ -25,6 +25,9 @@ void serialRxInt(uint8_t ch, uint8_t port){
 		serialSend(ACKNOWLEDGE, port);
 		// start driving again
 		break;
+	case ACKNOWLEDGE:
+	case ERROR:
+		break;
 	default:
 		serialSend(ERROR, port);
 	}
