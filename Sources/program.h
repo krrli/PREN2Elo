@@ -41,5 +41,6 @@ enum serialCommands // !!!ERROR!!! not every value may be used, serial Rx interr
 void start(void); // init method
 void serialRxInt(uint8_t ch, uint8_t port); // called from Hardware Interrupt
 void serialSend(uint8_t ch, uint8_t port); // sends byte to serial port
+void simulateParcour(void); // method to simulate the serial communication of a complete parcour
 
 #endif /* SOURCES_PROGRAM_H_ */

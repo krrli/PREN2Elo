@@ -8,6 +8,7 @@
 #include "program.h"
 
 void start(void){
+	simulateParcour();
 	for(;;);
 }
 
@@ -44,4 +45,13 @@ void serialSend(uint8_t ch, uint8_t port){
 	//default:
 		// error
 	}
+}
+
+void simulateParcour(void){
+	WAIT1_Waitms(2000);
+	serialSend(CURVE, PC);
+	serialSend(CURVE, RasPi);
+	WAIT1_Waitms(2000);
+	serialSend(ROMAN_NUMERAL_REQUEST, PC);
+	serialSend(ROMAN_NUMERAL_REQUEST, RasPi);
 }
