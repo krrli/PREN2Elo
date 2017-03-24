@@ -4,13 +4,13 @@
 /*##                                   */
 /*##     Filename  : ProcessorExpert.ld */
 /*##                                   */
-/*##     Project   : PREN2Elo          */
+/*##     Project   : PREN2-Freedom     */
 /*##                                   */
 /*##     Processor : MKL25Z128VLK4     */
 /*##                                   */
 /*##     Compiler  : GNU C Compiler    */
 /*##                                   */
-/*##     Date/Time : 2017-03-24, 12:37, # CodeGen: 2 */
+/*##     Date/Time : 2017-03-24, 13:10, # CodeGen: 10 */
 /*##                                   */
 /*##     Abstract  :                   */
 /*##                                   */
