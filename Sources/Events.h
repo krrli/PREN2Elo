@@ -61,7 +61,20 @@
 #include "PwmLdd3.h"
 #include "MT2_PWM2.h"
 #include "PwmLdd4.h"
-#include "test.h"
+#include "GenI2C_ToF.h"
+#include "I2C_ToF.h"
+#include "ToF1.h"
+#include "BitIoLdd1.h"
+#include "ToF2.h"
+#include "BitIoLdd2.h"
+#include "ToF3.h"
+#include "BitIoLdd3.h"
+#include "ToF4.h"
+#include "BitIoLdd4.h"
+#include "ToF5.h"
+#include "BitIoLdd5.h"
+#include "ToF6.h"
+#include "BitIoLdd6.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,12 +1,11 @@
-/*
- * tof.c
- *
- *  Created on: 24.03.2017
- *      Author: pirmin
- */
-
 #include "program.h"
 
-void initToF(void){
+
+
+uint8_t initToF(void) {
+	// todo
+}
+
+uint8_t getToFValue(uint8_t sens, uint8_t * val) {
 	// todo
 }

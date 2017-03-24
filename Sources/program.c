@@ -1,10 +1,3 @@
-/*
- * program.c
- *
- *  Created on: 23.03.2017
- *      Author: pirmin
- */
-
 #include "program.h"
 
 /*
@@ -23,8 +16,8 @@ volatile enum driveDistance distance;
 volatile uint8_t button;
 volatile enum buttonChecked btnchk;
 
-void start(void){
-	/* init variables */
+void start(void) {
+	/* init variables for main loop */
 	state = STOPPED;
 	stateBak = STOPPED;
 	stateCurr = STOPPED;
@@ -32,6 +25,7 @@ void start(void){
 	type = PARCOUR_A; // todo: check switch: type = value of switch port
 	endReached = NOT_REACHED;
 	distance = CURVE_DIST;
+	/* init variables for buttons */
 	button = BUTTON3;
 	btnchk = BUTTON_UNCHECKED;
 	/* temporary simulation of parcour to test serial interface protocol */
@@ -39,11 +33,12 @@ void start(void){
 	/* start mainloop */
 	mainLoop();
 	/* fallback loop, should never be reached */
-	for(;;);
+	for (;;)
+		;
 }
 
-void serialRxInt(uint8_t ch, uint8_t port){
-	switch (ch){
+void serialRxInt(uint8_t ch, uint8_t port) {
+	switch (ch) {
 	case START:
 		serialSend(ACKNOWLEDGE, port);
 		if (state == STOPPED)
@@ -77,8 +72,8 @@ void serialRxInt(uint8_t ch, uint8_t port){
 	}
 }
 
-void serialSend(uint8_t ch, uint8_t port){
-	switch (port){
+void serialSend(uint8_t ch, uint8_t port) {
+	switch (port) {
 	case PC:
 		CLS1_SendChar(ch);
 		break;
@@ -88,7 +83,7 @@ void serialSend(uint8_t ch, uint8_t port){
 	}
 }
 
-void simulateParcour(void){
+void simulateParcour(void) {
 	WAIT1_Waitms(2000);
 	serialSend(CURVE, PC);
 	serialSend(CURVE, RasPi);
@@ -99,7 +94,7 @@ void simulateParcour(void){
 
 void mainLoop(void) {
 	for (;;) {
-		if (stateCurr != state) { // todo: set servo position and motor direction and speed (check also wheelPos)
+		if (stateCurr != state) { // todo
 			switch (state) {
 			case STOPPED: /* do nothing */
 				break;
@@ -116,32 +111,32 @@ void mainLoop(void) {
 				break;
 			}
 			stateCurr = state;
-		} else { // todo: control the rigth direction with ToF sensors
-			switch (state) { // detect changes of parcours and change state
+		} else { // todo
+			switch (state) {
 			case STOPPED: /* do nothing */
 				break;
 			case DRIVE_FORWARD:
 				// right sensor front (?) to short distance, decrease motor speed left for defined time
 				// detect end, change to drive left or right mode depending on parcour type
-					// send signal curve to raspi
+				//     send signal curve to raspi
 				break;
 			case DRIVE_BACKWARD:
 				// if end reached, drive fixed distance into button, else:
-					// right sensor front (?) to short distance, decrease motor speed left for defined time
-					// detect end and change to drive left or right for button pressing depending on parcour type
-						// set endReached to reached
-						// ask raspi for roman number
-						// wait, to give raspi time to answer
+				//     right sensor front (?) to short distance, decrease motor speed left for defined time
+				//     detect end and change to drive left or right for button pressing depending on parcour type
+				//         set endReached to reached
+				//         ask raspi for roman number
+				//         wait, to give raspi time to answer
 				break;
 			case DRIVE_LEFT:
 				// right sensor front - right sensor back > 0 ==> decrease motor speed front for defined time
 				// drive until target distance is reached
-					// change to drive backward mode
+				//     change to drive backward mode
 				break;
 			case DRIVE_RIGHT:
 				// left sensor front - left sensor back > 0 ==> decrease motor speed front for defined time
 				// drive until target distance is reached
-					// change to drive backward mode
+				//     change to drive backward mode
 				break;
 			}
 		}

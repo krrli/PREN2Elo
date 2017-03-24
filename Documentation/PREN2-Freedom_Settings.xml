@@ -1564,41 +1564,530 @@ even (hw or sw)
       <event name="OnEnd" v="don&amp;apos;t generate code" />
     </Events>
   </Bean>
-  <Bean name="test" type="BitsIO_LDD">
+  <Bean name="GenI2C_ToF" type="GenericI2C">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="test" />
-      <Port v="PTA" />
-      <list name="Pins" v="1">
-        <group name="Pin0">
-          <Pin v="TSI0_CH1/PTA0/TPM0_CH5/SWD_CLK" />
+      <Component_name v="GenI2C_ToF" />
+      <Wait v="WAIT1" />
+      <Support_STOP_NOSTART v="no" />
+      <Write_Buffer_Size v="16" />
+      <boolgroup name="non-LDD I2C" v="Disabled" />
+      <boolgroup name="LDD I2C" v="Enabled">
+        <I2C v="I2C_ToF" />
+        <boolgroup name="Timeout" v="Disabled" />
+      </boolgroup>
+      <boolgroup name="RTOS" v="Disabled" />
+      <Init___on_startup v="yes" />
+    </Properties>
+    <Methods>
+      <SelectSlave v="generate code" />
+      <UnselectSlave v="generate code" />
+      <RequestBus v="generate code" />
+      <ReleaseBus v="generate code" />
+      <WriteBlock v="generate code" />
+      <ReadBlock v="generate code" />
+      <ReadBlockGeneric v="don&amp;apos;t generate code" />
+      <ReadAddress v="generate code" />
+      <WriteAddress v="generate code" />
+      <ReadByteAddress8 v="generate code" />
+      <WriteByteAddress8 v="generate code" />
+      <ProbeACK v="generate code" />
+      <GetSemaphore v="generate code" />
+      <ScanDevice v="generate code" />
+      <Deinit v="generate code" />
+      <Init v="generate code" />
+    </Methods>
+    <Events>
+      <Event_module_name v="Events" />
+      <event name="OnMasterBlockSent" v="don&amp;apos;t generate code" />
+      <event name="OnMasterBlockReceived" v="don&amp;apos;t generate code" />
+      <event name="OnRequestBus" v="don&amp;apos;t generate code" />
+      <event name="OnReleaseBus" v="don&amp;apos;t generate code" />
+      <event name="OnError" v="don&amp;apos;t generate code" />
+    </Events>
+  </Bean>
+  <Bean name="I2C_ToF" type="I2C_LDD">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="I2C_ToF" />
+      <I2C_channel v="I2C1" />
+      <boolgroup name="Interrupt service" v="Disabled" />
+      <group name="Settings">
+        <Mode_selection v="MASTER" />
+        <boolgroup name="MASTER mode" v="Enabled">
+          <group name="Initialization">
+            <Address_mode v="7-bit addressing" />
+            <Target_slave_address_init v="0" />
+          </group>
+        </boolgroup>
+        <boolgroup name="SLAVE mode" v="Disabled" />
+        <group name="Pins">
+          <group name="SDA pin">
+            <SDA_pin v="ADC0_SE11/TSI0_CH15/PTC2/I2C1_SDA/TPM0_CH1" />
+          </group>
+          <group name="SCL pin">
+            <SCL_pin v="ADC0_SE15/TSI0_CH14/PTC1/LLWU_P6/RTC_CLKIN/I2C1_SCL/TPM0_CH0" />
+          </group>
+          <High_drive_select v="Disabled" />
+          <Input_Glitch_filter v="0" />
         </group>
-      </list>
-      <Direction v="Input/Output" />
-      <group name="Initialization">
-        <Init__direction v="Output" />
-        <Init__value v="0" />
-        <Auto_initialization v="no" />
+        <Internal_frequency__multiplier_factor_ v="20.97152 MHz" />
+        <Bits_0_2_of_Frequency_divider_register v="010" />
+        <Bits_3_5_of_Frequency_divider_register v="100" />
+        <SCL_frequency v="93.623 kHz" />
+        <SDA_Hold v="1.574 us" />
+        <SCL_start_Hold v="5.245 us" />
+        <SCL_stop_Hold v="5.388 us" />
+        <boolgroup name="Control acknowledge bit" v="Disabled" />
+        <boolgroup name="Low timeout" v="Disabled" />
       </group>
-      <Safe_mode v="no" />
+      <group name="Initialization">
+        <Enabled_in_init_code v="yes" />
+        <group name="Event mask">
+          <OnMasterBlockSent v="Enabled" />
+          <OnMasterBlockReceived v="Enabled" />
+          <OnMasterByteReceived v="Disabled" />
+          <OnSlaveBlockSent v="Disabled" />
+          <OnSlaveBlockReceived v="Disabled" />
+          <OnSlaveByteReceived v="Disabled" />
+          <OnSlaveRxRequest v="Disabled" />
+          <OnSlaveTxRequest v="Disabled" />
+          <OnSlaveGeneralCallAddr v="Disabled" />
+          <OnSlaveSmBusCallAddr v="Disabled" />
+          <OnSlaveSmBusAlertResponse v="Disabled" />
+          <OnError v="Disabled" />
+          <OnBusStopDetected v="Disabled" />
+        </group>
+      </group>
     </Properties>
     <Methods>
       <Init v="generate code" />
-      <Deinit v="don&amp;apos;t generate code" />
+      <Deinit v="generate code" />
+      <Enable v="don&amp;apos;t generate code" />
+      <Disable v="don&amp;apos;t generate code" />
+      <SetEventMask v="don&amp;apos;t generate code" />
+      <GetEventMask v="don&amp;apos;t generate code" />
+      <MasterSendBlock v="generate code" />
+      <MasterGetBlockSentStatus v="don&amp;apos;t generate code" />
+      <MasterGetSentDataNum v="don&amp;apos;t generate code" />
+      <MasterReceiveBlock v="generate code" />
+      <MasterGetBlockReceivedStatus v="don&amp;apos;t generate code" />
+      <MasterGetReceivedDataNum v="don&amp;apos;t generate code" />
+      <MasterUpdateReceiveBlockSize v="don&amp;apos;t generate code" />
+      <SlaveSendBlock v="don&amp;apos;t generate code" />
+      <SlaveGetBlockSentStatus v="don&amp;apos;t generate code" />
+      <SlaveGetSentDataNum v="don&amp;apos;t generate code" />
+      <SlaveCancelTransmissionBlock v="don&amp;apos;t generate code" />
+      <SlaveReceiveBlock v="don&amp;apos;t generate code" />
+      <SlaveGetBlockReceivedStatus v="don&amp;apos;t generate code" />
+      <SlaveGetReceivedDataNum v="don&amp;apos;t generate code" />
+      <SlaveUpdateReceiveBlockSize v="don&amp;apos;t generate code" />
+      <SlaveCancelReceptionBlock v="don&amp;apos;t generate code" />
+      <SelectSlaveDevice v="generate code" />
+      <SendAcknowledge v="don&amp;apos;t generate code" />
+      <GetError v="don&amp;apos;t generate code" />
+      <CheckBus v="don&amp;apos;t generate code" />
+      <GetStats v="don&amp;apos;t generate code" />
+      <ClearStats v="don&amp;apos;t generate code" />
+      <Main v="generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <SetOperationMode v="don&amp;apos;t generate code" />
+      <GetDriverState v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <Event_module_name v="Events" />
+      <event name="OnMasterBlockSent" v="generate code">
+        <Event_procedure_name v="I2C_ToF_OnMasterBlockSent" />
+      </event>
+      <event name="OnMasterBlockReceived" v="generate code">
+        <Event_procedure_name v="I2C_ToF_OnMasterBlockReceived" />
+      </event>
+      <event name="OnMasterByteReceived" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveBlockSent" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveBlockReceived" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveByteReceived" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveRxRequest" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveTxRequest" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveGeneralCallAddr" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveSmBusCallAddr" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveSmBusAlertResponse" v="don&amp;apos;t generate code" />
+      <event name="OnError" v="don&amp;apos;t generate code" />
+      <event name="OnBusStopDetected" v="don&amp;apos;t generate code" />
+    </Events>
+  </Bean>
+  <Bean name="ToF1" type="BitIO">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="ToF1" />
+      <Pin_for_I_O v="ADC0_DP0/ADC0_SE0/PTE20/TPM1_CH0/UART0_TX" />
+      <inhrbean type="BitIO_LDD">
+        <Enabled v="Y" />
+        <Template v="BitIO_LDD" />
+        <Properties>
+          <Component_name v="BitIoLdd1" />
+          <Pin_for_I_O v="ADC0_DP0/ADC0_SE0/PTE20/TPM1_CH0/UART0_TX" />
+          <Direction v="Input/Output" />
+          <group name="Initialization">
+            <Init__direction v="Input" />
+            <Init__value v="0" />
+            <Auto_initialization v="yes" />
+          </group>
+          <Safe_mode v="no" />
+        </Properties>
+        <Methods>
+          <Init v="generate code" />
+          <Deinit v="don&amp;apos;t generate code" />
+          <GetDir v="don&amp;apos;t generate code" />
+          <SetDir v="generate code" />
+          <SetInput v="don&amp;apos;t generate code" />
+          <SetOutput v="don&amp;apos;t generate code" />
+          <GetVal v="generate code" />
+          <PutVal v="generate code" />
+          <ClrVal v="generate code" />
+          <SetVal v="generate code" />
+          <NegVal v="don&amp;apos;t generate code" />
+          <ConnectPin v="don&amp;apos;t generate code" />
+          <GetRawVal v="don&amp;apos;t generate code" />
+        </Methods>
+        <Events>
+          <EmptySection_DummyValue />
+        </Events>
+      </inhrbean>
+      <Direction v="Input/Output" />
+      <group name="Initialization">
+        <Init__direction v="Input" />
+        <Init__value v="0" />
+      </group>
+      <Safe_mode v="no" />
+      <Optimization_for v="speed" />
+    </Properties>
+    <Methods>
       <GetDir v="don&amp;apos;t generate code" />
       <SetDir v="generate code" />
-      <SetInput v="generate code" />
+      <SetInput v="don&amp;apos;t generate code" />
       <SetOutput v="don&amp;apos;t generate code" />
       <GetVal v="generate code" />
       <PutVal v="generate code" />
-      <GetBit v="generate code" />
-      <PutBit v="generate code" />
-      <SetBit v="generate code" />
-      <ClrBit v="generate code" />
-      <NegBit v="don&amp;apos;t generate code" />
-      <GetRawVal v="don&amp;apos;t generate code" />
-      <GetRawBit v="don&amp;apos;t generate code" />
+      <ClrVal v="generate code" />
+      <SetVal v="generate code" />
+      <NegVal v="don&amp;apos;t generate code" />
       <ConnectPin v="don&amp;apos;t generate code" />
+      <GetRawVal v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
+    </Events>
+  </Bean>
+  <Bean name="ToF2" type="BitIO">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="ToF2" />
+      <Pin_for_I_O v="ADC0_DM0/ADC0_SE4a/PTE21/TPM1_CH1/UART0_RX" />
+      <inhrbean type="BitIO_LDD">
+        <Enabled v="Y" />
+        <Template v="BitIO_LDD" />
+        <Properties>
+          <Component_name v="BitIoLdd2" />
+          <Pin_for_I_O v="ADC0_DM0/ADC0_SE4a/PTE21/TPM1_CH1/UART0_RX" />
+          <Direction v="Input/Output" />
+          <group name="Initialization">
+            <Init__direction v="Input" />
+            <Init__value v="0" />
+            <Auto_initialization v="yes" />
+          </group>
+          <Safe_mode v="no" />
+        </Properties>
+        <Methods>
+          <Init v="generate code" />
+          <Deinit v="don&amp;apos;t generate code" />
+          <GetDir v="don&amp;apos;t generate code" />
+          <SetDir v="generate code" />
+          <SetInput v="don&amp;apos;t generate code" />
+          <SetOutput v="don&amp;apos;t generate code" />
+          <GetVal v="generate code" />
+          <PutVal v="generate code" />
+          <ClrVal v="generate code" />
+          <SetVal v="generate code" />
+          <NegVal v="don&amp;apos;t generate code" />
+          <ConnectPin v="don&amp;apos;t generate code" />
+          <GetRawVal v="don&amp;apos;t generate code" />
+        </Methods>
+        <Events>
+          <EmptySection_DummyValue />
+        </Events>
+      </inhrbean>
+      <Direction v="Input/Output" />
+      <group name="Initialization">
+        <Init__direction v="Input" />
+        <Init__value v="0" />
+      </group>
+      <Safe_mode v="no" />
+      <Optimization_for v="speed" />
+    </Properties>
+    <Methods>
+      <GetDir v="don&amp;apos;t generate code" />
+      <SetDir v="generate code" />
+      <SetInput v="don&amp;apos;t generate code" />
+      <SetOutput v="don&amp;apos;t generate code" />
+      <GetVal v="generate code" />
+      <PutVal v="generate code" />
+      <ClrVal v="generate code" />
+      <SetVal v="generate code" />
+      <NegVal v="don&amp;apos;t generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <GetRawVal v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
+    </Events>
+  </Bean>
+  <Bean name="ToF3" type="BitIO">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="ToF3" />
+      <Pin_for_I_O v="ADC0_DP3/ADC0_SE3/PTE22/TPM2_CH0/UART2_TX" />
+      <inhrbean type="BitIO_LDD">
+        <Enabled v="Y" />
+        <Template v="BitIO_LDD" />
+        <Properties>
+          <Component_name v="BitIoLdd3" />
+          <Pin_for_I_O v="ADC0_DP3/ADC0_SE3/PTE22/TPM2_CH0/UART2_TX" />
+          <Direction v="Input/Output" />
+          <group name="Initialization">
+            <Init__direction v="Input" />
+            <Init__value v="0" />
+            <Auto_initialization v="yes" />
+          </group>
+          <Safe_mode v="no" />
+        </Properties>
+        <Methods>
+          <Init v="generate code" />
+          <Deinit v="don&amp;apos;t generate code" />
+          <GetDir v="don&amp;apos;t generate code" />
+          <SetDir v="generate code" />
+          <SetInput v="don&amp;apos;t generate code" />
+          <SetOutput v="don&amp;apos;t generate code" />
+          <GetVal v="generate code" />
+          <PutVal v="generate code" />
+          <ClrVal v="generate code" />
+          <SetVal v="generate code" />
+          <NegVal v="don&amp;apos;t generate code" />
+          <ConnectPin v="don&amp;apos;t generate code" />
+          <GetRawVal v="don&amp;apos;t generate code" />
+        </Methods>
+        <Events>
+          <EmptySection_DummyValue />
+        </Events>
+      </inhrbean>
+      <Direction v="Input/Output" />
+      <group name="Initialization">
+        <Init__direction v="Input" />
+        <Init__value v="0" />
+      </group>
+      <Safe_mode v="no" />
+      <Optimization_for v="speed" />
+    </Properties>
+    <Methods>
+      <GetDir v="don&amp;apos;t generate code" />
+      <SetDir v="generate code" />
+      <SetInput v="don&amp;apos;t generate code" />
+      <SetOutput v="don&amp;apos;t generate code" />
+      <GetVal v="generate code" />
+      <PutVal v="generate code" />
+      <ClrVal v="generate code" />
+      <SetVal v="generate code" />
+      <NegVal v="don&amp;apos;t generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <GetRawVal v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
+    </Events>
+  </Bean>
+  <Bean name="ToF4" type="BitIO">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="ToF4" />
+      <Pin_for_I_O v="ADC0_DM3/ADC0_SE7a/PTE23/TPM2_CH1/UART2_RX" />
+      <inhrbean type="BitIO_LDD">
+        <Enabled v="Y" />
+        <Template v="BitIO_LDD" />
+        <Properties>
+          <Component_name v="BitIoLdd4" />
+          <Pin_for_I_O v="ADC0_DM3/ADC0_SE7a/PTE23/TPM2_CH1/UART2_RX" />
+          <Direction v="Input/Output" />
+          <group name="Initialization">
+            <Init__direction v="Input" />
+            <Init__value v="0" />
+            <Auto_initialization v="yes" />
+          </group>
+          <Safe_mode v="no" />
+        </Properties>
+        <Methods>
+          <Init v="generate code" />
+          <Deinit v="don&amp;apos;t generate code" />
+          <GetDir v="don&amp;apos;t generate code" />
+          <SetDir v="generate code" />
+          <SetInput v="don&amp;apos;t generate code" />
+          <SetOutput v="don&amp;apos;t generate code" />
+          <GetVal v="generate code" />
+          <PutVal v="generate code" />
+          <ClrVal v="generate code" />
+          <SetVal v="generate code" />
+          <NegVal v="don&amp;apos;t generate code" />
+          <ConnectPin v="don&amp;apos;t generate code" />
+          <GetRawVal v="don&amp;apos;t generate code" />
+        </Methods>
+        <Events>
+          <EmptySection_DummyValue />
+        </Events>
+      </inhrbean>
+      <Direction v="Input/Output" />
+      <group name="Initialization">
+        <Init__direction v="Input" />
+        <Init__value v="0" />
+      </group>
+      <Safe_mode v="no" />
+      <Optimization_for v="speed" />
+    </Properties>
+    <Methods>
+      <GetDir v="don&amp;apos;t generate code" />
+      <SetDir v="generate code" />
+      <SetInput v="don&amp;apos;t generate code" />
+      <SetOutput v="don&amp;apos;t generate code" />
+      <GetVal v="generate code" />
+      <PutVal v="generate code" />
+      <ClrVal v="generate code" />
+      <SetVal v="generate code" />
+      <NegVal v="don&amp;apos;t generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <GetRawVal v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
+    </Events>
+  </Bean>
+  <Bean name="ToF5" type="BitIO">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="ToF5" />
+      <Pin_for_I_O v="CMP0_IN5/ADC0_SE4b/PTE29/TPM0_CH2/TPM_CLKIN0" />
+      <inhrbean type="BitIO_LDD">
+        <Enabled v="Y" />
+        <Template v="BitIO_LDD" />
+        <Properties>
+          <Component_name v="BitIoLdd5" />
+          <Pin_for_I_O v="CMP0_IN5/ADC0_SE4b/PTE29/TPM0_CH2/TPM_CLKIN0" />
+          <Direction v="Input/Output" />
+          <group name="Initialization">
+            <Init__direction v="Input" />
+            <Init__value v="0" />
+            <Auto_initialization v="yes" />
+          </group>
+          <Safe_mode v="no" />
+        </Properties>
+        <Methods>
+          <Init v="generate code" />
+          <Deinit v="don&amp;apos;t generate code" />
+          <GetDir v="don&amp;apos;t generate code" />
+          <SetDir v="generate code" />
+          <SetInput v="don&amp;apos;t generate code" />
+          <SetOutput v="don&amp;apos;t generate code" />
+          <GetVal v="generate code" />
+          <PutVal v="generate code" />
+          <ClrVal v="generate code" />
+          <SetVal v="generate code" />
+          <NegVal v="don&amp;apos;t generate code" />
+          <ConnectPin v="don&amp;apos;t generate code" />
+          <GetRawVal v="don&amp;apos;t generate code" />
+        </Methods>
+        <Events>
+          <EmptySection_DummyValue />
+        </Events>
+      </inhrbean>
+      <Direction v="Input/Output" />
+      <group name="Initialization">
+        <Init__direction v="Input" />
+        <Init__value v="0" />
+      </group>
+      <Safe_mode v="no" />
+      <Optimization_for v="speed" />
+    </Properties>
+    <Methods>
+      <GetDir v="don&amp;apos;t generate code" />
+      <SetDir v="generate code" />
+      <SetInput v="don&amp;apos;t generate code" />
+      <SetOutput v="don&amp;apos;t generate code" />
+      <GetVal v="generate code" />
+      <PutVal v="generate code" />
+      <ClrVal v="generate code" />
+      <SetVal v="generate code" />
+      <NegVal v="don&amp;apos;t generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <GetRawVal v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
+    </Events>
+  </Bean>
+  <Bean name="ToF6" type="BitIO">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="ToF6" />
+      <Pin_for_I_O v="DAC0_OUT/ADC0_SE23/CMP0_IN4/PTE30/TPM0_CH3/TPM_CLKIN1" />
+      <inhrbean type="BitIO_LDD">
+        <Enabled v="Y" />
+        <Template v="BitIO_LDD" />
+        <Properties>
+          <Component_name v="BitIoLdd6" />
+          <Pin_for_I_O v="DAC0_OUT/ADC0_SE23/CMP0_IN4/PTE30/TPM0_CH3/TPM_CLKIN1" />
+          <Direction v="Input/Output" />
+          <group name="Initialization">
+            <Init__direction v="Input" />
+            <Init__value v="0" />
+            <Auto_initialization v="yes" />
+          </group>
+          <Safe_mode v="no" />
+        </Properties>
+        <Methods>
+          <Init v="generate code" />
+          <Deinit v="don&amp;apos;t generate code" />
+          <GetDir v="don&amp;apos;t generate code" />
+          <SetDir v="generate code" />
+          <SetInput v="don&amp;apos;t generate code" />
+          <SetOutput v="don&amp;apos;t generate code" />
+          <GetVal v="generate code" />
+          <PutVal v="generate code" />
+          <ClrVal v="generate code" />
+          <SetVal v="generate code" />
+          <NegVal v="don&amp;apos;t generate code" />
+          <ConnectPin v="don&amp;apos;t generate code" />
+          <GetRawVal v="don&amp;apos;t generate code" />
+        </Methods>
+        <Events>
+          <EmptySection_DummyValue />
+        </Events>
+      </inhrbean>
+      <Direction v="Input/Output" />
+      <group name="Initialization">
+        <Init__direction v="Input" />
+        <Init__value v="0" />
+      </group>
+      <Safe_mode v="no" />
+      <Optimization_for v="speed" />
+    </Properties>
+    <Methods>
+      <GetDir v="don&amp;apos;t generate code" />
+      <SetDir v="generate code" />
+      <SetInput v="don&amp;apos;t generate code" />
+      <SetOutput v="don&amp;apos;t generate code" />
+      <GetVal v="generate code" />
+      <PutVal v="generate code" />
+      <ClrVal v="generate code" />
+      <SetVal v="generate code" />
+      <NegVal v="don&amp;apos;t generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <GetRawVal v="don&amp;apos;t generate code" />
     </Methods>
     <Events>
       <EmptySection_DummyValue />

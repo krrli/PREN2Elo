@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-24, 15:21, # CodeGen: 11
+**     Date/Time   : 2017-03-24, 16:48, # CodeGen: 15
 **     Abstract    :
 **
 **     Settings    :
@@ -271,7 +271,20 @@
 #include "PwmLdd3.h"
 #include "MT2_PWM2.h"
 #include "PwmLdd4.h"
-#include "test.h"
+#include "GenI2C_ToF.h"
+#include "I2C_ToF.h"
+#include "ToF1.h"
+#include "BitIoLdd1.h"
+#include "ToF2.h"
+#include "BitIoLdd2.h"
+#include "ToF3.h"
+#include "BitIoLdd3.h"
+#include "ToF4.h"
+#include "BitIoLdd4.h"
+#include "ToF5.h"
+#include "BitIoLdd5.h"
+#include "ToF6.h"
+#include "BitIoLdd6.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -470,6 +483,20 @@ void PE_low_level_init(void)
   (void)PwmLdd3_Init(NULL);
   /* ### PWM_LDD "PwmLdd4" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)PwmLdd4_Init(NULL);
+  /* ### GenericI2C "GenI2C_ToF" init code ... */
+  GenI2C_ToF_Init();
+  /* ### BitIO_LDD "BitIoLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd1_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd2_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd3" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd3_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd4" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd4_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd5" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd5_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd6" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd6_Init(NULL);
   __EI();
 }
   /* Flash configuration field */
