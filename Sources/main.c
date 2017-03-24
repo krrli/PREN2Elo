@@ -41,6 +41,8 @@
 #include "CLS2.h"
 #include "AS2.h"
 #include "ASerialLdd2.h"
+#include "Bit1.h"
+#include "Bit2.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"

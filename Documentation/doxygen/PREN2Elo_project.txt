@@ -1,4 +1,4 @@
-/*!
+  /*!
 
 \page page_pinalloc Pins allocation 
 \page page_memorymap Memory map 
@@ -24,6 +24,8 @@
 \page page_components Components 
 - \subpage ASerialLdd1
 - \subpage ASerialLdd2
+- \subpage Bit1
+- \subpage Bit2
 
 */
 

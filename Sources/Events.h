@@ -44,6 +44,8 @@
 #include "CLS2.h"
 #include "AS2.h"
 #include "ASerialLdd2.h"
+#include "Bit1.h"
+#include "Bit2.h"
 
 #ifdef __cplusplus
 extern "C" {

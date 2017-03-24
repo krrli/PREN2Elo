@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-24, 11:00, # CodeGen: 0
+**     Date/Time   : 2017-03-24, 11:23, # CodeGen: 1
 **     Abstract    :
 **
 **     Settings    :
@@ -72,6 +72,8 @@
 #include "CLS2.h"
 #include "AS2.h"
 #include "ASerialLdd2.h"
+#include "Bit1.h"
+#include "Bit2.h"
 
 
 /*

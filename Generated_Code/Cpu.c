@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-24, 11:00, # CodeGen: 0
+**     Date/Time   : 2017-03-24, 11:23, # CodeGen: 1
 **     Abstract    :
 **
 **     Settings    :
@@ -254,6 +254,8 @@
 #include "CLS2.h"
 #include "AS2.h"
 #include "ASerialLdd2.h"
+#include "Bit1.h"
+#include "Bit2.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
