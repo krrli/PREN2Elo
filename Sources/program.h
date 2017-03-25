@@ -9,13 +9,14 @@
 /*
  * Declaration of Constants used for the serial Interfaces
  */
+#define NUMBER_OF_SERIAL_PORTS 2
 enum serialPort {
-	PC, RasPi
+	PC = 0, RasPi = 1
 };
-enum serialResponse {
+enum serialResponse { // !!!ERROR!!! not every value may be used, serial Rx interrupt isn't called with every byte
 	ACKNOWLEDGE = 0x20,
 	ERROR = 0x10,
-	BUTTON1 = 0x01,
+	BUTTON1 = 0x01, // todo: change button values
 	BUTTON2 = 0x02,
 	BUTTON3 = 0x03,
 	BUTTON4 = 0x04,

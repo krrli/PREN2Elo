@@ -1,6 +1,10 @@
 #include "program.h"
 
 /*
+ * global variables for serial communication
+ */
+volatile uint8_t lastSentCmd[NUMBER_OF_SERIAL_PORTS];
+/*
  * global variables for main loop
  */
 volatile enum parcoursState state;
@@ -17,6 +21,9 @@ volatile uint8_t button;
 volatile enum buttonChecked btnchk;
 
 void start(void) {
+	/* init variables for serial communication */
+	lastSentCmd[PC] = 0x00;
+	lastSentCmd[RasPi] = 0x00;
 	/* init variables for main loop */
 	state = STOPPED;
 	stateBak = STOPPED;
@@ -31,9 +38,9 @@ void start(void) {
 	/* init tof sensors */
 	//initToF();
 	/* temporary simulation of parcour to test serial interface protocol */
-	//simulateParcour();
+	simulateParcour();
 	/* start mainloop */
-	mainLoop();
+	//mainLoop();
 	/* fallback loop, should never be reached */
 	for (;;)
 		;
@@ -56,16 +63,22 @@ void serialRxInt(uint8_t ch, uint8_t port) {
 		state = stateBak;
 		break;
 	case ACKNOWLEDGE:
+		break;
 	case ERROR:
+		serialSend(lastSentCmd[port], port);
 		break;
 	case BUTTON1:
 	case BUTTON2:
 	case BUTTON3:
 	case BUTTON4:
 	case BUTTON5:
-		serialSend(ACKNOWLEDGE, port);
-		button = ch;
-		btnchk = BUTTON_CHECKED;
+		if (lastSentCmd[port] == ROMAN_NUMERAL_REQUEST) {
+			serialSend(ACKNOWLEDGE, port);
+			button = ch;
+			btnchk = BUTTON_CHECKED;
+		} else {
+			serialSend(ERROR, port);
+		}
 		break;
 	case ROMAN_NUMERAL_REQUEST:
 	case CURVE:
@@ -83,6 +96,7 @@ void serialSend(uint8_t ch, uint8_t port) {
 		CLS2_SendChar(ch);
 		break;
 	}
+	lastSentCmd[port] = ch;
 }
 
 void simulateParcour(void) {
