@@ -60,6 +60,8 @@
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/BitIoLdd4.c</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/BitIoLdd5.c</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/BitIoLdd6.c</PathName>
+      <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/BitIoLdd7.c</PathName>
+      <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/BitIoLdd8.c</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/CLS1.c</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/CLS2.c</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/CS1.c</PathName>
@@ -84,6 +86,8 @@
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/PwmLdd2.c</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/PwmLdd3.c</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/PwmLdd4.c</PathName>
+      <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/SW_Parc.c</PathName>
+      <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/SW_Zent.c</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/TPM0.c</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/ToF1.c</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/ToF2.c</PathName>
@@ -112,6 +116,8 @@
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/BitIoLdd4.h</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/BitIoLdd5.h</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/BitIoLdd6.h</PathName>
+      <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/BitIoLdd7.h</PathName>
+      <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/BitIoLdd8.h</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/CLS1.h</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/CLS1config.h</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/CLS2.h</PathName>
@@ -144,6 +150,8 @@
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/PwmLdd2.h</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/PwmLdd3.h</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/PwmLdd4.h</PathName>
+      <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/SW_Parc.h</PathName>
+      <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/SW_Zent.h</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/TPM0.h</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/ToF1.h</PathName>
       <PathName>/home/pirmin/Studium/04_Produktentwicklung_2/Kinetis/PREN2-Freedom/Generated_Code/ToF2.h</PathName>

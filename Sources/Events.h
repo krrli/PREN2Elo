@@ -75,6 +75,10 @@
 #include "BitIoLdd5.h"
 #include "ToF6.h"
 #include "BitIoLdd6.h"
+#include "SW_Parc.h"
+#include "BitIoLdd7.h"
+#include "SW_Zent.h"
+#include "BitIoLdd8.h"
 
 #ifdef __cplusplus
 extern "C" {

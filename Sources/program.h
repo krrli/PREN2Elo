@@ -16,11 +16,11 @@ enum serialPort {
 enum serialResponse { // !!!ERROR!!! not every value may be used, serial Rx interrupt isn't called with every byte
 	ACKNOWLEDGE = 0x20,
 	ERROR = 0x10,
-	BUTTON1 = 0x01, // todo: change button values
-	BUTTON2 = 0x02,
-	BUTTON3 = 0x03,
-	BUTTON4 = 0x04,
-	BUTTON5 = 0x05
+	BUTTON1 = 0x43,
+	BUTTON2 = 0x45,
+	BUTTON3 = 0x46,
+	BUTTON4 = 0x49,
+	BUTTON5 = 0x4A
 };
 enum serialCommands // !!!ERROR!!! not every value may be used, serial Rx interrupt isn't called with every byte
 {
@@ -37,8 +37,11 @@ enum serialCommands // !!!ERROR!!! not every value may be used, serial Rx interr
 enum parcoursState {
 	DRIVE_FORWARD, DRIVE_BACKWARD, DRIVE_LEFT, DRIVE_RIGHT, STOPPED
 };
-enum parcourType {
-	PARCOUR_A = 0x00, PARCOUR_B = 0x01
+enum parcourType { // Values given by switch
+	PARCOUR_A = 0, PARCOUR_B = 1
+};
+enum centrifugeState { // Values given by switch
+	CENT_OFF = 0, CENT_ON = 1
 };
 enum buttonChecked {
 	BUTTON_CHECKED, BUTTON_UNCHECKED
@@ -178,23 +181,42 @@ enum VL_Enum_Error {
 /*
  * method declarations
  */
+
 /*
  * program.c
  */
-void start(void); // init method
-void serialRxInt(uint8_t ch, uint8_t port); // called from Hardware Interrupt
-void serialSend(uint8_t ch, uint8_t port); // sends byte to serial port
-void simulateParcour(void); // method to simulate the serial communication of a complete parcour
-void mainLoop(void); // main loop for driving
+
+/* init method */
+void start(void);
+
+/* called from Hardware Interrupt */
+void serialRxInt(uint8_t ch, uint8_t port);
+
+/* sends byte to serial port */
+void serialSend(uint8_t ch, uint8_t port);
+
+/* method to simulate the serial communication of a complete parcour */
+void simulateParcour(void);
+
+/* main loop for driving */
+void mainLoop(void);
 
 /*
  * tof.c
  */
-uint8_t initToF(void); // init tof sensors
-uint8_t getToFValue(uint8_t sens, uint8_t * val); // get value val of sensor sens
-void enableToF(uint8_t sens); // enable / disable sensor sens via chip enable pin
+
+/* init tof sensors */
+uint8_t initToF(void);
+
+/* get value val of sensor sens */
+uint8_t getToFValue(uint8_t sens, uint8_t * val);
+
+/* enable / disable sensor sens via chip enable pin */
+void enableToF(uint8_t sens);
 void disableToF(uint8_t sens);
-uint8_t writeRegister16bit(uint8_t ad, uint16_t reg, uint16_t val); // i2c stuff
+
+/* i2c stuff */
+uint8_t writeRegister16bit(uint8_t ad, uint16_t reg, uint16_t val);
 uint8_t writeRegister8bit(uint8_t ad, uint16_t reg, uint8_t val);
 uint8_t readRegister16bit(uint8_t ad, uint16_t reg, uint16_t * val);
 uint8_t readRegister8bit(uint8_t ad, uint16_t reg, uint8_t * val);

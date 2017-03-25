@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-24, 16:48, # CodeGen: 15
+**     Date/Time   : 2017-03-25, 11:49, # CodeGen: 21
 **     Abstract    :
 **
 **     Settings    :
@@ -97,6 +97,10 @@
   #include "BitIoLdd5.h"
   #include "ToF6.h"
   #include "BitIoLdd6.h"
+  #include "SW_Parc.h"
+  #include "BitIoLdd7.h"
+  #include "SW_Zent.h"
+  #include "BitIoLdd8.h"
   #include "Events.h"
 
 
