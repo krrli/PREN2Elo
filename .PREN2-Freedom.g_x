@@ -33,7 +33,7 @@
       <File Name="Documentation/doxygen/MT2_IN2_component.txt" FileDate="2017-03-24, 15:21:27" FileAge="1490365287000" FileType="45637" CompNumb="20" />
       <File Name="Documentation/doxygen/PwmLdd4_component.txt" FileDate="2017-03-24, 15:21:27" FileAge="1490365287000" FileType="45637" CompNumb="31" />
       <File Name="Project_Settings/Startup_Code/startup.c" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="16384" CompNumb="2" />
-      <File Name="Documentation/PREN2-Freedom_SIGNALS.txt" FileDate="2017-03-25, 12:59:04" FileAge="1490443144000" FileType="3072" />
+      <File Name="Documentation/PREN2-Freedom_SIGNALS.txt" FileDate="2017-03-25, 13:41:33" FileAge="1490445693000" FileType="3072" />
       <File Name="Generated_Code/SW_Zent.h" FileDate="2017-03-25, 11:49:37" FileAge="1490438977000" FileType="45637" CompNumb="55" />
       <File Name="Static_Code/PDD/SysTick_PDD.h" FileDate="2017-03-23, 10:05:22" FileAge="1490259922000" FileType="1048576" />
       <File Name="Generated_Code/XF1config.h" FileDate="2017-03-24, 13:10:05" FileAge="1490357405000" FileType="45637" CompNumb="8" />
@@ -194,5 +194,5 @@
       <File Name="Generated_Code/GenI2C_ToF.c" FileDate="2017-03-24, 16:17:35" FileAge="1490368655000" FileType="45637" CompNumb="33" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>25</CodeGenReference>
+  <CodeGenReference>27</CodeGenReference>
 </CodeGenerationInfo>
