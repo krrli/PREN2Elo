@@ -339,7 +339,7 @@ PE_DEBUGHALT();
         <Interrupt_TxD_priority v="medium priority" />
         <Interrupt_Error v="INT_UART0" />
         <Interrupt_Error_priority v="medium priority" />
-        <Input_buffer_size v="1" />
+        <Input_buffer_size v="0" />
         <Output_buffer_size v="0" />
         <group name="Handshake">
           <boolgroup name="CTS" v="Disabled" />
@@ -490,9 +490,9 @@ even (hw or sw)
       <DisableEvent v="don&amp;apos;t generate code" />
       <RecvChar v="generate code" />
       <SendChar v="generate code" />
-      <RecvBlock v="generate code" />
+      <RecvBlock v="don&amp;apos;t generate code" />
       <SendBlock v="don&amp;apos;t generate code" />
-      <ClearRxBuf v="generate code" />
+      <ClearRxBuf v="don&amp;apos;t generate code" />
       <ClearTxBuf v="don&amp;apos;t generate code" />
       <CharsInRxBuf v="don&amp;apos;t generate code" />
       <GetCharsInRxBuf v="generate code" />
@@ -517,19 +517,16 @@ even (hw or sw)
         <Event_procedure_name v="AS1_OnError" />
         <Priority v="same as interrupt" />
       </event>
-      <event name="OnRxChar" v="don&amp;apos;t generate code" />
-      <event name="OnRxCharExt" v="generate code">
-        <Event_procedure_name v="AS1_OnRxCharExt" />
+      <event name="OnRxChar" v="generate code">
+        <Event_procedure_name v="AS1_OnRxChar" />
         <Priority v="same as interrupt" />
       </event>
+      <event name="OnRxCharExt" v="don&amp;apos;t generate code" />
       <event name="OnTxChar" v="generate code">
         <Event_procedure_name v="AS1_OnTxChar" />
         <Priority v="same as interrupt" />
       </event>
-      <event name="OnFullRxBuf" v="generate code">
-        <Event_procedure_name v="AS1_OnFullRxBuf" />
-        <Priority v="same as interrupt" />
-      </event>
+      <event name="OnFullRxBuf" v="don&amp;apos;t generate code" />
       <event name="OnFreeTxBuf" v="don&amp;apos;t generate code" />
       <event name="OnBreak" v="don&amp;apos;t generate code" />
       <event name="OnTxComplete" v="don&amp;apos;t generate code" />
@@ -615,7 +612,7 @@ even (hw or sw)
         <Interrupt_TxD_priority v="medium priority" />
         <Interrupt_Error v="INT_UART1" />
         <Interrupt_Error_priority v="medium priority" />
-        <Input_buffer_size v="1" />
+        <Input_buffer_size v="0" />
         <Output_buffer_size v="0" />
         <group name="Handshake">
           <boolgroup name="CTS" v="Disabled" />
@@ -766,9 +763,9 @@ even (hw or sw)
       <DisableEvent v="don&amp;apos;t generate code" />
       <RecvChar v="generate code" />
       <SendChar v="generate code" />
-      <RecvBlock v="generate code" />
+      <RecvBlock v="don&amp;apos;t generate code" />
       <SendBlock v="don&amp;apos;t generate code" />
-      <ClearRxBuf v="generate code" />
+      <ClearRxBuf v="don&amp;apos;t generate code" />
       <ClearTxBuf v="don&amp;apos;t generate code" />
       <CharsInRxBuf v="don&amp;apos;t generate code" />
       <GetCharsInRxBuf v="generate code" />
@@ -793,19 +790,16 @@ even (hw or sw)
         <Event_procedure_name v="AS2_OnError" />
         <Priority v="same as interrupt" />
       </event>
-      <event name="OnRxChar" v="don&amp;apos;t generate code" />
-      <event name="OnRxCharExt" v="generate code">
-        <Event_procedure_name v="AS2_OnRxCharExt" />
+      <event name="OnRxChar" v="generate code">
+        <Event_procedure_name v="AS2_OnRxChar" />
         <Priority v="same as interrupt" />
       </event>
+      <event name="OnRxCharExt" v="don&amp;apos;t generate code" />
       <event name="OnTxChar" v="generate code">
         <Event_procedure_name v="AS2_OnTxChar" />
         <Priority v="same as interrupt" />
       </event>
-      <event name="OnFullRxBuf" v="generate code">
-        <Event_procedure_name v="AS2_OnFullRxBuf" />
-        <Priority v="same as interrupt" />
-      </event>
+      <event name="OnFullRxBuf" v="don&amp;apos;t generate code" />
       <event name="OnFreeTxBuf" v="don&amp;apos;t generate code" />
       <event name="OnBreak" v="don&amp;apos;t generate code" />
       <event name="OnTxComplete" v="don&amp;apos;t generate code" />

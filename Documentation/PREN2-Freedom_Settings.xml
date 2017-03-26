@@ -183,6 +183,7 @@ PE_DEBUGHALT();
     <Enabled v="Y" />
     <Properties>
       <Component_name v="WAIT1" />
+      <boolgroup name="Use Cycle Counter" v="Disabled" />
       <SDK v="MCUC1" />
       <boolgroup name="Manual Clock Values" v="Disabled" />
       <Delay100usFunction v="Delay100US" />
@@ -198,6 +199,8 @@ PE_DEBUGHALT();
       <Waitus v="generate code" />
       <Waitns v="generate code" />
       <WaitOSms v="generate code" />
+      <Init v="generate code" />
+      <DeInit v="generate code" />
     </Methods>
     <Events>
       <EmptySection_DummyValue />
@@ -1569,6 +1572,7 @@ even (hw or sw)
     <Properties>
       <Component_name v="GenI2C_ToF" />
       <Wait v="WAIT1" />
+      <SDK v="MCUC1" />
       <Support_STOP_NOSTART v="no" />
       <Write_Buffer_Size v="16" />
       <boolgroup name="non-LDD I2C" v="Disabled" />

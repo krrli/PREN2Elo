@@ -54,6 +54,8 @@ Module "WAIT1"     (component Wait)
    - WAIT1_Waitns -Wait for a specified time in nano seconds.
    - WAIT1_WaitOSms -If an RTOS is enabled, this routine will use a non-blocking wait method. Otherwise it will do a 
                 busy/blocking wait.
+   - WAIT1_Init -Driver initialization routine.
+   - WAIT1_DeInit -Driver de-initialization routine
 
 Module "MCUC1"     (component McuLibConfig)
 
