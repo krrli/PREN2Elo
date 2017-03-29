@@ -490,7 +490,7 @@ uint8_t writeRegister16bit(uint8_t ad, uint16_t reg, uint16_t val) {
 	v[1] = val & 0xff;
 
 	/* write to bus */
-	return GenI2C_ToF_WriteAddress(ad, &r[0], sizeof(r), &v, sizeof(v));
+	return GenI2C_ToF_WriteAddress(ad, &r[0], sizeof(r), &v[0], sizeof(v));
 }
 uint8_t writeRegister8bit(uint8_t ad, uint16_t reg, uint8_t val) {
 	/* copy address in 8bit array */
@@ -519,4 +519,3 @@ uint8_t readRegister8bit(uint8_t ad, uint16_t reg, uint8_t * val) {
 	/* write to bus */
 	return GenI2C_ToF_ReadAddress(ad, &r[0], sizeof(r), val, 1);
 }
-

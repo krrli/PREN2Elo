@@ -23,6 +23,8 @@ volatile uint8_t button;
 volatile enum buttonChecked btnchk;
 
 void start(void) {
+	uint8_t res;
+
 	/* init variables for serial communication */
 	lastSentCmd[PC] = 0x00;
 	lastSentCmd[RasPi] = 0x00;
@@ -47,11 +49,26 @@ void start(void) {
 	// todo: set direction like drive forward, set speed to 0
 
 	/* init servoshield, servos, brushless */
-	// todo: init brushless
-	// todo: init servos for straight wheels
+	res = initServo();
+	if (res != ERR_OK) {
+		for (;;) {
+			serialSend(ERROR, PC);
+			WAIT1_Waitms(1);
+			serialSend(ERROR, RasPi);
+			WAIT1_Waitms(10);
+		}
+	}
 
 	/* init tof sensors */
-	initToF();
+	res = initToF();
+	if (res != ERR_OK) {
+		for (;;) {
+			serialSend(ERROR, PC);
+			WAIT1_Waitms(1);
+			serialSend(ERROR, RasPi);
+			WAIT1_Waitms(10);
+		}
+	}
 
 	/* start mainloop */
 	mainLoop();
@@ -79,7 +96,7 @@ void serialRxInt(uint8_t ch, uint8_t port) {
 		state = stateBak;
 		break;
 
-	/* answers from raspi */
+		/* answers from raspi */
 	case ACKNOWLEDGE:
 		break;
 	case ERROR:
@@ -99,7 +116,7 @@ void serialRxInt(uint8_t ch, uint8_t port) {
 		}
 		break;
 
-	/* illegal commands from raspi */
+		/* illegal commands from raspi */
 	case ROMAN_NUMERAL_REQUEST:
 	case CURVE:
 	default:
@@ -146,7 +163,6 @@ void mainLoop(void) {
 	for (;;) {
 		/* check centrifuge state */
 		// todo: check state of SW_Zent, set brushless to fixed value or off
-
 		/* if state changed, set servo and motor outputs */
 		if (stateCurr != state) {
 			switch (state) {
@@ -157,7 +173,6 @@ void mainLoop(void) {
 			case DRIVE_BACKWARD:
 				/* set servos */
 				// todo: if wheelPos != STRAIGHT, turn servos, change wheelPos, wait
-
 				/* set motors */
 				// todo: set motor directions (check forward/backwards) and speeds
 				break;
@@ -165,17 +180,15 @@ void mainLoop(void) {
 			case DRIVE_RIGHT:
 				/* set servo */
 				// todo: if wheelPos != SIDEWAYS, turn servos, change wheelPos, wait
-
 				/* set motor */
 				// todo: set motor directions (check left/right) and speeds
-
 				/* set distance */
 				// todo: set distance and define to which wall
 				break;
 			}
 			stateCurr = state;
 
-		/* if state did not change */
+			/* if state did not change */
 		} else {
 			switch (state) {
 			case STOPPED:
@@ -184,7 +197,6 @@ void mainLoop(void) {
 			case DRIVE_FORWARD:
 				/* drive straight */
 				// todo: right sensor front (?) to short distance, decrease motor speed left for defined time
-
 				/* detect end */
 				// todo: detect end, change to drive left or right mode depending on parcour type
 				//     send signal curve to raspi
@@ -192,10 +204,8 @@ void mainLoop(void) {
 			case DRIVE_BACKWARD:
 				/* if end reached: drive into button */
 				// todo: if end reached, drive fixed distance into button
-
 				/* else: drive straight */
 				// todo: right sensor front (?) to short distance, decrease motor speed left for defined time
-
 				/* detect end */
 				// todo: detect end and change to drive left or right for button pressing depending on parcour type
 				//     set endReached to reached
@@ -205,7 +215,6 @@ void mainLoop(void) {
 			case DRIVE_LEFT:
 				/* drive straight */
 				// todo: right sensor front - right sensor back > 0 ==> decrease motor speed front for defined time
-
 				/* detect end via fixed distance */
 				// todo: drive until target distance is reached
 				//     change to drive backward mode
@@ -213,7 +222,6 @@ void mainLoop(void) {
 			case DRIVE_RIGHT:
 				/* drive straight */
 				// todo: left sensor front - left sensor back > 0 ==> decrease motor speed front for defined time
-
 				/* detect end via fixed distance */
 				// todo: drive until target distance is reached
 				//     change to drive backward mode

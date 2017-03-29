@@ -157,6 +157,26 @@ enum VL_Enum_Error {
 };
 
 /*
+ * declarations for the servo driver board
+ */
+#define PCA9685_ADDRESS 0x40
+#define PCA9685_MODE1 0x0
+#define PCA9685_PRESCALE 0xFE
+#define PCA9685_CH0_ON_L 0x6
+#define PCA9685_CH0_ON_H 0x7
+#define PCA9685_CH0_OFF_L 0x8
+#define PCA9685_CH0_OFF_H 0x9
+enum BrushlessState{
+	BRUSHLESS_OFF,
+	BRUSHLESS_ON,
+	BRUSHLESS_INIT
+};
+enum ServoDirection{
+	SERVO_STRAIGHT,
+	SERVO_SIDEWAYS
+};
+
+/*
  * method declarations
  */
 
@@ -191,12 +211,10 @@ void mainLoop(void);
  * tof.c
  */
 
-/* called from start() */
+/* external functions */
 
 /* init tof sensors */
 uint8_t initToF(void); // constructor + init
-
-/* called from mainLoop() */
 
 /* get value of sensor in mm */
 uint8_t getToFValueMillimeters(uint8_t sens, uint16_t * val);
@@ -221,5 +239,37 @@ uint8_t writeRegister16bit(uint8_t ad, uint16_t reg, uint16_t val);
 uint8_t writeRegister8bit(uint8_t ad, uint16_t reg, uint8_t val);
 uint8_t readRegister16bit(uint8_t ad, uint16_t reg, uint16_t * val);
 uint8_t readRegister8bit(uint8_t ad, uint16_t reg, uint8_t * val);
+
+/*
+ * servo.c
+ */
+
+/* external functions */
+
+/* init servos and brushless */
+uint8_t initServo(void);
+
+/* set brushless */
+uint8_t setBrushless(enum BrushlessState state);
+
+/* set servos */
+uint8_t setServo(uint8_t ser, enum ServoDirection dir); // ser = 0...3
+
+/* internal functions */
+
+/* reset */
+uint8_t resetServo(void);
+
+/* set pwm frequency */
+uint8_t setServoPwmFreq(void);
+
+/* set pwm value */
+uint8_t setServoPwm(uint8_t ch, uint16_t on, uint16_t off);
+
+/* i2c stuff */
+uint8_t servoRead8(uint8_t ad, uint8_t reg, uint8_t * val);
+uint8_t servoWrite8(uint8_t ad, uint8_t reg, uint8_t val);
+uint8_t servoRead32(uint8_t ad, uint8_t reg, uint32_t * val);
+uint8_t servoWrite32(uint8_t ad, uint8_t reg, uint32_t val);
 
 #endif /* SOURCES_PROGRAM_H_ */
