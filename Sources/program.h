@@ -69,17 +69,7 @@ enum driveDistance {
 /*
  * declarations for the tof sensors
  */
-#define NUMBER_OF_SENSORS 2
-#define ERROR_WRONG_SENSOR_NUMBER 0xff
-enum tofAddresses {
-	TOF_DEFAULT = 0x29,
-	TOF1 = 0x02,
-	TOF2 = 0x03,
-	TOF3 = 0x04,
-	TOF4 = 0x05,
-	TOF5 = 0x06,
-	TOF6 = 0x07
-};
+#define NUMBER_OF_SENSORS 2 // max 6
 enum regAddr {
 	IDENTIFICATION__MODEL_ID = 0x000,
 	IDENTIFICATION__MODEL_REV_MAJOR = 0x001,
@@ -139,25 +129,13 @@ enum regAddr {
 	RESULT__RANGE_REFERENCE_AMB_COUNT = 0x078, // 32-bit
 	RESULT__RANGE_RETURN_CONV_TIME = 0x07C, // 32-bit
 	RESULT__RANGE_REFERENCE_CONV_TIME = 0x080, // 32-bit
+	RANGE_SCALER = 0x096, // 16-bit
 	READOUT__AVERAGING_SAMPLE_PERIOD = 0x10A,
 	FIRMWARE__BOOTUP = 0x119,
 	FIRMWARE__RESULT_SCALER = 0x120,
 	I2C_SLAVE__DEVICE_ADDRESS = 0x212,
 	INTERLEAVED_MODE__ENABLE = 0x2A3,
 };
-#define VL6180X_REG_IDENTIFICATION_MODEL_ID       0x000
-#define VL6180X_REG_SYSTEM_INTERRUPT_CONFIG       0x014
-#define VL6180X_REG_SYSTEM_INTERRUPT_CLEAR        0x015
-#define VL6180X_REG_SYSTEM_FRESH_OUT_OF_RESET     0x016
-#define VL6180X_REG_SYSRANGE_START                0x018
-#define VL6180X_REG_SYSALS_START                  0x038
-#define VL6180X_REG_SYSALS_ANALOGUE_GAIN          0x03F
-#define VL6180X_REG_SYSALS_INTEGRATION_PERIOD_HI  0x040
-#define VL6180X_REG_SYSALS_INTEGRATION_PERIOD_LO  0x041
-#define VL6180X_REG_RESULT_ALS_VAL                0x050
-#define VL6180X_REG_RESULT_RANGE_VAL              0x062
-#define VL6180X_REG_RESULT_RANGE_STATUS           0x04d
-#define VL6180X_REG_RESULT_INTERRUPT_STATUS_GPIO  0x04f
 enum VL6180X_ALS_GAIN {
 	VL6180X_ALS_GAIN_1 = 0x06,
 	VL6180X_ALS_GAIN_1_25 = 0x05,
@@ -186,14 +164,22 @@ enum VL_Enum_Error {
  * program.c
  */
 
+/* called from main.c */
+
 /* init method */
 void start(void);
+
+/* Interrupts */
 
 /* called from Hardware Interrupt */
 void serialRxInt(uint8_t ch, uint8_t port);
 
+/* serial communication */
+
 /* sends byte to serial port */
 void serialSend(uint8_t ch, uint8_t port);
+
+/* loops */
 
 /* method to simulate the serial communication of a complete parcour */
 void simulateParcour(void);
@@ -205,15 +191,30 @@ void mainLoop(void);
  * tof.c
  */
 
-/* init tof sensors */
-uint8_t initToF(void);
+/* called from start() */
 
-/* get value val of sensor sens */
-uint8_t getToFValue(uint8_t sens, uint8_t * val);
+/* init tof sensors */
+uint8_t initToF(void); // constructor + init
+
+/* called from mainLoop() */
+
+/* get value of sensor in mm */
+uint8_t getToFValueMillimeters(uint8_t sens, uint16_t * val);
+
+/* internal functions */
+
+/* set tof address */
+uint8_t setToFAddress(uint8_t sens);
+
+/* set default values */
+uint8_t configureToFDefault(uint8_t sens);
+
+/* set scaling factor of tof */
+uint8_t setToFScaling(uint8_t sens, uint8_t scaling);
 
 /* enable / disable sensor sens via chip enable pin */
-void enableToF(uint8_t sens);
-void disableToF(uint8_t sens);
+uint8_t enableToF(uint8_t sens);
+uint8_t disableToF(uint8_t sens);
 
 /* i2c stuff */
 uint8_t writeRegister16bit(uint8_t ad, uint16_t reg, uint16_t val);
