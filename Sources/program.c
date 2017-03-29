@@ -46,7 +46,7 @@ void start(void) {
 	simulateParcour();
 
 	/* init motor */
-	// todo: set direction like drive forward, set speed to 0
+	initMotor();
 
 	/* init servoshield, servos, brushless */
 	res = initServo();

@@ -166,14 +166,18 @@ enum VL_Enum_Error {
 #define PCA9685_CH0_ON_H 0x7
 #define PCA9685_CH0_OFF_L 0x8
 #define PCA9685_CH0_OFF_H 0x9
-enum BrushlessState{
-	BRUSHLESS_OFF,
-	BRUSHLESS_ON,
-	BRUSHLESS_INIT
+enum BrushlessState {
+	BRUSHLESS_OFF, BRUSHLESS_ON, BRUSHLESS_INIT
 };
-enum ServoDirection{
-	SERVO_STRAIGHT,
-	SERVO_SIDEWAYS
+enum ServoDirection {
+	SERVO_STRAIGHT, SERVO_SIDEWAYS
+};
+
+/*
+ * declarations for the motor driver boards
+ */
+enum MotorDirection {
+	MOTOR_FORWARD, MOTOR_BACKWARD
 };
 
 /*
@@ -271,5 +275,18 @@ uint8_t servoRead8(uint8_t ad, uint8_t reg, uint8_t * val);
 uint8_t servoWrite8(uint8_t ad, uint8_t reg, uint8_t val);
 uint8_t servoRead32(uint8_t ad, uint8_t reg, uint32_t * val);
 uint8_t servoWrite32(uint8_t ad, uint8_t reg, uint32_t val);
+
+/*
+ * motor.c
+ */
+
+/* init motor */
+void initMotor(void);
+
+/* set motor direction */
+void setMotorDirection(uint8_t motor, enum MotorDirection val);
+
+/* set motor speed */
+void setMotorSpeed(uint8_t motor, uint8_t val);
 
 #endif /* SOURCES_PROGRAM_H_ */
