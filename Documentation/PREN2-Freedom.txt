@@ -418,117 +418,109 @@ Module "SW_Zent"   (component BitIO)
                 returned. If the direction is [output] then the last written value is returned (see <Safe mode> property for 
                 limitations). This method cannot be disabled if direction is [input].
 
-Module "Bit1"      (component BitIO)
-   - Bit1_SetDir -Sets a pin direction (available only if the direction = _[input/output]_).
-   - Bit1_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+Module "MT1_IN1"   (component BitIO)
+   - MT1_IN1_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
                 returned. If the direction is [output] then the last written value is returned (see <Safe mode> property for 
                 limitations). This method cannot be disabled if direction is [input].
-   - Bit1_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory or 
-                a register and this value will be written to the pin after switching to the output mode (using [SetDir(TRUE)]; 
-                see <Safe mode> property for limitations). If the direction is [output], it writes the value to the pin. 
-                (Method is available only if the direction = _[output]_ or _[input/output]_).
-   - Bit1_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available only 
-                if the direction = _[output]_ or _[input/output]_.
-   - Bit1_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if the 
-                direction = _[output]_ or _[input/output]_.
+   - MT1_IN1_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory 
+                or a register and this value will be written to the pin after switching to the output mode (using 
+                [SetDir(TRUE)]; see <Safe mode> property for limitations). If the direction is [output], it writes the value to 
+                the pin. (Method is available only if the direction = _[output]_ or _[input/output]_).
+   - MT1_IN1_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT1_IN1_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
 
-Module "Bit2"      (component BitIO)
-   - Bit2_SetDir -Sets a pin direction (available only if the direction = _[input/output]_).
-   - Bit2_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+Module "MT1_IN2"   (component BitIO)
+   - MT1_IN2_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
                 returned. If the direction is [output] then the last written value is returned (see <Safe mode> property for 
                 limitations). This method cannot be disabled if direction is [input].
-   - Bit2_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory or 
-                a register and this value will be written to the pin after switching to the output mode (using [SetDir(TRUE)]; 
-                see <Safe mode> property for limitations). If the direction is [output], it writes the value to the pin. 
-                (Method is available only if the direction = _[output]_ or _[input/output]_).
-   - Bit2_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available only 
-                if the direction = _[output]_ or _[input/output]_.
-   - Bit2_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if the 
-                direction = _[output]_ or _[input/output]_.
+   - MT1_IN2_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory 
+                or a register and this value will be written to the pin after switching to the output mode (using 
+                [SetDir(TRUE)]; see <Safe mode> property for limitations). If the direction is [output], it writes the value to 
+                the pin. (Method is available only if the direction = _[output]_ or _[input/output]_).
+   - MT1_IN2_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT1_IN2_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
 
-Module "Bit3"      (component BitIO)
-   - Bit3_SetDir -Sets a pin direction (available only if the direction = _[input/output]_).
-   - Bit3_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+Module "MT1_IN3"   (component BitIO)
+   - MT1_IN3_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
                 returned. If the direction is [output] then the last written value is returned (see <Safe mode> property for 
                 limitations). This method cannot be disabled if direction is [input].
-   - Bit3_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory or 
-                a register and this value will be written to the pin after switching to the output mode (using [SetDir(TRUE)]; 
-                see <Safe mode> property for limitations). If the direction is [output], it writes the value to the pin. 
-                (Method is available only if the direction = _[output]_ or _[input/output]_).
-   - Bit3_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available only 
-                if the direction = _[output]_ or _[input/output]_.
-   - Bit3_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if the 
-                direction = _[output]_ or _[input/output]_.
+   - MT1_IN3_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory 
+                or a register and this value will be written to the pin after switching to the output mode (using 
+                [SetDir(TRUE)]; see <Safe mode> property for limitations). If the direction is [output], it writes the value to 
+                the pin. (Method is available only if the direction = _[output]_ or _[input/output]_).
+   - MT1_IN3_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT1_IN3_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
 
-Module "Bit4"      (component BitIO)
-   - Bit4_SetDir -Sets a pin direction (available only if the direction = _[input/output]_).
-   - Bit4_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+Module "MT1_IN4"   (component BitIO)
+   - MT1_IN4_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
                 returned. If the direction is [output] then the last written value is returned (see <Safe mode> property for 
                 limitations). This method cannot be disabled if direction is [input].
-   - Bit4_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory or 
-                a register and this value will be written to the pin after switching to the output mode (using [SetDir(TRUE)]; 
-                see <Safe mode> property for limitations). If the direction is [output], it writes the value to the pin. 
-                (Method is available only if the direction = _[output]_ or _[input/output]_).
-   - Bit4_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available only 
-                if the direction = _[output]_ or _[input/output]_.
-   - Bit4_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if the 
-                direction = _[output]_ or _[input/output]_.
+   - MT1_IN4_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory 
+                or a register and this value will be written to the pin after switching to the output mode (using 
+                [SetDir(TRUE)]; see <Safe mode> property for limitations). If the direction is [output], it writes the value to 
+                the pin. (Method is available only if the direction = _[output]_ or _[input/output]_).
+   - MT1_IN4_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT1_IN4_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
 
-Module "Bit5"      (component BitIO)
-   - Bit5_SetDir -Sets a pin direction (available only if the direction = _[input/output]_).
-   - Bit5_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+Module "MT2_IN1"   (component BitIO)
+   - MT2_IN1_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
                 returned. If the direction is [output] then the last written value is returned (see <Safe mode> property for 
                 limitations). This method cannot be disabled if direction is [input].
-   - Bit5_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory or 
-                a register and this value will be written to the pin after switching to the output mode (using [SetDir(TRUE)]; 
-                see <Safe mode> property for limitations). If the direction is [output], it writes the value to the pin. 
-                (Method is available only if the direction = _[output]_ or _[input/output]_).
-   - Bit5_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available only 
-                if the direction = _[output]_ or _[input/output]_.
-   - Bit5_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if the 
-                direction = _[output]_ or _[input/output]_.
+   - MT2_IN1_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory 
+                or a register and this value will be written to the pin after switching to the output mode (using 
+                [SetDir(TRUE)]; see <Safe mode> property for limitations). If the direction is [output], it writes the value to 
+                the pin. (Method is available only if the direction = _[output]_ or _[input/output]_).
+   - MT2_IN1_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT2_IN1_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
 
-Module "Bit6"      (component BitIO)
-   - Bit6_SetDir -Sets a pin direction (available only if the direction = _[input/output]_).
-   - Bit6_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+Module "MT2_IN2"   (component BitIO)
+   - MT2_IN2_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
                 returned. If the direction is [output] then the last written value is returned (see <Safe mode> property for 
                 limitations). This method cannot be disabled if direction is [input].
-   - Bit6_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory or 
-                a register and this value will be written to the pin after switching to the output mode (using [SetDir(TRUE)]; 
-                see <Safe mode> property for limitations). If the direction is [output], it writes the value to the pin. 
-                (Method is available only if the direction = _[output]_ or _[input/output]_).
-   - Bit6_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available only 
-                if the direction = _[output]_ or _[input/output]_.
-   - Bit6_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if the 
-                direction = _[output]_ or _[input/output]_.
+   - MT2_IN2_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory 
+                or a register and this value will be written to the pin after switching to the output mode (using 
+                [SetDir(TRUE)]; see <Safe mode> property for limitations). If the direction is [output], it writes the value to 
+                the pin. (Method is available only if the direction = _[output]_ or _[input/output]_).
+   - MT2_IN2_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT2_IN2_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
 
-Module "Bit7"      (component BitIO)
-   - Bit7_SetDir -Sets a pin direction (available only if the direction = _[input/output]_).
-   - Bit7_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+Module "MT2_IN3"   (component BitIO)
+   - MT2_IN3_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
                 returned. If the direction is [output] then the last written value is returned (see <Safe mode> property for 
                 limitations). This method cannot be disabled if direction is [input].
-   - Bit7_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory or 
-                a register and this value will be written to the pin after switching to the output mode (using [SetDir(TRUE)]; 
-                see <Safe mode> property for limitations). If the direction is [output], it writes the value to the pin. 
-                (Method is available only if the direction = _[output]_ or _[input/output]_).
-   - Bit7_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available only 
-                if the direction = _[output]_ or _[input/output]_.
-   - Bit7_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if the 
-                direction = _[output]_ or _[input/output]_.
+   - MT2_IN3_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory 
+                or a register and this value will be written to the pin after switching to the output mode (using 
+                [SetDir(TRUE)]; see <Safe mode> property for limitations). If the direction is [output], it writes the value to 
+                the pin. (Method is available only if the direction = _[output]_ or _[input/output]_).
+   - MT2_IN3_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT2_IN3_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
 
-Module "Bit8"      (component BitIO)
-   - Bit8_SetDir -Sets a pin direction (available only if the direction = _[input/output]_).
-   - Bit8_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
+Module "MT2_IN4"   (component BitIO)
+   - MT2_IN4_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is read and 
                 returned. If the direction is [output] then the last written value is returned (see <Safe mode> property for 
                 limitations). This method cannot be disabled if direction is [input].
-   - Bit8_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory or 
-                a register and this value will be written to the pin after switching to the output mode (using [SetDir(TRUE)]; 
-                see <Safe mode> property for limitations). If the direction is [output], it writes the value to the pin. 
-                (Method is available only if the direction = _[output]_ or _[input/output]_).
-   - Bit8_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available only 
-                if the direction = _[output]_ or _[input/output]_.
-   - Bit8_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if the 
-                direction = _[output]_ or _[input/output]_.
+   - MT2_IN4_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a memory 
+                or a register and this value will be written to the pin after switching to the output mode (using 
+                [SetDir(TRUE)]; see <Safe mode> property for limitations). If the direction is [output], it writes the value to 
+                the pin. (Method is available only if the direction = _[output]_ or _[input/output]_).
+   - MT2_IN4_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+   - MT2_IN4_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
+                the direction = _[output]_ or _[input/output]_.
 
 Module "Cpu"       (component MKL25Z128LK4)
 

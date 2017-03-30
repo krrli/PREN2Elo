@@ -1963,18 +1963,18 @@ even (hw or sw)
       <EmptySection_DummyValue />
     </Events>
   </Bean>
-  <Bean name="Bit1" type="BitIO">
+  <Bean name="MT1_IN1" type="BitIO">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Bit1" />
-      <Pin_for_I_O v="PTE2/SPI1_SCK" />
+      <Component_name v="MT1_IN1" />
+      <Pin_for_I_O v="CMP0_IN1/PTC7/SPI0_MISO/SPI0_MOSI" />
       <inhrbean type="BitIO_LDD">
         <Enabled v="Y" />
         <Template v="BitIO_LDD" />
         <Properties>
           <Component_name v="BitIoLdd9" />
-          <Pin_for_I_O v="PTE2/SPI1_SCK" />
-          <Direction v="Input/Output" />
+          <Pin_for_I_O v="CMP0_IN1/PTC7/SPI0_MISO/SPI0_MOSI" />
+          <Direction v="Output" />
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
@@ -1986,7 +1986,7 @@ even (hw or sw)
           <Init v="generate code" />
           <Deinit v="don&amp;apos;t generate code" />
           <GetDir v="don&amp;apos;t generate code" />
-          <SetDir v="generate code" />
+          <SetDir v="don&amp;apos;t generate code" />
           <SetInput v="don&amp;apos;t generate code" />
           <SetOutput v="don&amp;apos;t generate code" />
           <GetVal v="generate code" />
@@ -2001,7 +2001,7 @@ even (hw or sw)
           <EmptySection_DummyValue />
         </Events>
       </inhrbean>
-      <Direction v="Input/Output" />
+      <Direction v="Output" />
       <group name="Initialization">
         <Init__direction v="Output" />
         <Init__value v="0" />
@@ -2011,7 +2011,7 @@ even (hw or sw)
     </Properties>
     <Methods>
       <GetDir v="don&amp;apos;t generate code" />
-      <SetDir v="generate code" />
+      <SetDir v="don&amp;apos;t generate code" />
       <SetInput v="don&amp;apos;t generate code" />
       <SetOutput v="don&amp;apos;t generate code" />
       <GetVal v="generate code" />
@@ -2026,18 +2026,18 @@ even (hw or sw)
       <EmptySection_DummyValue />
     </Events>
   </Bean>
-  <Bean name="Bit2" type="BitIO">
+  <Bean name="MT1_IN2" type="BitIO">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Bit2" />
-      <Pin_for_I_O v="PTE3/SPI1_MISO/SPI1_MOSI" />
+      <Component_name v="MT1_IN2" />
+      <Pin_for_I_O v="ADC0_SE14/TSI0_CH13/PTC0/EXTRG_IN/CMP0_OUT" />
       <inhrbean type="BitIO_LDD">
         <Enabled v="Y" />
         <Template v="BitIO_LDD" />
         <Properties>
           <Component_name v="BitIoLdd10" />
-          <Pin_for_I_O v="PTE3/SPI1_MISO/SPI1_MOSI" />
-          <Direction v="Input/Output" />
+          <Pin_for_I_O v="ADC0_SE14/TSI0_CH13/PTC0/EXTRG_IN/CMP0_OUT" />
+          <Direction v="Output" />
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
@@ -2049,7 +2049,7 @@ even (hw or sw)
           <Init v="generate code" />
           <Deinit v="don&amp;apos;t generate code" />
           <GetDir v="don&amp;apos;t generate code" />
-          <SetDir v="generate code" />
+          <SetDir v="don&amp;apos;t generate code" />
           <SetInput v="don&amp;apos;t generate code" />
           <SetOutput v="don&amp;apos;t generate code" />
           <GetVal v="generate code" />
@@ -2064,7 +2064,7 @@ even (hw or sw)
           <EmptySection_DummyValue />
         </Events>
       </inhrbean>
-      <Direction v="Input/Output" />
+      <Direction v="Output" />
       <group name="Initialization">
         <Init__direction v="Output" />
         <Init__value v="0" />
@@ -2074,7 +2074,7 @@ even (hw or sw)
     </Properties>
     <Methods>
       <GetDir v="don&amp;apos;t generate code" />
-      <SetDir v="generate code" />
+      <SetDir v="don&amp;apos;t generate code" />
       <SetInput v="don&amp;apos;t generate code" />
       <SetOutput v="don&amp;apos;t generate code" />
       <GetVal v="generate code" />
@@ -2089,18 +2089,18 @@ even (hw or sw)
       <EmptySection_DummyValue />
     </Events>
   </Bean>
-  <Bean name="Bit3" type="BitIO">
+  <Bean name="MT1_IN3" type="BitIO">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Bit3" />
-      <Pin_for_I_O v="PTE4/SPI1_PCS0" />
+      <Component_name v="MT1_IN3" />
+      <Pin_for_I_O v="PTC3/LLWU_P7/UART1_RX/TPM0_CH2/CLKOUTa" />
       <inhrbean type="BitIO_LDD">
         <Enabled v="Y" />
         <Template v="BitIO_LDD" />
         <Properties>
           <Component_name v="BitIoLdd11" />
-          <Pin_for_I_O v="PTE4/SPI1_PCS0" />
-          <Direction v="Input/Output" />
+          <Pin_for_I_O v="PTC3/LLWU_P7/UART1_RX/TPM0_CH2/CLKOUTa" />
+          <Direction v="Output" />
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
@@ -2112,7 +2112,7 @@ even (hw or sw)
           <Init v="generate code" />
           <Deinit v="don&amp;apos;t generate code" />
           <GetDir v="don&amp;apos;t generate code" />
-          <SetDir v="generate code" />
+          <SetDir v="don&amp;apos;t generate code" />
           <SetInput v="don&amp;apos;t generate code" />
           <SetOutput v="don&amp;apos;t generate code" />
           <GetVal v="generate code" />
@@ -2127,7 +2127,7 @@ even (hw or sw)
           <EmptySection_DummyValue />
         </Events>
       </inhrbean>
-      <Direction v="Input/Output" />
+      <Direction v="Output" />
       <group name="Initialization">
         <Init__direction v="Output" />
         <Init__value v="0" />
@@ -2137,7 +2137,7 @@ even (hw or sw)
     </Properties>
     <Methods>
       <GetDir v="don&amp;apos;t generate code" />
-      <SetDir v="generate code" />
+      <SetDir v="don&amp;apos;t generate code" />
       <SetInput v="don&amp;apos;t generate code" />
       <SetOutput v="don&amp;apos;t generate code" />
       <GetVal v="generate code" />
@@ -2152,18 +2152,18 @@ even (hw or sw)
       <EmptySection_DummyValue />
     </Events>
   </Bean>
-  <Bean name="Bit4" type="BitIO">
+  <Bean name="MT1_IN4" type="BitIO">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Bit4" />
-      <Pin_for_I_O v="PTE5" />
+      <Component_name v="MT1_IN4" />
+      <Pin_for_I_O v="PTC4/LLWU_P8/SPI0_PCS0/UART1_TX/TPM0_CH3" />
       <inhrbean type="BitIO_LDD">
         <Enabled v="Y" />
         <Template v="BitIO_LDD" />
         <Properties>
           <Component_name v="BitIoLdd12" />
-          <Pin_for_I_O v="PTE5" />
-          <Direction v="Input/Output" />
+          <Pin_for_I_O v="PTC4/LLWU_P8/SPI0_PCS0/UART1_TX/TPM0_CH3" />
+          <Direction v="Output" />
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
@@ -2175,7 +2175,7 @@ even (hw or sw)
           <Init v="generate code" />
           <Deinit v="don&amp;apos;t generate code" />
           <GetDir v="don&amp;apos;t generate code" />
-          <SetDir v="generate code" />
+          <SetDir v="don&amp;apos;t generate code" />
           <SetInput v="don&amp;apos;t generate code" />
           <SetOutput v="don&amp;apos;t generate code" />
           <GetVal v="generate code" />
@@ -2190,7 +2190,7 @@ even (hw or sw)
           <EmptySection_DummyValue />
         </Events>
       </inhrbean>
-      <Direction v="Input/Output" />
+      <Direction v="Output" />
       <group name="Initialization">
         <Init__direction v="Output" />
         <Init__value v="0" />
@@ -2200,7 +2200,7 @@ even (hw or sw)
     </Properties>
     <Methods>
       <GetDir v="don&amp;apos;t generate code" />
-      <SetDir v="generate code" />
+      <SetDir v="don&amp;apos;t generate code" />
       <SetInput v="don&amp;apos;t generate code" />
       <SetOutput v="don&amp;apos;t generate code" />
       <GetVal v="generate code" />
@@ -2215,18 +2215,18 @@ even (hw or sw)
       <EmptySection_DummyValue />
     </Events>
   </Bean>
-  <Bean name="Bit5" type="BitIO">
+  <Bean name="MT2_IN1" type="BitIO">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Bit5" />
-      <Pin_for_I_O v="PTE31/TPM0_CH4" />
+      <Component_name v="MT2_IN1" />
+      <Pin_for_I_O v="PTC5/LLWU_P9/SPI0_SCK/LPTMR0_ALT2/CMP0_OUT" />
       <inhrbean type="BitIO_LDD">
         <Enabled v="Y" />
         <Template v="BitIO_LDD" />
         <Properties>
           <Component_name v="BitIoLdd13" />
-          <Pin_for_I_O v="PTE31/TPM0_CH4" />
-          <Direction v="Input/Output" />
+          <Pin_for_I_O v="PTC5/LLWU_P9/SPI0_SCK/LPTMR0_ALT2/CMP0_OUT" />
+          <Direction v="Output" />
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
@@ -2238,7 +2238,7 @@ even (hw or sw)
           <Init v="generate code" />
           <Deinit v="don&amp;apos;t generate code" />
           <GetDir v="don&amp;apos;t generate code" />
-          <SetDir v="generate code" />
+          <SetDir v="don&amp;apos;t generate code" />
           <SetInput v="don&amp;apos;t generate code" />
           <SetOutput v="don&amp;apos;t generate code" />
           <GetVal v="generate code" />
@@ -2253,7 +2253,7 @@ even (hw or sw)
           <EmptySection_DummyValue />
         </Events>
       </inhrbean>
-      <Direction v="Input/Output" />
+      <Direction v="Output" />
       <group name="Initialization">
         <Init__direction v="Output" />
         <Init__value v="0" />
@@ -2263,7 +2263,7 @@ even (hw or sw)
     </Properties>
     <Methods>
       <GetDir v="don&amp;apos;t generate code" />
-      <SetDir v="generate code" />
+      <SetDir v="don&amp;apos;t generate code" />
       <SetInput v="don&amp;apos;t generate code" />
       <SetOutput v="don&amp;apos;t generate code" />
       <GetVal v="generate code" />
@@ -2278,18 +2278,18 @@ even (hw or sw)
       <EmptySection_DummyValue />
     </Events>
   </Bean>
-  <Bean name="Bit6" type="BitIO">
+  <Bean name="MT2_IN2" type="BitIO">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Bit6" />
-      <Pin_for_I_O v="PTE24/TPM0_CH0/I2C0_SCL" />
+      <Component_name v="MT2_IN2" />
+      <Pin_for_I_O v="CMP0_IN0/PTC6/LLWU_P10/SPI0_MOSI/EXTRG_IN/SPI0_MISO" />
       <inhrbean type="BitIO_LDD">
         <Enabled v="Y" />
         <Template v="BitIO_LDD" />
         <Properties>
           <Component_name v="BitIoLdd14" />
-          <Pin_for_I_O v="PTE24/TPM0_CH0/I2C0_SCL" />
-          <Direction v="Input/Output" />
+          <Pin_for_I_O v="CMP0_IN0/PTC6/LLWU_P10/SPI0_MOSI/EXTRG_IN/SPI0_MISO" />
+          <Direction v="Output" />
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
@@ -2301,7 +2301,7 @@ even (hw or sw)
           <Init v="generate code" />
           <Deinit v="don&amp;apos;t generate code" />
           <GetDir v="don&amp;apos;t generate code" />
-          <SetDir v="generate code" />
+          <SetDir v="don&amp;apos;t generate code" />
           <SetInput v="don&amp;apos;t generate code" />
           <SetOutput v="don&amp;apos;t generate code" />
           <GetVal v="generate code" />
@@ -2316,7 +2316,7 @@ even (hw or sw)
           <EmptySection_DummyValue />
         </Events>
       </inhrbean>
-      <Direction v="Input/Output" />
+      <Direction v="Output" />
       <group name="Initialization">
         <Init__direction v="Output" />
         <Init__value v="0" />
@@ -2326,7 +2326,7 @@ even (hw or sw)
     </Properties>
     <Methods>
       <GetDir v="don&amp;apos;t generate code" />
-      <SetDir v="generate code" />
+      <SetDir v="don&amp;apos;t generate code" />
       <SetInput v="don&amp;apos;t generate code" />
       <SetOutput v="don&amp;apos;t generate code" />
       <GetVal v="generate code" />
@@ -2341,18 +2341,18 @@ even (hw or sw)
       <EmptySection_DummyValue />
     </Events>
   </Bean>
-  <Bean name="Bit7" type="BitIO">
+  <Bean name="MT2_IN3" type="BitIO">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Bit7" />
-      <Pin_for_I_O v="PTE25/TPM0_CH1/I2C0_SDA" />
+      <Component_name v="MT2_IN3" />
+      <Pin_for_I_O v="PTC10/I2C1_SCL" />
       <inhrbean type="BitIO_LDD">
         <Enabled v="Y" />
         <Template v="BitIO_LDD" />
         <Properties>
           <Component_name v="BitIoLdd15" />
-          <Pin_for_I_O v="PTE25/TPM0_CH1/I2C0_SDA" />
-          <Direction v="Input/Output" />
+          <Pin_for_I_O v="PTC10/I2C1_SCL" />
+          <Direction v="Output" />
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
@@ -2364,7 +2364,7 @@ even (hw or sw)
           <Init v="generate code" />
           <Deinit v="don&amp;apos;t generate code" />
           <GetDir v="don&amp;apos;t generate code" />
-          <SetDir v="generate code" />
+          <SetDir v="don&amp;apos;t generate code" />
           <SetInput v="don&amp;apos;t generate code" />
           <SetOutput v="don&amp;apos;t generate code" />
           <GetVal v="generate code" />
@@ -2379,7 +2379,7 @@ even (hw or sw)
           <EmptySection_DummyValue />
         </Events>
       </inhrbean>
-      <Direction v="Input/Output" />
+      <Direction v="Output" />
       <group name="Initialization">
         <Init__direction v="Output" />
         <Init__value v="0" />
@@ -2389,7 +2389,7 @@ even (hw or sw)
     </Properties>
     <Methods>
       <GetDir v="don&amp;apos;t generate code" />
-      <SetDir v="generate code" />
+      <SetDir v="don&amp;apos;t generate code" />
       <SetInput v="don&amp;apos;t generate code" />
       <SetOutput v="don&amp;apos;t generate code" />
       <GetVal v="generate code" />
@@ -2404,18 +2404,18 @@ even (hw or sw)
       <EmptySection_DummyValue />
     </Events>
   </Bean>
-  <Bean name="Bit8" type="BitIO">
+  <Bean name="MT2_IN4" type="BitIO">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Bit8" />
-      <Pin_for_I_O v="TSI0_CH1/PTA0/TPM0_CH5/SWD_CLK" />
+      <Component_name v="MT2_IN4" />
+      <Pin_for_I_O v="PTC11/I2C1_SDA" />
       <inhrbean type="BitIO_LDD">
         <Enabled v="Y" />
         <Template v="BitIO_LDD" />
         <Properties>
           <Component_name v="BitIoLdd16" />
-          <Pin_for_I_O v="TSI0_CH1/PTA0/TPM0_CH5/SWD_CLK" />
-          <Direction v="Input/Output" />
+          <Pin_for_I_O v="PTC11/I2C1_SDA" />
+          <Direction v="Output" />
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
@@ -2427,7 +2427,7 @@ even (hw or sw)
           <Init v="generate code" />
           <Deinit v="don&amp;apos;t generate code" />
           <GetDir v="don&amp;apos;t generate code" />
-          <SetDir v="generate code" />
+          <SetDir v="don&amp;apos;t generate code" />
           <SetInput v="don&amp;apos;t generate code" />
           <SetOutput v="don&amp;apos;t generate code" />
           <GetVal v="generate code" />
@@ -2442,7 +2442,7 @@ even (hw or sw)
           <EmptySection_DummyValue />
         </Events>
       </inhrbean>
-      <Direction v="Input/Output" />
+      <Direction v="Output" />
       <group name="Initialization">
         <Init__direction v="Output" />
         <Init__value v="0" />
@@ -2452,7 +2452,7 @@ even (hw or sw)
     </Properties>
     <Methods>
       <GetDir v="don&amp;apos;t generate code" />
-      <SetDir v="generate code" />
+      <SetDir v="don&amp;apos;t generate code" />
       <SetInput v="don&amp;apos;t generate code" />
       <SetOutput v="don&amp;apos;t generate code" />
       <GetVal v="generate code" />

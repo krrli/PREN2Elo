@@ -54,14 +54,6 @@
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\AS2.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\ASerialLdd1.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\ASerialLdd2.c</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit1.c</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit2.c</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit3.c</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit4.c</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit5.c</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit6.c</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit7.c</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit8.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\BitIoLdd1.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\BitIoLdd10.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\BitIoLdd11.c</PathName>
@@ -85,8 +77,16 @@
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\GenI2C_ToF.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\I2C_ToF.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MCUC1.c</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_IN1.c</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_IN2.c</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_IN3.c</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_IN4.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_PWM1.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_PWM2.c</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_IN1.c</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_IN2.c</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_IN3.c</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_IN4.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_PWM1.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_PWM2.c</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\PE_LDD.c</PathName>
@@ -120,14 +120,6 @@
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\AS2.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\ASerialLdd1.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\ASerialLdd2.h</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit1.h</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit2.h</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit3.h</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit4.h</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit5.h</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit6.h</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit7.h</PathName>
-      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\Bit8.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\BitIoLdd1.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\BitIoLdd10.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\BitIoLdd11.h</PathName>
@@ -156,8 +148,16 @@
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\IO_Map.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MCUC1.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MCUC1config.h</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_IN1.h</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_IN2.h</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_IN3.h</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_IN4.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_PWM1.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT1_PWM2.h</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_IN1.h</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_IN2.h</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_IN3.h</PathName>
+      <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_IN4.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_PWM1.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\MT2_PWM2.h</PathName>
       <PathName>C:\Users\Beda\git\PREN2Elo\Generated_Code\PE_Const.h</PathName>

@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-30, 09:33, # CodeGen: 31
+**     Date/Time   : 2017-03-30, 09:42, # CodeGen: 33
 **     Abstract    :
 **
 **     Settings    :
@@ -281,21 +281,21 @@
 #include "BitIoLdd7.h"
 #include "SW_Zent.h"
 #include "BitIoLdd8.h"
-#include "Bit1.h"
+#include "MT1_IN1.h"
 #include "BitIoLdd9.h"
-#include "Bit2.h"
+#include "MT1_IN2.h"
 #include "BitIoLdd10.h"
-#include "Bit3.h"
+#include "MT1_IN3.h"
 #include "BitIoLdd11.h"
-#include "Bit4.h"
+#include "MT1_IN4.h"
 #include "BitIoLdd12.h"
-#include "Bit5.h"
+#include "MT2_IN1.h"
 #include "BitIoLdd13.h"
-#include "Bit6.h"
+#include "MT2_IN2.h"
 #include "BitIoLdd14.h"
-#include "Bit7.h"
+#include "MT2_IN3.h"
 #include "BitIoLdd15.h"
-#include "Bit8.h"
+#include "MT2_IN4.h"
 #include "BitIoLdd16.h"
 #include "PE_Types.h"
 #include "PE_Error.h"

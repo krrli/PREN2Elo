@@ -7,7 +7,7 @@
 **     Version     : Component 01.033, Driver 01.03, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-30, 09:33, # CodeGen: 31
+**     Date/Time   : 2017-03-30, 09:42, # CodeGen: 33
 **     Abstract    :
 **         The HAL BitIO component provides a low level API for unified
 **         access to general purpose digital input/output pins across
@@ -17,9 +17,9 @@
 **         portable to various microprocessors.
 **     Settings    :
 **          Component name                                 : BitIoLdd16
-**          Pin for I/O                                    : TSI0_CH1/PTA0/TPM0_CH5/SWD_CLK
+**          Pin for I/O                                    : PTC11/I2C1_SDA
 **          Pin signal                                     : 
-**          Direction                                      : Input/Output
+**          Direction                                      : Output
 **          Initialization                                 : 
 **            Init. direction                              : Output
 **            Init. value                                  : 0
@@ -27,7 +27,6 @@
 **          Safe mode                                      : yes
 **     Contents    :
 **         Init   - LDD_TDeviceData* BitIoLdd16_Init(LDD_TUserData *UserDataPtr);
-**         SetDir - void BitIoLdd16_SetDir(LDD_TDeviceData *DeviceDataPtr, bool Dir);
 **         GetVal - bool BitIoLdd16_GetVal(LDD_TDeviceData *DeviceDataPtr);
 **         PutVal - void BitIoLdd16_PutVal(LDD_TDeviceData *DeviceDataPtr, bool Val);
 **         ClrVal - void BitIoLdd16_ClrVal(LDD_TDeviceData *DeviceDataPtr);
@@ -103,23 +102,22 @@ extern "C" {
 
 
 /*! Peripheral base address of a device allocated by the component. This constant can be used directly in PDD macros. */
-#define BitIoLdd16_PRPH_BASE_ADDRESS  0x400FF000U
+#define BitIoLdd16_PRPH_BASE_ADDRESS  0x400FF080U
   
 /*! Device data structure pointer used when auto initialization property is enabled. This constant can be passed as a first parameter to all component's methods. */
 #define BitIoLdd16_DeviceData  ((LDD_TDeviceData *)PE_LDD_GetDeviceStructure(PE_LDD_COMPONENT_BitIoLdd16_ID))
 
 /* Methods configuration constants - generated for all enabled component's methods */
 #define BitIoLdd16_Init_METHOD_ENABLED /*!< Init method of the component BitIoLdd16 is enabled (generated) */
-#define BitIoLdd16_SetDir_METHOD_ENABLED /*!< SetDir method of the component BitIoLdd16 is enabled (generated) */
 #define BitIoLdd16_GetVal_METHOD_ENABLED /*!< GetVal method of the component BitIoLdd16 is enabled (generated) */
 #define BitIoLdd16_PutVal_METHOD_ENABLED /*!< PutVal method of the component BitIoLdd16 is enabled (generated) */
 #define BitIoLdd16_ClrVal_METHOD_ENABLED /*!< ClrVal method of the component BitIoLdd16 is enabled (generated) */
 #define BitIoLdd16_SetVal_METHOD_ENABLED /*!< SetVal method of the component BitIoLdd16 is enabled (generated) */
 
 /* Definition of implementation constants */
-#define BitIoLdd16_MODULE_BASE_ADDRESS FPTA_BASE_PTR /*!< Name of macro used as the base address */
-#define BitIoLdd16_PORTCONTROL_BASE_ADDRESS PORTA_BASE_PTR /*!< Name of macro used as the base address */
-#define BitIoLdd16_PORT_MASK 0x01U     /*!< Mask of the allocated pin from the port */
+#define BitIoLdd16_MODULE_BASE_ADDRESS FPTC_BASE_PTR /*!< Name of macro used as the base address */
+#define BitIoLdd16_PORTCONTROL_BASE_ADDRESS PORTC_BASE_PTR /*!< Name of macro used as the base address */
+#define BitIoLdd16_PORT_MASK 0x0800U   /*!< Mask of the allocated pin from the port */
 
 
 
@@ -146,25 +144,6 @@ extern "C" {
 */
 /* ===================================================================*/
 LDD_TDeviceData* BitIoLdd16_Init(LDD_TUserData *UserDataPtr);
-
-/*
-** ===================================================================
-**     Method      :  BitIoLdd16_SetDir (component BitIO_LDD)
-*/
-/*!
-**     @brief
-**         Sets a pin direction (available only if the direction =
-**         _[input/output]_).
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by <Init> method.
-**     @param
-**         Dir             - Direction to set. Possible values:
-**                           <false> - Input
-**                           <true> - Output
-*/
-/* ===================================================================*/
-void BitIoLdd16_SetDir(LDD_TDeviceData *DeviceDataPtr, bool Dir);
 
 /*
 ** ===================================================================

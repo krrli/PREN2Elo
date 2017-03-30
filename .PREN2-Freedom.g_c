@@ -82,10 +82,10 @@
       <XtraAge4>1249791021</XtraAge4>
       <XtraAge6>1249791021</XtraAge6>
       <XtraAge8>1249791021</XtraAge8>
-      <XtraAge35>1249791021</XtraAge35>
-      <XtraAge36>1249791021</XtraAge36>
+      <XtraAge35>1249791319</XtraAge35>
+      <XtraAge36>1249791319</XtraAge36>
       <XtraAge38>1249790448</XtraAge38>
-      <XtraAge39>1249791021</XtraAge39>
+      <XtraAge39>1249791319</XtraAge39>
       <GenExtraFileType39>4</GenExtraFileType39>
       <GenExtraFileType38>5</GenExtraFileType38>
       <GenExtraFileType37>4</GenExtraFileType37>
@@ -378,14 +378,6 @@
         <Line>AS2</Line>
         <Line>ASerialLdd1</Line>
         <Line>ASerialLdd2</Line>
-        <Line>Bit1</Line>
-        <Line>Bit2</Line>
-        <Line>Bit3</Line>
-        <Line>Bit4</Line>
-        <Line>Bit5</Line>
-        <Line>Bit6</Line>
-        <Line>Bit7</Line>
-        <Line>Bit8</Line>
         <Line>BitIoLdd1</Line>
         <Line>BitIoLdd10</Line>
         <Line>BitIoLdd11</Line>
@@ -411,8 +403,16 @@
         <Line>I2C_ToF</Line>
         <Line>IO_Map</Line>
         <Line>MCUC1</Line>
+        <Line>MT1_IN1</Line>
+        <Line>MT1_IN2</Line>
+        <Line>MT1_IN3</Line>
+        <Line>MT1_IN4</Line>
         <Line>MT1_PWM1</Line>
         <Line>MT1_PWM2</Line>
+        <Line>MT2_IN1</Line>
+        <Line>MT2_IN2</Line>
+        <Line>MT2_IN3</Line>
+        <Line>MT2_IN4</Line>
         <Line>MT2_PWM1</Line>
         <Line>MT2_PWM2</Line>
         <Line>PE_Const</Line>
@@ -475,27 +475,27 @@
         <Line>BitIoLdd7</Line>
         <Line>SW_Zent</Line>
         <Line>BitIoLdd8</Line>
-        <Line>Bit1</Line>
+        <Line>MT1_IN1</Line>
         <Line>BitIoLdd9</Line>
-        <Line>Bit2</Line>
+        <Line>MT1_IN2</Line>
         <Line>BitIoLdd10</Line>
-        <Line>Bit3</Line>
+        <Line>MT1_IN3</Line>
         <Line>BitIoLdd11</Line>
-        <Line>Bit4</Line>
+        <Line>MT1_IN4</Line>
         <Line>BitIoLdd12</Line>
-        <Line>Bit5</Line>
+        <Line>MT2_IN1</Line>
         <Line>BitIoLdd13</Line>
-        <Line>Bit6</Line>
+        <Line>MT2_IN2</Line>
         <Line>BitIoLdd14</Line>
-        <Line>Bit7</Line>
+        <Line>MT2_IN3</Line>
         <Line>BitIoLdd15</Line>
-        <Line>Bit8</Line>
+        <Line>MT2_IN4</Line>
         <Line>BitIoLdd16</Line>
       </GenBeanModules>
     </GenFiles>
     <SignalListFile>Documentation\PREN2-Freedom_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>19</ProjectModificationStamp>
+    <ProjectModificationStamp>20</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>
@@ -504,7 +504,7 @@
     <GenDriverVersion>01.04</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
     <HeaderAge>1249790449</HeaderAge>
-    <CodeAge>1249791021</CodeAge>
+    <CodeAge>1249791319</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <SetClockConfiguration>false</SetClockConfiguration>
@@ -6512,16 +6512,16 @@
   </ComponentID_55>
   <ComponentID_57>
     <Generated>true</Generated>
-    <GenCompName>Bit1</GenCompName>
+    <GenCompName>MT1_IN1</GenCompName>
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1249791021</HeaderAge>
-    <CodeAge>1249791021</CodeAge>
+    <HeaderAge>1249791319</HeaderAge>
+    <CodeAge>1249791319</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <GetDir>false</GetDir>
-    <SetDir>true</SetDir>
+    <SetDir>false</SetDir>
     <SetInput>false</SetInput>
     <SetOutput>false</SetOutput>
     <GetVal>true</GetVal>
@@ -6535,76 +6535,62 @@
     <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
     <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
     <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>10</GenMethodPos>
+    <GenMethodPos>8</GenMethodPos>
     <MethodPos>
-      <MethodPos0>SetDir</MethodPos0>
+      <MethodPos0>GetVal</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>100</LineBeg>
-      <LineEnd>113</LineEnd>
+      <LineBeg>101</LineBeg>
+      <LineEnd>119</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos1>GetVal</MethodPos1>
+      <MethodPos1>PutVal</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>114</LineBeg>
-      <LineEnd>131</LineEnd>
+      <LineBeg>120</LineBeg>
+      <LineEnd>134</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos2>PutVal</MethodPos2>
+      <MethodPos2>ClrVal</MethodPos2>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>132</LineBeg>
-      <LineEnd>153</LineEnd>
+      <LineBeg>135</LineBeg>
+      <LineEnd>145</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos3>ClrVal</MethodPos3>
+      <MethodPos3>SetVal</MethodPos3>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>154</LineBeg>
-      <LineEnd>171</LineEnd>
+      <LineBeg>146</LineBeg>
+      <LineEnd>156</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos4>SetVal</MethodPos4>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>172</LineBeg>
-      <LineEnd>189</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos5>SetDir</MethodPos5>
+      <MethodPos4>GetVal</MethodPos4>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>86</LineBeg>
-      <LineEnd>103</LineEnd>
+      <LineBeg>87</LineBeg>
+      <LineEnd>109</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos6>GetVal</MethodPos6>
+      <MethodPos5>PutVal</MethodPos5>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>104</LineBeg>
-      <LineEnd>125</LineEnd>
+      <LineBeg>110</LineBeg>
+      <LineEnd>128</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos7>PutVal</MethodPos7>
+      <MethodPos6>ClrVal</MethodPos6>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>126</LineBeg>
-      <LineEnd>151</LineEnd>
+      <LineBeg>129</LineBeg>
+      <LineEnd>143</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos8>ClrVal</MethodPos8>
+      <MethodPos7>SetVal</MethodPos7>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>152</LineBeg>
-      <LineEnd>173</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos9>SetVal</MethodPos9>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>174</LineBeg>
-      <LineEnd>195</LineEnd>
+      <LineBeg>144</LineBeg>
+      <LineEnd>158</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
     <InhrCompID_58>
@@ -6613,14 +6599,14 @@
       <GenComponentVersion>01.033</GenComponentVersion>
       <GenDriverVersion>01.03</GenDriverVersion>
       <GenEventModule />
-      <HeaderAge>1249791021</HeaderAge>
-      <CodeAge>1249791021</CodeAge>
+      <HeaderAge>1249791319</HeaderAge>
+      <CodeAge>1249791319</CodeAge>
       <AsemblAge>-1</AsemblAge>
       <GenNumMethods>13</GenNumMethods>
       <Init>true</Init>
       <Deinit>false</Deinit>
       <GetDir>false</GetDir>
-      <SetDir>true</SetDir>
+      <SetDir>false</SetDir>
       <SetInput>false</SetInput>
       <SetOutput>false</SetOutput>
       <GetVal>true</GetVal>
@@ -6634,90 +6620,76 @@
       <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
       <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
       <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-      <GenMethodPos>12</GenMethodPos>
+      <GenMethodPos>10</GenMethodPos>
       <MethodPos>
         <MethodPos0>Init</MethodPos0>
         <MethodType>method</MethodType>
         <ModuleType>Header</ModuleType>
-        <LineBeg>125</LineBeg>
-        <LineEnd>148</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos1>SetDir</MethodPos1>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>149</LineBeg>
-        <LineEnd>167</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos2>GetVal</MethodPos2>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>168</LineBeg>
-        <LineEnd>189</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos3>PutVal</MethodPos3>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>190</LineBeg>
-        <LineEnd>215</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos4>ClrVal</MethodPos4>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>216</LineBeg>
-        <LineEnd>231</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos5>SetVal</MethodPos5>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>232</LineBeg>
-        <LineEnd>247</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos6>Init</MethodPos6>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>97</LineBeg>
+        <LineBeg>123</LineBeg>
         <LineEnd>146</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos7>SetDir</MethodPos7>
+        <MethodPos1>GetVal</MethodPos1>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>147</LineBeg>
-        <LineEnd>175</LineEnd>
+        <LineEnd>168</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos8>GetVal</MethodPos8>
+        <MethodPos2>PutVal</MethodPos2>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>176</LineBeg>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>169</LineBeg>
+        <LineEnd>194</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos3>ClrVal</MethodPos3>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>195</LineBeg>
         <LineEnd>210</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos9>PutVal</MethodPos9>
+        <MethodPos4>SetVal</MethodPos4>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>211</LineBeg>
-        <LineEnd>244</LineEnd>
+        <LineEnd>226</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos10>ClrVal</MethodPos10>
+        <MethodPos5>Init</MethodPos5>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>245</LineBeg>
-        <LineEnd>264</LineEnd>
+        <LineBeg>96</LineBeg>
+        <LineEnd>145</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos11>SetVal</MethodPos11>
+        <MethodPos6>GetVal</MethodPos6>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>265</LineBeg>
-        <LineEnd>284</LineEnd>
+        <LineBeg>146</LineBeg>
+        <LineEnd>174</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos7>PutVal</MethodPos7>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>175</LineBeg>
+        <LineEnd>208</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos8>ClrVal</MethodPos8>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>209</LineBeg>
+        <LineEnd>228</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos9>SetVal</MethodPos9>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>229</LineBeg>
+        <LineEnd>248</LineEnd>
       </MethodPos>
       <GenExtraFilesCount>1</GenExtraFilesCount>
       <ExtraFile0>Documentation\doxygen\BitIoLdd9_component.txt</ExtraFile0>
@@ -6725,16 +6697,16 @@
   </ComponentID_57>
   <ComponentID_59>
     <Generated>true</Generated>
-    <GenCompName>Bit2</GenCompName>
+    <GenCompName>MT1_IN2</GenCompName>
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1249791021</HeaderAge>
-    <CodeAge>1249791021</CodeAge>
+    <HeaderAge>1249791319</HeaderAge>
+    <CodeAge>1249791319</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <GetDir>false</GetDir>
-    <SetDir>true</SetDir>
+    <SetDir>false</SetDir>
     <SetInput>false</SetInput>
     <SetOutput>false</SetOutput>
     <GetVal>true</GetVal>
@@ -6748,76 +6720,62 @@
     <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
     <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
     <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>10</GenMethodPos>
+    <GenMethodPos>8</GenMethodPos>
     <MethodPos>
-      <MethodPos0>SetDir</MethodPos0>
+      <MethodPos0>GetVal</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>100</LineBeg>
-      <LineEnd>113</LineEnd>
+      <LineBeg>101</LineBeg>
+      <LineEnd>119</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos1>GetVal</MethodPos1>
+      <MethodPos1>PutVal</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>114</LineBeg>
-      <LineEnd>131</LineEnd>
+      <LineBeg>120</LineBeg>
+      <LineEnd>134</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos2>PutVal</MethodPos2>
+      <MethodPos2>ClrVal</MethodPos2>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>132</LineBeg>
-      <LineEnd>153</LineEnd>
+      <LineBeg>135</LineBeg>
+      <LineEnd>145</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos3>ClrVal</MethodPos3>
+      <MethodPos3>SetVal</MethodPos3>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>154</LineBeg>
-      <LineEnd>171</LineEnd>
+      <LineBeg>146</LineBeg>
+      <LineEnd>156</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos4>SetVal</MethodPos4>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>172</LineBeg>
-      <LineEnd>189</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos5>SetDir</MethodPos5>
+      <MethodPos4>GetVal</MethodPos4>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>86</LineBeg>
-      <LineEnd>103</LineEnd>
+      <LineBeg>87</LineBeg>
+      <LineEnd>109</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos6>GetVal</MethodPos6>
+      <MethodPos5>PutVal</MethodPos5>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>104</LineBeg>
-      <LineEnd>125</LineEnd>
+      <LineBeg>110</LineBeg>
+      <LineEnd>128</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos7>PutVal</MethodPos7>
+      <MethodPos6>ClrVal</MethodPos6>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>126</LineBeg>
-      <LineEnd>151</LineEnd>
+      <LineBeg>129</LineBeg>
+      <LineEnd>143</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos8>ClrVal</MethodPos8>
+      <MethodPos7>SetVal</MethodPos7>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>152</LineBeg>
-      <LineEnd>173</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos9>SetVal</MethodPos9>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>174</LineBeg>
-      <LineEnd>195</LineEnd>
+      <LineBeg>144</LineBeg>
+      <LineEnd>158</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
     <InhrCompID_60>
@@ -6826,14 +6784,14 @@
       <GenComponentVersion>01.033</GenComponentVersion>
       <GenDriverVersion>01.03</GenDriverVersion>
       <GenEventModule />
-      <HeaderAge>1249791021</HeaderAge>
-      <CodeAge>1249791021</CodeAge>
+      <HeaderAge>1249791319</HeaderAge>
+      <CodeAge>1249791319</CodeAge>
       <AsemblAge>-1</AsemblAge>
       <GenNumMethods>13</GenNumMethods>
       <Init>true</Init>
       <Deinit>false</Deinit>
       <GetDir>false</GetDir>
-      <SetDir>true</SetDir>
+      <SetDir>false</SetDir>
       <SetInput>false</SetInput>
       <SetOutput>false</SetOutput>
       <GetVal>true</GetVal>
@@ -6847,90 +6805,76 @@
       <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
       <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
       <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-      <GenMethodPos>12</GenMethodPos>
+      <GenMethodPos>10</GenMethodPos>
       <MethodPos>
         <MethodPos0>Init</MethodPos0>
         <MethodType>method</MethodType>
         <ModuleType>Header</ModuleType>
-        <LineBeg>125</LineBeg>
-        <LineEnd>148</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos1>SetDir</MethodPos1>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>149</LineBeg>
-        <LineEnd>167</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos2>GetVal</MethodPos2>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>168</LineBeg>
-        <LineEnd>189</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos3>PutVal</MethodPos3>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>190</LineBeg>
-        <LineEnd>215</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos4>ClrVal</MethodPos4>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>216</LineBeg>
-        <LineEnd>231</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos5>SetVal</MethodPos5>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>232</LineBeg>
-        <LineEnd>247</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos6>Init</MethodPos6>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>97</LineBeg>
+        <LineBeg>123</LineBeg>
         <LineEnd>146</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos7>SetDir</MethodPos7>
+        <MethodPos1>GetVal</MethodPos1>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>147</LineBeg>
-        <LineEnd>175</LineEnd>
+        <LineEnd>168</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos8>GetVal</MethodPos8>
+        <MethodPos2>PutVal</MethodPos2>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>176</LineBeg>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>169</LineBeg>
+        <LineEnd>194</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos3>ClrVal</MethodPos3>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>195</LineBeg>
         <LineEnd>210</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos9>PutVal</MethodPos9>
+        <MethodPos4>SetVal</MethodPos4>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>211</LineBeg>
-        <LineEnd>244</LineEnd>
+        <LineEnd>226</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos10>ClrVal</MethodPos10>
+        <MethodPos5>Init</MethodPos5>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>245</LineBeg>
-        <LineEnd>264</LineEnd>
+        <LineBeg>96</LineBeg>
+        <LineEnd>145</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos11>SetVal</MethodPos11>
+        <MethodPos6>GetVal</MethodPos6>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>265</LineBeg>
-        <LineEnd>284</LineEnd>
+        <LineBeg>146</LineBeg>
+        <LineEnd>174</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos7>PutVal</MethodPos7>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>175</LineBeg>
+        <LineEnd>208</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos8>ClrVal</MethodPos8>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>209</LineBeg>
+        <LineEnd>228</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos9>SetVal</MethodPos9>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>229</LineBeg>
+        <LineEnd>248</LineEnd>
       </MethodPos>
       <GenExtraFilesCount>1</GenExtraFilesCount>
       <ExtraFile0>Documentation\doxygen\BitIoLdd10_component.txt</ExtraFile0>
@@ -6938,16 +6882,16 @@
   </ComponentID_59>
   <ComponentID_61>
     <Generated>true</Generated>
-    <GenCompName>Bit3</GenCompName>
+    <GenCompName>MT1_IN3</GenCompName>
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1249791021</HeaderAge>
-    <CodeAge>1249791021</CodeAge>
+    <HeaderAge>1249791319</HeaderAge>
+    <CodeAge>1249791319</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <GetDir>false</GetDir>
-    <SetDir>true</SetDir>
+    <SetDir>false</SetDir>
     <SetInput>false</SetInput>
     <SetOutput>false</SetOutput>
     <GetVal>true</GetVal>
@@ -6961,76 +6905,62 @@
     <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
     <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
     <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>10</GenMethodPos>
+    <GenMethodPos>8</GenMethodPos>
     <MethodPos>
-      <MethodPos0>SetDir</MethodPos0>
+      <MethodPos0>GetVal</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>100</LineBeg>
-      <LineEnd>113</LineEnd>
+      <LineBeg>101</LineBeg>
+      <LineEnd>119</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos1>GetVal</MethodPos1>
+      <MethodPos1>PutVal</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>114</LineBeg>
-      <LineEnd>131</LineEnd>
+      <LineBeg>120</LineBeg>
+      <LineEnd>134</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos2>PutVal</MethodPos2>
+      <MethodPos2>ClrVal</MethodPos2>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>132</LineBeg>
-      <LineEnd>153</LineEnd>
+      <LineBeg>135</LineBeg>
+      <LineEnd>145</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos3>ClrVal</MethodPos3>
+      <MethodPos3>SetVal</MethodPos3>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>154</LineBeg>
-      <LineEnd>171</LineEnd>
+      <LineBeg>146</LineBeg>
+      <LineEnd>156</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos4>SetVal</MethodPos4>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>172</LineBeg>
-      <LineEnd>189</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos5>SetDir</MethodPos5>
+      <MethodPos4>GetVal</MethodPos4>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>86</LineBeg>
-      <LineEnd>103</LineEnd>
+      <LineBeg>87</LineBeg>
+      <LineEnd>109</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos6>GetVal</MethodPos6>
+      <MethodPos5>PutVal</MethodPos5>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>104</LineBeg>
-      <LineEnd>125</LineEnd>
+      <LineBeg>110</LineBeg>
+      <LineEnd>128</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos7>PutVal</MethodPos7>
+      <MethodPos6>ClrVal</MethodPos6>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>126</LineBeg>
-      <LineEnd>151</LineEnd>
+      <LineBeg>129</LineBeg>
+      <LineEnd>143</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos8>ClrVal</MethodPos8>
+      <MethodPos7>SetVal</MethodPos7>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>152</LineBeg>
-      <LineEnd>173</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos9>SetVal</MethodPos9>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>174</LineBeg>
-      <LineEnd>195</LineEnd>
+      <LineBeg>144</LineBeg>
+      <LineEnd>158</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
     <InhrCompID_62>
@@ -7039,14 +6969,14 @@
       <GenComponentVersion>01.033</GenComponentVersion>
       <GenDriverVersion>01.03</GenDriverVersion>
       <GenEventModule />
-      <HeaderAge>1249791021</HeaderAge>
-      <CodeAge>1249791021</CodeAge>
+      <HeaderAge>1249791319</HeaderAge>
+      <CodeAge>1249791319</CodeAge>
       <AsemblAge>-1</AsemblAge>
       <GenNumMethods>13</GenNumMethods>
       <Init>true</Init>
       <Deinit>false</Deinit>
       <GetDir>false</GetDir>
-      <SetDir>true</SetDir>
+      <SetDir>false</SetDir>
       <SetInput>false</SetInput>
       <SetOutput>false</SetOutput>
       <GetVal>true</GetVal>
@@ -7060,90 +6990,76 @@
       <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
       <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
       <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-      <GenMethodPos>12</GenMethodPos>
+      <GenMethodPos>10</GenMethodPos>
       <MethodPos>
         <MethodPos0>Init</MethodPos0>
         <MethodType>method</MethodType>
         <ModuleType>Header</ModuleType>
-        <LineBeg>125</LineBeg>
-        <LineEnd>148</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos1>SetDir</MethodPos1>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>149</LineBeg>
-        <LineEnd>167</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos2>GetVal</MethodPos2>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>168</LineBeg>
-        <LineEnd>189</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos3>PutVal</MethodPos3>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>190</LineBeg>
-        <LineEnd>215</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos4>ClrVal</MethodPos4>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>216</LineBeg>
-        <LineEnd>231</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos5>SetVal</MethodPos5>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>232</LineBeg>
-        <LineEnd>247</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos6>Init</MethodPos6>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>97</LineBeg>
+        <LineBeg>123</LineBeg>
         <LineEnd>146</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos7>SetDir</MethodPos7>
+        <MethodPos1>GetVal</MethodPos1>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>147</LineBeg>
-        <LineEnd>175</LineEnd>
+        <LineEnd>168</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos8>GetVal</MethodPos8>
+        <MethodPos2>PutVal</MethodPos2>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>176</LineBeg>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>169</LineBeg>
+        <LineEnd>194</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos3>ClrVal</MethodPos3>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>195</LineBeg>
         <LineEnd>210</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos9>PutVal</MethodPos9>
+        <MethodPos4>SetVal</MethodPos4>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>211</LineBeg>
-        <LineEnd>244</LineEnd>
+        <LineEnd>226</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos10>ClrVal</MethodPos10>
+        <MethodPos5>Init</MethodPos5>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>245</LineBeg>
-        <LineEnd>264</LineEnd>
+        <LineBeg>96</LineBeg>
+        <LineEnd>145</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos11>SetVal</MethodPos11>
+        <MethodPos6>GetVal</MethodPos6>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>265</LineBeg>
-        <LineEnd>284</LineEnd>
+        <LineBeg>146</LineBeg>
+        <LineEnd>174</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos7>PutVal</MethodPos7>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>175</LineBeg>
+        <LineEnd>208</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos8>ClrVal</MethodPos8>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>209</LineBeg>
+        <LineEnd>228</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos9>SetVal</MethodPos9>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>229</LineBeg>
+        <LineEnd>248</LineEnd>
       </MethodPos>
       <GenExtraFilesCount>1</GenExtraFilesCount>
       <ExtraFile0>Documentation\doxygen\BitIoLdd11_component.txt</ExtraFile0>
@@ -7151,16 +7067,16 @@
   </ComponentID_61>
   <ComponentID_63>
     <Generated>true</Generated>
-    <GenCompName>Bit4</GenCompName>
+    <GenCompName>MT1_IN4</GenCompName>
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1249791021</HeaderAge>
-    <CodeAge>1249791021</CodeAge>
+    <HeaderAge>1249791319</HeaderAge>
+    <CodeAge>1249791319</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <GetDir>false</GetDir>
-    <SetDir>true</SetDir>
+    <SetDir>false</SetDir>
     <SetInput>false</SetInput>
     <SetOutput>false</SetOutput>
     <GetVal>true</GetVal>
@@ -7174,76 +7090,62 @@
     <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
     <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
     <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>10</GenMethodPos>
+    <GenMethodPos>8</GenMethodPos>
     <MethodPos>
-      <MethodPos0>SetDir</MethodPos0>
+      <MethodPos0>GetVal</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>100</LineBeg>
-      <LineEnd>113</LineEnd>
+      <LineBeg>101</LineBeg>
+      <LineEnd>119</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos1>GetVal</MethodPos1>
+      <MethodPos1>PutVal</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>114</LineBeg>
-      <LineEnd>131</LineEnd>
+      <LineBeg>120</LineBeg>
+      <LineEnd>134</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos2>PutVal</MethodPos2>
+      <MethodPos2>ClrVal</MethodPos2>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>132</LineBeg>
-      <LineEnd>153</LineEnd>
+      <LineBeg>135</LineBeg>
+      <LineEnd>145</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos3>ClrVal</MethodPos3>
+      <MethodPos3>SetVal</MethodPos3>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>154</LineBeg>
-      <LineEnd>171</LineEnd>
+      <LineBeg>146</LineBeg>
+      <LineEnd>156</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos4>SetVal</MethodPos4>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>172</LineBeg>
-      <LineEnd>189</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos5>SetDir</MethodPos5>
+      <MethodPos4>GetVal</MethodPos4>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>86</LineBeg>
-      <LineEnd>103</LineEnd>
+      <LineBeg>87</LineBeg>
+      <LineEnd>109</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos6>GetVal</MethodPos6>
+      <MethodPos5>PutVal</MethodPos5>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>104</LineBeg>
-      <LineEnd>125</LineEnd>
+      <LineBeg>110</LineBeg>
+      <LineEnd>128</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos7>PutVal</MethodPos7>
+      <MethodPos6>ClrVal</MethodPos6>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>126</LineBeg>
-      <LineEnd>151</LineEnd>
+      <LineBeg>129</LineBeg>
+      <LineEnd>143</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos8>ClrVal</MethodPos8>
+      <MethodPos7>SetVal</MethodPos7>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>152</LineBeg>
-      <LineEnd>173</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos9>SetVal</MethodPos9>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>174</LineBeg>
-      <LineEnd>195</LineEnd>
+      <LineBeg>144</LineBeg>
+      <LineEnd>158</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
     <InhrCompID_64>
@@ -7252,14 +7154,14 @@
       <GenComponentVersion>01.033</GenComponentVersion>
       <GenDriverVersion>01.03</GenDriverVersion>
       <GenEventModule />
-      <HeaderAge>1249791021</HeaderAge>
-      <CodeAge>1249791021</CodeAge>
+      <HeaderAge>1249791319</HeaderAge>
+      <CodeAge>1249791319</CodeAge>
       <AsemblAge>-1</AsemblAge>
       <GenNumMethods>13</GenNumMethods>
       <Init>true</Init>
       <Deinit>false</Deinit>
       <GetDir>false</GetDir>
-      <SetDir>true</SetDir>
+      <SetDir>false</SetDir>
       <SetInput>false</SetInput>
       <SetOutput>false</SetOutput>
       <GetVal>true</GetVal>
@@ -7273,90 +7175,76 @@
       <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
       <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
       <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-      <GenMethodPos>12</GenMethodPos>
+      <GenMethodPos>10</GenMethodPos>
       <MethodPos>
         <MethodPos0>Init</MethodPos0>
         <MethodType>method</MethodType>
         <ModuleType>Header</ModuleType>
-        <LineBeg>125</LineBeg>
-        <LineEnd>148</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos1>SetDir</MethodPos1>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>149</LineBeg>
-        <LineEnd>167</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos2>GetVal</MethodPos2>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>168</LineBeg>
-        <LineEnd>189</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos3>PutVal</MethodPos3>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>190</LineBeg>
-        <LineEnd>215</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos4>ClrVal</MethodPos4>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>216</LineBeg>
-        <LineEnd>231</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos5>SetVal</MethodPos5>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>232</LineBeg>
-        <LineEnd>247</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos6>Init</MethodPos6>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>97</LineBeg>
+        <LineBeg>123</LineBeg>
         <LineEnd>146</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos7>SetDir</MethodPos7>
+        <MethodPos1>GetVal</MethodPos1>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>147</LineBeg>
-        <LineEnd>175</LineEnd>
+        <LineEnd>168</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos8>GetVal</MethodPos8>
+        <MethodPos2>PutVal</MethodPos2>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>176</LineBeg>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>169</LineBeg>
+        <LineEnd>194</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos3>ClrVal</MethodPos3>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>195</LineBeg>
         <LineEnd>210</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos9>PutVal</MethodPos9>
+        <MethodPos4>SetVal</MethodPos4>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>211</LineBeg>
-        <LineEnd>244</LineEnd>
+        <LineEnd>226</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos10>ClrVal</MethodPos10>
+        <MethodPos5>Init</MethodPos5>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>245</LineBeg>
-        <LineEnd>264</LineEnd>
+        <LineBeg>96</LineBeg>
+        <LineEnd>145</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos11>SetVal</MethodPos11>
+        <MethodPos6>GetVal</MethodPos6>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>265</LineBeg>
-        <LineEnd>284</LineEnd>
+        <LineBeg>146</LineBeg>
+        <LineEnd>174</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos7>PutVal</MethodPos7>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>175</LineBeg>
+        <LineEnd>208</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos8>ClrVal</MethodPos8>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>209</LineBeg>
+        <LineEnd>228</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos9>SetVal</MethodPos9>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>229</LineBeg>
+        <LineEnd>248</LineEnd>
       </MethodPos>
       <GenExtraFilesCount>1</GenExtraFilesCount>
       <ExtraFile0>Documentation\doxygen\BitIoLdd12_component.txt</ExtraFile0>
@@ -7364,16 +7252,16 @@
   </ComponentID_63>
   <ComponentID_65>
     <Generated>true</Generated>
-    <GenCompName>Bit5</GenCompName>
+    <GenCompName>MT2_IN1</GenCompName>
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1249791021</HeaderAge>
-    <CodeAge>1249791021</CodeAge>
+    <HeaderAge>1249791319</HeaderAge>
+    <CodeAge>1249791319</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <GetDir>false</GetDir>
-    <SetDir>true</SetDir>
+    <SetDir>false</SetDir>
     <SetInput>false</SetInput>
     <SetOutput>false</SetOutput>
     <GetVal>true</GetVal>
@@ -7387,76 +7275,62 @@
     <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
     <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
     <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>10</GenMethodPos>
+    <GenMethodPos>8</GenMethodPos>
     <MethodPos>
-      <MethodPos0>SetDir</MethodPos0>
+      <MethodPos0>GetVal</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>100</LineBeg>
-      <LineEnd>113</LineEnd>
+      <LineBeg>101</LineBeg>
+      <LineEnd>119</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos1>GetVal</MethodPos1>
+      <MethodPos1>PutVal</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>114</LineBeg>
-      <LineEnd>131</LineEnd>
+      <LineBeg>120</LineBeg>
+      <LineEnd>134</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos2>PutVal</MethodPos2>
+      <MethodPos2>ClrVal</MethodPos2>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>132</LineBeg>
-      <LineEnd>153</LineEnd>
+      <LineBeg>135</LineBeg>
+      <LineEnd>145</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos3>ClrVal</MethodPos3>
+      <MethodPos3>SetVal</MethodPos3>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>154</LineBeg>
-      <LineEnd>171</LineEnd>
+      <LineBeg>146</LineBeg>
+      <LineEnd>156</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos4>SetVal</MethodPos4>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>172</LineBeg>
-      <LineEnd>189</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos5>SetDir</MethodPos5>
+      <MethodPos4>GetVal</MethodPos4>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>86</LineBeg>
-      <LineEnd>103</LineEnd>
+      <LineBeg>87</LineBeg>
+      <LineEnd>109</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos6>GetVal</MethodPos6>
+      <MethodPos5>PutVal</MethodPos5>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>104</LineBeg>
-      <LineEnd>125</LineEnd>
+      <LineBeg>110</LineBeg>
+      <LineEnd>128</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos7>PutVal</MethodPos7>
+      <MethodPos6>ClrVal</MethodPos6>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>126</LineBeg>
-      <LineEnd>151</LineEnd>
+      <LineBeg>129</LineBeg>
+      <LineEnd>143</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos8>ClrVal</MethodPos8>
+      <MethodPos7>SetVal</MethodPos7>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>152</LineBeg>
-      <LineEnd>173</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos9>SetVal</MethodPos9>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>174</LineBeg>
-      <LineEnd>195</LineEnd>
+      <LineBeg>144</LineBeg>
+      <LineEnd>158</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
     <InhrCompID_66>
@@ -7465,14 +7339,14 @@
       <GenComponentVersion>01.033</GenComponentVersion>
       <GenDriverVersion>01.03</GenDriverVersion>
       <GenEventModule />
-      <HeaderAge>1249791021</HeaderAge>
-      <CodeAge>1249791021</CodeAge>
+      <HeaderAge>1249791319</HeaderAge>
+      <CodeAge>1249791319</CodeAge>
       <AsemblAge>-1</AsemblAge>
       <GenNumMethods>13</GenNumMethods>
       <Init>true</Init>
       <Deinit>false</Deinit>
       <GetDir>false</GetDir>
-      <SetDir>true</SetDir>
+      <SetDir>false</SetDir>
       <SetInput>false</SetInput>
       <SetOutput>false</SetOutput>
       <GetVal>true</GetVal>
@@ -7486,90 +7360,76 @@
       <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
       <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
       <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-      <GenMethodPos>12</GenMethodPos>
+      <GenMethodPos>10</GenMethodPos>
       <MethodPos>
         <MethodPos0>Init</MethodPos0>
         <MethodType>method</MethodType>
         <ModuleType>Header</ModuleType>
-        <LineBeg>125</LineBeg>
-        <LineEnd>148</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos1>SetDir</MethodPos1>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>149</LineBeg>
-        <LineEnd>167</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos2>GetVal</MethodPos2>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>168</LineBeg>
-        <LineEnd>189</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos3>PutVal</MethodPos3>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>190</LineBeg>
-        <LineEnd>215</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos4>ClrVal</MethodPos4>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>216</LineBeg>
-        <LineEnd>231</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos5>SetVal</MethodPos5>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>232</LineBeg>
-        <LineEnd>247</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos6>Init</MethodPos6>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>97</LineBeg>
+        <LineBeg>123</LineBeg>
         <LineEnd>146</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos7>SetDir</MethodPos7>
+        <MethodPos1>GetVal</MethodPos1>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>147</LineBeg>
-        <LineEnd>175</LineEnd>
+        <LineEnd>168</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos8>GetVal</MethodPos8>
+        <MethodPos2>PutVal</MethodPos2>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>176</LineBeg>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>169</LineBeg>
+        <LineEnd>194</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos3>ClrVal</MethodPos3>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>195</LineBeg>
         <LineEnd>210</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos9>PutVal</MethodPos9>
+        <MethodPos4>SetVal</MethodPos4>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>211</LineBeg>
-        <LineEnd>244</LineEnd>
+        <LineEnd>226</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos10>ClrVal</MethodPos10>
+        <MethodPos5>Init</MethodPos5>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>245</LineBeg>
-        <LineEnd>264</LineEnd>
+        <LineBeg>96</LineBeg>
+        <LineEnd>145</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos11>SetVal</MethodPos11>
+        <MethodPos6>GetVal</MethodPos6>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>265</LineBeg>
-        <LineEnd>284</LineEnd>
+        <LineBeg>146</LineBeg>
+        <LineEnd>174</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos7>PutVal</MethodPos7>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>175</LineBeg>
+        <LineEnd>208</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos8>ClrVal</MethodPos8>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>209</LineBeg>
+        <LineEnd>228</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos9>SetVal</MethodPos9>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>229</LineBeg>
+        <LineEnd>248</LineEnd>
       </MethodPos>
       <GenExtraFilesCount>1</GenExtraFilesCount>
       <ExtraFile0>Documentation\doxygen\BitIoLdd13_component.txt</ExtraFile0>
@@ -7577,16 +7437,16 @@
   </ComponentID_65>
   <ComponentID_67>
     <Generated>true</Generated>
-    <GenCompName>Bit6</GenCompName>
+    <GenCompName>MT2_IN2</GenCompName>
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1249791021</HeaderAge>
-    <CodeAge>1249791021</CodeAge>
+    <HeaderAge>1249791319</HeaderAge>
+    <CodeAge>1249791319</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <GetDir>false</GetDir>
-    <SetDir>true</SetDir>
+    <SetDir>false</SetDir>
     <SetInput>false</SetInput>
     <SetOutput>false</SetOutput>
     <GetVal>true</GetVal>
@@ -7600,76 +7460,62 @@
     <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
     <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
     <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>10</GenMethodPos>
+    <GenMethodPos>8</GenMethodPos>
     <MethodPos>
-      <MethodPos0>SetDir</MethodPos0>
+      <MethodPos0>GetVal</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>100</LineBeg>
-      <LineEnd>113</LineEnd>
+      <LineBeg>101</LineBeg>
+      <LineEnd>119</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos1>GetVal</MethodPos1>
+      <MethodPos1>PutVal</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>114</LineBeg>
-      <LineEnd>131</LineEnd>
+      <LineBeg>120</LineBeg>
+      <LineEnd>134</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos2>PutVal</MethodPos2>
+      <MethodPos2>ClrVal</MethodPos2>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>132</LineBeg>
-      <LineEnd>153</LineEnd>
+      <LineBeg>135</LineBeg>
+      <LineEnd>145</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos3>ClrVal</MethodPos3>
+      <MethodPos3>SetVal</MethodPos3>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>154</LineBeg>
-      <LineEnd>171</LineEnd>
+      <LineBeg>146</LineBeg>
+      <LineEnd>156</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos4>SetVal</MethodPos4>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>172</LineBeg>
-      <LineEnd>189</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos5>SetDir</MethodPos5>
+      <MethodPos4>GetVal</MethodPos4>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>86</LineBeg>
-      <LineEnd>103</LineEnd>
+      <LineBeg>87</LineBeg>
+      <LineEnd>109</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos6>GetVal</MethodPos6>
+      <MethodPos5>PutVal</MethodPos5>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>104</LineBeg>
-      <LineEnd>125</LineEnd>
+      <LineBeg>110</LineBeg>
+      <LineEnd>128</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos7>PutVal</MethodPos7>
+      <MethodPos6>ClrVal</MethodPos6>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>126</LineBeg>
-      <LineEnd>151</LineEnd>
+      <LineBeg>129</LineBeg>
+      <LineEnd>143</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos8>ClrVal</MethodPos8>
+      <MethodPos7>SetVal</MethodPos7>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>152</LineBeg>
-      <LineEnd>173</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos9>SetVal</MethodPos9>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>174</LineBeg>
-      <LineEnd>195</LineEnd>
+      <LineBeg>144</LineBeg>
+      <LineEnd>158</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
     <InhrCompID_68>
@@ -7678,14 +7524,14 @@
       <GenComponentVersion>01.033</GenComponentVersion>
       <GenDriverVersion>01.03</GenDriverVersion>
       <GenEventModule />
-      <HeaderAge>1249791021</HeaderAge>
-      <CodeAge>1249791021</CodeAge>
+      <HeaderAge>1249791319</HeaderAge>
+      <CodeAge>1249791319</CodeAge>
       <AsemblAge>-1</AsemblAge>
       <GenNumMethods>13</GenNumMethods>
       <Init>true</Init>
       <Deinit>false</Deinit>
       <GetDir>false</GetDir>
-      <SetDir>true</SetDir>
+      <SetDir>false</SetDir>
       <SetInput>false</SetInput>
       <SetOutput>false</SetOutput>
       <GetVal>true</GetVal>
@@ -7699,90 +7545,76 @@
       <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
       <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
       <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-      <GenMethodPos>12</GenMethodPos>
+      <GenMethodPos>10</GenMethodPos>
       <MethodPos>
         <MethodPos0>Init</MethodPos0>
         <MethodType>method</MethodType>
         <ModuleType>Header</ModuleType>
-        <LineBeg>125</LineBeg>
-        <LineEnd>148</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos1>SetDir</MethodPos1>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>149</LineBeg>
-        <LineEnd>167</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos2>GetVal</MethodPos2>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>168</LineBeg>
-        <LineEnd>189</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos3>PutVal</MethodPos3>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>190</LineBeg>
-        <LineEnd>215</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos4>ClrVal</MethodPos4>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>216</LineBeg>
-        <LineEnd>231</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos5>SetVal</MethodPos5>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>232</LineBeg>
-        <LineEnd>247</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos6>Init</MethodPos6>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>97</LineBeg>
+        <LineBeg>123</LineBeg>
         <LineEnd>146</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos7>SetDir</MethodPos7>
+        <MethodPos1>GetVal</MethodPos1>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>147</LineBeg>
-        <LineEnd>175</LineEnd>
+        <LineEnd>168</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos8>GetVal</MethodPos8>
+        <MethodPos2>PutVal</MethodPos2>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>176</LineBeg>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>169</LineBeg>
+        <LineEnd>194</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos3>ClrVal</MethodPos3>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>195</LineBeg>
         <LineEnd>210</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos9>PutVal</MethodPos9>
+        <MethodPos4>SetVal</MethodPos4>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>211</LineBeg>
-        <LineEnd>244</LineEnd>
+        <LineEnd>226</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos10>ClrVal</MethodPos10>
+        <MethodPos5>Init</MethodPos5>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>245</LineBeg>
-        <LineEnd>264</LineEnd>
+        <LineBeg>96</LineBeg>
+        <LineEnd>145</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos11>SetVal</MethodPos11>
+        <MethodPos6>GetVal</MethodPos6>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>265</LineBeg>
-        <LineEnd>284</LineEnd>
+        <LineBeg>146</LineBeg>
+        <LineEnd>174</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos7>PutVal</MethodPos7>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>175</LineBeg>
+        <LineEnd>208</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos8>ClrVal</MethodPos8>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>209</LineBeg>
+        <LineEnd>228</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos9>SetVal</MethodPos9>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>229</LineBeg>
+        <LineEnd>248</LineEnd>
       </MethodPos>
       <GenExtraFilesCount>1</GenExtraFilesCount>
       <ExtraFile0>Documentation\doxygen\BitIoLdd14_component.txt</ExtraFile0>
@@ -7790,16 +7622,16 @@
   </ComponentID_67>
   <ComponentID_69>
     <Generated>true</Generated>
-    <GenCompName>Bit7</GenCompName>
+    <GenCompName>MT2_IN3</GenCompName>
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1249791021</HeaderAge>
-    <CodeAge>1249791021</CodeAge>
+    <HeaderAge>1249791319</HeaderAge>
+    <CodeAge>1249791319</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <GetDir>false</GetDir>
-    <SetDir>true</SetDir>
+    <SetDir>false</SetDir>
     <SetInput>false</SetInput>
     <SetOutput>false</SetOutput>
     <GetVal>true</GetVal>
@@ -7813,76 +7645,62 @@
     <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
     <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
     <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>10</GenMethodPos>
+    <GenMethodPos>8</GenMethodPos>
     <MethodPos>
-      <MethodPos0>SetDir</MethodPos0>
+      <MethodPos0>GetVal</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>100</LineBeg>
-      <LineEnd>113</LineEnd>
+      <LineBeg>101</LineBeg>
+      <LineEnd>119</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos1>GetVal</MethodPos1>
+      <MethodPos1>PutVal</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>114</LineBeg>
-      <LineEnd>131</LineEnd>
+      <LineBeg>120</LineBeg>
+      <LineEnd>134</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos2>PutVal</MethodPos2>
+      <MethodPos2>ClrVal</MethodPos2>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>132</LineBeg>
-      <LineEnd>153</LineEnd>
+      <LineBeg>135</LineBeg>
+      <LineEnd>145</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos3>ClrVal</MethodPos3>
+      <MethodPos3>SetVal</MethodPos3>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>154</LineBeg>
-      <LineEnd>171</LineEnd>
+      <LineBeg>146</LineBeg>
+      <LineEnd>156</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos4>SetVal</MethodPos4>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>172</LineBeg>
-      <LineEnd>189</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos5>SetDir</MethodPos5>
+      <MethodPos4>GetVal</MethodPos4>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>86</LineBeg>
-      <LineEnd>103</LineEnd>
+      <LineBeg>87</LineBeg>
+      <LineEnd>109</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos6>GetVal</MethodPos6>
+      <MethodPos5>PutVal</MethodPos5>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>104</LineBeg>
-      <LineEnd>125</LineEnd>
+      <LineBeg>110</LineBeg>
+      <LineEnd>128</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos7>PutVal</MethodPos7>
+      <MethodPos6>ClrVal</MethodPos6>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>126</LineBeg>
-      <LineEnd>151</LineEnd>
+      <LineBeg>129</LineBeg>
+      <LineEnd>143</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos8>ClrVal</MethodPos8>
+      <MethodPos7>SetVal</MethodPos7>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>152</LineBeg>
-      <LineEnd>173</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos9>SetVal</MethodPos9>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>174</LineBeg>
-      <LineEnd>195</LineEnd>
+      <LineBeg>144</LineBeg>
+      <LineEnd>158</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
     <InhrCompID_70>
@@ -7891,14 +7709,14 @@
       <GenComponentVersion>01.033</GenComponentVersion>
       <GenDriverVersion>01.03</GenDriverVersion>
       <GenEventModule />
-      <HeaderAge>1249791021</HeaderAge>
-      <CodeAge>1249791021</CodeAge>
+      <HeaderAge>1249791319</HeaderAge>
+      <CodeAge>1249791319</CodeAge>
       <AsemblAge>-1</AsemblAge>
       <GenNumMethods>13</GenNumMethods>
       <Init>true</Init>
       <Deinit>false</Deinit>
       <GetDir>false</GetDir>
-      <SetDir>true</SetDir>
+      <SetDir>false</SetDir>
       <SetInput>false</SetInput>
       <SetOutput>false</SetOutput>
       <GetVal>true</GetVal>
@@ -7912,90 +7730,76 @@
       <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
       <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
       <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-      <GenMethodPos>12</GenMethodPos>
+      <GenMethodPos>10</GenMethodPos>
       <MethodPos>
         <MethodPos0>Init</MethodPos0>
         <MethodType>method</MethodType>
         <ModuleType>Header</ModuleType>
-        <LineBeg>125</LineBeg>
-        <LineEnd>148</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos1>SetDir</MethodPos1>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>149</LineBeg>
-        <LineEnd>167</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos2>GetVal</MethodPos2>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>168</LineBeg>
-        <LineEnd>189</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos3>PutVal</MethodPos3>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>190</LineBeg>
-        <LineEnd>215</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos4>ClrVal</MethodPos4>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>216</LineBeg>
-        <LineEnd>231</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos5>SetVal</MethodPos5>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>232</LineBeg>
-        <LineEnd>247</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos6>Init</MethodPos6>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>97</LineBeg>
+        <LineBeg>123</LineBeg>
         <LineEnd>146</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos7>SetDir</MethodPos7>
+        <MethodPos1>GetVal</MethodPos1>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>147</LineBeg>
-        <LineEnd>175</LineEnd>
+        <LineEnd>168</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos8>GetVal</MethodPos8>
+        <MethodPos2>PutVal</MethodPos2>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>176</LineBeg>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>169</LineBeg>
+        <LineEnd>194</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos3>ClrVal</MethodPos3>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>195</LineBeg>
         <LineEnd>210</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos9>PutVal</MethodPos9>
+        <MethodPos4>SetVal</MethodPos4>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>211</LineBeg>
-        <LineEnd>244</LineEnd>
+        <LineEnd>226</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos10>ClrVal</MethodPos10>
+        <MethodPos5>Init</MethodPos5>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>245</LineBeg>
-        <LineEnd>264</LineEnd>
+        <LineBeg>96</LineBeg>
+        <LineEnd>145</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos11>SetVal</MethodPos11>
+        <MethodPos6>GetVal</MethodPos6>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>265</LineBeg>
-        <LineEnd>284</LineEnd>
+        <LineBeg>146</LineBeg>
+        <LineEnd>174</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos7>PutVal</MethodPos7>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>175</LineBeg>
+        <LineEnd>208</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos8>ClrVal</MethodPos8>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>209</LineBeg>
+        <LineEnd>228</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos9>SetVal</MethodPos9>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>229</LineBeg>
+        <LineEnd>248</LineEnd>
       </MethodPos>
       <GenExtraFilesCount>1</GenExtraFilesCount>
       <ExtraFile0>Documentation\doxygen\BitIoLdd15_component.txt</ExtraFile0>
@@ -8003,16 +7807,16 @@
   </ComponentID_69>
   <ComponentID_71>
     <Generated>true</Generated>
-    <GenCompName>Bit8</GenCompName>
+    <GenCompName>MT2_IN4</GenCompName>
     <GenComponentVersion>02.086</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1249791021</HeaderAge>
-    <CodeAge>1249791021</CodeAge>
+    <HeaderAge>1249791319</HeaderAge>
+    <CodeAge>1249791319</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <GetDir>false</GetDir>
-    <SetDir>true</SetDir>
+    <SetDir>false</SetDir>
     <SetInput>false</SetInput>
     <SetOutput>false</SetOutput>
     <GetVal>true</GetVal>
@@ -8026,76 +7830,62 @@
     <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
     <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
     <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>10</GenMethodPos>
+    <GenMethodPos>8</GenMethodPos>
     <MethodPos>
-      <MethodPos0>SetDir</MethodPos0>
+      <MethodPos0>GetVal</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>100</LineBeg>
-      <LineEnd>113</LineEnd>
+      <LineBeg>101</LineBeg>
+      <LineEnd>119</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos1>GetVal</MethodPos1>
+      <MethodPos1>PutVal</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>114</LineBeg>
-      <LineEnd>131</LineEnd>
+      <LineBeg>120</LineBeg>
+      <LineEnd>134</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos2>PutVal</MethodPos2>
+      <MethodPos2>ClrVal</MethodPos2>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>132</LineBeg>
-      <LineEnd>153</LineEnd>
+      <LineBeg>135</LineBeg>
+      <LineEnd>145</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos3>ClrVal</MethodPos3>
+      <MethodPos3>SetVal</MethodPos3>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>154</LineBeg>
-      <LineEnd>171</LineEnd>
+      <LineBeg>146</LineBeg>
+      <LineEnd>156</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos4>SetVal</MethodPos4>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>172</LineBeg>
-      <LineEnd>189</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos5>SetDir</MethodPos5>
+      <MethodPos4>GetVal</MethodPos4>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>86</LineBeg>
-      <LineEnd>103</LineEnd>
+      <LineBeg>87</LineBeg>
+      <LineEnd>109</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos6>GetVal</MethodPos6>
+      <MethodPos5>PutVal</MethodPos5>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>104</LineBeg>
-      <LineEnd>125</LineEnd>
+      <LineBeg>110</LineBeg>
+      <LineEnd>128</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos7>PutVal</MethodPos7>
+      <MethodPos6>ClrVal</MethodPos6>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>126</LineBeg>
-      <LineEnd>151</LineEnd>
+      <LineBeg>129</LineBeg>
+      <LineEnd>143</LineEnd>
     </MethodPos>
     <MethodPos>
-      <MethodPos8>ClrVal</MethodPos8>
+      <MethodPos7>SetVal</MethodPos7>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>152</LineBeg>
-      <LineEnd>173</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos9>SetVal</MethodPos9>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>174</LineBeg>
-      <LineEnd>195</LineEnd>
+      <LineBeg>144</LineBeg>
+      <LineEnd>158</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>0</GenExtraFilesCount>
     <InhrCompID_72>
@@ -8104,14 +7894,14 @@
       <GenComponentVersion>01.033</GenComponentVersion>
       <GenDriverVersion>01.03</GenDriverVersion>
       <GenEventModule />
-      <HeaderAge>1249791021</HeaderAge>
-      <CodeAge>1249791021</CodeAge>
+      <HeaderAge>1249791319</HeaderAge>
+      <CodeAge>1249791319</CodeAge>
       <AsemblAge>-1</AsemblAge>
       <GenNumMethods>13</GenNumMethods>
       <Init>true</Init>
       <Deinit>false</Deinit>
       <GetDir>false</GetDir>
-      <SetDir>true</SetDir>
+      <SetDir>false</SetDir>
       <SetInput>false</SetInput>
       <SetOutput>false</SetOutput>
       <GetVal>true</GetVal>
@@ -8125,90 +7915,76 @@
       <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
       <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
       <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-      <GenMethodPos>12</GenMethodPos>
+      <GenMethodPos>10</GenMethodPos>
       <MethodPos>
         <MethodPos0>Init</MethodPos0>
         <MethodType>method</MethodType>
         <ModuleType>Header</ModuleType>
-        <LineBeg>125</LineBeg>
-        <LineEnd>148</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos1>SetDir</MethodPos1>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>149</LineBeg>
-        <LineEnd>167</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos2>GetVal</MethodPos2>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>168</LineBeg>
-        <LineEnd>189</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos3>PutVal</MethodPos3>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>190</LineBeg>
-        <LineEnd>215</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos4>ClrVal</MethodPos4>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>216</LineBeg>
-        <LineEnd>231</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos5>SetVal</MethodPos5>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>232</LineBeg>
-        <LineEnd>247</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos6>Init</MethodPos6>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>97</LineBeg>
+        <LineBeg>123</LineBeg>
         <LineEnd>146</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos7>SetDir</MethodPos7>
+        <MethodPos1>GetVal</MethodPos1>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>147</LineBeg>
-        <LineEnd>175</LineEnd>
+        <LineEnd>168</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos8>GetVal</MethodPos8>
+        <MethodPos2>PutVal</MethodPos2>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>176</LineBeg>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>169</LineBeg>
+        <LineEnd>194</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos3>ClrVal</MethodPos3>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>195</LineBeg>
         <LineEnd>210</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos9>PutVal</MethodPos9>
+        <MethodPos4>SetVal</MethodPos4>
         <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
+        <ModuleType>Header</ModuleType>
         <LineBeg>211</LineBeg>
-        <LineEnd>244</LineEnd>
+        <LineEnd>226</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos10>ClrVal</MethodPos10>
+        <MethodPos5>Init</MethodPos5>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>245</LineBeg>
-        <LineEnd>264</LineEnd>
+        <LineBeg>96</LineBeg>
+        <LineEnd>145</LineEnd>
       </MethodPos>
       <MethodPos>
-        <MethodPos11>SetVal</MethodPos11>
+        <MethodPos6>GetVal</MethodPos6>
         <MethodType>method</MethodType>
         <ModuleType>Code</ModuleType>
-        <LineBeg>265</LineBeg>
-        <LineEnd>284</LineEnd>
+        <LineBeg>146</LineBeg>
+        <LineEnd>174</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos7>PutVal</MethodPos7>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>175</LineBeg>
+        <LineEnd>208</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos8>ClrVal</MethodPos8>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>209</LineBeg>
+        <LineEnd>228</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos9>SetVal</MethodPos9>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>229</LineBeg>
+        <LineEnd>248</LineEnd>
       </MethodPos>
       <GenExtraFilesCount>1</GenExtraFilesCount>
       <ExtraFile0>Documentation\doxygen\BitIoLdd16_component.txt</ExtraFile0>
