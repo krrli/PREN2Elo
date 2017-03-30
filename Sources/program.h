@@ -16,11 +16,11 @@ enum serialPort {
 enum serialResponse { // !!!ERROR!!! not every value may be used, serial Rx interrupt isn't called with every byte
 	ACKNOWLEDGE = 0x20,
 	ERROR = 0x10,
-	BUTTON1 = 0x43,
-	BUTTON2 = 0x45,
-	BUTTON3 = 0x46,
-	BUTTON4 = 0x49,
-	BUTTON5 = 0x4A
+	BUTTON1 = 0x01,
+	BUTTON2 = 0x02,
+	BUTTON3 = 0x03,
+	BUTTON4 = 0x04,
+	BUTTON5 = 0x05
 };
 enum serialCommands // !!!ERROR!!! not every value may be used, serial Rx interrupt isn't called with every byte
 {
@@ -52,7 +52,7 @@ enum wheelPosition {
 enum parcourEnd {
 	REACHED, NOT_REACHED
 };
-enum driveDistance {
+enum driveDistance { // values in mm
 	CURVE_DIST = 0xA0, // todo: change values
 	BUTTON1_A = 0xA0,
 	BUTTON2_A = 0xA0,
