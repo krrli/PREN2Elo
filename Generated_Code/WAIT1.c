@@ -4,15 +4,14 @@
 **     Project     : PREN2-Freedom
 **     Processor   : MKL25Z128VLK4
 **     Component   : Wait
-**     Version     : Component 01.079, Driver 01.00, CPU db: 3.00.000
+**     Version     : Component 01.071, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-26, 17:07, # CodeGen: 27
+**     Date/Time   : 2017-03-30, 09:33, # CodeGen: 31
 **     Abstract    :
 **          Implements busy waiting routines.
 **     Settings    :
 **          Component name                                 : WAIT1
-**          Use Cycle Counter                              : Disabled
 **          SDK                                            : MCUC1
 **          Manual Clock Values                            : Disabled
 **          Delay100usFunction                             : Delay100US
@@ -27,10 +26,8 @@
 **         Waitus         - void WAIT1_Waitus(uint16_t us);
 **         Waitns         - void WAIT1_Waitns(uint16_t ns);
 **         WaitOSms       - void WAIT1_WaitOSms(void);
-**         Init           - void WAIT1_Init(void);
-**         DeInit         - void WAIT1_DeInit(void);
 **
-**     * Copyright (c) 2013-2017, Erich Styger
+**     * Copyright (c) 2013-2016, Erich Styger
 **      * Web:         https://mcuoneclipse.com
 **      * SourceForge: https://sourceforge.net/projects/mcuoneclipse
 **      * Git:         https://github.com/ErichStyger/McuOnEclipse_PEx
@@ -150,14 +147,6 @@ __attribute__((naked, no_instrument_function)) void WAIT1_Wait100Cycles(void)
 void WAIT1_WaitCycles(uint16_t cycles)
 {
   /*lint -save -e522 function lacks side effect. */
-#if WAIT1_CONFIG_USE_CYCLE_COUNTER
-  uint32_t counter = cycles;
-
-  counter += KIN1_GetCycleCounter();
-  while(KIN1_GetCycleCounter()<counter) {
-    /* wait */
-  }
-#else
   while(cycles > 100) {
     WAIT1_Wait100Cycles();
     cycles -= 100;
@@ -166,7 +155,6 @@ void WAIT1_WaitCycles(uint16_t cycles)
     WAIT1_Wait10Cycles();
     cycles -= 10;
   }
-#endif
   /*lint -restore */
 }
 
@@ -183,14 +171,6 @@ void WAIT1_WaitCycles(uint16_t cycles)
 */
 void WAIT1_WaitLongCycles(uint32_t cycles)
 {
-#if WAIT1_CONFIG_USE_CYCLE_COUNTER
-  uint32_t counter = cycles;
-
-  counter += KIN1_GetCycleCounter();
-  while(KIN1_GetCycleCounter()<counter) {
-    /* wait */
-  }
-#else
   /*lint -save -e522 function lacks side effect. */
   while(cycles>60000) {
     WAIT1_WaitCycles(60000);
@@ -198,7 +178,6 @@ void WAIT1_WaitLongCycles(uint32_t cycles)
   }
   WAIT1_WaitCycles((uint16_t)cycles);
   /*lint -restore */
-#endif
 }
 
 /*
@@ -261,46 +240,12 @@ void WAIT1_Waitms(uint16_t ms)
 **     Returns     : Nothing
 ** ===================================================================
 */
-/*
+#if 0
 void WAIT1_WaitOSms(void)
 {
-  Method is implemented as macro in the header file
+  /* Method is implemented as macro in the header file */
 }
-*/
-
-/*
-** ===================================================================
-**     Method      :  WAIT1_Init (component Wait)
-**     Description :
-**         Driver initialization routine.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void WAIT1_Init(void)
-{
-#if WAIT1_CONFIG_USE_CYCLE_COUNTER
-  /* init cycle counter */
-  KIN1_InitCycleCounter();
 #endif
-}
-
-/*
-** ===================================================================
-**     Method      :  WAIT1_DeInit (component Wait)
-**     Description :
-**         Driver de-initialization routine
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void WAIT1_DeInit(void)
-{
-#if WAIT1_CONFIG_USE_CYCLE_COUNTER
-  /* disable hardware cycle counter */
-  KIN1_DisableCycleCounter();
-#endif
-}
 
 /* END WAIT1. */
 

@@ -6,7 +6,7 @@
 **     Component   : PE_Types
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-25, 11:49, # CodeGen: 21
+**     Date/Time   : 2017-03-30, 09:33, # CodeGen: 31
 **     Abstract    :
 **         PE_Types.h - contains definitions of basic types,
 **         register access macros and hardware specific macros
@@ -206,28 +206,28 @@ typedef unsigned long int       uint32;
 */
 #define PE_LDD_COMPONENT_ASerialLdd1_ID          0x00U
 #define PE_LDD_COMPONENT_ASerialLdd2_ID          0x01U
-#define PE_LDD_COMPONENT_MT1_IN1_ID              0x02U
-#define PE_LDD_COMPONENT_MT1_IN2_ID              0x03U
-#define PE_LDD_COMPONENT_MT1_IN3_ID              0x04U
-#define PE_LDD_COMPONENT_MT1_IN4_ID              0x05U
-#define PE_LDD_COMPONENT_MT2_IN1_ID              0x06U
-#define PE_LDD_COMPONENT_MT2_IN2_ID              0x07U
-#define PE_LDD_COMPONENT_MT2_IN3_ID              0x08U
-#define PE_LDD_COMPONENT_MT2_IN4_ID              0x09U
-#define PE_LDD_COMPONENT_TPM0_ID                 0x0AU
-#define PE_LDD_COMPONENT_PwmLdd1_ID              0x0BU
-#define PE_LDD_COMPONENT_PwmLdd2_ID              0x0CU
-#define PE_LDD_COMPONENT_PwmLdd3_ID              0x0DU
-#define PE_LDD_COMPONENT_PwmLdd4_ID              0x0EU
-#define PE_LDD_COMPONENT_I2C_ToF_ID              0x0FU
-#define PE_LDD_COMPONENT_BitIoLdd1_ID            0x10U
-#define PE_LDD_COMPONENT_BitIoLdd2_ID            0x11U
-#define PE_LDD_COMPONENT_BitIoLdd3_ID            0x12U
-#define PE_LDD_COMPONENT_BitIoLdd4_ID            0x13U
-#define PE_LDD_COMPONENT_BitIoLdd5_ID            0x14U
-#define PE_LDD_COMPONENT_BitIoLdd6_ID            0x15U
-#define PE_LDD_COMPONENT_BitIoLdd7_ID            0x16U
-#define PE_LDD_COMPONENT_BitIoLdd8_ID            0x17U
+#define PE_LDD_COMPONENT_TPM0_ID                 0x02U
+#define PE_LDD_COMPONENT_PwmLdd1_ID              0x03U
+#define PE_LDD_COMPONENT_PwmLdd2_ID              0x04U
+#define PE_LDD_COMPONENT_PwmLdd3_ID              0x05U
+#define PE_LDD_COMPONENT_PwmLdd4_ID              0x06U
+#define PE_LDD_COMPONENT_I2C_ToF_ID              0x07U
+#define PE_LDD_COMPONENT_BitIoLdd1_ID            0x08U
+#define PE_LDD_COMPONENT_BitIoLdd2_ID            0x09U
+#define PE_LDD_COMPONENT_BitIoLdd3_ID            0x0AU
+#define PE_LDD_COMPONENT_BitIoLdd4_ID            0x0BU
+#define PE_LDD_COMPONENT_BitIoLdd5_ID            0x0CU
+#define PE_LDD_COMPONENT_BitIoLdd6_ID            0x0DU
+#define PE_LDD_COMPONENT_BitIoLdd7_ID            0x0EU
+#define PE_LDD_COMPONENT_BitIoLdd8_ID            0x0FU
+#define PE_LDD_COMPONENT_BitIoLdd9_ID            0x10U
+#define PE_LDD_COMPONENT_BitIoLdd10_ID           0x11U
+#define PE_LDD_COMPONENT_BitIoLdd11_ID           0x12U
+#define PE_LDD_COMPONENT_BitIoLdd12_ID           0x13U
+#define PE_LDD_COMPONENT_BitIoLdd13_ID           0x14U
+#define PE_LDD_COMPONENT_BitIoLdd14_ID           0x15U
+#define PE_LDD_COMPONENT_BitIoLdd15_ID           0x16U
+#define PE_LDD_COMPONENT_BitIoLdd16_ID           0x17U
 
 /*
 ** ===================================================================
@@ -1256,7 +1256,7 @@ typedef struct LDD_USB_TDevDescriptor_Struct {
   uint16_t  bcdDevice;                 /*!< Device release number in binary-coded decimal */
   uint8_t   iManufacturer;             /*!< Index of string descriptor describing manufacturer */
   uint8_t   iProduct;                  /*!< Index of string descriptor describing product */
-  uint8_t   iSerialNumber;             /*!< Index of string descriptor describing the deviceï¿½s serial number */
+  uint8_t   iSerialNumber;             /*!< Index of string descriptor describing the device’s serial number */
   uint8_t   bNumConfigurations;        /*!< Number of possible configurations */
 } LDD_USB_TDevDescriptor;
 

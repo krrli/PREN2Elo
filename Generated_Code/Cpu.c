@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-26, 17:07, # CodeGen: 27
+**     Date/Time   : 2017-03-30, 09:33, # CodeGen: 31
 **     Abstract    :
 **
 **     Settings    :
@@ -254,14 +254,6 @@
 #include "CLS2.h"
 #include "AS2.h"
 #include "ASerialLdd2.h"
-#include "MT1_IN1.h"
-#include "MT1_IN2.h"
-#include "MT1_IN3.h"
-#include "MT1_IN4.h"
-#include "MT2_IN1.h"
-#include "MT2_IN2.h"
-#include "MT2_IN3.h"
-#include "MT2_IN4.h"
 #include "MT1_PWM1.h"
 #include "PwmLdd1.h"
 #include "TPM0.h"
@@ -289,6 +281,22 @@
 #include "BitIoLdd7.h"
 #include "SW_Zent.h"
 #include "BitIoLdd8.h"
+#include "Bit1.h"
+#include "BitIoLdd9.h"
+#include "Bit2.h"
+#include "BitIoLdd10.h"
+#include "Bit3.h"
+#include "BitIoLdd11.h"
+#include "Bit4.h"
+#include "BitIoLdd12.h"
+#include "Bit5.h"
+#include "BitIoLdd13.h"
+#include "Bit6.h"
+#include "BitIoLdd14.h"
+#include "Bit7.h"
+#include "BitIoLdd15.h"
+#include "Bit8.h"
+#include "BitIoLdd16.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -470,7 +478,6 @@ void PE_low_level_init(void)
   /* NVIC_IPR1: PRI_6=0 */
   NVIC_IPR1 &= (uint32_t)~(uint32_t)(NVIC_IP_PRI_6(0xFF));
   /* ### McuLibConfig "MCUC1" init code ... */
-  WAIT1_Init();
   /* ### XFormat "XF1" init code ... */
   /* ### CriticalSection "CS1" init code ... */
   /* ### Asynchro serial "AS1" init code ... */
@@ -507,6 +514,22 @@ void PE_low_level_init(void)
   (void)BitIoLdd7_Init(NULL);
   /* ### BitIO_LDD "BitIoLdd8" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)BitIoLdd8_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd9" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd9_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd10" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd10_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd11" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd11_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd12" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd12_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd13" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd13_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd14" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd14_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd15" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd15_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd16" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd16_Init(NULL);
   __EI();
 }
   /* Flash configuration field */

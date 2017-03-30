@@ -1064,7 +1064,7 @@ registers of the peripheral(s) configured by the component.
 **          Counter                                        : TPM0_CNT
 **          Interrupt service/event                        : Disabled
 **          Period                                         : 25 ms
-**          Starting pulse width                           : 0 Âµs
+**          Starting pulse width                           : 0 µs
 **          Initial polarity                               : low
 **          Initialization                                 : 
 **            Enabled in init. code                        : yes
