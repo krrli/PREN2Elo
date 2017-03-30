@@ -173,12 +173,19 @@ enum ServoDirection {
 	SERVO_STRAIGHT, SERVO_SIDEWAYS
 };
 
+
 /*
  * declarations for the motor driver boards
  */
+#define INIT_MOTOR_DIRECTION_1	1
+#define INIT_MOTOR_DIRECTION_2	0
+#define NUMBER_OF_MOTOR 4
+
 enum MotorDirection {
 	MOTOR_FORWARD, MOTOR_BACKWARD
 };
+
+
 
 
 /*
@@ -282,12 +289,12 @@ uint8_t servoWrite32(uint8_t ad, uint8_t reg, uint32_t val);
  */
 
 /* init motor */
-void initMotor(void);
+uint8_t initMotor(void);
 
 /* set motor direction */
-void setMotorDirection(uint8_t motor, enum MotorDirection val);
+uint8_t setMotorDirection(uint8_t motor, enum MotorDirection val);
 
 /* set motor speed */
-void setMotorSpeed(uint8_t motor, uint8_t val);
+uint8_t setMotorSpeed(uint8_t motor, uint8_t val);
 
 #endif /* SOURCES_PROGRAM_H_ */
