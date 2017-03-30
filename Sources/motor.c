@@ -2,6 +2,7 @@
 
 /* init motor */
 void initMotor(void) {
+
 	// todo: set direction forward, set speed to 0
 }
 
