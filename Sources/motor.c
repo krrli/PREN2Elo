@@ -50,23 +50,23 @@ void setMotorDirection(uint8_t motorIn, enum MotorDirection val) {
 	}
 	case 2:{
 		if (MotorDirection == MOTOR_FORWARD){
-			MT2_IN1_PutVal(INIT_MOTOR_DIRECTION_1);
-			MT2_IN2_PutVal(INIT_MOTOR_DIRECTION_2);
-		}
-		else{
 			MT2_IN1_PutVal(INIT_MOTOR_DIRECTION_2);
 			MT2_IN2_PutVal(INIT_MOTOR_DIRECTION_1);
+		}
+		else{
+			MT2_IN1_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT2_IN2_PutVal(INIT_MOTOR_DIRECTION_2);
 		}
 		break;
 	}
 	case 3:	{
 		if (MotorDirection == MOTOR_FORWARD){
-			MT2_IN3_PutVal(INIT_MOTOR_DIRECTION_1);
-			MT2_IN4_PutVal(INIT_MOTOR_DIRECTION_2);
-		}
-		else{
 			MT2_IN3_PutVal(INIT_MOTOR_DIRECTION_2);
 			MT2_IN4_PutVal(INIT_MOTOR_DIRECTION_1);
+		}
+		else{
+			MT2_IN3_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT2_IN4_PutVal(INIT_MOTOR_DIRECTION_2);
 		}
 		break;
 	}
