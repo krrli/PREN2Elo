@@ -142,7 +142,7 @@ void serialSend(uint8_t ch, uint8_t port) {
 void simulateParcour(void) {
 	/* wait for start command */
 	while(state==STOPPED){
-		WAIT1_Waitms(1);
+		//WAIT1_Waitms(1);
 	}
 	
 	/* wait 5 seconds */
