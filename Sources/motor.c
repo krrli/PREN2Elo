@@ -15,6 +15,11 @@ void initMotor(void) {
 	MT2_IN3_PutVal(INIT_MOTOR_DIRECTION_2);
 	MT2_IN4_PutVal(INIT_MOTOR_DIRECTION_1);
 /*set speed to 0*/
+	MT1_PWM1_Enable();
+	MT1_PWM2_Enable();
+	MT2_PWM1_Enable();
+	MT2_PWM2_Enable();
+
 	MT1_PWM1_SetRatio16(0);
 	MT1_PWM2_SetRatio16(0);
 	MT2_PWM1_SetRatio16(0);
