@@ -46,11 +46,19 @@ void start(void) {
 	simulateParcour();
 
 	/* init motor */
-	initMotor();
+	res = initMotor();
+	if (res != ERR_OK) { // todo
+		for (;;) {
+			serialSend(ERROR, PC);
+			WAIT1_Waitms(1);
+			serialSend(ERROR, RasPi);
+			WAIT1_Waitms(10);
+		}
+	}
 
 	/* init servoshield, servos, brushless */
 	res = initServo();
-	if (res != ERR_OK) {
+	if (res != ERR_OK) { // todo
 		for (;;) {
 			serialSend(ERROR, PC);
 			WAIT1_Waitms(1);
@@ -61,7 +69,7 @@ void start(void) {
 
 	/* init tof sensors */
 	res = initToF();
-	if (res != ERR_OK) {
+	if (res != ERR_OK) { // todo
 		for (;;) {
 			serialSend(ERROR, PC);
 			WAIT1_Waitms(1);
@@ -141,10 +149,10 @@ void serialSend(uint8_t ch, uint8_t port) {
 
 void simulateParcour(void) {
 	/* wait for start command */
-	while(state==STOPPED){
+	while (state == STOPPED) {
 		//WAIT1_Waitms(1);
 	}
-	
+
 	/* wait 5 seconds */
 	WAIT1_Waitms(5000);
 
