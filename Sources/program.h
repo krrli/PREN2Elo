@@ -166,6 +166,8 @@ enum VL_Enum_Error {
 #define PCA9685_CH0_ON_H 0x7
 #define PCA9685_CH0_OFF_L 0x8
 #define PCA9685_CH0_OFF_H 0x9
+#define BRUSHLESS_SWITCH_ON 1
+#define BRUSHLESS_SWITCH_OFF 0
 enum BrushlessState {
 	BRUSHLESS_OFF, BRUSHLESS_ON, BRUSHLESS_INIT
 };

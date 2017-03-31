@@ -173,9 +173,22 @@ void simulateParcour(void) {
 }
 
 void mainLoop(void) {
+	uint8_t cent_switch, cent_switch_old = BRUSHLESS_SWITCH_OFF;
 	for (;;) {
 		/* check centrifuge state */
-		// todo: check state of SW_Zent, set brushless to fixed value or off
+		cent_switch = SW_Zent_GetVal();
+		if (cent_switch != cent_switch_old) {
+			if (cent_switch == BRUSHLESS_SWITCH_ON) {
+				setBrushless(BRUSHLESS_ON);
+				cent_switch_old = cent_switch;
+			} else if (cent_switch == BRUSHLESS_SWITCH_OFF) {
+				setBrushless(BRUSHLESS_OFF);
+				cent_switch_old = cent_switch;
+			} else {
+				// todo: error
+			}
+		}
+
 		/* if state changed, set servo and motor outputs */
 		if (stateCurr != state) {
 			switch (state) {
@@ -185,7 +198,15 @@ void mainLoop(void) {
 			case DRIVE_FORWARD:
 			case DRIVE_BACKWARD:
 				/* set servos */
-				// todo: if wheelPos != STRAIGHT, turn servos, change wheelPos, wait
+				if (wheelPos!=STRAIGHT){
+					setServo(0,SERVO_STRAIGHT);
+					setServo(1,SERVO_STRAIGHT);
+					setServo(2,SERVO_STRAIGHT);
+					setServo(3,SERVO_STRAIGHT);
+					wheelPos=STRAIGHT;
+					WAIT1_Waitms(1000); // todo
+				}
+
 				/* set motors */
 				// todo: set motor directions (check forward/backwards) and speeds
 				break;
