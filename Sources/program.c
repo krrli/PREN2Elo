@@ -198,26 +198,77 @@ void mainLoop(void) {
 			case DRIVE_FORWARD:
 			case DRIVE_BACKWARD:
 				/* set servos */
-				if (wheelPos!=STRAIGHT){
-					setServo(0,SERVO_STRAIGHT);
-					setServo(1,SERVO_STRAIGHT);
-					setServo(2,SERVO_STRAIGHT);
-					setServo(3,SERVO_STRAIGHT);
-					wheelPos=STRAIGHT;
+				if (wheelPos != STRAIGHT) {
+					setServo(0, SERVO_STRAIGHT);
+					setServo(1, SERVO_STRAIGHT);
+					setServo(2, SERVO_STRAIGHT);
+					setServo(3, SERVO_STRAIGHT);
+					wheelPos = STRAIGHT;
 					WAIT1_Waitms(1000); // todo
 				}
 
 				/* set motors */
-				// todo: set motor directions (check forward/backwards) and speeds
+				if (state == DRIVE_FORWARD) {
+					setMotorDirection(0, MOTOR_FORWARD);
+					setMotorDirection(1, MOTOR_FORWARD);
+					setMotorDirection(2, MOTOR_FORWARD);
+					setMotorDirection(3, MOTOR_FORWARD);
+				} else {
+					setMotorDirection(0, MOTOR_BACKWARD);
+					setMotorDirection(1, MOTOR_BACKWARD);
+					setMotorDirection(2, MOTOR_BACKWARD);
+					setMotorDirection(3, MOTOR_BACKWARD);
+				}
+				WAIT1_Waitms(10); // todo
+				setMotorSpeed(0, 0xffff); // todo
+				setMotorSpeed(1, 0xffff);
+				setMotorSpeed(2, 0xffff);
+				setMotorSpeed(3, 0xffff);
+				WAIT1_Waitms(10); // todo
 				break;
 			case DRIVE_LEFT:
 			case DRIVE_RIGHT:
 				/* set servo */
-				// todo: if wheelPos != SIDEWAYS, turn servos, change wheelPos, wait
+				if (wheelPos != SIDEWAYS) {
+					setServo(0, SERVO_SIDEWAYS);
+					setServo(1, SERVO_SIDEWAYS);
+					setServo(2, SERVO_SIDEWAYS);
+					setServo(3, SERVO_SIDEWAYS);
+					wheelPos = SIDEWAYS;
+					WAIT1_Waitms(1000); // todo
+				}
+
 				/* set motor */
 				// todo: set motor directions (check left/right) and speeds
+				if (state == DRIVE_LEFT) {
+					setMotorDirection(0, MOTOR_FORWARD); // todo
+					setMotorDirection(1, MOTOR_FORWARD);
+					setMotorDirection(2, MOTOR_FORWARD);
+					setMotorDirection(3, MOTOR_FORWARD);
+				} else {
+					setMotorDirection(0, MOTOR_BACKWARD); // todo
+					setMotorDirection(1, MOTOR_BACKWARD);
+					setMotorDirection(2, MOTOR_BACKWARD);
+					setMotorDirection(3, MOTOR_BACKWARD);
+				}
+				WAIT1_Waitms(10); // todo
+				setMotorSpeed(0, 0xffff); // todo
+				setMotorSpeed(1, 0xffff);
+				setMotorSpeed(2, 0xffff);
+				setMotorSpeed(3, 0xffff);
+				WAIT1_Waitms(10); // todo
+
 				/* set distance */
 				// todo: set distance and define to which wall
+				if (endReached == NOT_REACHED) {
+					/* curve */
+					distance = CURVE_DIST;
+				} else {
+					/* button pressing */
+					// check if button checked, else ask raspi
+					// wait
+					// set drive distance for button
+				}
 				break;
 			}
 			stateCurr = state;
@@ -252,6 +303,7 @@ void mainLoop(void) {
 				/* detect end via fixed distance */
 				// todo: drive until target distance is reached
 				//     change to drive backward mode
+				// todo: check with endReached if max or min distance
 				break;
 			case DRIVE_RIGHT:
 				/* drive straight */
@@ -259,6 +311,7 @@ void mainLoop(void) {
 				/* detect end via fixed distance */
 				// todo: drive until target distance is reached
 				//     change to drive backward mode
+				// todo: check with endReached if max or min distance
 				break;
 			}
 		}
