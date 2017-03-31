@@ -239,9 +239,6 @@ void serialSend(uint8_t ch, uint8_t port);
 
 /* loops */
 
-/* method to simulate the serial communication of a complete parcour */
-void simulateParcour(void);
-
 /* main loop for driving */
 void mainLoop(void);
 

@@ -92,6 +92,7 @@
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
 #include "program.h"
+#include "test.h"
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -106,6 +107,7 @@ int main(void)
   /* Write your code here */
   /* For example: for(;;) { } */
 
+  starttest();
   start();
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/

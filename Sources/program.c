@@ -50,9 +50,6 @@ void start(void) {
 	button = BUTTON3;
 	btnchk = BUTTON_UNCHECKED;
 
-	/* temporary simulation of parcour to test serial interface protocol */
-	simulateParcour();
-
 	/* init motor */
 	res = initMotor();
 	if (res != ERR_OK) { // todo
@@ -155,34 +152,9 @@ void serialSend(uint8_t ch, uint8_t port) {
 	lastSentCmd[port] = ch;
 }
 
-void simulateParcour(void) {
-	/* wait for start command */
-	while (state == STOPPED) {
-		//WAIT1_Waitms(1);
-	}
-
-	/* wait 5 seconds */
-	WAIT1_Waitms(5000);
-
-	/* send CURVE signal to raspi */
-	serialSend(CURVE, PC);
-	serialSend(CURVE, RasPi);
-
-	/* wait 5 seconds */
-	WAIT1_Waitms(5000);
-
-	/* send ROMAN_NUMERAL_REQUEST to raspi */
-	serialSend(ROMAN_NUMERAL_REQUEST, PC);
-	serialSend(ROMAN_NUMERAL_REQUEST, RasPi);
-
-	/* end loop */
-	for (;;) {
-	}
-}
-
 void mainLoop(void) {
 	/* local variables for brushless */
-	uint8_t cent_switch, cent_switch_old = BRUSHLESS_SWITCH_OFF;
+	uint8_t cent_switch, cent_switch_old = CENT_OFF;
 	/* local variables for tof sensors */
 	uint8_t tof1_tmp, tof2_tmp;
 	uint16_t tof1_tmp_val, tof2_tmp_val;
@@ -323,7 +295,7 @@ void mainLoop(void) {
 						case BUTTON5:
 							distance = BUTTON5_A;
 							break;
-						default:
+						//default:
 							// todo: error
 						}
 					} else {
@@ -345,7 +317,7 @@ void mainLoop(void) {
 						case BUTTON5:
 							distance = BUTTON5_B;
 							break;
-						default:
+						//default:
 							// todo: error
 						}
 					}
@@ -379,11 +351,11 @@ void mainLoop(void) {
 				}
 			case DRIVE_FORWARD:
 				/* drive straight */
-				res = getToFValueMillimeters(tof1_tmp, tof1_tmp_val);
+				res = getToFValueMillimeters(tof1_tmp, &tof1_tmp_val);
 				if (res != ERR_OK) {
 					// todo: error
 				}
-				res = getToFValueMillimeters(tof2_tmp, tof2_tmp_val);
+				res = getToFValueMillimeters(tof2_tmp, &tof2_tmp_val);
 				if (res != ERR_OK) {
 					// todo: error
 				}
@@ -462,11 +434,11 @@ void mainLoop(void) {
 			case DRIVE_LEFT:
 			case DRIVE_RIGHT:
 				/* drive straight */
-				res = getToFValueMillimeters(tof1_tmp, tof1_tmp_val);
+				res = getToFValueMillimeters(tof1_tmp, &tof1_tmp_val);
 				if (res != ERR_OK) {
 					// todo: error
 				}
-				res = getToFValueMillimeters(tof2_tmp, tof2_tmp_val);
+				res = getToFValueMillimeters(tof2_tmp, &tof2_tmp_val);
 				if (res != ERR_OK) {
 					// todo: error
 				}

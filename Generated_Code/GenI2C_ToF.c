@@ -4,15 +4,16 @@
 **     Project     : PREN2-Freedom
 **     Processor   : MKL25Z128VLK4
 **     Component   : GenericI2C
-**     Version     : Component 01.028, Driver 01.00, CPU db: 3.00.000
+**     Version     : Component 01.030, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-30, 09:33, # CodeGen: 31
+**     Date/Time   : 2017-03-31, 20:18, # CodeGen: 35
 **     Abstract    :
 **         This component implements a generic I2C driver wrapper to work both with LDD and non-LDD I2C components.
 **     Settings    :
 **          Component name                                 : GenI2C_ToF
 **          Wait                                           : WAIT1
+**          SDK                                            : MCUC1
 **          Support STOP_NOSTART                           : no
 **          Write Buffer Size                              : 16
 **          non-LDD I2C                                    : Disabled
