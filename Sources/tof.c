@@ -1,3 +1,8 @@
+/*
+ * todo:
+ * - testing
+ */
+
 #include "program.h"
 
 uint8_t last_status; // status of last I2C transmission
@@ -238,7 +243,11 @@ uint8_t getToFValueMillimeters(uint8_t sens, uint16_t * val) {
 	}
 
 	/* return value */
-	*val = (uint16_t) scaling * (uint16_t) range;
+	if (range != 0xff) {
+		*val = (uint16_t) scaling * (uint16_t) range;
+	} else {
+		*val = 0xffff;
+	}
 
 	return ERR_OK;
 }

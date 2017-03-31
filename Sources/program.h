@@ -1,3 +1,8 @@
+/*
+ * todo:
+ * - set values
+ */
+
 #ifndef SOURCES_PROGRAM_H_
 #define SOURCES_PROGRAM_H_
 
@@ -16,11 +21,11 @@ enum serialPort {
 enum serialResponse { // !!!ERROR!!! not every value may be used, serial Rx interrupt isn't called with every byte
 	ACKNOWLEDGE = 0x20,
 	ERROR = 0x10,
-	BUTTON1 = 0x43,
-	BUTTON2 = 0x45,
-	BUTTON3 = 0x46,
-	BUTTON4 = 0x49,
-	BUTTON5 = 0x4A
+	BUTTON1 = 0x01,
+	BUTTON2 = 0x02,
+	BUTTON3 = 0x03,
+	BUTTON4 = 0x04,
+	BUTTON5 = 0x05
 };
 enum serialCommands // !!!ERROR!!! not every value may be used, serial Rx interrupt isn't called with every byte
 {
@@ -52,9 +57,12 @@ enum wheelPosition {
 enum parcourEnd {
 	REACHED, NOT_REACHED
 };
+#define DISTANCE_TO_WALL 100 // value in mm
+#define DISTANCE_TO_WALL_VAR 10 // value in mm
+#define DRIVE_SIDEWAYS_VAR 5 // value in mm
 enum driveDistance {
-	CURVE_DIST = 0xA0, // todo: change values
-	BUTTON1_A = 0xA0,
+	CURVE_DIST = DISTANCE_TO_WALL,
+	BUTTON1_A = 0xA0, // todo: change values
 	BUTTON2_A = 0xA0,
 	BUTTON3_A = 0xA0,
 	BUTTON4_A = 0xA0,
@@ -65,11 +73,27 @@ enum driveDistance {
 	BUTTON4_B = 0xA0,
 	BUTTON5_B = 0xA0
 };
+enum MotorSpeed {
+	MOTOR_CORRSPEED = 0xefff, MOTOR_MAXSPEED = 0xffff
+};
+#define CORR_TIME 500 // value in ms
+#define BLIND_TIME 1000 // value in ms
+#define CURVE_DRIVE_OVER_TIME 200 // value in ms
+#define END_DRIVE_OVER_TIME 200 // value in ms
+#define DRIVE_INTO_BUTTON_TIME 500 // value in ms
 
 /*
  * declarations for the tof sensors
  */
-#define NUMBER_OF_SENSORS 2 // max 6
+#define NUMBER_OF_SENSORS 6 // max 6
+enum ToF_Sensors {
+	TOF_LEFT_FRONT = 0,
+	TOF_LEFT_REAR = 1,
+	TOF_RIGHT_FRONT = 2,
+	TOF_RIGHT_REAR = 3,
+	TOF_REAR = 4,
+	TOF_FRONT = 5
+};
 enum regAddr {
 	IDENTIFICATION__MODEL_ID = 0x000,
 	IDENTIFICATION__MODEL_REV_MAJOR = 0x001,
@@ -166,15 +190,12 @@ enum VL_Enum_Error {
 #define PCA9685_CH0_ON_H 0x7
 #define PCA9685_CH0_OFF_L 0x8
 #define PCA9685_CH0_OFF_H 0x9
-#define BRUSHLESS_SWITCH_ON 1
-#define BRUSHLESS_SWITCH_OFF 0
 enum BrushlessState {
 	BRUSHLESS_OFF, BRUSHLESS_ON, BRUSHLESS_INIT
 };
 enum ServoDirection {
 	SERVO_STRAIGHT, SERVO_SIDEWAYS
 };
-
 
 /*
  * declarations for the motor driver boards
@@ -186,9 +207,12 @@ enum ServoDirection {
 enum MotorDirection {
 	MOTOR_FORWARD, MOTOR_BACKWARD
 };
-
-
-
+enum Motor {
+	MOTOR_FRONT_RIGHT = 0,
+	MOTOR_FRONT_LEFT = 2,
+	MOTOR_REAR_RIGHT = 1,
+	MOTOR_REAR_LEFT = 3
+};
 
 /*
  * method declarations

@@ -1,3 +1,10 @@
+/*
+ * todo:
+ * - init brushless
+ * - servo values
+ * - testing
+ */
+
 #include "program.h"
 
 /*
