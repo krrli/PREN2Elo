@@ -35,6 +35,18 @@ enum serialCommands // !!!ERROR!!! not every value may be used, serial Rx interr
 	PAUSE = 0xB0, // RPi to FD
 	RESUME = 0x70 // RPi to FD
 };
+enum serialDebugLite{
+	DEBUG_ERROR_INIT_MOTOR=0xC1,
+	DEBUG_ERROR_INIT_SERVO=0xC2,
+	DEBUG_ERROR_INIT_TOF=0xC3,
+	DEBUG_ERROR_END_LOOP_REACHED=0xC4,
+	DEBUG_ERROR_SET_MOTOR_SPEED=0xC5,
+	DEBUG_ERROR_SET_MOTOR_DIRECTION=0xC6,
+	DEBUG_ERROR_SET_BRUSHLESS=0xC7,
+	DEBUG_ERROR_SET_SERVO=0xC8,
+	DEBUG_ERROR_GET_TOF_VALUE=0xC9,
+	DEBUG_ERROR_WRONG_BUTTON_NUMBER=0xCA
+};
 
 /*
  * Declaration of states for main loop
@@ -77,10 +89,14 @@ enum MotorSpeed {
 	MOTOR_CORRSPEED = 0xefff, MOTOR_MAXSPEED = 0xffff
 };
 #define CORR_TIME 500 // value in ms
-#define BLIND_TIME 1000 // value in ms
+#define BLIND_TIME 2000 // value in ms
 #define CURVE_DRIVE_OVER_TIME 200 // value in ms
 #define END_DRIVE_OVER_TIME 200 // value in ms
 #define DRIVE_INTO_BUTTON_TIME 500 // value in ms
+#define WAIT_TIME_DEFAULT 10 // value in ms
+#define WAIT_TIME_SERVO 1000 // value in ms
+#define WAIT_TIME_SERIAL_LOOP 1000 // value in ms
+#define WAIT_TIME_SERIAL_ANSWER 100 // value in ms
 
 /*
  * declarations for the tof sensors
@@ -236,6 +252,9 @@ void serialRxInt(uint8_t ch, uint8_t port);
 
 /* sends byte to serial port */
 void serialSend(uint8_t ch, uint8_t port);
+
+/* defines what happens at errors */
+void serialDebugLite(uint8_t ch);
 
 /* loops */
 

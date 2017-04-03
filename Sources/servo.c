@@ -23,7 +23,7 @@ uint16_t servoValuesSideways[] = { 491, 491, 491, 491 }; // 0...4095; 246 --> 0Â
 uint8_t servoChannels[] = { 0, 1, 2, 3 }; // 0...15
 uint16_t brushlessValueOff = 246;
 uint16_t brushlessValueOn = 330;
-uint16_t brushlessValueInit = 246; // todo
+uint16_t brushlessValueInit = 491; // todo
 uint8_t brushlessChannel = 4;
 
 /*
@@ -51,12 +51,12 @@ uint8_t initServo(void) {
 	if (res != ERR_OK) {
 		return res;
 	}
-	WAIT1_Waitms(100);
+	WAIT1_Waitms(1000);
 	res = setBrushless(BRUSHLESS_INIT);
 	if (res != ERR_OK) {
 		return res;
 	}
-	WAIT1_Waitms(100);
+	WAIT1_Waitms(1000);
 	res = setBrushless(BRUSHLESS_OFF);
 	if (res != ERR_OK) {
 		return res;

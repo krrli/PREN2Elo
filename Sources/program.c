@@ -51,35 +51,20 @@ void start(void) {
 
 	/* init motor */
 	res = initMotor();
-	if (res != ERR_OK) { // todo
-		for (;;) {
-			serialSend(ERROR, PC);
-			WAIT1_Waitms(1);
-			serialSend(ERROR, RasPi);
-			WAIT1_Waitms(10);
-		}
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_INIT_MOTOR);
 	}
 
 	/* init servoshield, servos, brushless */
 	res = initServo();
-	if (res != ERR_OK) { // todo
-		for (;;) {
-			serialSend(ERROR, PC);
-			WAIT1_Waitms(1);
-			serialSend(ERROR, RasPi);
-			WAIT1_Waitms(10);
-		}
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_INIT_SERVO);
 	}
 
 	/* init tof sensors */
 	res = initToF();
-	if (res != ERR_OK) { // todo
-		for (;;) {
-			serialSend(ERROR, PC);
-			WAIT1_Waitms(1);
-			serialSend(ERROR, RasPi);
-			WAIT1_Waitms(10);
-		}
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_INIT_TOF);
 	}
 
 	/* start mainloop */
@@ -87,6 +72,7 @@ void start(void) {
 
 	for (;;) {
 		/* fallback loop, should never be reached */
+		serialDebugLite(DEBUG_ERROR_END_LOOP_REACHED);
 	}
 }
 
@@ -151,6 +137,10 @@ void serialSend(uint8_t ch, uint8_t port) {
 	lastSentCmd[port] = ch;
 }
 
+void serialDebugLite(uint8_t ch) {
+	serialDebugLite(ch);
+}
+
 void mainLoop(void) {
 	/* local variables for brushless */
 	uint8_t cent_switch, cent_switch_old = CENT_OFF;
@@ -166,13 +156,17 @@ void mainLoop(void) {
 		cent_switch = SW_Zent_GetVal();
 		if (cent_switch != cent_switch_old) {
 			if (cent_switch == CENT_ON) {
-				setBrushless(BRUSHLESS_ON);
-				cent_switch_old = cent_switch;
-			} else if (cent_switch == CENT_OFF) {
-				setBrushless(BRUSHLESS_OFF);
+				res = setBrushless(BRUSHLESS_ON);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
+				}
 				cent_switch_old = cent_switch;
 			} else {
-				// todo: error
+				res = setBrushless(BRUSHLESS_OFF);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
+				}
+				cent_switch_old = cent_switch;
 			}
 		}
 
@@ -183,21 +177,21 @@ void mainLoop(void) {
 				/* stop */
 				res = setMotorSpeed(MOTOR_FRONT_LEFT, 0);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
 				res = setMotorSpeed(MOTOR_FRONT_RIGHT, 0);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
 				res = setMotorSpeed(MOTOR_REAR_LEFT, 0);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
 				res = setMotorSpeed(MOTOR_REAR_RIGHT, 0);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
-				WAIT1_Waitms(10); // todo
+				WAIT1_Waitms(WAIT_TIME_DEFAULT);
 				break;
 			case DRIVE_FORWARD:
 			case DRIVE_BACKWARD:
@@ -205,78 +199,78 @@ void mainLoop(void) {
 				if (wheelPos != STRAIGHT) {
 					res = setServo(0, SERVO_STRAIGHT);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_SERVO);
 					}
 					res = setServo(1, SERVO_STRAIGHT);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_SERVO);
 					}
 					res = setServo(2, SERVO_STRAIGHT);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_SERVO);
 					}
 					res = setServo(3, SERVO_STRAIGHT);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_SERVO);
 					}
 					wheelPos = STRAIGHT;
-					WAIT1_Waitms(1000); // todo
+					WAIT1_Waitms(WAIT_TIME_SERVO);
 				}
 
 				/* set motors */
 				if (state == DRIVE_FORWARD) {
 					res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 				} else {
 					res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 				}
-				WAIT1_Waitms(10); // todo
+				WAIT1_Waitms(WAIT_TIME_DEFAULT);
 				res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
 				res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
 				res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
 				res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
-				WAIT1_Waitms(10); // todo
+				WAIT1_Waitms(WAIT_TIME_DEFAULT);
 
 				/* define used tof sensors */
 				if (type == PARCOUR_A) {
@@ -296,78 +290,78 @@ void mainLoop(void) {
 				if (wheelPos != SIDEWAYS) {
 					res = setServo(0, SERVO_SIDEWAYS);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_SERVO);
 					}
 					res = setServo(1, SERVO_SIDEWAYS);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_SERVO);
 					}
 					res = setServo(2, SERVO_SIDEWAYS);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_SERVO);
 					}
 					res = setServo(3, SERVO_SIDEWAYS);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_SERVO);
 					}
 					wheelPos = SIDEWAYS;
-					WAIT1_Waitms(1000); // todo
+					WAIT1_Waitms(WAIT_TIME_SERVO);
 				}
 
 				/* set motor */
 				if (state == DRIVE_LEFT) {
 					res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 				} else {
 					res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 					res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
 					if (res != ERR_OK) {
-						// todo
+						serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 					}
 				}
-				WAIT1_Waitms(10); // todo
+				WAIT1_Waitms(WAIT_TIME_DEFAULT);
 				res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
 				res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
 				res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
 				res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
 				if (res != ERR_OK) {
-					// todo
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
-				WAIT1_Waitms(10); // todo
+				WAIT1_Waitms(WAIT_TIME_DEFAULT);
 
 				/* set distance */
 				if (endReached == NOT_REACHED) {
@@ -378,9 +372,9 @@ void mainLoop(void) {
 					/* check if button checked, else ask raspi */
 					while (btnchk == BUTTON_UNCHECKED) {
 						serialSend(ROMAN_NUMERAL_REQUEST, PC);
-						WAIT1_Waitms(1);
+						//WAIT1_Waitms(1);
 						serialSend(ROMAN_NUMERAL_REQUEST, RasPi);
-						WAIT1_Waitms(1000); // todo
+						WAIT1_Waitms(WAIT_TIME_SERIAL_LOOP);
 					}
 					/* set drive distance for button */
 					if (type == PARCOUR_A) {
@@ -402,8 +396,8 @@ void mainLoop(void) {
 						case BUTTON5:
 							distance = BUTTON5_A;
 							break;
-							//default:
-							// todo: error
+						default:
+							serialDebugLite(DEBUG_ERROR_WRONG_BUTTON_NUMBER);
 						}
 					} else {
 						/* Parcour B */
@@ -424,8 +418,8 @@ void mainLoop(void) {
 						case BUTTON5:
 							distance = BUTTON5_B;
 							break;
-							//default:
-							// todo: error
+						default:
+							serialDebugLite(DEBUG_ERROR_WRONG_BUTTON_NUMBER);
 						}
 					}
 				}
@@ -460,11 +454,11 @@ void mainLoop(void) {
 				/* drive straight */
 				res = getToFValueMillimeters(tof1_tmp, &tof1_tmp_val);
 				if (res != ERR_OK) {
-					// todo: error
+					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 				}
 				res = getToFValueMillimeters(tof2_tmp, &tof2_tmp_val);
 				if (res != ERR_OK) {
-					// todo: error
+					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 				}
 				if ((tof1_tmp_val > (DISTANCE_TO_WALL + DISTANCE_TO_WALL_VAR))
 						&& (tof1_tmp_val != 0xffff)) {
@@ -473,39 +467,39 @@ void mainLoop(void) {
 						/* parcour a */
 						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						WAIT1_Waitms(CORR_TIME);
 						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 					} else {
 						/* parcour b */
 						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						WAIT1_Waitms(CORR_TIME);
 						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 					}
 				} else if (tof1_tmp_val
@@ -515,39 +509,39 @@ void mainLoop(void) {
 						/* parcour b */
 						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						WAIT1_Waitms(CORR_TIME);
 						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 					} else {
 						/* parcour a */
 						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						WAIT1_Waitms(CORR_TIME);
 						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 					}
 				}
@@ -564,9 +558,9 @@ void mainLoop(void) {
 							state = DRIVE_RIGHT;
 						}
 						serialSend(CURVE, PC);
-						WAIT1_Waitms(1);
+						//WAIT1_Waitms(1);
 						serialSend(CURVE, RasPi);
-						WAIT1_Waitms(1);
+						//WAIT1_Waitms(1);
 					}
 				} else {
 					/* drive backward */
@@ -580,9 +574,9 @@ void mainLoop(void) {
 						}
 						endReached = REACHED;
 						serialSend(ROMAN_NUMERAL_REQUEST, PC);
-						WAIT1_Waitms(1);
+						//WAIT1_Waitms(1);
 						serialSend(ROMAN_NUMERAL_REQUEST, RasPi);
-						WAIT1_Waitms(100); // todo: give raspi time to answer
+						WAIT1_Waitms(WAIT_TIME_SERIAL_ANSWER);
 					}
 				}
 				break;
@@ -591,11 +585,11 @@ void mainLoop(void) {
 				/* drive straight */
 				res = getToFValueMillimeters(tof1_tmp, &tof1_tmp_val);
 				if (res != ERR_OK) {
-					// todo: error
+					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 				}
 				res = getToFValueMillimeters(tof2_tmp, &tof2_tmp_val);
 				if (res != ERR_OK) {
-					// todo: error
+					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 				}
 				tof_diff = (int32_t) tof1_tmp_val - (int32_t) tof2_tmp_val; // front - rear
 				if (((type == PARCOUR_A) && (state == DRIVE_LEFT))
@@ -604,38 +598,38 @@ void mainLoop(void) {
 					if (tof_diff > DRIVE_SIDEWAYS_VAR) {
 						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						WAIT1_Waitms(CORR_TIME);
 						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 					} else if (tof_diff < (0 - DRIVE_SIDEWAYS_VAR)) {
 						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						WAIT1_Waitms(CORR_TIME);
 						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 					}
 				} else {
@@ -643,38 +637,38 @@ void mainLoop(void) {
 					if (tof_diff > DRIVE_SIDEWAYS_VAR) {
 						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						WAIT1_Waitms(CORR_TIME);
 						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 					} else if (tof_diff < (0 - DRIVE_SIDEWAYS_VAR)) {
 						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						WAIT1_Waitms(CORR_TIME);
 						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
 						if (res != ERR_OK) {
-							// todo
+							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 						}
 					}
 				}
