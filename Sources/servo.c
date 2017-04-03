@@ -17,12 +17,13 @@
  * ticksperms=0.001/tick=245.70 --> 0°
  * 2*ticksperms=491.40 --> 180°
  */
+// todo
 uint16_t servoValuesStraight[] = { 246, 246, 246, 246 }; // 0...4095; 246 --> 0°; 491 --> 180°
 uint16_t servoValuesSideways[] = { 491, 491, 491, 491 }; // 0...4095; 246 --> 0°; 491 --> 180°
 uint8_t servoChannels[] = { 0, 1, 2, 3 }; // 0...15
 uint16_t brushlessValueOff = 246;
 uint16_t brushlessValueOn = 330;
-uint16_t brushlessValueInit = 491; // todo
+uint16_t brushlessValueInit = 246; // todo
 uint8_t brushlessChannel = 4;
 
 /*
@@ -50,12 +51,12 @@ uint8_t initServo(void) {
 	if (res != ERR_OK) {
 		return res;
 	}
-	WAIT1_Waitms(10);
+	WAIT1_Waitms(100);
 	res = setBrushless(BRUSHLESS_INIT);
 	if (res != ERR_OK) {
 		return res;
 	}
-	WAIT1_Waitms(10);
+	WAIT1_Waitms(100);
 	res = setBrushless(BRUSHLESS_OFF);
 	if (res != ERR_OK) {
 		return res;

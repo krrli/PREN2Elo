@@ -1,6 +1,5 @@
 /*
  * todo:
- * - error handling servo and motor commands
  * - error handling in general
  * - set wait times
  * - testing
@@ -182,41 +181,101 @@ void mainLoop(void) {
 			switch (state) {
 			case STOPPED:
 				/* stop */
-				setMotorSpeed(MOTOR_FRONT_LEFT, 0);
-				setMotorSpeed(MOTOR_FRONT_RIGHT, 0);
-				setMotorSpeed(MOTOR_REAR_LEFT, 0);
-				setMotorSpeed(MOTOR_REAR_RIGHT, 0);
+				res = setMotorSpeed(MOTOR_FRONT_LEFT, 0);
+				if (res != ERR_OK) {
+					// todo
+				}
+				res = setMotorSpeed(MOTOR_FRONT_RIGHT, 0);
+				if (res != ERR_OK) {
+					// todo
+				}
+				res = setMotorSpeed(MOTOR_REAR_LEFT, 0);
+				if (res != ERR_OK) {
+					// todo
+				}
+				res = setMotorSpeed(MOTOR_REAR_RIGHT, 0);
+				if (res != ERR_OK) {
+					// todo
+				}
 				WAIT1_Waitms(10); // todo
 				break;
 			case DRIVE_FORWARD:
 			case DRIVE_BACKWARD:
 				/* set servos */
 				if (wheelPos != STRAIGHT) {
-					setServo(0, SERVO_STRAIGHT);
-					setServo(1, SERVO_STRAIGHT);
-					setServo(2, SERVO_STRAIGHT);
-					setServo(3, SERVO_STRAIGHT);
+					res = setServo(0, SERVO_STRAIGHT);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setServo(1, SERVO_STRAIGHT);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setServo(2, SERVO_STRAIGHT);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setServo(3, SERVO_STRAIGHT);
+					if (res != ERR_OK) {
+						// todo
+					}
 					wheelPos = STRAIGHT;
 					WAIT1_Waitms(1000); // todo
 				}
 
 				/* set motors */
 				if (state == DRIVE_FORWARD) {
-					setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
-					setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
-					setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
-					setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+					res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
 				} else {
-					setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
-					setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
-					setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
-					setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+					res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
 				}
 				WAIT1_Waitms(10); // todo
-				setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
-				setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
-				setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
-				setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+				res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
+				if (res != ERR_OK) {
+					// todo
+				}
+				res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
+				if (res != ERR_OK) {
+					// todo
+				}
+				res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
+				if (res != ERR_OK) {
+					// todo
+				}
+				res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+				if (res != ERR_OK) {
+					// todo
+				}
 				WAIT1_Waitms(10); // todo
 
 				/* define used tof sensors */
@@ -235,31 +294,79 @@ void mainLoop(void) {
 			case DRIVE_RIGHT:
 				/* set servo */
 				if (wheelPos != SIDEWAYS) {
-					setServo(0, SERVO_SIDEWAYS);
-					setServo(1, SERVO_SIDEWAYS);
-					setServo(2, SERVO_SIDEWAYS);
-					setServo(3, SERVO_SIDEWAYS);
+					res = setServo(0, SERVO_SIDEWAYS);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setServo(1, SERVO_SIDEWAYS);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setServo(2, SERVO_SIDEWAYS);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setServo(3, SERVO_SIDEWAYS);
+					if (res != ERR_OK) {
+						// todo
+					}
 					wheelPos = SIDEWAYS;
 					WAIT1_Waitms(1000); // todo
 				}
 
 				/* set motor */
 				if (state == DRIVE_LEFT) {
-					setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
-					setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
-					setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
-					setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+					res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
 				} else {
-					setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
-					setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
-					setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
-					setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+					res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
+					res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+					if (res != ERR_OK) {
+						// todo
+					}
 				}
 				WAIT1_Waitms(10); // todo
-				setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
-				setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
-				setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
-				setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+				res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
+				if (res != ERR_OK) {
+					// todo
+				}
+				res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
+				if (res != ERR_OK) {
+					// todo
+				}
+				res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
+				if (res != ERR_OK) {
+					// todo
+				}
+				res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+				if (res != ERR_OK) {
+					// todo
+				}
 				WAIT1_Waitms(10); // todo
 
 				/* set distance */
@@ -295,7 +402,7 @@ void mainLoop(void) {
 						case BUTTON5:
 							distance = BUTTON5_A;
 							break;
-						//default:
+							//default:
 							// todo: error
 						}
 					} else {
@@ -317,7 +424,7 @@ void mainLoop(void) {
 						case BUTTON5:
 							distance = BUTTON5_B;
 							break;
-						//default:
+							//default:
 							// todo: error
 						}
 					}
@@ -364,36 +471,84 @@ void mainLoop(void) {
 					/* to far from wall */
 					if (type == PARCOUR_A) {
 						/* parcour a */
-						setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
-						setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 						WAIT1_Waitms(CORR_TIME);
-						setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
-						setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 					} else {
 						/* parcour b */
-						setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
-						setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 						WAIT1_Waitms(CORR_TIME);
-						setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
-						setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 					}
 				} else if (tof1_tmp_val
 						< (DISTANCE_TO_WALL - DISTANCE_TO_WALL_VAR)) {
 					/* to near to wall */
 					if (type == PARCOUR_B) {
 						/* parcour b */
-						setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
-						setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 						WAIT1_Waitms(CORR_TIME);
-						setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
-						setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 					} else {
 						/* parcour a */
-						setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
-						setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 						WAIT1_Waitms(CORR_TIME);
-						setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
-						setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 					}
 				}
 
@@ -447,32 +602,80 @@ void mainLoop(void) {
 						|| ((type == PARCOUR_B) && (state == DRIVE_RIGHT))) {
 					/* drive towards wall */
 					if (tof_diff > DRIVE_SIDEWAYS_VAR) {
-						setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
-						setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
+						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 						WAIT1_Waitms(CORR_TIME);
-						setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
-						setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 					} else if (tof_diff < (0 - DRIVE_SIDEWAYS_VAR)) {
-						setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
-						setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 						WAIT1_Waitms(CORR_TIME);
-						setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
-						setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 					}
 				} else {
 					/* drive away from wall */
 					if (tof_diff > DRIVE_SIDEWAYS_VAR) {
-						setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
-						setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 						WAIT1_Waitms(CORR_TIME);
-						setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
-						setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
+						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 					} else if (tof_diff < (0 - DRIVE_SIDEWAYS_VAR)) {
-						setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
-						setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
+						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 						WAIT1_Waitms(CORR_TIME);
-						setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
-						setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
+						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
+						if (res != ERR_OK) {
+							// todo
+						}
 					}
 				}
 
