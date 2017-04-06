@@ -9,8 +9,8 @@ void starttest(void);
 
 #define WAIT_MINUTES 0
 
-#define TEST_SERIAL 1
-#define TEST_TOF_SENSORS 0
+#define TEST_SERIAL 0
+#define TEST_TOF_SENSORS 1
 #define TEST_SERVO_BOARD 0 // !!! brushless !!!
 #define TEST_MOTOR 0
 

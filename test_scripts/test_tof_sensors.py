@@ -4,7 +4,7 @@ import serial
 NUMBER_OF_SENSORS=6
 
 ERR_OK=b'\x00'
-ERR_RANG=b'\x02'
+ERR_RANGE=b'\x02'
 ERR_VALUE=b'\x03'
 
 # Serial Interface
@@ -25,14 +25,14 @@ if res==ERR_OK:
 else:
 	print('ERROR: INIT')
 
-for i in range(0,NUMBER_OF_SENSORS-1):
-	res=s.read(1)
-	print('Testing Sensor '+res+':')
-	res=s.read(1)
-	if res==ERR_OK:
-		print('OK:    READ')
-	else:
-		print('ERROR: READ')
-	res=s.read(2)
-	print('Distance: '+res+' mm')
+#for i in range(0,NUMBER_OF_SENSORS-1):
+res=s.read(1)
+print('Testing Sensor '+str(int.from_bytes(res,byteorder='little'))+':')
+res=s.read(1)
+if res==ERR_OK:
+    print('OK:    READ')
+else:
+	print('ERROR: READ')
+res=s.read(2)
+print('Distance: '+str(int.from_bytes(res,byteorder='little'))+' mm')
 
