@@ -1,5 +1,4 @@
 import serial
-import threading
 
 DEBUG_ERROR_INIT_MOTOR=b'\xC1'
 DEBUG_ERROR_INIT_SERVO=b'\xC2'
@@ -39,54 +38,51 @@ s.isOpen()
 def getError():
     while True:
         res=s.read(1)
-        if res==DEBUG_ERROR_INIT_MOTOR
+        if res==DEBUG_ERROR_INIT_MOTOR:
         	print('DEBUG_ERROR_INIT_MOTOR')
-        elif res==DEBUG_ERROR_INIT_SERVO
+        elif res==DEBUG_ERROR_INIT_SERVO:
         	print('DEBUG_ERROR_INIT_SERVO')
-        elif res==DEBUG_ERROR_INIT_TOF
+        elif res==DEBUG_ERROR_INIT_TOF:
         	print('DEBUG_ERROR_INIT_TOF')
-        elif res==DEBUG_ERROR_END_LOOP_REACHED
+        elif res==DEBUG_ERROR_END_LOOP_REACHED:
         	print('DEBUG_ERROR_END_LOOP_REACHED')
-        elif res==DEBUG_ERROR_SET_MOTOR_SPEED
+        elif res==DEBUG_ERROR_SET_MOTOR_SPEED:
         	print('DEBUG_ERROR_SET_MOTOR_SPEED')
-        elif res==DEBUG_ERROR_SET_MOTOR_DIRECTION
+        elif res==DEBUG_ERROR_SET_MOTOR_DIRECTION:
         	print('DEBUG_ERROR_SET_MOTOR_DIRECTION')
-        elif res==DEBUG_ERROR_SET_BRUSHLESS
+        elif res==DEBUG_ERROR_SET_BRUSHLESS:
         	print('DEBUG_ERROR_SET_BRUSHLESS')
-        elif res==DEBUG_ERROR_SET_SERVO
+        elif res==DEBUG_ERROR_SET_SERVO:
         	print('DEBUG_ERROR_SET_SERVO')
-        elif res==DEBUG_ERROR_GET_TOF_VALUE
+        elif res==DEBUG_ERROR_GET_TOF_VALUE:
         	print('DEBUG_ERROR_GET_TOF_VALUE')
-        elif res==DEBUG_ERROR_WRONG_BUTTON_NUMBER
+        elif res==DEBUG_ERROR_WRONG_BUTTON_NUMBER:
         	print('DEBUG_ERROR_WRONG_BUTTON_NUMBER')
-        elif res==ACKNOWLEDGE
+        elif res==ACKNOWLEDGE:
         	print('ACKNOWLEDGE')
-        elif res==ERROR
+        elif res==ERROR:
         	print('ERROR')
-        elif res==BUTTON1
+        elif res==BUTTON1:
         	print('BUTTON1')
-        elif res==BUTTON2
+        elif res==BUTTON2:
         	print('BUTTON2')
-        elif res==BUTTON3
+        elif res==BUTTON3:
         	print('BUTTON3')
-        elif res==BUTTON4
+        elif res==BUTTON4:
         	print('BUTTON4')
-        elif res==BUTTON5
+        elif res==BUTTON5:
         	print('BUTTON5')
-        elif res==START
+        elif res==START:
         	print('START')
-        elif res==ROMAN_NUMERAL_REQUEST
+        elif res==ROMAN_NUMERAL_REQUEST:
         	print('ROMAN_NUMERAL_REQUEST')
-        elif res==CURVE
+        elif res==CURVE:
         	print('CURVE')
-        elif res==PAUSE
+        elif res==PAUSE:
         	print('PAUSE')
-        elif res==RESUME
+        elif res==RESUME:
         	print('RESUME')
-        else
+        else:
         	print('unknown code: '+str(res))
 
-t=threading.Thread(target=getError)
-t.daemon=True
-t.start()
-
+getError()
