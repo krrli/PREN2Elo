@@ -18,7 +18,7 @@
 enum serialPort {
 	PC = 0, RasPi = 1
 };
-enum serialResponse { // !!!ERROR!!! not every value may be used, serial Rx interrupt isn't called with every byte
+enum serialResponse {
 	ACKNOWLEDGE = 0x20,
 	ERROR = 0x10,
 	BUTTON1 = 0x01,
@@ -27,7 +27,7 @@ enum serialResponse { // !!!ERROR!!! not every value may be used, serial Rx inte
 	BUTTON4 = 0x04,
 	BUTTON5 = 0x05
 };
-enum serialCommands // !!!ERROR!!! not every value may be used, serial Rx interrupt isn't called with every byte
+enum serialCommands
 {
 	START = 0x80, // RPi to FD
 	ROMAN_NUMERAL_REQUEST = 0x40, // FD to RPi
@@ -88,6 +88,7 @@ enum driveDistance {
 enum MotorSpeed {
 	MOTOR_CORRSPEED = 0xefff, MOTOR_MAXSPEED = 0xffff
 };
+#define CORR_ENABLED 1
 #define CORR_TIME 500 // value in ms
 #define BLIND_TIME 2000 // value in ms
 #define CURVE_DRIVE_OVER_TIME 200 // value in ms

@@ -1,10 +1,3 @@
-/*
- * todo:
- * - error handling in general
- * - set wait times
- * - testing
- */
-
 #include "program.h"
 
 /*
@@ -460,88 +453,107 @@ void mainLoop(void) {
 				if (res != ERR_OK) {
 					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 				}
-				if ((tof1_tmp_val > (DISTANCE_TO_WALL + DISTANCE_TO_WALL_VAR))
-						&& (tof1_tmp_val != 0xffff)) {
-					/* to far from wall */
-					if (type == PARCOUR_A) {
-						/* parcour a */
-						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				if (CORR_ENABLED) {
+					if ((tof1_tmp_val
+							> (DISTANCE_TO_WALL + DISTANCE_TO_WALL_VAR))
+							&& (tof1_tmp_val != 0xffff)) {
+						/* to far from wall */
+						if (type == PARCOUR_A) {
+							/* parcour a */
+							res = setMotorSpeed(MOTOR_FRONT_LEFT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_LEFT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							WAIT1_Waitms(CORR_TIME);
+							res = setMotorSpeed(MOTOR_FRONT_LEFT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_LEFT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+						} else {
+							/* parcour b */
+							res = setMotorSpeed(MOTOR_FRONT_RIGHT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_RIGHT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							WAIT1_Waitms(CORR_TIME);
+							res = setMotorSpeed(MOTOR_FRONT_RIGHT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_RIGHT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
 						}
-						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						WAIT1_Waitms(CORR_TIME);
-						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-					} else {
-						/* parcour b */
-						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						WAIT1_Waitms(CORR_TIME);
-						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-					}
-				} else if (tof1_tmp_val
-						< (DISTANCE_TO_WALL - DISTANCE_TO_WALL_VAR)) {
-					/* to near to wall */
-					if (type == PARCOUR_B) {
-						/* parcour b */
-						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						WAIT1_Waitms(CORR_TIME);
-						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-					} else {
-						/* parcour a */
-						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						WAIT1_Waitms(CORR_TIME);
-						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+					} else if (tof1_tmp_val
+							< (DISTANCE_TO_WALL - DISTANCE_TO_WALL_VAR)) {
+						/* to near to wall */
+						if (type == PARCOUR_B) {
+							/* parcour b */
+							res = setMotorSpeed(MOTOR_FRONT_LEFT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_LEFT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							WAIT1_Waitms(CORR_TIME);
+							res = setMotorSpeed(MOTOR_FRONT_LEFT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_LEFT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+						} else {
+							/* parcour a */
+							res = setMotorSpeed(MOTOR_FRONT_RIGHT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_RIGHT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							WAIT1_Waitms(CORR_TIME);
+							res = setMotorSpeed(MOTOR_FRONT_RIGHT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_RIGHT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
 						}
 					}
 				}
@@ -592,83 +604,101 @@ void mainLoop(void) {
 					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 				}
 				tof_diff = (int32_t) tof1_tmp_val - (int32_t) tof2_tmp_val; // front - rear
-				if (((type == PARCOUR_A) && (state == DRIVE_LEFT))
-						|| ((type == PARCOUR_B) && (state == DRIVE_RIGHT))) {
-					/* drive towards wall */
-					if (tof_diff > DRIVE_SIDEWAYS_VAR) {
-						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				if (CORR_ENABLED) {
+					if (((type == PARCOUR_A) && (state == DRIVE_LEFT))
+							|| ((type == PARCOUR_B) && (state == DRIVE_RIGHT))) {
+						/* drive towards wall */
+						if (tof_diff > DRIVE_SIDEWAYS_VAR) {
+							res = setMotorSpeed(MOTOR_REAR_LEFT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_RIGHT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							WAIT1_Waitms(CORR_TIME);
+							res = setMotorSpeed(MOTOR_REAR_LEFT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_RIGHT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+						} else if (tof_diff < (0 - DRIVE_SIDEWAYS_VAR)) {
+							res = setMotorSpeed(MOTOR_FRONT_LEFT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_FRONT_RIGHT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							WAIT1_Waitms(CORR_TIME);
+							res = setMotorSpeed(MOTOR_FRONT_LEFT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_FRONT_RIGHT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
 						}
-						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						WAIT1_Waitms(CORR_TIME);
-						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-					} else if (tof_diff < (0 - DRIVE_SIDEWAYS_VAR)) {
-						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						WAIT1_Waitms(CORR_TIME);
-						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-					}
-				} else {
-					/* drive away from wall */
-					if (tof_diff > DRIVE_SIDEWAYS_VAR) {
-						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						WAIT1_Waitms(CORR_TIME);
-						res = setMotorSpeed(MOTOR_FRONT_LEFT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_FRONT_RIGHT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-					} else if (tof_diff < (0 - DRIVE_SIDEWAYS_VAR)) {
-						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_CORRSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						WAIT1_Waitms(CORR_TIME);
-						res = setMotorSpeed(MOTOR_REAR_LEFT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-						}
-						res = setMotorSpeed(MOTOR_REAR_RIGHT, MOTOR_MAXSPEED);
-						if (res != ERR_OK) {
-							serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+					} else {
+						/* drive away from wall */
+						if (tof_diff > DRIVE_SIDEWAYS_VAR) {
+							res = setMotorSpeed(MOTOR_FRONT_LEFT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_FRONT_RIGHT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							WAIT1_Waitms(CORR_TIME);
+							res = setMotorSpeed(MOTOR_FRONT_LEFT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_FRONT_RIGHT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+						} else if (tof_diff < (0 - DRIVE_SIDEWAYS_VAR)) {
+							res = setMotorSpeed(MOTOR_REAR_LEFT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_RIGHT,
+									MOTOR_CORRSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							WAIT1_Waitms(CORR_TIME);
+							res = setMotorSpeed(MOTOR_REAR_LEFT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
+							res = setMotorSpeed(MOTOR_REAR_RIGHT,
+									MOTOR_MAXSPEED);
+							if (res != ERR_OK) {
+								serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+							}
 						}
 					}
 				}

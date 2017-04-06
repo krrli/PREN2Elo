@@ -1,8 +1,3 @@
-/*
- * todo:
- * - testing
- */
-
 #include "program.h"
 
 uint8_t last_status; // status of last I2C transmission
@@ -43,7 +38,7 @@ uint8_t initToF(void) {
 
 		WAIT1_WaitCycles(10000);
 
-		/* read part-to-part range offset */
+		/* read part-to-part range offset */ // todo
 		res = readRegister8bit(address[i], SYSRANGE__PART_TO_PART_RANGE_OFFSET,
 				&ptp_offset);
 		if (res != ERR_OK) {
@@ -64,7 +59,7 @@ uint8_t initToF(void) {
 			return res;
 		}
 		res = writeRegister8bit(address[i], 0x097, 0xFD); // RANGE_SCALER = 253
-		if (res != ERR_OK) {
+		if (res != ERR_OK) { // todo
 			return res;
 		}
 		res = writeRegister8bit(address[i], 0x0E3, 0x00);
@@ -244,7 +239,7 @@ uint8_t getToFValueMillimeters(uint8_t sens, uint16_t * val) {
 
 	/* return value */
 	if (range != 0xff) {
-		*val = (uint16_t) scaling * (uint16_t) range;
+		*val = (uint16_t) scaling * (uint16_t) range; // todo
 	} else {
 		*val = 0xffff;
 	}
@@ -354,7 +349,7 @@ uint8_t configureToFDefault(uint8_t sens) {
 }
 
 /* set scaling factor of tof */
-uint8_t setToFScaling(uint8_t sens, uint8_t new_scaling) {
+uint8_t setToFScaling(uint8_t sens, uint8_t new_scaling) { // todo
 	uint8_t res;
 
 	/* check if sens is a valid sensor number */
@@ -374,21 +369,21 @@ uint8_t setToFScaling(uint8_t sens, uint8_t new_scaling) {
 	scaling = new_scaling;
 
 	/* write scaling value to sensor */
-	res = writeRegister16bit(address[sens], RANGE_SCALER,
+	res = writeRegister16bit(address[sens], RANGE_SCALER, // todo: 151? (0x97)
 			ScalerValues[scaling]);
 	if (res != ERR_OK) {
 		return res;
 	}
 
 	/* apply scaling on part-to-part offset */
-	res = writeRegister8bit(address[sens], SYSRANGE__PART_TO_PART_RANGE_OFFSET,
+	res = writeRegister8bit(address[sens], SYSRANGE__PART_TO_PART_RANGE_OFFSET, // todo
 			ptp_offset / scaling);
 	if (res != ERR_OK) {
 		return res;
 	}
 
 	/* apply scaling on cross talk valid height */
-	res = writeRegister8bit(address[sens], SYSRANGE__CROSSTALK_VALID_HEIGHT,
+	res = writeRegister8bit(address[sens], SYSRANGE__CROSSTALK_VALID_HEIGHT, // todo
 			DefaultCrosstalkValidHeight / scaling);
 	if (res != ERR_OK) {
 		return res;

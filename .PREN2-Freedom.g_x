@@ -69,7 +69,7 @@
       <File Name="Project_Settings/Startup_Code/startup.c" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="16384" CompNumb="2" />
       <File Name="Generated_Code/BitIoLdd4.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="48" />
       <File Name="Generated_Code/MT1_IN4.h" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="63" />
-      <File Name="Documentation/PREN2-Freedom_SIGNALS.txt" FileDate="2017-04-06, 11:06:51" FileAge="1491469611000" FileType="3072" />
+      <File Name="Documentation/PREN2-Freedom_SIGNALS.txt" FileDate="2017-04-06, 18:57:59" FileAge="1491497879000" FileType="3072" />
       <File Name="Generated_Code/BitIoLdd4.c" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="48" />
       <File Name="Static_Code/PDD/CMP_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
       <File Name="Generated_Code/BitIoLdd2.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="44" />
@@ -211,5 +211,5 @@
       <File Name="Generated_Code/UTIL1.c" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="7" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>39</CodeGenReference>
+  <CodeGenReference>41</CodeGenReference>
 </CodeGenerationInfo>

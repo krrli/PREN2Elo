@@ -22,6 +22,11 @@ void starttest(void) {
 		testTofSensors();
 	}
 
+	/* test tof sensors */
+	if (TEST_TOF_SENSORS_CONTINUOUS) {
+		testTofSensorsContinuous();
+	}
+
 	/* test servo board */
 	if (TEST_SERVO_BOARD) {
 		testServoBoard();
@@ -84,6 +89,41 @@ void testTofSensors(void) {
 		WAIT1_Waitms(1);
 		serialSend((val & 0xff), RasPi);
 		WAIT1_Waitms(1);
+	}
+}
+
+void testTofSensorsContinuous(void) {
+	uint8_t res;
+	uint16_t val;
+
+	/* init tof */
+	res = initToF();
+	serialSend(res, PC);
+	WAIT1_Waitms(1);
+	serialSend(res, RasPi);
+	WAIT1_Waitms(1);
+
+	/* read tof */
+	for (;;) {
+		for (uint8_t i = 0; i < NUMBER_OF_SENSORS; i++) {
+			res = getToFValueMillimeters(i, &val);
+			serialSend(i, PC);
+			WAIT1_Waitms(1);
+			serialSend(i, RasPi);
+			WAIT1_Waitms(1);
+			serialSend(res, PC);
+			WAIT1_Waitms(1);
+			serialSend(res, RasPi);
+			WAIT1_Waitms(1);
+			serialSend((val >> 8), PC);
+			WAIT1_Waitms(1);
+			serialSend((val >> 8), RasPi);
+			WAIT1_Waitms(1);
+			serialSend((val & 0xff), PC);
+			WAIT1_Waitms(1);
+			serialSend((val & 0xff), RasPi);
+			WAIT1_Waitms(1);
+		}
 	}
 }
 

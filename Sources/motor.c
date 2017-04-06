@@ -1,8 +1,3 @@
-/*
- * todo:
- * - testing
- */
-
 #include "program.h"
 
 /* init motor */
