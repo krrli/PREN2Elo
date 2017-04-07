@@ -7,10 +7,12 @@ void starttest(void) {
 	}
 
 	/* wait */
-	for (uint8_t i = 0; i < WAIT_MINUTES; i++) {
-		WAIT1_Waitms(60000);
+	if (WAIT_BEFORE_TEST) {
+		for (uint8_t i = 0; i < WAIT_MINUTES; i++) {
+			WAIT1_Waitms(60000);
+		}
+		WAIT1_Waitms(10000);
 	}
-	WAIT1_Waitms(10000);
 
 	/* test serial communication */
 	if (TEST_SERIAL) {
@@ -22,7 +24,7 @@ void starttest(void) {
 		testTofSensors();
 	}
 
-	/* test tof sensors */
+	/* test tof sensors continuously */
 	if (TEST_TOF_SENSORS_CONTINUOUS) {
 		testTofSensorsContinuous();
 	}
@@ -30,6 +32,11 @@ void starttest(void) {
 	/* test servo board */
 	if (TEST_SERVO_BOARD) {
 		testServoBoard();
+	}
+
+	/* test brushless and switch */
+	if (TEST_BRUSHLESS_SWITCH) {
+		testBrushlessSwitch();
 	}
 
 	/* test motor controller */
@@ -168,6 +175,41 @@ void testServoBoard(void) {
 	WAIT1_Waitms(1);
 }
 
+void testBrushlessSwitch(void) {
+	/* local variables for brushless */
+	uint8_t cent_switch, cent_switch_old = CENT_OFF;
+	/* local variable to catch errors */
+	uint8_t res;
+	/* init servo board */
+	res = initServo();
+	serialSend(res, PC);
+	WAIT1_Waitms(1);
+	serialSend(res, RasPi);
+	WAIT1_Waitms(1);
+	WAIT1_Waitms(10000); // give brushless time to init
+	for (;;) {
+		/* check centrifuge state */
+		cent_switch = SW_Zent_GetVal();
+		if (cent_switch != cent_switch_old) {
+			if (cent_switch == CENT_ON) {
+				res = setBrushless(BRUSHLESS_ON);
+				serialSend(res, PC);
+				WAIT1_Waitms(1);
+				serialSend(res, RasPi);
+				WAIT1_Waitms(1);
+				cent_switch_old = cent_switch;
+			} else {
+				res = setBrushless(BRUSHLESS_OFF);
+				serialSend(res, PC);
+				WAIT1_Waitms(1);
+				serialSend(res, RasPi);
+				WAIT1_Waitms(1);
+				cent_switch_old = cent_switch;
+			}
+		}
+	}
+}
+
 void testMotor(void) {
 	uint8_t res;
 
@@ -177,20 +219,40 @@ void testMotor(void) {
 	WAIT1_Waitms(1);
 	serialSend(res, RasPi);
 	WAIT1_Waitms(1);
-	for (uint8_t i = 0; i < NUMBER_OF_MOTOR; i++) {
-		res = setMotorDirection(i, MOTOR_FORWARD);
-		serialSend(i, PC);
-		WAIT1_Waitms(1);
-		serialSend(i, RasPi);
-		WAIT1_Waitms(1);
-		serialSend(res, PC);
-		WAIT1_Waitms(1);
-		serialSend(res, RasPi);
-		WAIT1_Waitms(1);
-		res = setMotorSpeed(i, 0xFFFF);
-		serialSend(res, PC);
-		WAIT1_Waitms(1);
-		serialSend(res, RasPi);
-		WAIT1_Waitms(1);
+	for (;;) {
+		for (uint8_t i = 0; i < NUMBER_OF_MOTOR; i++) {
+			res = setMotorDirection(i, MOTOR_FORWARD);
+			serialSend(i, PC);
+			WAIT1_Waitms(1);
+			serialSend(i, RasPi);
+			WAIT1_Waitms(1);
+			serialSend(res, PC);
+			WAIT1_Waitms(1);
+			serialSend(res, RasPi);
+			WAIT1_Waitms(1);
+			res = setMotorSpeed(i, 0xFFFF);
+			serialSend(res, PC);
+			WAIT1_Waitms(1);
+			serialSend(res, RasPi);
+			WAIT1_Waitms(1);
+		}
+		WAIT1_Waitms(10000);
+		for (uint8_t i = 0; i < NUMBER_OF_MOTOR; i++) {
+			res = setMotorDirection(i, MOTOR_BACKWARD);
+			serialSend(i, PC);
+			WAIT1_Waitms(1);
+			serialSend(i, RasPi);
+			WAIT1_Waitms(1);
+			serialSend(res, PC);
+			WAIT1_Waitms(1);
+			serialSend(res, RasPi);
+			WAIT1_Waitms(1);
+			res = setMotorSpeed(i, 0xFFFF);
+			serialSend(res, PC);
+			WAIT1_Waitms(1);
+			serialSend(res, RasPi);
+			WAIT1_Waitms(1);
+		}
+		WAIT1_Waitms(10000);
 	}
 }

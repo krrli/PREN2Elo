@@ -25,9 +25,9 @@ if res==ERR_OK:
 else:
 	print('ERROR: INIT')
 
-for i in range(0,NUMBER_OF_SERVOS-1):
+for i in range(0,NUMBER_OF_SERVOS):
 	res=s.read(1)
-	print('Testing Sensor '+res+':')
+	print('Testing Sensor '+str(int(res[0]))+':')
 	res=s.read(1)
 	if res==ERR_OK:
 		print('OK:    SERVO STRAIGHT')
