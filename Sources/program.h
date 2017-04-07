@@ -102,7 +102,7 @@ enum MotorSpeed {
 /*
  * declarations for the tof sensors
  */
-#define NUMBER_OF_SENSORS 1 // max 6
+#define NUMBER_OF_SENSORS 6 // max 6
 enum ToF_Sensors {
 	TOF_LEFT_FRONT = 0,
 	TOF_LEFT_REAR = 1,
@@ -338,6 +338,6 @@ uint8_t initMotor(void);
 uint8_t setMotorDirection(uint8_t motor, enum MotorDirection val);
 
 /* set motor speed */
-uint8_t setMotorSpeed(uint8_t motor, uint16_t val);
+uint8_t setMotorSpeed(uint8_t motor, uint8_t val);
 
 #endif /* SOURCES_PROGRAM_H_ */

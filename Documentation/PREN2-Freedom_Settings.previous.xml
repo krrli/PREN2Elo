@@ -816,7 +816,13 @@ even (hw or sw)
       <Duty_compare v="" />
       <Output_pin v="ADC0_SE6b/PTD5/SPI1_SCK/UART2_TX/TPM0_CH5" />
       <Counter v="TPM0_CNT" />
-      <boolgroup name="Interrupt service/event" v="Disabled" />
+      <boolgroup name="Interrupt service/event" v="Enabled">
+        <Interrupt v="INT_TPM0" />
+        <Interrupt_on_duty v="" />
+        <Interrupt_overflow v="INT_TPM0" />
+        <Interrupt_priority v="medium priority" />
+        <Iterations_before_action_event v="1" />
+      </boolgroup>
       <Period v="25 ms" />
       <Starting_pulse_width v="0 &amp;#181;s" />
       <Initial_polarity v="low" />
@@ -840,14 +846,18 @@ even (hw or sw)
             <Duty_device v="TPM0_C5V" />
             <Output_pin v="ADC0_SE6b/PTD5/SPI1_SCK/UART2_TX/TPM0_CH5" />
             <Counter v="TPM0_CNT" />
-            <boolgroup name="Interrupt service/event" v="Disabled" />
+            <boolgroup name="Interrupt service/event" v="Enabled">
+              <Interrupt v="INT_TPM0" />
+              <Interrupt_priority v="medium priority" />
+              <Iterations_before_action_event v="1" />
+            </boolgroup>
             <Period v="25 ms" />
             <Starting_pulse_width v="0 &amp;#181;s" />
             <Initial_polarity v="low" />
             <group name="Initialization">
               <Enabled_in_init__code v="yes" />
               <group name="Event mask">
-                <OnEnd v="Disabled" />
+                <OnEnd v="Enabled" />
               </group>
             </group>
             <group name="Referenced components">
@@ -876,7 +886,9 @@ even (hw or sw)
           </Methods>
           <Events>
             <Event_module_name v="Events" />
-            <event name="OnEnd" v="don&amp;apos;t generate code" />
+            <event name="OnEnd" v="generate code">
+              <Event_procedure_name v="PwmLdd1_OnEnd" />
+            </event>
           </Events>
         </inhrbean>
       </group>
@@ -901,7 +913,10 @@ even (hw or sw)
       <Event_module_name v="Events" />
       <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
       <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
-      <event name="OnEnd" v="don&amp;apos;t generate code" />
+      <event name="OnEnd" v="generate code">
+        <Event_procedure_name v="MT1_PWM1_OnEnd" />
+        <Priority v="same as interrupt" />
+      </event>
     </Events>
   </Bean>
   <Bean name="TPM0" type="TimerUnit_LDD">
@@ -919,7 +934,10 @@ even (hw or sw)
       <enumgroup name="Counter restart" v="On-match">
         <Period_device v="TPM0_MOD" />
         <Period v="25 ms" />
-        <boolgroup name="Interrupt" v="Disabled" />
+        <boolgroup name="Interrupt" v="Enabled">
+          <Interrupt v="INT_TPM0" />
+          <Interrupt_priority v="medium priority" />
+        </boolgroup>
       </enumgroup>
       <list name="Channel list" v="4">
         <group name="Channel 0">
@@ -974,7 +992,7 @@ even (hw or sw)
       <group name="Initialization">
         <Enabled_in_init__code v="yes" />
         <group name="Event mask">
-          <OnCounterRestart v="Disabled" />
+          <OnCounterRestart v="Enabled" />
           <OnChannel0 v="Disabled" />
           <OnChannel1 v="Disabled" />
           <OnChannel2 v="Disabled" />
@@ -1012,7 +1030,9 @@ even (hw or sw)
     </Methods>
     <Events>
       <Event_module_name v="Events" />
-      <event name="OnCounterRestart" v="don&amp;apos;t generate code" />
+      <event name="OnCounterRestart" v="generate code">
+        <Event_procedure_name v="TPM0_OnCounterRestart" />
+      </event>
       <event name="OnChannel0" v="don&amp;apos;t generate code" />
       <event name="OnChannel1" v="don&amp;apos;t generate code" />
       <event name="OnChannel2" v="don&amp;apos;t generate code" />
@@ -1031,7 +1051,13 @@ even (hw or sw)
       <Duty_compare v="" />
       <Output_pin v="PTD0/SPI0_PCS0/TPM0_CH0" />
       <Counter v="TPM0_CNT" />
-      <boolgroup name="Interrupt service/event" v="Disabled" />
+      <boolgroup name="Interrupt service/event" v="Enabled">
+        <Interrupt v="INT_TPM0" />
+        <Interrupt_on_duty v="" />
+        <Interrupt_overflow v="INT_TPM0" />
+        <Interrupt_priority v="medium priority" />
+        <Iterations_before_action_event v="1" />
+      </boolgroup>
       <Period v="25 ms" />
       <Starting_pulse_width v="0 &amp;#181;s" />
       <Initial_polarity v="low" />
@@ -1055,14 +1081,18 @@ even (hw or sw)
             <Duty_device v="TPM0_C0V" />
             <Output_pin v="PTD0/SPI0_PCS0/TPM0_CH0" />
             <Counter v="TPM0_CNT" />
-            <boolgroup name="Interrupt service/event" v="Disabled" />
+            <boolgroup name="Interrupt service/event" v="Enabled">
+              <Interrupt v="INT_TPM0" />
+              <Interrupt_priority v="medium priority" />
+              <Iterations_before_action_event v="1" />
+            </boolgroup>
             <Period v="25 ms" />
             <Starting_pulse_width v="0 &amp;#181;s" />
             <Initial_polarity v="low" />
             <group name="Initialization">
               <Enabled_in_init__code v="yes" />
               <group name="Event mask">
-                <OnEnd v="Disabled" />
+                <OnEnd v="Enabled" />
               </group>
             </group>
             <group name="Referenced components">
@@ -1091,7 +1121,9 @@ even (hw or sw)
           </Methods>
           <Events>
             <Event_module_name v="Events" />
-            <event name="OnEnd" v="don&amp;apos;t generate code" />
+            <event name="OnEnd" v="generate code">
+              <Event_procedure_name v="PwmLdd2_OnEnd" />
+            </event>
           </Events>
         </inhrbean>
       </group>
@@ -1116,7 +1148,10 @@ even (hw or sw)
       <Event_module_name v="Events" />
       <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
       <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
-      <event name="OnEnd" v="don&amp;apos;t generate code" />
+      <event name="OnEnd" v="generate code">
+        <Event_procedure_name v="MT1_PWM2_OnEnd" />
+        <Priority v="same as interrupt" />
+      </event>
     </Events>
   </Bean>
   <Bean name="MT2_PWM1" type="PWM">
@@ -1127,7 +1162,13 @@ even (hw or sw)
       <Duty_compare v="" />
       <Output_pin v="PTD2/SPI0_MOSI/UART2_RX/TPM0_CH2/SPI0_MISO" />
       <Counter v="TPM0_CNT" />
-      <boolgroup name="Interrupt service/event" v="Disabled" />
+      <boolgroup name="Interrupt service/event" v="Enabled">
+        <Interrupt v="INT_TPM0" />
+        <Interrupt_on_duty v="" />
+        <Interrupt_overflow v="INT_TPM0" />
+        <Interrupt_priority v="medium priority" />
+        <Iterations_before_action_event v="1" />
+      </boolgroup>
       <Period v="25 ms" />
       <Starting_pulse_width v="0 &amp;#181;s" />
       <Initial_polarity v="low" />
@@ -1151,14 +1192,18 @@ even (hw or sw)
             <Duty_device v="TPM0_C2V" />
             <Output_pin v="PTD2/SPI0_MOSI/UART2_RX/TPM0_CH2/SPI0_MISO" />
             <Counter v="TPM0_CNT" />
-            <boolgroup name="Interrupt service/event" v="Disabled" />
+            <boolgroup name="Interrupt service/event" v="Enabled">
+              <Interrupt v="INT_TPM0" />
+              <Interrupt_priority v="medium priority" />
+              <Iterations_before_action_event v="1" />
+            </boolgroup>
             <Period v="25 ms" />
             <Starting_pulse_width v="0 &amp;#181;s" />
             <Initial_polarity v="low" />
             <group name="Initialization">
               <Enabled_in_init__code v="yes" />
               <group name="Event mask">
-                <OnEnd v="Disabled" />
+                <OnEnd v="Enabled" />
               </group>
             </group>
             <group name="Referenced components">
@@ -1187,7 +1232,9 @@ even (hw or sw)
           </Methods>
           <Events>
             <Event_module_name v="Events" />
-            <event name="OnEnd" v="don&amp;apos;t generate code" />
+            <event name="OnEnd" v="generate code">
+              <Event_procedure_name v="PwmLdd3_OnEnd" />
+            </event>
           </Events>
         </inhrbean>
       </group>
@@ -1212,7 +1259,10 @@ even (hw or sw)
       <Event_module_name v="Events" />
       <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
       <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
-      <event name="OnEnd" v="don&amp;apos;t generate code" />
+      <event name="OnEnd" v="generate code">
+        <Event_procedure_name v="MT2_PWM1_OnEnd" />
+        <Priority v="same as interrupt" />
+      </event>
     </Events>
   </Bean>
   <Bean name="MT2_PWM2" type="PWM">
@@ -1223,7 +1273,13 @@ even (hw or sw)
       <Duty_compare v="" />
       <Output_pin v="PTD3/SPI0_MISO/UART2_TX/TPM0_CH3/SPI0_MOSI" />
       <Counter v="TPM0_CNT" />
-      <boolgroup name="Interrupt service/event" v="Disabled" />
+      <boolgroup name="Interrupt service/event" v="Enabled">
+        <Interrupt v="INT_TPM0" />
+        <Interrupt_on_duty v="" />
+        <Interrupt_overflow v="INT_TPM0" />
+        <Interrupt_priority v="medium priority" />
+        <Iterations_before_action_event v="1" />
+      </boolgroup>
       <Period v="25 ms" />
       <Starting_pulse_width v="0 &amp;#181;s" />
       <Initial_polarity v="low" />
@@ -1247,14 +1303,18 @@ even (hw or sw)
             <Duty_device v="TPM0_C3V" />
             <Output_pin v="PTD3/SPI0_MISO/UART2_TX/TPM0_CH3/SPI0_MOSI" />
             <Counter v="TPM0_CNT" />
-            <boolgroup name="Interrupt service/event" v="Disabled" />
+            <boolgroup name="Interrupt service/event" v="Enabled">
+              <Interrupt v="INT_TPM0" />
+              <Interrupt_priority v="medium priority" />
+              <Iterations_before_action_event v="1" />
+            </boolgroup>
             <Period v="25 ms" />
             <Starting_pulse_width v="0 &amp;#181;s" />
             <Initial_polarity v="low" />
             <group name="Initialization">
               <Enabled_in_init__code v="yes" />
               <group name="Event mask">
-                <OnEnd v="Disabled" />
+                <OnEnd v="Enabled" />
               </group>
             </group>
             <group name="Referenced components">
@@ -1283,7 +1343,9 @@ even (hw or sw)
           </Methods>
           <Events>
             <Event_module_name v="Events" />
-            <event name="OnEnd" v="don&amp;apos;t generate code" />
+            <event name="OnEnd" v="generate code">
+              <Event_procedure_name v="PwmLdd4_OnEnd" />
+            </event>
           </Events>
         </inhrbean>
       </group>
@@ -1308,7 +1370,10 @@ even (hw or sw)
       <Event_module_name v="Events" />
       <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
       <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
-      <event name="OnEnd" v="don&amp;apos;t generate code" />
+      <event name="OnEnd" v="generate code">
+        <Event_procedure_name v="MT2_PWM2_OnEnd" />
+        <Priority v="same as interrupt" />
+      </event>
     </Events>
   </Bean>
   <Bean name="GenI2C_ToF" type="GenericI2C">

@@ -29,10 +29,11 @@ while True:
         str2=' (OK)    '
         res3=s.read(2)
         intres3=0
-        for b in res:
-            intres3=intres3*256+int(b)
+        #for b in res:
+        #    intres3=intres3*256+int(b)
+        intres3=res3[0]*256+res3[1]
     else:
-    	str2=' (ERROR) '
+        str2=' (ERROR) '
         intres3=0
-    print('Sensor '+str(int(res1))+str2+': '+str(intres3)+' mm')
+    print('Sensor '+str(int(res1[0]))+str2+': '+str(intres3)+' mm')
 

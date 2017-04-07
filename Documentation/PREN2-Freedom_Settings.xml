@@ -183,6 +183,7 @@ PE_DEBUGHALT();
     <Enabled v="Y" />
     <Properties>
       <Component_name v="WAIT1" />
+      <boolgroup name="Use Cycle Counter" v="Disabled" />
       <SDK v="MCUC1" />
       <boolgroup name="Manual Clock Values" v="Disabled" />
       <Delay100usFunction v="Delay100US" />
@@ -198,6 +199,8 @@ PE_DEBUGHALT();
       <Waitus v="generate code" />
       <Waitns v="generate code" />
       <WaitOSms v="generate code" />
+      <Init v="generate code" />
+      <DeInit v="generate code" />
     </Methods>
     <Events>
       <EmptySection_DummyValue />
@@ -1313,6 +1316,7 @@ even (hw or sw)
     <Properties>
       <Component_name v="GenI2C_ToF" />
       <Wait v="WAIT1" />
+      <SDK v="MCUC1" />
       <Support_STOP_NOSTART v="no" />
       <Write_Buffer_Size v="16" />
       <boolgroup name="non-LDD I2C" v="Disabled" />
@@ -1355,7 +1359,10 @@ even (hw or sw)
     <Properties>
       <Component_name v="I2C_ToF" />
       <I2C_channel v="I2C1" />
-      <boolgroup name="Interrupt service" v="Disabled" />
+      <boolgroup name="Interrupt service" v="Enabled">
+        <Interrupt v="INT_I2C1" />
+        <Interrupt_priority v="medium priority" />
+      </boolgroup>
       <group name="Settings">
         <Mode_selection v="MASTER" />
         <boolgroup name="MASTER mode" v="Enabled">
@@ -1433,7 +1440,7 @@ even (hw or sw)
       <CheckBus v="don&amp;apos;t generate code" />
       <GetStats v="don&amp;apos;t generate code" />
       <ClearStats v="don&amp;apos;t generate code" />
-      <Main v="generate code" />
+      <Main v="don&amp;apos;t generate code" />
       <ConnectPin v="don&amp;apos;t generate code" />
       <SetOperationMode v="don&amp;apos;t generate code" />
       <GetDriverState v="don&amp;apos;t generate code" />

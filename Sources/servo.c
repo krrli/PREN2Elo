@@ -50,17 +50,7 @@ uint8_t initServo(void) {
 	if (res != ERR_OK) {
 		return res;
 	}
-	/*WAIT1_Waitms(1000);
-	res = setBrushless(BRUSHLESS_INIT);
-	if (res != ERR_OK) {
-		return res;
-	}
-	WAIT1_Waitms(1000);
-	res = setBrushless(BRUSHLESS_OFF);
-	if (res != ERR_OK) {
-		return res;
-	}*/
-	WAIT1_Waitms(10);
+	WAIT1_Waitms(3000);
 
 	/* init servos */
 	for (int i = 0; i < 4; i++) {

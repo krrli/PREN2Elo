@@ -53,7 +53,6 @@ void start(void) {
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_INIT_SERVO);
 	}
-	WAIT1_Waitms(10000); // give brushless time to init
 
 	/* init tof sensors */
 	res = initToF();

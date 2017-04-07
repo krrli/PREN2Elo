@@ -130,6 +130,7 @@ void testTofSensorsContinuous(void) {
 			WAIT1_Waitms(1);
 			serialSend((val & 0xff), RasPi);
 			WAIT1_Waitms(1);
+			WAIT1_Waitms(500);
 		}
 	}
 }
@@ -186,7 +187,6 @@ void testBrushlessSwitch(void) {
 	WAIT1_Waitms(1);
 	serialSend(res, RasPi);
 	WAIT1_Waitms(1);
-	WAIT1_Waitms(10000); // give brushless time to init
 	for (;;) {
 		/* check centrifuge state */
 		cent_switch = SW_Zent_GetVal();
@@ -212,16 +212,13 @@ void testBrushlessSwitch(void) {
 
 void testMotor(void) {
 	uint8_t res;
-	/* init Servo*/
-	res = initServo();
-	serialSend(res, PC);
-	WAIT1_Waitms(1);
 	/* init motor */
 	res = initMotor();
 	serialSend(res, PC);
 	WAIT1_Waitms(1);
 	serialSend(res, RasPi);
 	WAIT1_Waitms(1);
+	WAIT1_Waitms(2000);
 	for (;;) {
 		for (uint8_t i = 0; i < NUMBER_OF_MOTOR; i++) {
 			res = setMotorDirection(i, MOTOR_FORWARD);
@@ -233,7 +230,7 @@ void testMotor(void) {
 			WAIT1_Waitms(1);
 			serialSend(res, RasPi);
 			WAIT1_Waitms(1);
-			res = setMotorSpeed(i, 0xFFFF);
+			res = setMotorSpeed(i, 100);
 			serialSend(res, PC);
 			WAIT1_Waitms(1);
 			serialSend(res, RasPi);
@@ -250,7 +247,7 @@ void testMotor(void) {
 			WAIT1_Waitms(1);
 			serialSend(res, RasPi);
 			WAIT1_Waitms(1);
-			res = setMotorSpeed(i, 0xFFFF);
+			res = setMotorSpeed(i, 50);
 			serialSend(res, PC);
 			WAIT1_Waitms(1);
 			serialSend(res, RasPi);

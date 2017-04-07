@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-07, 15:10, # CodeGen: 45
+**     Date/Time   : 2017-04-07, 16:18, # CodeGen: 47
 **     Abstract    :
 **
 **     Settings    :
@@ -478,6 +478,7 @@ void PE_low_level_init(void)
   /* NVIC_IPR1: PRI_6=0 */
   NVIC_IPR1 &= (uint32_t)~(uint32_t)(NVIC_IP_PRI_6(0xFF));
   /* ### McuLibConfig "MCUC1" init code ... */
+  WAIT1_Init();
   /* ### XFormat "XF1" init code ... */
   /* ### CriticalSection "CS1" init code ... */
   /* ### Asynchro serial "AS1" init code ... */

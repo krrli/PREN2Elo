@@ -7,7 +7,7 @@
 **     Version     : Component 01.016, Driver 01.07, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-07, 15:10, # CodeGen: 45
+**     Date/Time   : 2017-04-07, 15:31, # CodeGen: 45
 **     Abstract    :
 **          This component encapsulates the internal I2C communication
 **          interface. The implementation of the interface is based
@@ -28,7 +28,9 @@
 **     Settings    :
 **          Component name                                 : I2C_ToF
 **          I2C channel                                    : I2C1
-**          Interrupt service                              : Disabled
+**          Interrupt service                              : Enabled
+**            Interrupt                                    : INT_I2C1
+**            Interrupt priority                           : medium priority
 **          Settings                                       : 
 **            Mode selection                               : MASTER
 **            MASTER mode                                  : Enabled
@@ -86,7 +88,6 @@
 **         MasterSendBlock    - LDD_TError I2C_ToF_MasterSendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
 **         MasterReceiveBlock - LDD_TError I2C_ToF_MasterReceiveBlock(LDD_TDeviceData *DeviceDataPtr,...
 **         SelectSlaveDevice  - LDD_TError I2C_ToF_SelectSlaveDevice(LDD_TDeviceData *DeviceDataPtr,...
-**         Main               - void I2C_ToF_Main(LDD_TDeviceData *DeviceDataPtr);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -173,7 +174,6 @@ extern "C" {
 #define I2C_ToF_MasterSendBlock_METHOD_ENABLED /*!< MasterSendBlock method of the component I2C_ToF is enabled (generated) */
 #define I2C_ToF_MasterReceiveBlock_METHOD_ENABLED /*!< MasterReceiveBlock method of the component I2C_ToF is enabled (generated) */
 #define I2C_ToF_SelectSlaveDevice_METHOD_ENABLED /*!< SelectSlaveDevice method of the component I2C_ToF is enabled (generated) */
-#define I2C_ToF_Main_METHOD_ENABLED    /*!< Main method of the component I2C_ToF is enabled (generated) */
 
 /* Events configuration constants - generated for all enabled component's events */
 #define I2C_ToF_OnMasterBlockSent_EVENT_ENABLED /*!< OnMasterBlockSent event of the component I2C_ToF is enabled (generated) */
@@ -356,20 +356,16 @@ LDD_TError I2C_ToF_SelectSlaveDevice(LDD_TDeviceData *DeviceDataPtr, LDD_I2C_TAd
 
 /*
 ** ===================================================================
-**     Method      :  I2C_ToF_Main (component I2C_LDD)
+**     Method      :  I2C_ToF_Interrupt (component I2C_LDD)
+**
+**     Description :
+**         The method services the interrupt of the selected peripheral(s)
+**         and eventually invokes event(s) of the component.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
 */
-/*!
-**     @brief
-**         This method is available only for polling mode. If interrupt
-**         service is disabled this method replaces the I2C interrupt
-**         handler. This method should be called if Receive/SendBlock
-**         was invoked before in order to run the reception/transmition.
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by <Init> method.
-*/
-/* ===================================================================*/
-void I2C_ToF_Main(LDD_TDeviceData *DeviceDataPtr);
+/* {Default RTOS Adapter} ISR function prototype */
+PE_ISR(I2C_ToF_Interrupt);
 
 /* END I2C_ToF. */
 
