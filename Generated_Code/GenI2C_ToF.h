@@ -4,16 +4,15 @@
 **     Project     : PREN2-Freedom
 **     Processor   : MKL25Z128VLK4
 **     Component   : GenericI2C
-**     Version     : Component 01.030, Driver 01.00, CPU db: 3.00.000
+**     Version     : Component 01.028, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-31, 20:18, # CodeGen: 35
+**     Date/Time   : 2017-04-07, 15:10, # CodeGen: 45
 **     Abstract    :
 **         This component implements a generic I2C driver wrapper to work both with LDD and non-LDD I2C components.
 **     Settings    :
 **          Component name                                 : GenI2C_ToF
 **          Wait                                           : WAIT1
-**          SDK                                            : MCUC1
 **          Support STOP_NOSTART                           : no
 **          Write Buffer Size                              : 16
 **          non-LDD I2C                                    : Disabled
@@ -81,14 +80,38 @@
 #define __GenI2C_ToF_H
 
 /* MODULE GenI2C_ToF. */
-#include "MCUC1.h" /* SDK and API used */
-#include "GenI2C_ToFconfig.h" /* configuration */
 
+/* Include shared modules, which are used for whole project */
+#include "PE_Types.h"
+#include "PE_Error.h"
+#include "PE_Const.h"
+#include "IO_Map.h"
 /* Include inherited beans */
 #include "WAIT1.h"
-#include "MCUC1.h"
 #include "I2C_ToF.h"
 
+#include "Cpu.h"
+
+
+#ifndef __BWUserType_GenI2C_ToF_TTIME
+#define __BWUserType_GenI2C_ToF_TTIME
+  typedef struct {                     /* Time in binary format */
+    byte hour;                         /* hours */
+    byte min;                          /* minutes */
+    byte sec;                          /* seconds */
+    bool mode;                         /* clock mode, 0 for 12-hour mode, otherwise 0-24 hour mode */
+    byte am_pm;                        /* 0: AM, otherwise PM */
+  } GenI2C_ToF_TTIME;
+#endif
+#ifndef __BWUserType_GenI2C_ToF_TDATE
+#define __BWUserType_GenI2C_ToF_TDATE
+  typedef struct {                     /* Date in binary format */
+    byte year;                         /* year */
+    byte month;                        /* month */
+    byte day;                          /* day */
+    bool dayOfWeek;                    /* Day of week, where 0 is the first day. In the range of 0..6 */
+  } GenI2C_ToF_TDATE;
+#endif
 
 #define GenI2C_ToF_WRITE_BUFFER_SIZE 16 /* size of internal buffer used, set in the component properties */
 

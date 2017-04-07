@@ -54,8 +54,6 @@ Module "WAIT1"     (component Wait)
    - WAIT1_Waitns -Wait for a specified time in nano seconds.
    - WAIT1_WaitOSms -If an RTOS is enabled, this routine will use a non-blocking wait method. Otherwise it will do a 
                 busy/blocking wait.
-   - WAIT1_Init -Driver initialization routine.
-   - WAIT1_DeInit -Driver de-initialization routine
 
 Module "MCUC1"     (component McuLibConfig)
 
@@ -322,6 +320,9 @@ Module "I2C_ToF"   (component I2C_LDD)
    - I2C_ToF_SelectSlaveDevice -This method selects a new slave for communication by its 7-bit slave, 10-bit address or general 
                 call value. Any send or receive method directs to or from selected device, until a new slave device is selected 
                 by this method. This method is available for the MASTER mode.
+   - I2C_ToF_Main -This method is available only for polling mode. If interrupt service is disabled this method replaces the 
+                I2C interrupt handler. This method should be called if Receive/SendBlock was invoked before in order to run the 
+                reception/transmition.
 
 Module "ToF1"      (component BitIO)
    - ToF1_SetDir -Sets a pin direction (available only if the direction = _[input/output]_).

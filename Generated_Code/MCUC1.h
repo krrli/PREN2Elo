@@ -4,10 +4,10 @@
 **     Project     : PREN2-Freedom
 **     Processor   : MKL25Z128VLK4
 **     Component   : McuLibConfig
-**     Version     : Component 01.008, Driver 01.00, CPU db: 3.00.000
+**     Version     : Component 01.007, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-31, 20:18, # CodeGen: 35
+**     Date/Time   : 2017-04-07, 15:10, # CodeGen: 45
 **     Abstract    :
 **
 **     Settings    :

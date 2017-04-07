@@ -212,7 +212,10 @@ void testBrushlessSwitch(void) {
 
 void testMotor(void) {
 	uint8_t res;
-
+	/* init Servo*/
+	res = initServo();
+	serialSend(res, PC);
+	WAIT1_Waitms(1);
 	/* init motor */
 	res = initMotor();
 	serialSend(res, PC);

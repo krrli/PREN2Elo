@@ -7,7 +7,7 @@
 **     Version     : Component 01.164, Driver 01.11, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-31, 20:18, # CodeGen: 35
+**     Date/Time   : 2017-04-07, 15:10, # CodeGen: 45
 **     Abstract    :
 **          This TimerUnit component provides a low level API for unified hardware access across
 **          various timer devices using the Prescaler-Counter-Compare-Capture timer structure.
@@ -28,7 +28,7 @@
 **            Channel 0                                    : 
 **              Mode                                       : Compare
 **                Compare                                  : TPM0_C5V
-**                Offset                                   : 0 Âµs
+**                Offset                                   : 0 µs
 **                Output on compare                        : Set
 **                  Output on overrun                      : Clear
 **                  Initial state                          : Low
@@ -38,7 +38,7 @@
 **            Channel 1                                    : 
 **              Mode                                       : Compare
 **                Compare                                  : TPM0_C0V
-**                Offset                                   : 0 Âµs
+**                Offset                                   : 0 µs
 **                Output on compare                        : Set
 **                  Output on overrun                      : Clear
 **                  Initial state                          : Low
@@ -48,7 +48,7 @@
 **            Channel 2                                    : 
 **              Mode                                       : Compare
 **                Compare                                  : TPM0_C2V
-**                Offset                                   : 0 Âµs
+**                Offset                                   : 0 µs
 **                Output on compare                        : Set
 **                  Output on overrun                      : Clear
 **                  Initial state                          : Low
@@ -58,7 +58,7 @@
 **            Channel 3                                    : 
 **              Mode                                       : Compare
 **                Compare                                  : TPM0_C3V
-**                Offset                                   : 0 Âµs
+**                Offset                                   : 0 µs
 **                Output on compare                        : Set
 **                  Output on overrun                      : Clear
 **                  Initial state                          : Low
