@@ -86,7 +86,7 @@ enum driveDistance {
 	BUTTON5_B = 0xA0
 };
 enum MotorSpeed {
-	MOTOR_CORRSPEED = 0xefff, MOTOR_MAXSPEED = 0xffff
+	MOTOR_CORRSPEED = 50, MOTOR_MAXSPEED = 100
 };
 #define CORR_ENABLED 1
 #define CORR_TIME 500 // value in ms
@@ -102,7 +102,7 @@ enum MotorSpeed {
 /*
  * declarations for the tof sensors
  */
-#define NUMBER_OF_SENSORS 6 // max 6
+#define NUMBER_OF_SENSORS 5 // max 6
 enum ToF_Sensors {
 	TOF_LEFT_FRONT = 0,
 	TOF_LEFT_REAR = 1,
@@ -217,18 +217,18 @@ enum ServoDirection {
 /*
  * declarations for the motor driver boards
  */
-#define INIT_MOTOR_DIRECTION_1	1
-#define INIT_MOTOR_DIRECTION_2	0
+#define INIT_MOTOR_DIRECTION_1	0
+#define INIT_MOTOR_DIRECTION_2	1
 #define NUMBER_OF_MOTOR 4
 
 enum MotorDirection {
 	MOTOR_FORWARD, MOTOR_BACKWARD
 };
 enum Motor {
-	MOTOR_FRONT_RIGHT = 0,
-	MOTOR_FRONT_LEFT = 2,
-	MOTOR_REAR_RIGHT = 1,
-	MOTOR_REAR_LEFT = 3
+	MOTOR_FRONT_RIGHT = 2,
+	MOTOR_FRONT_LEFT = 0,
+	MOTOR_REAR_RIGHT = 3,
+	MOTOR_REAR_LEFT = 1
 };
 
 /*

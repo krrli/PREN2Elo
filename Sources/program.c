@@ -34,7 +34,9 @@ void start(void) {
 	stateBak = STOPPED;
 	stateCurr = STOPPED;
 	wheelPos = STRAIGHT;
-	type = SW_Parc_GetVal();
+	//type = SW_Parc_GetVal();
+	type = PARCOUR_A; // todo
+	state = DRIVE_FORWARD; // todo
 	endReached = NOT_REACHED;
 	distance = CURVE_DIST;
 
@@ -146,22 +148,22 @@ void mainLoop(void) {
 
 	for (;;) {
 		/* check centrifuge state */
-		cent_switch = SW_Zent_GetVal();
-		if (cent_switch != cent_switch_old) {
-			if (cent_switch == CENT_ON) {
-				res = setBrushless(BRUSHLESS_ON);
-				if (res != ERR_OK) {
-					serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
-				}
-				cent_switch_old = cent_switch;
-			} else {
-				res = setBrushless(BRUSHLESS_OFF);
-				if (res != ERR_OK) {
-					serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
-				}
-				cent_switch_old = cent_switch;
-			}
-		}
+		/*cent_switch = SW_Zent_GetVal();
+		 if (cent_switch != cent_switch_old) {
+		 if (cent_switch == CENT_ON) {
+		 res = setBrushless(BRUSHLESS_ON);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
+		 }
+		 cent_switch_old = cent_switch;
+		 } else {
+		 res = setBrushless(BRUSHLESS_OFF);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
+		 }
+		 cent_switch_old = cent_switch;
+		 }
+		 }*/
 
 		/* if state changed, set servo and motor outputs */
 		if (stateCurr != state) {
@@ -188,6 +190,24 @@ void mainLoop(void) {
 				break;
 			case DRIVE_FORWARD:
 			case DRIVE_BACKWARD:
+				/* Stop Motors before turning */
+				res = setMotorSpeed(MOTOR_FRONT_LEFT, 0);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				}
+				res = setMotorSpeed(MOTOR_FRONT_RIGHT, 0);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				}
+				res = setMotorSpeed(MOTOR_REAR_LEFT, 0);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				}
+				res = setMotorSpeed(MOTOR_REAR_RIGHT, 0);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				}
+				WAIT1_Waitms(WAIT_TIME_DEFAULT);
 				/* set servos */
 				if (wheelPos != STRAIGHT) {
 					res = setServo(0, SERVO_STRAIGHT);
@@ -279,6 +299,24 @@ void mainLoop(void) {
 				break;
 			case DRIVE_LEFT:
 			case DRIVE_RIGHT:
+				/* Stop Motors before turning */
+				res = setMotorSpeed(MOTOR_FRONT_LEFT, 0);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				}
+				res = setMotorSpeed(MOTOR_FRONT_RIGHT, 0);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				}
+				res = setMotorSpeed(MOTOR_REAR_LEFT, 0);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				}
+				res = setMotorSpeed(MOTOR_REAR_RIGHT, 0);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				}
+				WAIT1_Waitms(WAIT_TIME_DEFAULT);
 				/* set servo */
 				if (wheelPos != SIDEWAYS) {
 					res = setServo(0, SERVO_SIDEWAYS);

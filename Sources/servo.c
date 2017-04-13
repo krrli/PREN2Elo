@@ -17,13 +17,17 @@
  * 2*ticksperms=491.40 --> 180°
  */
 // todo values: 100..630, 90°: 246,491
-uint16_t servoValuesStraight[] = { 100, 246, 246, 246 }; // 0...4095; 246 --> 0°; 491 --> 180°
-uint16_t servoValuesSideways[] = { 630, 491, 491, 491 }; // 0...4095; 246 --> 0°; 491 --> 180°
+uint16_t servoValuesStraight[] = { 200, 500, 500, 200 }; // 0...4095; 246 --> 0°; 491 --> 180°
+uint16_t servoValuesSideways[] = { 455, 260, 245, 450 }; // 0...4095; 246 --> 0°; 491 --> 180°
 uint8_t servoChannels[] = { 0, 1, 2, 3 }; // 0...15
 uint16_t brushlessValueOff = 246;
 uint16_t brushlessValueOn = 300; //min 300
 uint16_t brushlessValueInit = 491; // todo
 uint8_t brushlessChannel = 4;
+
+/*
+ * VL,HL,VR,HR
+ */
 
 /*
  * external functions

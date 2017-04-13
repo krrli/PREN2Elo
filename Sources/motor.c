@@ -54,11 +54,11 @@ uint8_t setMotorDirection(uint8_t motor, enum MotorDirection val) {
 			break;
 		case 3:
 			if (val == MOTOR_FORWARD) {
-				MT2_IN3_PutVal(INIT_MOTOR_DIRECTION_2);
-				MT2_IN4_PutVal(INIT_MOTOR_DIRECTION_1);
-			} else {
 				MT2_IN3_PutVal(INIT_MOTOR_DIRECTION_1);
 				MT2_IN4_PutVal(INIT_MOTOR_DIRECTION_2);
+			} else {
+				MT2_IN3_PutVal(INIT_MOTOR_DIRECTION_2);
+				MT2_IN4_PutVal(INIT_MOTOR_DIRECTION_1);
 			}
 			break;
 		}
