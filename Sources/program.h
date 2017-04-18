@@ -262,6 +262,41 @@ void serialDebugLite(uint8_t ch);
 /* main loop for driving */
 void mainLoop(void);
 
+/* new main loop */
+void mainLoop2(void);
+#define NEW_MAIN_LOOP 1
+#define NEW_WALL_DIST 100 // value in mm
+#define NEW_WALL_DIST_VAR 10 // value in mm
+#define NEW_DIFF_MAX 10
+enum newDriveDistance {
+	NEW_CURVE_DIST = 220,
+	NEW_DIST_END = 250,
+	NEW_BUTTON1_A = 150, // todo: change values
+	NEW_BUTTON2_A = 150,
+	NEW_BUTTON3_A = 150,
+	NEW_BUTTON4_A = 150,
+	NEW_BUTTON5_A = 150,
+	NEW_BUTTON1_B = 150,
+	NEW_BUTTON2_B = 150,
+	NEW_BUTTON3_B = 150,
+	NEW_BUTTON4_B = 150,
+	NEW_BUTTON5_B = 150
+};
+enum NewMotorSpeed {
+	NEW_MOTOR_CORRSPEED = 25, NEW_MOTOR_MAXSPEED = 100
+};
+#define NEW_CORR_ENABLED 1
+#define NEW_CENT_ENABLED 0
+#define NEW_CORR_TIME 50 // value in ms
+#define NEW_BLIND_TIME 2000 // value in ms
+#define NEW_CURVE_BLIND_TIME 500
+#define NEW_CURVE_DRIVE_OVER_TIME 200 // value in ms
+#define NEW_DRIVE_INTO_BUTTON_TIME 100 // value in ms
+#define NEW_WAIT_TIME_DEFAULT 1 // value in ms
+#define NEW_WAIT_TIME_SERVO 500 // value in ms
+#define NEW_WAIT_TIME_SERIAL_LOOP 1000 // value in ms
+#define NEW_WAIT_TIME_SERIAL_ANSWER 100 // value in ms
+
 /*
  * tof.c
  */
