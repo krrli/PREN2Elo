@@ -12,10 +12,10 @@ void starttest(void);
 
 #define TEST_SERIAL 0
 #define TEST_TOF_SENSORS 0
-#define TEST_TOF_SENSORS_CONTINUOUS 0
+#define TEST_TOF_SENSORS_CONTINUOUS 1
 #define TEST_SERVO_BOARD 0 // !!! brushless !!!
 #define TEST_BRUSHLESS_SWITCH 0// !!! brushless !!!
-#define SERVO_CALIB 1 // !!! brushless !!!
+#define SERVO_CALIB 0 // !!! brushless !!!
 #define TEST_MOTOR 0
 #define TEST_MOTOR_DIRECTION 0
 #define TEST_MOTOR_DIRECTION_MOTOR 3 // number of motor to test

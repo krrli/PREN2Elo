@@ -21,7 +21,7 @@ by the component.
 <td class="regNotResetVal">0x01000001</td>
  <td>SIM_SCGC6 register, peripheral PwmLdd2.</td></tr>
 <tr><td>0x40038000</td><td>TPM0_SC</td>
-<td class="regNotResetVal">0x0000000B</td>
+<td class="regNotResetVal">0x00000008</td>
  <td>TPM0_SC register, peripheral PwmLdd2.</td></tr>
 <tr><td>0x40038004</td><td>TPM0_CNT</td>
 <td class="regResetVal">0x00000000</td>
@@ -45,7 +45,7 @@ by the component.
 <td class="regNotResetVal">0x0000002C</td>
  <td>TPM0_C5SC register, peripheral PwmLdd2.</td></tr>
 <tr><td>0x40038008</td><td>TPM0_MOD</td>
-<td class="regResetVal">0x0000FFFF</td>
+<td class="regNotResetVal">0x000051EB</td>
  <td>TPM0_MOD register, peripheral PwmLdd2.</td></tr>
 <tr><td>0x40038038</td><td>TPM0_C5V</td>
 <td class="regResetVal">0x00000000</td>
@@ -184,7 +184,7 @@ registers of the peripheral(s) configured by the component.
         
 </div>
 <table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40038000</td></tr>
-<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x0000000B</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00000008</td></tr>
 <tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
 <tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
 <tr><td>8</td><td>DMA</td><td>0x00</td><td>DMA Enable</td>
@@ -631,10 +631,10 @@ registers of the peripheral(s) configured by the component.
         
 </div>
 <table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40038008</td></tr>
-<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x0000FFFF</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x000051EB</td></tr>
 <tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x0000FFFF</td></tr>
 <tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
-<tr><td>0 - 15</td><td>MOD</td><td>0x8000</td><td>Modulo value</td>
+<tr><td>0 - 15</td><td>MOD</td><td>0x00</td><td>Modulo value</td>
 </tr></table>
 <div class="reghdr1">TPM0_C5V</div>
 <div class="regdiag">
@@ -1063,7 +1063,7 @@ registers of the peripheral(s) configured by the component.
 **          Output pin signal                              : 
 **          Counter                                        : TPM0_CNT
 **          Interrupt service/event                        : Disabled
-**          Period                                         : 25 ms
+**          Period                                         : 1 ms
 **          Starting pulse width                           : 0 µs
 **          Initial polarity                               : low
 **          Initialization                                 : 

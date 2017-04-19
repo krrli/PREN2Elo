@@ -7,7 +7,7 @@
 **     Version     : Component 01.164, Driver 01.11, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-07, 16:18, # CodeGen: 47
+**     Date/Time   : 2017-04-19, 19:00, # CodeGen: 59
 **     Abstract    :
 **          This TimerUnit component provides a low level API for unified hardware access across
 **          various timer devices using the Prescaler-Counter-Compare-Capture timer structure.
@@ -22,7 +22,7 @@
 **            Counter frequency                            : Auto select
 **          Counter restart                                : On-match
 **            Period device                                : TPM0_MOD
-**            Period                                       : 25 ms
+**            Period                                       : 1 ms
 **            Interrupt                                    : Disabled
 **          Channel list                                   : 4
 **            Channel 0                                    : 
@@ -162,10 +162,10 @@ extern "C" {
 #define __BWUserType_TPM0_TValueType
   typedef uint16_t TPM0_TValueType ;   /* Type for data parameters of methods */
 #endif
-#define TPM0_CNT_INP_FREQ_U_0 0x00280000UL /* Counter input frequency in Hz */
-#define TPM0_CNT_INP_FREQ_R_0 2621438.120953155F /* Counter input frequency in Hz */
+#define TPM0_CNT_INP_FREQ_U_0 0x01400000UL /* Counter input frequency in Hz */
+#define TPM0_CNT_INP_FREQ_R_0 20971395.017196544F /* Counter input frequency in Hz */
 #define TPM0_CNT_INP_FREQ_COUNT 0U     /* Count of predefined counter input frequencies */
-#define TPM0_PERIOD_TICKS  0x00010000UL /* Initialization value of period in 'counter ticks' */
+#define TPM0_PERIOD_TICKS  0x51ECUL    /* Initialization value of period in 'counter ticks' */
 #define TPM0_NUMBER_OF_CHANNELS 0x04U  /* Count of predefined channels */
 #define TPM0_COUNTER_WIDTH 0x10U       /* Counter width in bits  */
 #define TPM0_COUNTER_DIR   DIR_UP      /* Direction of counting */

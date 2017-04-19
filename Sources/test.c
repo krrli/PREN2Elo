@@ -128,22 +128,22 @@ void testTofSensorsContinuous(void) {
 		for (uint8_t i = 0; i < NUMBER_OF_SENSORS; i++) {
 			res = getToFValueMillimeters(i, &val);
 			serialSend(i, PC);
-			WAIT1_Waitms(1);
+			//WAIT1_Waitms(1);
 			serialSend(i, RasPi);
-			WAIT1_Waitms(1);
+			//WAIT1_Waitms(1);
 			serialSend(res, PC);
-			WAIT1_Waitms(1);
+			//WAIT1_Waitms(1);
 			serialSend(res, RasPi);
-			WAIT1_Waitms(1);
+			//WAIT1_Waitms(1);
 			serialSend((val >> 8), PC);
-			WAIT1_Waitms(1);
+			//WAIT1_Waitms(1);
 			serialSend((val >> 8), RasPi);
-			WAIT1_Waitms(1);
+			//WAIT1_Waitms(1);
 			serialSend((val & 0xff), PC);
-			WAIT1_Waitms(1);
+			//WAIT1_Waitms(1);
 			serialSend((val & 0xff), RasPi);
-			WAIT1_Waitms(1);
-			WAIT1_Waitms(500);
+			//WAIT1_Waitms(1);
+			//WAIT1_Waitms(10);
 		}
 	}
 }

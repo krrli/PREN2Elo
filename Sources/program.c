@@ -23,8 +23,14 @@ volatile uint8_t cent_switch, cent_switch_old;
 volatile uint8_t tof1, tof2, tof3, tof4;
 volatile uint8_t parcour_state;
 volatile uint8_t state0_initialized, state7_initialized, state8_initialized;
-volatile uint8_t enableSerialInt;
 volatile uint8_t loop_paused;
+
+/*
+ * pid vars
+ */
+int32_t diff, diff_old, P_diff, I_diff, D_diff, PID_diff, PID_minus;
+int32_t diff_dist, diff_dist_old, P_diff_dist, I_diff_dist, D_diff_dist,
+		PID_diff_dist, PID_minus_dist;
 
 /*
  * global variables for button pressing
@@ -32,6 +38,12 @@ volatile uint8_t loop_paused;
 volatile uint8_t button;
 volatile enum buttonChecked btnchk;
 
+void loop_pidReset() {
+	diff = 0;
+	I_diff = 0;
+	diff_dist = 0;
+	I_diff_dist = 0;
+}
 void loop_initVars() {
 	/* init variables for serial communication */
 	lastSentCmd[PC] = 0x00;
@@ -67,6 +79,9 @@ void loop_initVars() {
 	state7_initialized = 0;
 	state8_initialized = 0;
 	loop_paused = 0;
+
+	/* init vars for pid */
+	loop_pidReset();
 
 	/* init variables for buttons */
 	button = BUTTON3;
@@ -252,7 +267,7 @@ void loop_setMotorStop() {
 	}
 	WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
 }
-void loop_corrLeft() {
+void loop_corrLeft(uint16_t delay) {
 	if (NEW_CORR_ENABLED) {
 		uint8_t res;
 		res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_CORRSPEED);
@@ -263,7 +278,7 @@ void loop_corrLeft() {
 		if (res != ERR_OK) {
 			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 		}
-		WAIT1_Waitms(NEW_CORR_TIME);
+		WAIT1_Waitms(delay);
 		res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED);
 		if (res != ERR_OK) {
 			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
@@ -275,7 +290,7 @@ void loop_corrLeft() {
 		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
 	}
 }
-void loop_corrRight() {
+void loop_corrRight(uint16_t delay) {
 	if (NEW_CORR_ENABLED) {
 		uint8_t res;
 		res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_CORRSPEED);
@@ -286,7 +301,7 @@ void loop_corrRight() {
 		if (res != ERR_OK) {
 			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 		}
-		WAIT1_Waitms(NEW_CORR_TIME);
+		WAIT1_Waitms(delay);
 		res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED);
 		if (res != ERR_OK) {
 			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
@@ -298,7 +313,7 @@ void loop_corrRight() {
 		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
 	}
 }
-void loop_corrFront() {
+void loop_corrFront(uint16_t delay) {
 	if (NEW_CORR_ENABLED) {
 		uint8_t res;
 		res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_CORRSPEED);
@@ -309,7 +324,7 @@ void loop_corrFront() {
 		if (res != ERR_OK) {
 			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 		}
-		WAIT1_Waitms(NEW_CORR_TIME);
+		WAIT1_Waitms(delay);
 		res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED);
 		if (res != ERR_OK) {
 			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
@@ -321,7 +336,7 @@ void loop_corrFront() {
 		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
 	}
 }
-void loop_corrRear() {
+void loop_corrRear(uint16_t delay) {
 	if (NEW_CORR_ENABLED) {
 		uint8_t res;
 		res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_CORRSPEED);
@@ -332,7 +347,7 @@ void loop_corrRear() {
 		if (res != ERR_OK) {
 			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 		}
-		WAIT1_Waitms(NEW_CORR_TIME);
+		WAIT1_Waitms(delay);
 		res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED);
 		if (res != ERR_OK) {
 			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
@@ -342,6 +357,86 @@ void loop_corrRear() {
 			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 		}
 		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
+	}
+}
+void loop_pidDiffCorr(uint16_t val_front, uint16_t val_back) {
+	if (val_front == 0xFFFF || val_back == 0xFFFF) {
+		return;
+	}
+	diff_old = diff;
+	diff = val_front - val_back;
+	P_diff = diff;
+	I_diff += diff;
+	D_diff = diff - diff_old;
+	PID_diff = PID_P * P_diff + PID_I * I_diff + PID_D * D_diff;
+	if (PID_diff >= 0) {
+		PID_minus = 0;
+	} else {
+		PID_minus = 1;
+		PID_diff = 0 - PID_diff;
+	}
+	if (PID_diff > PID_MAX_CORR_TIME) {
+		PID_diff = PID_MAX_CORR_TIME;
+	}
+	switch (parcour_state) {
+	case 2:
+		if ((type == PARCOUR_A && PID_minus == 0)
+				|| (type == PARCOUR_B && PID_minus == 1)) {
+			// corr left
+			loop_corrLeft(PID_diff);
+		} else {
+			// corr right
+			loop_corrRight(PID_diff);
+		}
+		break;
+	case 4:
+		if (PID_minus == 0) {
+			// corr rear
+			loop_corrRear(PID_diff);
+		} else {
+			// corr front
+			loop_corrFront(PID_diff);
+		}
+		break;
+	case 6:
+		if ((type == PARCOUR_A && PID_minus == 0)
+				|| (type == PARCOUR_B && PID_minus == 1)) {
+			// corr right
+			loop_corrRight(PID_diff);
+		} else {
+			// corr left
+			loop_corrLeft(PID_diff);
+		}
+		break;
+	}
+}
+void loop_pidDistCorr(uint16_t val) {
+	if (val == 0xFFFF) {
+		return;
+	}
+	diff_dist_old = diff_dist;
+	diff_dist = val - NEW_DIST_TO_WALL;
+	P_diff_dist = diff_dist;
+	I_diff_dist += diff_dist;
+	D_diff_dist = diff_dist - diff_dist_old;
+	PID_diff_dist = PID_DIST_P * P_diff_dist + PID_DIST_I * I_diff_dist
+			+ PID_DIST_D * D_diff_dist;
+	if (PID_diff_dist >= 0) {
+		PID_minus_dist = 0;
+	} else {
+		PID_minus_dist = 1;
+		PID_diff_dist = 0 - PID_diff_dist;
+	}
+	if (PID_diff_dist > PID_DIST_MAX_CORR_TIME) {
+		PID_diff_dist = PID_DIST_MAX_CORR_TIME;
+	}
+	if ((type == PARCOUR_A && PID_minus_dist == 0)
+			|| (type == PARCOUR_B && PID_minus_dist == 1)) {
+		// corr_left
+		loop_corrLeft(PID_diff_dist);
+	} else {
+		// corr_right
+		loop_corrRight(PID_diff_dist);
 	}
 }
 
@@ -349,7 +444,6 @@ void start(void) {
 	uint8_t res;
 
 	cent_switch_old = CENT_OFF;
-	enableSerialInt = 0;
 
 	loop_initVars();
 
@@ -388,7 +482,7 @@ void start(void) {
 }
 
 void serialRxInt(uint8_t ch, uint8_t port) {
-	if (enableSerialInt == 0) {
+	if (NEW_SERIAL_INT_ENABLED == 0) {
 		return;
 	}
 	switch (ch) {
@@ -1133,7 +1227,6 @@ void mainLoop2(void) {
 							serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
 						}
 					}
-					enableSerialInt = cent_switch;
 					cent_switch_old = cent_switch;
 				} else {
 					if (NEW_CENT_ENABLED) {
@@ -1142,7 +1235,6 @@ void mainLoop2(void) {
 							serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
 						}
 					}
-					enableSerialInt = cent_switch;
 					cent_switch_old = cent_switch;
 				}
 			}
@@ -1168,6 +1260,7 @@ void mainLoop2(void) {
 				}
 				WAIT1_Waitms(NEW_BLIND_TIME / 10);
 			}
+			loop_pidReset();
 			parcour_state = 2;
 			break;
 		case 2: /* drive forward with corr */
@@ -1193,21 +1286,42 @@ void mainLoop2(void) {
 				break;
 			}
 			/* drive straight */
-			if (diff < (0 - NEW_DIFF_MAX)) {
-				if (type == PARCOUR_A) {
-					loop_corrRight();
-				} else {
-					loop_corrLeft();
-				}
-			} else if (diff > NEW_DIFF_MAX) {
-				if (type == PARCOUR_A) {
-					loop_corrLeft();
-				} else {
-					loop_corrRight();
-				}
+			if (NEW_DIFF_CORR_ENABLED) {
+				/*if (tof1_val != 0xFFFF && tof2_val != 0xFFFF) {
+				 if (diff < (0 - NEW_DIFF_MAX)) {
+				 if (type == PARCOUR_A) {
+				 loop_corrRight();
+				 } else {
+				 loop_corrLeft();
+				 }
+				 } else if (diff > NEW_DIFF_MAX) {
+				 if (type == PARCOUR_A) {
+				 loop_corrLeft();
+				 } else {
+				 loop_corrRight();
+				 }
+				 }
+				 }*/
+				loop_pidDiffCorr(tof1_val, tof2_val);
 			}
 			/* check distance to wall */
-			// todo: check tof2_val min/max, ignore 0xffff, corr left or right for longer time
+			if (NEW_DIST_CORR_ENABLED) {
+				/*if (tof2_val < NEW_DIST_TO_WALL_MIN) {
+				 if (type == PARCOUR_A) {
+				 loop_corrRight();
+				 } else {
+				 loop_corrLeft();
+				 }
+				 }
+				 if (tof2_val > NEW_DIST_TO_WALL_MAX && tof2_val < 0xFFFF) {
+				 if (type == PARCOUR_A) {
+				 loop_corrLeft();
+				 } else {
+				 loop_corrRight();
+				 }
+				 }*/
+				loop_pidDistCorr(tof2_val);
+			}
 			break;
 		case 3: /* drive sideways blind */
 			loop_setMotorStop();
@@ -1221,6 +1335,7 @@ void mainLoop2(void) {
 			serialSend(CURVE, RasPi);
 			serialSend(CURVE, PC);
 			WAIT1_Waitms(NEW_CURVE_BLIND_TIME);
+			loop_pidReset();
 			parcour_state = 4;
 			break;
 		case 4: /* drive sideways with corr */
@@ -1241,10 +1356,13 @@ void mainLoop2(void) {
 				break;
 			}
 			/* drive straight */
-			if (diff < (0 - NEW_DIFF_MAX)) {
-				loop_corrFront();
-			} else if (diff > NEW_DIFF_MAX) {
-				loop_corrRear();
+			if (NEW_CURVE_CORR_ENABLED) {
+				/*if (diff < (0 - NEW_DIFF_MAX)) {
+				 loop_corrFront();
+				 } else if (diff > NEW_DIFF_MAX) {
+				 loop_corrRear();
+				 }*/
+				loop_pidDiffCorr(tof1_val, tof2_val);
 			}
 			break;
 		case 5: /* drive backwards blind */
@@ -1256,8 +1374,9 @@ void mainLoop2(void) {
 				while (loop_paused) {
 					WAIT1_Waitms(10);
 				}
-				WAIT1_Waitms(NEW_BLIND_TIME / 10);
+				WAIT1_Waitms(NEW_BLIND_TIME_BACK / 10);
 			}
+			loop_pidReset();
 			parcour_state = 6;
 			break;
 		case 6: /* drive backwards with corr */
@@ -1285,20 +1404,41 @@ void mainLoop2(void) {
 				parcour_state = 7;
 				break;
 			}
-			if (diff < (0 - NEW_DIFF_MAX)) {
-				if (type == PARCOUR_A) {
-					loop_corrLeft();
-				} else {
-					loop_corrRight();
-				}
-			} else if (diff > NEW_DIFF_MAX) {
-				if (type == PARCOUR_A) {
-					loop_corrRight();
-				} else {
-					loop_corrLeft();
-				}
+			if (NEW_DIFF_CORR_ENABLED) {
+				/*if (tof1_val != 0xFFFF && tof2_val != 0xFFFF) {
+				 if (diff < (0 - NEW_DIFF_MAX)) {
+				 if (type == PARCOUR_A) {
+				 loop_corrLeft();
+				 } else {
+				 loop_corrRight();
+				 }
+				 } else if (diff > NEW_DIFF_MAX) {
+				 if (type == PARCOUR_A) {
+				 loop_corrRight();
+				 } else {
+				 loop_corrLeft();
+				 }
+				 }
+				 }*/
+				loop_pidDiffCorr(tof1_val, tof2_val);
 			}
-			// todo: check tof2_val min/max, ignore 0xffff, corr left or right for longer time
+			if (NEW_DIST_CORR_ENABLED) {
+				/*if (tof2_val < NEW_DIST_TO_WALL_MIN) {
+				 if (type == PARCOUR_A) {
+				 loop_corrRight();
+				 } else {
+				 loop_corrLeft();
+				 }
+				 }
+				 if (tof2_val > NEW_DIST_TO_WALL_MAX && tof2_val < 0xFFFF) {
+				 if (type == PARCOUR_A) {
+				 loop_corrLeft();
+				 } else {
+				 loop_corrRight();
+				 }
+				 }*/
+				loop_pidDistCorr(tof2_val);
+			}
 			break;
 		case 7: /* stop, get roman number */
 			if (state7_initialized == 0) {
