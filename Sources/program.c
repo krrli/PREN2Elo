@@ -39,7 +39,7 @@ void loop_initVars() {
 
 	/* get parcour type */
 	//type = SW_Parc_GetVal();
-	type = PARCOUR_A; // todo
+	type = PARCOUR_B; // todo
 
 	/* init variables for main loop */
 	state = STOPPED;
