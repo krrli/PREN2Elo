@@ -19,6 +19,10 @@
 // todo values: 100..630, 90°: 246,491
 uint16_t servoValuesStraight[] = { 200, 500, 500, 200 }; // 0...4095; 246 --> 0°; 491 --> 180°
 uint16_t servoValuesSideways[] = { 455, 260, 245, 450 }; // 0...4095; 246 --> 0°; 491 --> 180°
+uint16_t servoValuesCorrLeft[] = { 185, 515, 485, 215 };
+uint16_t servoValuesCorrRight[] = { 215, 485, 515, 185 };
+uint16_t servoValuesCorrFront[] = { 470, 275, 230, 435 };
+uint16_t servoValuesCorrRear[] = { 440, 245, 260, 465 };
 uint8_t servoChannels[] = { 0, 1, 2, 3 }; // 0...15
 uint16_t brushlessValueOff = 246;
 uint16_t brushlessValueOn = 300; //min 300
@@ -88,6 +92,14 @@ uint8_t setServo(uint8_t ser, enum ServoDirection dir) { // ser = 0...3
 		return setServoPwm(servoChannels[ser], 0, servoValuesStraight[ser]);
 	case SERVO_SIDEWAYS:
 		return setServoPwm(servoChannels[ser], 0, servoValuesSideways[ser]);
+	case SERVO_CORR_LEFT:
+		return setServoPwm(servoChannels[ser], 0, servoValuesCorrLeft[ser]);
+	case SERVO_CORR_RIGHT:
+		return setServoPwm(servoChannels[ser], 0, servoValuesCorrRight[ser]);
+	case SERVO_CORR_FRONT:
+		return setServoPwm(servoChannels[ser], 0, servoValuesCorrFront[ser]);
+	case SERVO_CORR_REAR:
+		return setServoPwm(servoChannels[ser], 0, servoValuesCorrRear[ser]);
 	default:
 		return ERR_VALUE;
 	}

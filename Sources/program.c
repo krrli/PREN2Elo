@@ -270,22 +270,34 @@ void loop_setMotorStop() {
 void loop_corrLeft(uint16_t delay) {
 	if (NEW_CORR_ENABLED) {
 		uint8_t res;
-		res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_CORRSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-		}
-		res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_CORRSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		/*res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_CORRSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }
+		 res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_CORRSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }*/
+		for (uint8_t i = 0; i < 4; i++) {
+			res = setServo(i, SERVO_CORR_LEFT);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_SET_SERVO);
+			}
 		}
 		WAIT1_Waitms(delay);
-		res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-		}
-		res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		/*res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }
+		 res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }*/
+		for (uint8_t i = 0; i < 4; i++) {
+			res = setServo(i, SERVO_STRAIGHT);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_SET_SERVO);
+			}
 		}
 		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
 	}
@@ -293,22 +305,34 @@ void loop_corrLeft(uint16_t delay) {
 void loop_corrRight(uint16_t delay) {
 	if (NEW_CORR_ENABLED) {
 		uint8_t res;
-		res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_CORRSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-		}
-		res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_CORRSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		/*res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_CORRSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }
+		 res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_CORRSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }*/
+		for (uint8_t i = 0; i < 4; i++) {
+			res = setServo(i, SERVO_CORR_RIGHT);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_SET_SERVO);
+			}
 		}
 		WAIT1_Waitms(delay);
-		res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-		}
-		res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		/*res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }
+		 res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }*/
+		for (uint8_t i = 0; i < 4; i++) {
+			res = setServo(i, SERVO_STRAIGHT);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_SET_SERVO);
+			}
 		}
 		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
 	}
@@ -316,22 +340,34 @@ void loop_corrRight(uint16_t delay) {
 void loop_corrFront(uint16_t delay) {
 	if (NEW_CORR_ENABLED) {
 		uint8_t res;
-		res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_CORRSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-		}
-		res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_CORRSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		/*res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_CORRSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }
+		 res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_CORRSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }*/
+		for (uint8_t i = 0; i < 4; i++) {
+			res = setServo(i, SERVO_CORR_FRONT);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_SET_SERVO);
+			}
 		}
 		WAIT1_Waitms(delay);
-		res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-		}
-		res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		/*res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }
+		 res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }*/
+		for (uint8_t i = 0; i < 4; i++) {
+			res = setServo(i, SERVO_SIDEWAYS);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_SET_SERVO);
+			}
 		}
 		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
 	}
@@ -339,22 +375,34 @@ void loop_corrFront(uint16_t delay) {
 void loop_corrRear(uint16_t delay) {
 	if (NEW_CORR_ENABLED) {
 		uint8_t res;
-		res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_CORRSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-		}
-		res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_CORRSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		/*res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_CORRSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }
+		 res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_CORRSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }*/
+		for (uint8_t i = 0; i < 4; i++) {
+			res = setServo(i, SERVO_CORR_REAR);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_SET_SERVO);
+			}
 		}
 		WAIT1_Waitms(delay);
-		res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
-		}
-		res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED);
-		if (res != ERR_OK) {
-			serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		/*res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }
+		 res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED);
+		 if (res != ERR_OK) {
+		 serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+		 }*/
+		for (uint8_t i = 0; i < 4; i++) {
+			res = setServo(i, SERVO_SIDEWAYS);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_SET_SERVO);
+			}
 		}
 		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
 	}

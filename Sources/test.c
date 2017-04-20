@@ -6,6 +6,10 @@ void starttest(void) {
 		return;
 	}
 
+	if(DO_NOTHING){
+		doNothing();
+	}
+
 	/* wait */
 	if (WAIT_BEFORE_TEST) {
 		for (uint8_t i = 0; i < WAIT_MINUTES; i++) {
@@ -43,6 +47,10 @@ void starttest(void) {
 		servoCalib();
 	}
 
+	if(TEST_SERVO_CORR){
+		testServoCorr();
+	}
+
 	/* test motor controller */
 	if (TEST_MOTOR) {
 		testMotor();
@@ -57,9 +65,15 @@ void starttest(void) {
 	}
 
 	/* end loop */
-	for (;;){
+	for (;;) {
 
 	}
+}
+
+void doNothing(void) {
+	initServo();
+	for (;;)
+		;
 }
 
 void testSerial(void) {
@@ -226,22 +240,49 @@ void testBrushlessSwitch(void) {
 void servoCalib(void) {
 	initServo();
 	WAIT1_Waitms(2000);
-	//for (;;) {
+	for (uint8_t i = 0; i < 4; i++) {
+		setServo(i, SERVO_STRAIGHT);
+	}
+	WAIT1_Waitms(2000);
+	for (uint8_t i = 0; i < 4; i++) {
+		setServo(i, SERVO_SIDEWAYS);
+	}
+	WAIT1_Waitms(2000);
+	for (uint8_t i = 0; i < 4; i++) {
+		setServo(i, SERVO_STRAIGHT);
+	}
+	for(;;);
+}
+
+void testServoCorr(void) {
+	initServo();
+	WAIT1_Waitms(2000);
+	for (;;) {
 		for (uint8_t i = 0; i < 4; i++) {
 			setServo(i, SERVO_STRAIGHT);
-			//WAIT1_Waitms(2000);
+		}
+		WAIT1_Waitms(2000);
+		for (uint8_t i = 0; i < 4; i++) {
+			setServo(i, SERVO_CORR_LEFT);
+		}
+		WAIT1_Waitms(2000);
+		for (uint8_t i = 0; i < 4; i++) {
+			setServo(i, SERVO_CORR_RIGHT);
 		}
 		WAIT1_Waitms(2000);
 		for (uint8_t i = 0; i < 4; i++) {
 			setServo(i, SERVO_SIDEWAYS);
-			//WAIT1_Waitms(2000);
 		}
 		WAIT1_Waitms(2000);
-	//}
-	for (uint8_t i = 0; i < 4; i++) {
-	 setServo(i, SERVO_STRAIGHT);
-	 //WAIT1_Waitms(2000);
-	 }
+		for (uint8_t i = 0; i < 4; i++) {
+			setServo(i, SERVO_CORR_FRONT);
+		}
+		WAIT1_Waitms(2000);
+		for (uint8_t i = 0; i < 4; i++) {
+			setServo(i, SERVO_CORR_REAR);
+		}
+		WAIT1_Waitms(2000);
+	}
 }
 
 void testMotor(void) {

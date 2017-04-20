@@ -211,7 +211,7 @@ enum BrushlessState {
 	BRUSHLESS_OFF, BRUSHLESS_ON, BRUSHLESS_INIT
 };
 enum ServoDirection {
-	SERVO_STRAIGHT, SERVO_SIDEWAYS
+	SERVO_STRAIGHT, SERVO_SIDEWAYS, SERVO_CORR_LEFT, SERVO_CORR_RIGHT, SERVO_CORR_FRONT, SERVO_CORR_REAR
 };
 
 /*
@@ -287,13 +287,13 @@ enum newDriveDistance {
 enum NewMotorSpeed {
 	NEW_MOTOR_CORRSPEED = 25, NEW_MOTOR_MAXSPEED = 100
 };
-#define NEW_CORR_ENABLED 0
-#define NEW_DIFF_CORR_ENABLED 1
-#define NEW_DIST_CORR_ENABLED 0
+#define NEW_CORR_ENABLED 1
+#define NEW_DIFF_CORR_ENABLED 0
+#define NEW_DIST_CORR_ENABLED 1
 #define NEW_CURVE_CORR_ENABLED 1
 #define NEW_CENT_ENABLED 0
 #define NEW_CORR_TIME 100 // value in ms
-#define NEW_BLIND_TIME 3000 // value in ms
+#define NEW_BLIND_TIME 2000 // value in ms
 #define NEW_BLIND_TIME_BACK 1000
 #define NEW_CURVE_BLIND_TIME 200
 #define NEW_CURVE_DRIVE_OVER_TIME 50 // value in ms
@@ -301,14 +301,14 @@ enum NewMotorSpeed {
 #define NEW_WAIT_TIME_DEFAULT 0 // value in ms
 #define NEW_WAIT_TIME_SERVO 400 // value in ms
 
-#define PID_P 100
+#define PID_P 2
 #define PID_I 0
-#define PID_D 0
+#define PID_D 20
 #define PID_MAX_CORR_TIME 100
 
-#define PID_DIST_P 100
+#define PID_DIST_P 2
 #define PID_DIST_I 0
-#define PID_DIST_D 0
+#define PID_DIST_D 20
 #define PID_DIST_MAX_CORR_TIME 200
 
 /*
