@@ -414,7 +414,7 @@ void loop_pidDiffCorr(uint16_t val_front, uint16_t val_back) {
 	diff_old = diff;
 	diff = val_front - val_back;
 	P_diff = diff;
-	I_diff += diff;
+	I_diff=0;//I_diff += diff;
 	D_diff = diff - diff_old;
 	PID_diff = PID_P * P_diff + PID_I * I_diff + PID_D * D_diff;
 	if (PID_diff >= 0) {
@@ -465,7 +465,7 @@ void loop_pidDistCorr(uint16_t val) {
 	diff_dist_old = diff_dist;
 	diff_dist = val - NEW_DIST_TO_WALL;
 	P_diff_dist = diff_dist;
-	I_diff_dist += diff_dist;
+	I_diff_dist=0;//I_diff_dist += diff_dist;
 	D_diff_dist = diff_dist - diff_dist_old;
 	PID_diff_dist = PID_DIST_P * P_diff_dist + PID_DIST_I * I_diff_dist
 			+ PID_DIST_D * D_diff_dist;
