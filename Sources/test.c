@@ -6,7 +6,7 @@ void starttest(void) {
 		return;
 	}
 
-	if(DO_NOTHING){
+	if (DO_NOTHING) {
 		doNothing();
 	}
 
@@ -43,11 +43,15 @@ void starttest(void) {
 		testBrushlessSwitch();
 	}
 
+	if(TEST_BRUSHLESS){
+		testBrushless();
+	}
+
 	if (SERVO_CALIB) {
 		servoCalib();
 	}
 
-	if(TEST_SERVO_CORR){
+	if (TEST_SERVO_CORR) {
 		testServoCorr();
 	}
 
@@ -237,21 +241,34 @@ void testBrushlessSwitch(void) {
 	}
 }
 
+void testBrushless(){
+	initServo();
+	//for(;;){
+		WAIT1_Waitms(5000);
+		setBrushless(BRUSHLESS_ON);
+		WAIT1_Waitms(5000);
+		setBrushless(BRUSHLESS_OFF);
+	//}
+}
+
 void servoCalib(void) {
 	initServo();
 	WAIT1_Waitms(2000);
 	for (uint8_t i = 0; i < 4; i++) {
 		setServo(i, SERVO_STRAIGHT);
 	}
-	WAIT1_Waitms(2000);
-	for (uint8_t i = 0; i < 4; i++) {
-		setServo(i, SERVO_SIDEWAYS);
+	for (;;) {
+		WAIT1_Waitms(2000);
+		for (uint8_t i = 0; i < 4; i++) {
+			setServo(i, SERVO_SIDEWAYS);
+		}
+		WAIT1_Waitms(2000);
+		for (uint8_t i = 0; i < 4; i++) {
+			setServo(i, SERVO_STRAIGHT);
+		}
 	}
-	WAIT1_Waitms(2000);
-	for (uint8_t i = 0; i < 4; i++) {
-		setServo(i, SERVO_STRAIGHT);
-	}
-	for(;;);
+	for (;;)
+		;
 }
 
 void testServoCorr(void) {

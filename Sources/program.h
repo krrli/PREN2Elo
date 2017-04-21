@@ -264,12 +264,17 @@ void mainLoop(void);
 
 /* new main loop */
 void mainLoop2(void);
+
 #define NEW_SERIAL_INT_ENABLED 0
+#define NEW_SERIAL_PAUSE_ENABLED 0
+
 #define NEW_MAIN_LOOP 1
+
 #define NEW_DIFF_MAX 10
 #define NEW_DIST_TO_WALL 132
 #define NEW_DIST_TO_WALL_MIN 122
 #define NEW_DIST_TO_WALL_MAX 142
+
 enum newDriveDistance {
 	NEW_CURVE_DIST = 270,
 	NEW_DIST_END = 400,
@@ -284,29 +289,46 @@ enum newDriveDistance {
 	NEW_BUTTON4_B = 150,
 	NEW_BUTTON5_B = 150
 };
+
 enum NewMotorSpeed {
 	NEW_MOTOR_CORRSPEED = 25, NEW_MOTOR_MAXSPEED = 100
 };
+
 #define NEW_CORR_ENABLED 1
 #define NEW_DIFF_CORR_ENABLED 0
 #define NEW_DIST_CORR_ENABLED 1
 #define NEW_CURVE_CORR_ENABLED 1
-#define NEW_CENT_ENABLED 0
+
+#define NEW_CENT_ENABLED 0 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#define NEW_CENT_WITHOUT_SWITCH_ENABLED 0 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 #define NEW_CORR_TIME 100 // value in ms
+
 #define NEW_BLIND_TIME 2000 // value in ms
 #define NEW_BLIND_TIME_BACK 1000
 #define NEW_CURVE_BLIND_TIME 200
+
 #define NEW_CURVE_DRIVE_OVER_TIME 50 // value in ms
+
 #define NEW_DRIVE_INTO_BUTTON_TIME 50 // value in ms
+
 #define NEW_WAIT_TIME_DEFAULT 0 // value in ms
+
 #define NEW_WAIT_TIME_SERVO 400 // value in ms
 
-#define PID_P 2
+// chose only one!
+#define PID_CORR_SPEED 0
+#define PID_CORR_SERVO 1
+#define PID_CORR_DIRECTION 0
+
+#define PID_WAIT_TIME_SERVO_CORR 1
+
+#define PID_P 2 // PID diff
 #define PID_I 0
 #define PID_D 20
 #define PID_MAX_CORR_TIME 100
 
-#define PID_DIST_P 2
+#define PID_DIST_P 2 // PID dist
 #define PID_DIST_I 0
 #define PID_DIST_D 20
 #define PID_DIST_MAX_CORR_TIME 200

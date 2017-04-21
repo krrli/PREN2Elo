@@ -16,6 +16,7 @@ void starttest(void);
 #define TEST_TOF_SENSORS_CONTINUOUS 0
 #define TEST_SERVO_BOARD 0 // !!! brushless !!!
 #define TEST_BRUSHLESS_SWITCH 0// !!! brushless !!!
+#define TEST_BRUSHLESS 0 // !!! brushless !!!
 #define SERVO_CALIB 0 // !!! brushless !!!
 #define TEST_SERVO_CORR 0
 #define TEST_MOTOR 0
@@ -34,6 +35,8 @@ void testTofSensorsContinuous(void);
 void testServoBoard(void);
 
 void testBrushlessSwitch(void);
+
+void testBrushless();
 
 void servoCalib(void);
 
