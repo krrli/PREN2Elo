@@ -321,7 +321,7 @@ enum NewMotorSpeed {
 #define PID_CORR_SERVO 1
 #define PID_CORR_DIRECTION 0
 
-#define PID_WAIT_TIME_SERVO_CORR 1
+#define PID_WAIT_TIME_SERVO_CORR 10
 
 #define PID_P 2 // PID diff
 #define PID_I 0
