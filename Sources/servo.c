@@ -23,6 +23,7 @@ uint16_t servoValuesCorrLeft[] = { 185, 515, 485, 215 };
 uint16_t servoValuesCorrRight[] = { 215, 485, 515, 185 };
 uint16_t servoValuesCorrFront[] = { 470, 275, 230, 435 };
 uint16_t servoValuesCorrRear[] = { 440, 245, 260, 465 };
+uint16_t servoValuesCircle[] = { 342, 365, 357, 340 };
 uint8_t servoChannels[] = { 0, 1, 2, 3 }; // 0...15
 uint16_t brushlessValueOff = 246;
 uint16_t brushlessValueOn = 300; //min 300
@@ -100,6 +101,139 @@ uint8_t setServo(uint8_t ser, enum ServoDirection dir) { // ser = 0...3
 		return setServoPwm(servoChannels[ser], 0, servoValuesCorrFront[ser]);
 	case SERVO_CORR_REAR:
 		return setServoPwm(servoChannels[ser], 0, servoValuesCorrRear[ser]);
+	case SERVO_CIRCLE:
+		return setServoPwm(servoChannels[ser], 0, servoValuesCircle[ser]);
+	default:
+		return ERR_VALUE;
+	}
+}
+
+uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
+		uint16_t corr_val) {
+	uint8_t res;
+	// VL,HL,VR,HR
+	// 200, 500, 500, 200
+	// corr_dir: 0 right/front, 1 left/back
+	switch (dir) {
+	case SERVO_STRAIGHT:
+		switch (corr_dir) {
+		case 0: //right
+			res = setServoPwm(servoChannels[0], 0,
+					servoValuesStraight[0] + corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[1], 0,
+					servoValuesStraight[1] - corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[2], 0,
+					servoValuesStraight[2] + corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[3], 0,
+					servoValuesStraight[3] - corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			break;
+		case 1: //left
+			res = setServoPwm(servoChannels[0], 0,
+					servoValuesStraight[0] - corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[1], 0,
+					servoValuesStraight[1] + corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[2], 0,
+					servoValuesStraight[2] - corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[3], 0,
+					servoValuesStraight[3] + corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			break;
+		default:
+			return ERR_VALUE;
+		}
+		return ERR_OK;
+		// VL,HL,VR,HR
+		// 455, 260, 245, 450
+		// corr_dir: 0 right/front, 1 left/back
+	case SERVO_SIDEWAYS:
+		switch (corr_dir) {
+		case 0: //front
+			res = setServoPwm(servoChannels[0], 0,
+					servoValuesSideways[0] + corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[1], 0,
+					servoValuesSideways[1] + corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[2], 0,
+					servoValuesSideways[2] - corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[3], 0,
+					servoValuesSideways[3] - corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			break;
+		case 1: //back
+			res = setServoPwm(servoChannels[0], 0,
+					servoValuesSideways[0] - corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[1], 0,
+					servoValuesSideways[1] - corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[2], 0,
+					servoValuesSideways[2] + corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			res = setServoPwm(servoChannels[3], 0,
+					servoValuesSideways[3] + corr_val);
+			if (res != ERR_OK) {
+				return res;
+			}
+			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+			break;
+		default:
+			return ERR_VALUE;
+		}
+		return ERR_OK;
 	default:
 		return ERR_VALUE;
 	}

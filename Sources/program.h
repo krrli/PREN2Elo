@@ -27,25 +27,24 @@ enum serialResponse {
 	BUTTON4 = 0x04,
 	BUTTON5 = 0x05
 };
-enum serialCommands
-{
+enum serialCommands {
 	START = 0x80, // RPi to FD
 	ROMAN_NUMERAL_REQUEST = 0x40, // FD to RPi
 	CURVE = 0x08, // FD to RPi
 	PAUSE = 0xB0, // RPi to FD
 	RESUME = 0x70 // RPi to FD
 };
-enum serialDebugLite{
-	DEBUG_ERROR_INIT_MOTOR=0xC1,
-	DEBUG_ERROR_INIT_SERVO=0xC2,
-	DEBUG_ERROR_INIT_TOF=0xC3,
-	DEBUG_ERROR_END_LOOP_REACHED=0xC4,
-	DEBUG_ERROR_SET_MOTOR_SPEED=0xC5,
-	DEBUG_ERROR_SET_MOTOR_DIRECTION=0xC6,
-	DEBUG_ERROR_SET_BRUSHLESS=0xC7,
-	DEBUG_ERROR_SET_SERVO=0xC8,
-	DEBUG_ERROR_GET_TOF_VALUE=0xC9,
-	DEBUG_ERROR_WRONG_BUTTON_NUMBER=0xCA
+enum serialDebugLite {
+	DEBUG_ERROR_INIT_MOTOR = 0xC1,
+	DEBUG_ERROR_INIT_SERVO = 0xC2,
+	DEBUG_ERROR_INIT_TOF = 0xC3,
+	DEBUG_ERROR_END_LOOP_REACHED = 0xC4,
+	DEBUG_ERROR_SET_MOTOR_SPEED = 0xC5,
+	DEBUG_ERROR_SET_MOTOR_DIRECTION = 0xC6,
+	DEBUG_ERROR_SET_BRUSHLESS = 0xC7,
+	DEBUG_ERROR_SET_SERVO = 0xC8,
+	DEBUG_ERROR_GET_TOF_VALUE = 0xC9,
+	DEBUG_ERROR_WRONG_BUTTON_NUMBER = 0xCA
 };
 
 /*
@@ -73,8 +72,7 @@ enum parcourEnd {
 #define DISTANCE_TO_WALL_VAR 10 // value in mm
 #define DRIVE_SIDEWAYS_VAR 5 // value in mm
 enum driveDistance {
-	CURVE_DIST = DISTANCE_TO_WALL,
-	BUTTON1_A = 0xA0, // todo: change values
+	CURVE_DIST = DISTANCE_TO_WALL, BUTTON1_A = 0xA0, // todo: change values
 	BUTTON2_A = 0xA0,
 	BUTTON3_A = 0xA0,
 	BUTTON4_A = 0xA0,
@@ -211,7 +209,13 @@ enum BrushlessState {
 	BRUSHLESS_OFF, BRUSHLESS_ON, BRUSHLESS_INIT
 };
 enum ServoDirection {
-	SERVO_STRAIGHT, SERVO_SIDEWAYS, SERVO_CORR_LEFT, SERVO_CORR_RIGHT, SERVO_CORR_FRONT, SERVO_CORR_REAR
+	SERVO_STRAIGHT,
+	SERVO_SIDEWAYS,
+	SERVO_CORR_LEFT,
+	SERVO_CORR_RIGHT,
+	SERVO_CORR_FRONT,
+	SERVO_CORR_REAR,
+	SERVO_CIRCLE
 };
 
 /*
@@ -276,9 +280,7 @@ void mainLoop2(void);
 #define NEW_DIST_TO_WALL_MAX 142
 
 enum newDriveDistance {
-	NEW_CURVE_DIST = 270,
-	NEW_DIST_END = 400,
-	NEW_BUTTON1_A = 150, // todo: change values
+	NEW_CURVE_DIST = 270, NEW_DIST_END = 400, NEW_BUTTON1_A = 150, // todo: change values
 	NEW_BUTTON2_A = 150,
 	NEW_BUTTON3_A = 150,
 	NEW_BUTTON4_A = 150,
@@ -309,6 +311,12 @@ enum NewMotorSpeed {
 #define NEW_CURVE_BLIND_TIME 200
 
 #define NEW_CURVE_DRIVE_OVER_TIME 50 // value in ms
+#define NEW_CURVE_DETECT_DISTANCE 300
+#define NEW_CURVE_DETECT_TOF4_ENABLED 1
+
+#define NEW_SECOND_ROUND_ENABLED 0
+#define NEW_SECOND_ROUND_TURN_TIME 1000
+#define NEW_SECOND_ROUND_DRIVE_TO_START_TIME 1000
 
 #define NEW_DRIVE_INTO_BUTTON_TIME 50 // value in ms
 
@@ -318,20 +326,27 @@ enum NewMotorSpeed {
 
 // chose only one!
 #define PID_CORR_SPEED 0
-#define PID_CORR_SERVO 1
+#define PID_CORR_SERVO 0
+#define PID_CORR_SERVO_DIRECTION 1
 #define PID_CORR_DIRECTION 0
 
 #define PID_WAIT_TIME_SERVO_CORR 10
 
-#define PID_P 2 // PID diff
+#define PID_P 1 // PID diff
+#define PID_P_DIV 1
 #define PID_I 0
-#define PID_D 20
-#define PID_MAX_CORR_TIME 100
+#define PID_I_DIV 1
+#define PID_D 0
+#define PID_D_DIV 1
+#define PID_MAX_CORR_TIME 30 // max corr time / max servo corr val
 
-#define PID_DIST_P 2 // PID dist
+#define PID_DIST_P 1 // PID dist
+#define PID_DIST_P_DIV 1
 #define PID_DIST_I 0
-#define PID_DIST_D 20
-#define PID_DIST_MAX_CORR_TIME 200
+#define PID_DIST_I_DIV 1
+#define PID_DIST_D 0
+#define PID_DIST_D_DIV 1
+#define PID_DIST_MAX_CORR_TIME 30 // max corr time / max servo corr val
 
 /*
  * tof.c
@@ -380,6 +395,9 @@ uint8_t setBrushless(enum BrushlessState state);
 
 /* set servos */
 uint8_t setServo(uint8_t ser, enum ServoDirection dir); // ser = 0...3
+
+uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
+		uint16_t corr_val);
 
 /* internal functions */
 

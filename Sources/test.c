@@ -43,7 +43,7 @@ void starttest(void) {
 		testBrushlessSwitch();
 	}
 
-	if(TEST_BRUSHLESS){
+	if (TEST_BRUSHLESS) {
 		testBrushless();
 	}
 
@@ -66,6 +66,10 @@ void starttest(void) {
 
 	if (TEST_MOTOR_AND_SERVO) {
 		testMotorAndServo();
+	}
+
+	if (TEST_SERVO_CIRCLE) {
+		testServoCircle();
 	}
 
 	/* end loop */
@@ -241,13 +245,13 @@ void testBrushlessSwitch(void) {
 	}
 }
 
-void testBrushless(){
+void testBrushless() {
 	initServo();
 	//for(;;){
-		WAIT1_Waitms(5000);
-		setBrushless(BRUSHLESS_ON);
-		WAIT1_Waitms(5000);
-		setBrushless(BRUSHLESS_OFF);
+	WAIT1_Waitms(5000);
+	setBrushless(BRUSHLESS_ON);
+	WAIT1_Waitms(5000);
+	setBrushless(BRUSHLESS_OFF);
 	//}
 }
 
@@ -395,5 +399,91 @@ void testMotorAndServo() {
 		setMotorSpeed(MOTOR_FRONT_RIGHT, 0);
 		setMotorSpeed(MOTOR_REAR_LEFT, 0);
 		setMotorSpeed(MOTOR_REAR_RIGHT, 0);
+	}
+}
+
+void testServoCircle() {
+	uint8_t res;
+	initServo();
+	initMotor();
+	for (uint8_t i = 0; i < 4; i++) {
+		res = setServo(i, SERVO_CIRCLE);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_SERVO);
+		}
+		WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+	}
+	res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
+	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED / 4);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED / 4);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED / 4);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED / 4);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
+	WAIT1_Waitms(NEW_SECOND_ROUND_TURN_TIME);
+	for (;;) {
+		res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+		}
+		res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+		}
+		res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+		}
+		res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+		}
+		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
+		WAIT1_Waitms(NEW_SECOND_ROUND_TURN_TIME);
+		res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+		}
+		res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+		}
+		res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+		}
+		res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+		}
+		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
+		WAIT1_Waitms(NEW_SECOND_ROUND_TURN_TIME);
 	}
 }

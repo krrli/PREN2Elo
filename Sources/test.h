@@ -23,6 +23,7 @@ void starttest(void);
 #define TEST_MOTOR_DIRECTION 0
 #define TEST_MOTOR_DIRECTION_MOTOR 3 // number of motor to test
 #define TEST_MOTOR_AND_SERVO 0 // !!! brushless !!!
+#define TEST_SERVO_CIRCLE 0
 
 void doNothing(void);
 
@@ -47,5 +48,7 @@ void testMotor(void);
 void testMotorDirection(uint8_t motor);
 
 void testMotorAndServo();
+
+void testServoCircle();
 
 #endif /* SOURCES_TEST_H_ */

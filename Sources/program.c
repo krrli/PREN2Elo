@@ -28,6 +28,12 @@ volatile uint8_t loop_paused;
 #endif
 
 /*
+ * global variables for second round
+ */
+
+uint8_t parcour_state2;
+
+/*
  * pid vars
  */
 int32_t diff, diff_old, P_diff, I_diff, D_diff, PID_diff, PID_minus;
@@ -233,19 +239,19 @@ void loop_setMotorMaxSpeed() {
 }
 void loop_setMotorHalfSpeed() {
 	uint8_t res;
-	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED / 2);
+	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED / 4);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED / 2);
+	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED / 4);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED / 2);
+	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED / 4);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED / 2);
+	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED / 4);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
@@ -314,7 +320,14 @@ void loop_corrLeft(uint16_t delay) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 	}
 #endif
+#if PID_CORR_SERVO_DIRECTION
+	res = setServoPID(SERVO_STRAIGHT, 1, delay);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_SERVO);
+	}
+#else
 	WAIT1_Waitms(delay);
+#endif
 #if PID_CORR_SPEED
 	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED);
 	if (res != ERR_OK) {
@@ -390,7 +403,14 @@ void loop_corrRight(uint16_t delay) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 	}
 #endif
+#if PID_CORR_SERVO_DIRECTION
+	res = setServoPID(SERVO_STRAIGHT, 0, delay);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_SERVO);
+	}
+#else
 	WAIT1_Waitms(delay);
+#endif
 #if PID_CORR_SPEED
 	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED);
 	if (res != ERR_OK) {
@@ -468,7 +488,14 @@ void loop_corrFront(uint16_t delay) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 	}
 #endif
+#if PID_CORR_SERVO_DIRECTION
+	res = setServoPID(SERVO_SIDEWAYS, 0, delay);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_SERVO);
+	}
+#else
 	WAIT1_Waitms(delay);
+#endif
 #if PID_CORR_SPEED
 	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED);
 	if (res != ERR_OK) {
@@ -546,7 +573,14 @@ void loop_corrRear(uint16_t delay) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 	}
 #endif
+#if PID_CORR_SERVO_DIRECTION
+	res = setServoPID(SERVO_SIDEWAYS, 1, delay);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_SERVO);
+	}
+#else
 	WAIT1_Waitms(delay);
+#endif
 #if PID_CORR_SPEED
 	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED);
 	if (res != ERR_OK) {
@@ -584,11 +618,12 @@ void loop_pidDiffCorr(uint16_t val_front, uint16_t val_back) {
 		return;
 	}
 	diff_old = diff;
-	diff = val_front - val_back;
+	diff = (int32_t) val_front - (int32_t) val_back;
 	P_diff = diff;
 	I_diff += diff;
 	D_diff = diff - diff_old;
-	PID_diff = PID_P * P_diff + PID_I * I_diff + PID_D * D_diff;
+	PID_diff = (PID_P * P_diff) / PID_P_DIV + (PID_I * I_diff) / PID_I_DIV
+			+ (PID_D * D_diff) / PID_D_DIV;
 	if (PID_diff >= 0) {
 		PID_minus = 0;
 	} else {
@@ -635,12 +670,13 @@ void loop_pidDistCorr(uint16_t val) {
 		return;
 	}
 	diff_dist_old = diff_dist;
-	diff_dist = val - NEW_DIST_TO_WALL;
+	diff_dist = (int32_t) val - (int32_t) NEW_DIST_TO_WALL;
 	P_diff_dist = diff_dist;
 	I_diff_dist += diff_dist;
 	D_diff_dist = diff_dist - diff_dist_old;
-	PID_diff_dist = PID_DIST_P * P_diff_dist + PID_DIST_I * I_diff_dist
-			+ PID_DIST_D * D_diff_dist;
+	PID_diff_dist = (PID_DIST_P * P_diff_dist) / PID_DIST_P_DIV
+			+ (PID_DIST_I * I_diff_dist) / PID_DIST_I_DIV
+			+ (PID_DIST_D * D_diff_dist) / PID_DIST_D_DIV;
 	if (PID_diff_dist >= 0) {
 		PID_minus_dist = 0;
 	} else {
@@ -702,16 +738,16 @@ void start(void) {
 void serialRxInt(uint8_t ch, uint8_t port) {
 #if NEW_SERIAL_INT_ENABLED
 	switch (ch) {
-	/* commands from raspi */
-	case START:
+		/* commands from raspi */
+		case START:
 		serialSend(ACKNOWLEDGE, port);
 		if (state == STOPPED)
-			state = DRIVE_FORWARD;
+		state = DRIVE_FORWARD;
 		if (parcour_state == 0) {
 			parcour_state = 1;
 		}
 		break;
-	case PAUSE:
+		case PAUSE:
 		serialSend(ACKNOWLEDGE, port);
 #if NEW_SERIAL_PAUSE_ENABLED
 		stateBak = state;
@@ -720,7 +756,7 @@ void serialRxInt(uint8_t ch, uint8_t port) {
 		loop_setMotorStop();
 #endif
 		break;
-	case RESUME:
+		case RESUME:
 		serialSend(ACKNOWLEDGE, port);
 #if NEW_SERIAL_PAUSE_ENABLED
 		state = stateBak;
@@ -749,16 +785,16 @@ void serialRxInt(uint8_t ch, uint8_t port) {
 		break;
 
 		/* answers from raspi */
-	case ACKNOWLEDGE:
+		case ACKNOWLEDGE:
 		break;
-	case ERROR:
+		case ERROR:
 		serialSend(lastSentCmd[port], port);
 		break;
-	case BUTTON1:
-	case BUTTON2:
-	case BUTTON3:
-	case BUTTON4:
-	case BUTTON5:
+		case BUTTON1:
+		case BUTTON2:
+		case BUTTON3:
+		case BUTTON4:
+		case BUTTON5:
 		if (lastSentCmd[port] == ROMAN_NUMERAL_REQUEST || parcour_state == 7) {
 			serialSend(ACKNOWLEDGE, port);
 			button = ch;
@@ -771,9 +807,9 @@ void serialRxInt(uint8_t ch, uint8_t port) {
 		break;
 
 		/* illegal commands from raspi */
-	case ROMAN_NUMERAL_REQUEST:
-	case CURVE:
-	default:
+		case ROMAN_NUMERAL_REQUEST:
+		case CURVE:
+		default:
 		serialSend(ERROR, port);
 	}
 #endif
@@ -1426,6 +1462,190 @@ void mainLoop(void) {
 #endif
 }
 
+void loop_secondRound() {
+	uint8_t res;
+	uint16_t tof1_val, tof2_val, tof3_val, tof4_val;
+	int32_t diff;
+	parcour_state2 = 0;
+	/* disable brushless */
+	setBrushless(BRUSHLESS_OFF);
+	WAIT1_Waitms(4000);
+	/* set servo dir */
+	for (uint8_t i = 0; i < 4; i++) {
+		res = setServo(i, SERVO_CIRCLE);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_SERVO);
+		}
+		WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+	}
+	/* set motor dir */
+	res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
+	/* turn arround */
+	loop_setMotorHalfSpeed();
+	WAIT1_Waitms(NEW_SECOND_ROUND_TURN_TIME);
+	loop_setMotorStop();
+	/* drive to start field */
+	loop_setServosStraight();
+	WAIT1_Waitms(NEW_WAIT_TIME_SERVO);
+	WAIT1_Waitms(NEW_WAIT_TIME_SERVO);
+	loop_setMotorDirBackward();
+	loop_setMotorHalfSpeed();
+	WAIT1_Waitms(NEW_SECOND_ROUND_DRIVE_TO_START_TIME);
+	loop_setMotorStop();
+	/* set servo dir */
+	for (uint8_t i = 0; i < 4; i++) {
+		res = setServo(i, SERVO_CIRCLE);
+		if (res != ERR_OK) {
+			serialDebugLite(DEBUG_ERROR_SET_SERVO);
+		}
+		WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+	}
+	/* set motor dir */
+	res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	res = setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	res = setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	res = setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
+	}
+	WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
+	/* turn arround */
+	loop_setMotorHalfSpeed();
+	WAIT1_Waitms(NEW_SECOND_ROUND_TURN_TIME);
+	loop_setMotorStop();
+	/* start second round */
+	for (;;) {
+		switch (parcour_state2) {
+		case 0:
+			loop_setServosStraight();
+			loop_setMotorDirForward();
+			loop_setMotorHalfSpeed();
+			WAIT1_Waitms(BLIND_TIME);
+			parcour_state2 = 1;
+			parcour_state = 2;
+			loop_pidReset();
+			break;
+		case 1:
+			res = getToFValueMillimeters(tof1, &tof1_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			res = getToFValueMillimeters(tof2, &tof2_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			res = getToFValueMillimeters(tof4, &tof4_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+#if NEW_CURVE_DETECT_TOF4_ENABLED
+			if (tof2_val >= NEW_CURVE_DETECT_DISTANCE
+					&& tof4_val >= NEW_CURVE_DETECT_DISTANCE) {
+#else
+				if (tof2_val >= NEW_CURVE_DETECT_DISTANCE) {
+#endif
+				parcour_state2 = 2;
+				WAIT1_Waitms(4 * NEW_CURVE_DRIVE_OVER_TIME);
+				break;
+			}
+			loop_pidDistCorr(tof2_val);
+			break;
+		case 2:
+			loop_setMotorStop();
+			loop_setServosSideways();
+			WAIT1_Waitms(NEW_WAIT_TIME_SERVO);
+			if (type == PARCOUR_A) {
+				loop_setMotorDirLeft();
+			} else {
+				loop_setMotorDirRight();
+			}
+			loop_setMotorHalfSpeed();
+			WAIT1_Waitms(NEW_CURVE_BLIND_TIME);
+			parcour_state2 = 3;
+			parcour_state = 4;
+			loop_pidReset();
+			break;
+		case 3:
+			res = getToFValueMillimeters(tof1, &tof1_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			res = getToFValueMillimeters(tof2, &tof2_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			if (tof2_val < NEW_CURVE_DIST) {
+				parcour_state2 = 4;
+				break;
+			}
+			loop_pidDiffCorr(tof1_val, tof2_val);
+			break;
+		case 4:
+			loop_setMotorStop();
+			loop_setServosStraight();
+			WAIT1_Waitms(NEW_WAIT_TIME_SERVO);
+			loop_setMotorDirBackward();
+			loop_setMotorHalfSpeed();
+			WAIT1_Waitms(NEW_BLIND_TIME_BACK);
+			parcour_state2 = 5;
+			parcour_state = 6;
+			loop_pidReset();
+			break;
+		case 5:
+			res = getToFValueMillimeters(tof1, &tof1_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			res = getToFValueMillimeters(tof2, &tof2_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			res = getToFValueMillimeters(tof3, &tof3_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			res = getToFValueMillimeters(tof4, &tof4_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			if (tof3_val < NEW_DIST_END && tof4_val == 0xffff) {
+				parcour_state2 = 6;
+				break;
+			}
+			loop_pidDistCorr(tof2_val);
+			break;
+		case 6:
+			parcour_state = 7;
+			return;
+		}
+	}
+}
+
 void mainLoop2(void) {
 #if NEW_MAIN_LOOP
 	/* local variables for tof sensors */
@@ -1451,6 +1671,7 @@ void mainLoop2(void) {
 					res = setBrushless(BRUSHLESS_ON);
 					if (res != ERR_OK) {
 						serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
+					}
 #endif
 				}
 				cent_switch_old = cent_switch;
@@ -1515,7 +1736,12 @@ void mainLoop2(void) {
 		/* get tof diff */
 		diff = tof1_val - tof2_val;
 		/* check if curve reached */
-		if (tof2_val == 0xFFFF && tof4_val == 0xFFFF) { // todo: can tof4 be ignored?
+#if NEW_CURVE_DETECT_TOF4_ENABLED
+		if (tof2_val >= NEW_CURVE_DETECT_DISTANCE
+				&& tof4_val >= NEW_CURVE_DETECT_DISTANCE) { // todo: can tof4 be ignored?
+#else
+		if (tof2_val >= NEW_CURVE_DETECT_DISTANCE) {
+#endif
 			parcour_state = 3;
 			WAIT1_Waitms(NEW_CURVE_DRIVE_OVER_TIME);
 			break;
@@ -1693,6 +1919,10 @@ void mainLoop2(void) {
 #if NEW_CENT_WITHOUT_SWITCH_ENABLED
 			setBrushless(BRUSHLESS_OFF);
 			WAIT1_Waitms(4000);
+#endif
+#if NEW_SECOND_ROUND_ENABLED
+			loop_secondRound();
+			loop_setMotorStop();
 #endif
 			loop_setServosSideways();
 			if (type == PARCOUR_A) {
