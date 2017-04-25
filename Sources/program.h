@@ -31,6 +31,7 @@ enum serialCommands {
 	START = 0x80, // RPi to FD
 	ROMAN_NUMERAL_REQUEST = 0x40, // FD to RPi
 	CURVE = 0x08, // FD to RPi
+	SECOND_ROUND = 0x09, // FD to RPi
 	PAUSE = 0xB0, // RPi to FD
 	RESUME = 0x70 // RPi to FD
 };

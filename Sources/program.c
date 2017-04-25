@@ -1466,6 +1466,10 @@ void loop_secondRound() {
 	uint8_t res;
 	uint16_t tof1_val, tof2_val, tof3_val, tof4_val;
 	int32_t diff;
+	serialSend(SECOND_ROUND,RasPi);
+	WAIT1_Waitms(WAIT_TIME_DEFAULT);
+	serialSend(SECOND_ROUND,PC);
+	WAIT1_Waitms(WAIT_TIME_DEFAULT);
 	parcour_state2 = 0;
 	/* disable brushless */
 	setBrushless(BRUSHLESS_OFF);
@@ -1577,6 +1581,10 @@ void loop_secondRound() {
 			break;
 		case 2:
 			loop_setMotorStop();
+			serialSend(CURVE,RasPi);
+			WAIT1_Waitms(WAIT_TIME_DEFAULT);
+			serialSend(CURVE,PC);
+			WAIT1_Waitms(WAIT_TIME_DEFAULT);
 			loop_setServosSideways();
 			WAIT1_Waitms(NEW_WAIT_TIME_SERVO);
 			if (type == PARCOUR_A) {
