@@ -326,12 +326,16 @@ enum NewMotorSpeed {
 #define NEW_WAIT_TIME_SERVO 400 // value in ms
 
 // chose only one!
-#define PID_CORR_SPEED 0
-#define PID_CORR_SERVO 0
-#define PID_CORR_SERVO_DIRECTION 1
-#define PID_CORR_DIRECTION 0
+#define PID_CORR_SPEED 0 // regulated over time
+#define PID_CORR_SERVO 0 // regulated over time
+#define PID_CORR_DIRECTION 0 // regulated over time
+#define PID_CORR_SERVO_DIRECTION 1 // regulated over servo angle
+#define PID_CORR_SIMPLE 0 // drive away from wall, if too near, else drive towards wall
+#define PID_CORR_SET_SPEED 0 // regulate motor speed directly
 
 #define PID_WAIT_TIME_SERVO_CORR 10
+#define PID_CORR_SIMPLE_CORR_PERCENT 30
+#define PID_CORR_SIMPLE_MIN_PID_VAL 5
 
 #define PID_P 1 // PID diff
 #define PID_P_DIV 1
@@ -339,7 +343,7 @@ enum NewMotorSpeed {
 #define PID_I_DIV 1
 #define PID_D 0
 #define PID_D_DIV 1
-#define PID_MAX_CORR_TIME 30 // max corr time / max servo corr val
+#define PID_MAX_CORR_TIME 30 // max corr time in ms / max servo corr val / max speed difference in %
 
 #define PID_DIST_P 1 // PID dist
 #define PID_DIST_P_DIV 1

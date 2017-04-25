@@ -413,6 +413,8 @@ void testServoCircle() {
 		}
 		WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
 	}
+	WAIT1_Waitms(NEW_WAIT_TIME_SERVO);
+	WAIT1_Waitms(NEW_WAIT_TIME_SERVO);
 	res = setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
