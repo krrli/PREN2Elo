@@ -106,7 +106,7 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
-
+WAIT1_Waitms(1000);
   starttest();
   start();
 

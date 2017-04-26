@@ -276,12 +276,12 @@ void mainLoop2(void);
 #define NEW_MAIN_LOOP 1
 
 #define NEW_DIFF_MAX 10
-#define NEW_DIST_TO_WALL 132
+#define NEW_DIST_TO_WALL 132 //todo
 #define NEW_DIST_TO_WALL_MIN 122
 #define NEW_DIST_TO_WALL_MAX 142
 
 enum newDriveDistance {
-	NEW_CURVE_DIST = 270, NEW_DIST_END = 400, NEW_BUTTON1_A = 150, // todo: change values
+	NEW_CURVE_DIST = 220, NEW_DIST_END = 400, NEW_BUTTON1_A = 150, // todo: change values
 	NEW_BUTTON2_A = 150,
 	NEW_BUTTON3_A = 150,
 	NEW_BUTTON4_A = 150,
@@ -307,9 +307,9 @@ enum NewMotorSpeed {
 
 #define NEW_CORR_TIME 100 // value in ms
 
-#define NEW_BLIND_TIME 2000 // value in ms
+#define NEW_BLIND_TIME 1000 // value in ms
 #define NEW_BLIND_TIME_BACK 1000
-#define NEW_CURVE_BLIND_TIME 200
+#define NEW_CURVE_BLIND_TIME 100
 
 #define NEW_CURVE_DRIVE_OVER_TIME 50 // value in ms
 #define NEW_CURVE_DETECT_DISTANCE 300
@@ -333,12 +333,12 @@ enum NewMotorSpeed {
 #define PID_CORR_SIMPLE 0 // drive away from wall, if too near, else drive towards wall
 #define PID_CORR_SET_SPEED 0 // regulate motor speed directly
 
-#define PID_WAIT_TIME_SERVO_CORR 10
+#define PID_WAIT_TIME_SERVO_CORR 20
 #define PID_CORR_SIMPLE_CORR_PERCENT 30
 #define PID_CORR_SIMPLE_MIN_PID_VAL 5
 
 #define PID_P 1 // PID diff
-#define PID_P_DIV 1
+#define PID_P_DIV 8
 #define PID_I 0
 #define PID_I_DIV 1
 #define PID_D 0
@@ -346,11 +346,11 @@ enum NewMotorSpeed {
 #define PID_MAX_CORR_TIME 30 // max corr time in ms / max servo corr val / max speed difference in %
 
 #define PID_DIST_P 1 // PID dist
-#define PID_DIST_P_DIV 1
-#define PID_DIST_I 0
-#define PID_DIST_I_DIV 1
-#define PID_DIST_D 0
-#define PID_DIST_D_DIV 1
+#define PID_DIST_P_DIV 20
+#define PID_DIST_I 1
+#define PID_DIST_I_DIV 1000
+#define PID_DIST_D 1
+#define PID_DIST_D_DIV 3
 #define PID_DIST_MAX_CORR_TIME 30 // max corr time / max servo corr val
 
 /*

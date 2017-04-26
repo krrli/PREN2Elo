@@ -7,7 +7,7 @@
 **     Version     : Component 02.241, Driver 01.01, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-19, 19:00, # CodeGen: 59
+**     Date/Time   : 2017-04-26, 11:30, # CodeGen: 72
 **     Abstract    :
 **         This component implements a pulse-width modulation generator
 **         that generates signal with variable duty and fixed cycle. 
@@ -19,7 +19,7 @@
 **          Output pin signal                              : 
 **          Counter                                        : TPM0_CNT
 **          Interrupt service/event                        : Disabled
-**          Period                                         : 1 ms
+**          Period                                         : 25 ms
 **          Starting pulse width                           : 0 µs
 **          Initial polarity                               : low
 **          Same period in modes                           : no
@@ -151,7 +151,7 @@ byte MT2_PWM1_SetDutyUS(word Time)
 **     Parameters  :
 **         NAME            - DESCRIPTION
 **         Time            - Duty to set [in milliseconds]
-**                      (0 to 1 ms in high speed mode)
+**                      (0 to 25 ms in high speed mode)
 **     Returns     :
 **         ---             - Error code, possible codes:
 **                           ERR_OK - OK

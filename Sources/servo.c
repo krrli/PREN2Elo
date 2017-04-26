@@ -317,18 +317,22 @@ uint8_t setServoPwm(uint8_t ch, uint16_t on, uint16_t off) {
 
 /* i2c stuff */
 uint8_t servoRead8(uint8_t ad, uint8_t reg, uint8_t * val) {
+	WAIT1_Waitms(1);
 	/* write to bus */
 	return GenI2C_ToF_ReadAddress(ad, &reg, sizeof(reg), val, 1);
 }
 uint8_t servoWrite8(uint8_t ad, uint8_t reg, uint8_t val) {
+	WAIT1_Waitms(1);
 	/* write to bus */
 	return GenI2C_ToF_WriteAddress(ad, &reg, sizeof(reg), &val, sizeof(val));
 }
 uint8_t servoRead32(uint8_t ad, uint8_t reg, uint32_t * val) {
+	WAIT1_Waitms(1);
 	/* write to bus */
 	return GenI2C_ToF_ReadAddress(ad, &reg, sizeof(reg), (uint8_t *) val, 1);
 }
 uint8_t servoWrite32(uint8_t ad, uint8_t reg, uint32_t val) {
+	WAIT1_Waitms(1);
 	/* copy address and value in 8bit arrays */
 	uint8_t v[4];
 	v[0] = val & 0xff;

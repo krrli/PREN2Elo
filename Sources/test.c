@@ -72,6 +72,10 @@ void starttest(void) {
 		testServoCircle();
 	}
 
+	if (TEST_TOF_SERVO) {
+		testTofServo();
+	}
+
 	/* end loop */
 	for (;;) {
 
@@ -79,7 +83,7 @@ void starttest(void) {
 }
 
 void doNothing(void) {
-	initServo();
+	//initServo();
 	for (;;)
 		;
 }
@@ -432,19 +436,19 @@ void testServoCircle() {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 	}
 	WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
-	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED / 4);
+	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED / 2);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED / 4);
+	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED / 2);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED / 4);
+	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED / 2);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED / 4);
+	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED / 2);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
@@ -487,5 +491,31 @@ void testServoCircle() {
 		}
 		WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
 		WAIT1_Waitms(NEW_SECOND_ROUND_TURN_TIME);
+	}
+}
+
+void testTofServo() {
+	uint8_t res;
+	uint16_t tof_val, val = 0;
+	initToF();
+	initServo();
+	/*initMotor();
+	WAIT1_Waitms(500);
+	for (uint8_t i = 0; i < 4; i++) {
+		res=setMotorDirection(i, MOTOR_FORWARD);
+		res=setMotorSpeed(i, 100);
+	}*/
+	for (;;) {
+		getToFValueMillimeters(0, &tof_val);
+		getToFValueMillimeters(1, &tof_val);
+		getToFValueMillimeters(2, &tof_val);
+		getToFValueMillimeters(3, &tof_val);
+		getToFValueMillimeters(4, &tof_val);
+		val += 1;
+		if (val >= 30) {
+			val = 0;
+		}
+		setServoPID(SERVO_STRAIGHT, 0, val);
+		WAIT1_Waitms(50);
 	}
 }
