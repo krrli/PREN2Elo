@@ -239,19 +239,19 @@ void loop_setMotorMaxSpeed() {
 }
 void loop_setMotorHalfSpeed() {
 	uint8_t res;
-	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED / 4);
+	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_HALFSPEED);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED / 4);
+	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_HALFSPEED);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED / 4);
+	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_HALFSPEED);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED / 4);
+	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_HALFSPEED);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
@@ -779,6 +779,9 @@ void loop_corrRear(uint16_t delay) {
 }
 void loop_pidDiffCorr(uint16_t val_front, uint16_t val_back) {
 	if (val_front == 0xFFFF || val_back == 0xFFFF) {
+#if NEW_CORR_EXPERIMANTAL_ENABLED
+		loop_setServosStraight();
+#endif
 		return;
 	}
 	diff_old = diff;
@@ -831,6 +834,9 @@ void loop_pidDiffCorr(uint16_t val_front, uint16_t val_back) {
 }
 void loop_pidDistCorr(uint16_t val) {
 	if (val == 0xFFFF) {
+#if NEW_CORR_EXPERIMANTAL_ENABLED
+		loop_setServosStraight();
+#endif
 		return;
 	}
 	diff_dist_old = diff_dist;
@@ -857,6 +863,23 @@ void loop_pidDistCorr(uint16_t val) {
 	} else {
 		// corr_right
 		loop_corrRight(PID_diff_dist);
+	}
+}
+void loop_pidDoubleDistCorr(uint16_t val1, uint16_t val2) {
+	uint16_t reg_val;
+	if ((val1 != 0xffff) && (val2 != 0xffff)) {
+		reg_val = (uint16_t) ((int32_t) NEW_DIST_TO_WALL
+				+ (((int32_t) val1 - (int32_t) val2)) / 2);
+		loop_pidDistCorr(reg_val);
+	} else if (val1 != 0xffff) {
+		loop_pidDistCorr(val1);
+	} else if (val2 != 0xffff) {
+		reg_val = (uint16_t) (2 * (int32_t) NEW_DIST_TO_WALL) - (int32_t) val2;
+		loop_pidDistCorr(reg_val);
+	} else {
+#if NEW_CORR_EXPERIMANTAL_ENABLED
+		loop_setServosStraight();
+#endif
 	}
 }
 
@@ -1746,7 +1769,8 @@ void loop_secondRound() {
 				WAIT1_Waitms(4 * NEW_CURVE_DRIVE_OVER_TIME);
 				break;
 			}
-			loop_pidDistCorr(tof2_val);
+			//loop_pidDistCorr(tof2_val);
+			loop_pidDoubleDistCorr(tof2_val, tof4_val);
 			break;
 		case 2:
 			loop_setMotorStop();
@@ -1814,7 +1838,8 @@ void loop_secondRound() {
 				parcour_state2 = 6;
 				break;
 			}
-			loop_pidDistCorr(tof2_val);
+			//loop_pidDistCorr(tof2_val);
+			loop_pidDoubleDistCorr(tof2_val, tof4_val);
 			break;
 		case 6:
 			parcour_state = 7;
@@ -1959,6 +1984,9 @@ void mainLoop2(void) {
 			 }*/
 			loop_pidDistCorr(tof2_val);
 #endif
+#if NEW_DOUBLE_DIST_CORR_ENABLED
+			loop_pidDoubleDistCorr(tof2_val, tof4_val);
+#endif
 			break;
 		case 3: /* drive sideways blind */
 			loop_setMotorStop();
@@ -2049,7 +2077,7 @@ void mainLoop2(void) {
 			/* get tof diff */
 			diff = tof1_val - tof2_val;
 			/* check if end reached */
-			if (tof3_val < NEW_DIST_END && tof4_val == 0xFFFF) {
+			if (tof3_val < NEW_DIST_END && tof4_val >= NEW_CURVE_DETECT_DISTANCE) {
 				parcour_state = 7;
 				break;
 			}
@@ -2087,6 +2115,9 @@ void mainLoop2(void) {
 			 }
 			 }*/
 			loop_pidDistCorr(tof2_val);
+#endif
+#if NEW_DOUBLE_DIST_CORR_ENABLED
+			loop_pidDoubleDistCorr(tof2_val, tof4_val);
 #endif
 			break;
 		case 7: /* stop, get roman number */

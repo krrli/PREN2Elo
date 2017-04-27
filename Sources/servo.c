@@ -74,13 +74,141 @@ uint8_t initServo(void) {
 
 /* set brushless */
 uint8_t setBrushless(enum BrushlessState state) {
+	uint8_t res;
 	switch (state) {
 	case BRUSHLESS_ON:
-		return setServoPwm(brushlessChannel, 0, brushlessValueOn);
+		for (uint8_t i = 0; i < 10; i++) {
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(1);
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOff);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(9);
+		}
+		for (uint8_t i = 0; i < 10; i++) {
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(2);
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOff);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(8);
+		}
+		for (uint8_t i = 0; i < 10; i++) {
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(3);
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOff);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(7);
+		}
+		for (uint8_t i = 0; i < 10; i++) {
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(4);
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOff);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(6);
+		}
+		for (uint8_t i = 0; i < 10; i++) {
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(5);
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOff);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(5);
+		}
+		for (uint8_t i = 0; i < 10; i++) {
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(6);
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOff);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(4);
+		}
+		for (uint8_t i = 0; i < 10; i++) {
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(7);
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOff);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(3);
+		}
+		for (uint8_t i = 0; i < 10; i++) {
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(8);
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOff);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(2);
+		}
+		for (uint8_t i = 0; i < 10; i++) {
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(9);
+			res = setServoPwm(brushlessChannel, 0, brushlessValueOff);
+			if (res != ERR_OK) {
+				setServoPwm(brushlessChannel, 0, brushlessValueOff);
+				return res;
+			}
+			WAIT1_Waitms(1);
+		}
+		return res;
 	case BRUSHLESS_OFF:
 		return setServoPwm(brushlessChannel, 0, brushlessValueOff);
 	case BRUSHLESS_INIT:
-		return setServoPwm(brushlessChannel, 0, brushlessValueInit);
+		//return setServoPwm(brushlessChannel, 0, brushlessValueInit);
+		return ERR_VALUE;
 	default:
 		return ERR_VALUE;
 	}

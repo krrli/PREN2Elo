@@ -436,19 +436,19 @@ void testServoCircle() {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_DIRECTION);
 	}
 	WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
-	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_MAXSPEED / 2);
+	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_HALFSPEED);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_MAXSPEED / 2);
+	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_HALFSPEED);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_MAXSPEED / 2);
+	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_HALFSPEED);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
-	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED / 2);
+	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_HALFSPEED);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}

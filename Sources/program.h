@@ -281,7 +281,7 @@ void mainLoop2(void);
 #define NEW_DIST_TO_WALL_MAX 142
 
 enum newDriveDistance {
-	NEW_CURVE_DIST = 220, NEW_DIST_END = 400, NEW_BUTTON1_A = 150, // todo: change values
+	NEW_CURVE_DIST = 220, NEW_DIST_END = 300, NEW_BUTTON1_A = 150, // todo: change values
 	NEW_BUTTON2_A = 150,
 	NEW_BUTTON3_A = 150,
 	NEW_BUTTON4_A = 150,
@@ -294,13 +294,17 @@ enum newDriveDistance {
 };
 
 enum NewMotorSpeed {
-	NEW_MOTOR_CORRSPEED = 25, NEW_MOTOR_MAXSPEED = 100
+	NEW_MOTOR_CORRSPEED = 25, NEW_MOTOR_MAXSPEED = 100, NEW_MOTOR_HALFSPEED=50
 };
 
 #define NEW_CORR_ENABLED 1
+
 #define NEW_DIFF_CORR_ENABLED 0
-#define NEW_DIST_CORR_ENABLED 1
+#define NEW_DIST_CORR_ENABLED 0
+#define NEW_DOUBLE_DIST_CORR_ENABLED 1
 #define NEW_CURVE_CORR_ENABLED 1
+
+#define NEW_CORR_EXPERIMANTAL_ENABLED 1
 
 #define NEW_CENT_ENABLED 0 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #define NEW_CENT_WITHOUT_SWITCH_ENABLED 0 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -316,8 +320,8 @@ enum NewMotorSpeed {
 #define NEW_CURVE_DETECT_TOF4_ENABLED 1
 
 #define NEW_SECOND_ROUND_ENABLED 0
-#define NEW_SECOND_ROUND_TURN_TIME 1000
-#define NEW_SECOND_ROUND_DRIVE_TO_START_TIME 1000
+#define NEW_SECOND_ROUND_TURN_TIME 2000
+#define NEW_SECOND_ROUND_DRIVE_TO_START_TIME 2000
 
 #define NEW_DRIVE_INTO_BUTTON_TIME 50 // value in ms
 
