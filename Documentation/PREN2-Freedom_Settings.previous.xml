@@ -1324,7 +1324,7 @@ even (hw or sw)
         <I2C v="I2C_ToF" />
         <boolgroup name="Timeout" v="Enabled">
           <Timeout v="TMOUT1" />
-          <us v="50000" />
+          <us v="5000" />
         </boolgroup>
       </boolgroup>
       <boolgroup name="RTOS" v="Disabled" />
@@ -1364,7 +1364,7 @@ even (hw or sw)
       <I2C_channel v="I2C1" />
       <boolgroup name="Interrupt service" v="Enabled">
         <Interrupt v="INT_I2C1" />
-        <Interrupt_priority v="maximal priority" />
+        <Interrupt_priority v="high priority" />
       </boolgroup>
       <group name="Settings">
         <Mode_selection v="MASTER" />
@@ -2485,7 +2485,7 @@ even (hw or sw)
       <SDK v="MCUC1" />
       <Critical_Section v="CS1" />
       <Maximum_counters v="1" />
-      <Counter_tick_period__ms_ v="10" />
+      <Counter_tick_period__ms_ v="1" />
       <boolgroup name="RTOS" v="Disabled" />
     </Properties>
     <Methods>
@@ -2509,7 +2509,7 @@ even (hw or sw)
       <Counter v="TPM1_CNT" />
       <boolgroup name="Interrupt service/event" v="Enabled">
         <Interrupt v="INT_TPM1" />
-        <Interrupt_priority v="medium priority" />
+        <Interrupt_priority v="maximal priority" />
       </boolgroup>
       <Interrupt_period v="1 ms" />
       <Same_period_in_modes v="yes" />
@@ -2532,7 +2532,7 @@ even (hw or sw)
             <Counter v="TPM1_CNT" />
             <boolgroup name="Interrupt service/event" v="Enabled">
               <Interrupt v="INT_TPM1" />
-              <Interrupt_priority v="medium priority" />
+              <Interrupt_priority v="maximal priority" />
             </boolgroup>
             <Interrupt_period v="1 ms" />
             <group name="Initialization">
@@ -2613,7 +2613,10 @@ even (hw or sw)
       </enumgroup>
       <enumgroup name="Counter restart" v="On-overrun">
         <Overrun_period v="Auto select" />
-        <boolgroup name="Interrupt" v="Disabled" />
+        <boolgroup name="Interrupt" v="Enabled">
+          <Interrupt v="INT_TPM1" />
+          <Interrupt_priority v="minimal priority" />
+        </boolgroup>
       </enumgroup>
       <list name="Channel list" v="1">
         <group name="Channel 0">
@@ -2625,7 +2628,7 @@ even (hw or sw)
             </enumgroup>
             <boolgroup name="Interrupt" v="Enabled">
               <Interrupt v="INT_TPM1" />
-              <Interrupt_priority v="medium priority" />
+              <Interrupt_priority v="maximal priority" />
             </boolgroup>
           </enumgroup>
         </group>
@@ -2633,7 +2636,7 @@ even (hw or sw)
       <group name="Initialization">
         <Enabled_in_init__code v="yes" />
         <group name="Event mask">
-          <OnCounterRestart v="Disabled" />
+          <OnCounterRestart v="Enabled" />
           <OnChannel0 v="Enabled" />
           <OnChannel1 v="Disabled" />
           <OnChannel2 v="Disabled" />
@@ -2671,7 +2674,9 @@ even (hw or sw)
     </Methods>
     <Events>
       <Event_module_name v="Events" />
-      <event name="OnCounterRestart" v="don&amp;apos;t generate code" />
+      <event name="OnCounterRestart" v="generate code">
+        <Event_procedure_name v="TU1_OnCounterRestart" />
+      </event>
       <event name="OnChannel0" v="generate code">
         <Event_procedure_name v="TU1_OnChannel0" />
       </event>

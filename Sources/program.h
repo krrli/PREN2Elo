@@ -281,30 +281,31 @@ void mainLoop2(void);
 #define NEW_DIST_TO_WALL_MAX 142
 
 enum newDriveDistance {
-	NEW_CURVE_DIST = 220, NEW_DIST_END = 300, NEW_BUTTON1_A = 150, // todo: change values
-	NEW_BUTTON2_A = 150,
-	NEW_BUTTON3_A = 150,
+	NEW_CURVE_DIST = 260, NEW_DIST_END = 400, NEW_BUTTON1_A = 100, // todo: change values
+	NEW_BUTTON2_A = 110,
+	NEW_BUTTON3_A = 130,
 	NEW_BUTTON4_A = 150,
-	NEW_BUTTON5_A = 150,
-	NEW_BUTTON1_B = 150,
-	NEW_BUTTON2_B = 150,
-	NEW_BUTTON3_B = 150,
+	NEW_BUTTON5_A = 190,
+	NEW_BUTTON1_B = 100,
+	NEW_BUTTON2_B = 110,
+	NEW_BUTTON3_B = 130,
 	NEW_BUTTON4_B = 150,
-	NEW_BUTTON5_B = 150
+	NEW_BUTTON5_B = 190
 };
 
 enum NewMotorSpeed {
-	NEW_MOTOR_CORRSPEED = 25, NEW_MOTOR_MAXSPEED = 100, NEW_MOTOR_HALFSPEED=50
+	NEW_MOTOR_CORRSPEED = 25, NEW_MOTOR_MAXSPEED = 100, NEW_MOTOR_HALFSPEED=50, NEW_MOTOR_BUTTON_SPEED=10
 };
 
 #define NEW_CORR_ENABLED 1
 
 #define NEW_DIFF_CORR_ENABLED 0
 #define NEW_DIST_CORR_ENABLED 0
-#define NEW_DOUBLE_DIST_CORR_ENABLED 1
+#define NEW_DOUBLE_DIST_CORR_ENABLED 0
+#define NEW_BOTH_CORR_ENABLED 1
 #define NEW_CURVE_CORR_ENABLED 1
 
-#define NEW_CORR_EXPERIMANTAL_ENABLED 1
+#define NEW_CORR_EXPERIMANTAL_ENABLED 0
 
 #define NEW_CENT_ENABLED 0 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #define NEW_CENT_WITHOUT_SWITCH_ENABLED 0 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -315,7 +316,7 @@ enum NewMotorSpeed {
 #define NEW_BLIND_TIME_BACK 1000
 #define NEW_CURVE_BLIND_TIME 100
 
-#define NEW_CURVE_DRIVE_OVER_TIME 50 // value in ms
+#define NEW_CURVE_DRIVE_OVER_TIME 0 // value in ms
 #define NEW_CURVE_DETECT_DISTANCE 300
 #define NEW_CURVE_DETECT_TOF4_ENABLED 1
 
@@ -323,11 +324,11 @@ enum NewMotorSpeed {
 #define NEW_SECOND_ROUND_TURN_TIME 2000
 #define NEW_SECOND_ROUND_DRIVE_TO_START_TIME 2000
 
-#define NEW_DRIVE_INTO_BUTTON_TIME 50 // value in ms
+#define NEW_DRIVE_INTO_BUTTON_TIME 1000 // value in ms
 
 #define NEW_WAIT_TIME_DEFAULT 0 // value in ms
 
-#define NEW_WAIT_TIME_SERVO 400 // value in ms
+#define NEW_WAIT_TIME_SERVO 300 // value in ms
 
 // chose only one!
 #define PID_CORR_SPEED 0 // regulated over time
@@ -342,11 +343,11 @@ enum NewMotorSpeed {
 #define PID_CORR_SIMPLE_MIN_PID_VAL 5
 
 #define PID_P 1 // PID diff
-#define PID_P_DIV 8
-#define PID_I 0
-#define PID_I_DIV 1
-#define PID_D 0
-#define PID_D_DIV 1
+#define PID_P_DIV 2
+#define PID_I 1
+#define PID_I_DIV 10
+#define PID_D 1
+#define PID_D_DIV 10
 #define PID_MAX_CORR_TIME 30 // max corr time in ms / max servo corr val / max speed difference in %
 
 #define PID_DIST_P 1 // PID dist
@@ -356,6 +357,22 @@ enum NewMotorSpeed {
 #define PID_DIST_D 1
 #define PID_DIST_D_DIV 3
 #define PID_DIST_MAX_CORR_TIME 30 // max corr time / max servo corr val
+
+#define PID_BOTH_DIST_P_MULT 1
+#define PID_BOTH_DIST_P_DIV 2
+#define PID_BOTH_DIST_I_MULT 1
+#define PID_BOTH_DIST_I_DIV 30
+#define PID_BOTH_DIST_D_MULT 1
+#define PID_BOTH_DIST_D_DIV 3
+
+#define PID_BOTH_DIFF_P_MULT 1
+#define PID_BOTH_DIFF_P_DIV 1
+#define PID_BOTH_DIFF_I_MULT 1
+#define PID_BOTH_DIFF_I_DIV 5
+#define PID_BOTH_DIFF_D_MULT 1
+#define PID_BOTH_DIFF_D_DIV 10
+
+#define PID_BOTH_MAX_CORR_VAL 30
 
 /*
  * tof.c
@@ -407,6 +424,8 @@ uint8_t setServo(uint8_t ser, enum ServoDirection dir); // ser = 0...3
 
 uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
 		uint16_t corr_val);
+
+void setServoPidBoth(int32_t pid_val_dist,int32_t pid_val_diff,enum parcourType type,uint8_t state);
 
 /* internal functions */
 

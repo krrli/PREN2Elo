@@ -367,6 +367,77 @@ uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
 	}
 }
 
+void setServoPidBoth(int32_t pid_val_dist, int32_t pid_val_diff,
+		enum parcourType type, uint8_t state) {
+	uint8_t parc_a_forw = 0, parc_a_back = 0, parc_b_forw = 0, parc_b_back = 0;
+	if (type == PARCOUR_A) {
+		if (state == 2) {
+			parc_a_forw = 1;
+		} else if (state == 6) {
+			parc_a_back = 1;
+		}
+	} else {
+		if (state == 2) {
+			parc_b_forw = 1;
+		} else if (state == 6) {
+			parc_b_back = 1;
+		}
+	}
+
+	int32_t servo_val_fl, servo_val_fr, servo_val_rl, servo_val_rr;
+	if (parc_a_forw) {
+		servo_val_fl = (int32_t) servoValuesStraight[0] - pid_val_dist
+				- pid_val_diff;
+		servo_val_fr = (int32_t) servoValuesStraight[2] - pid_val_dist
+				- pid_val_diff;
+		servo_val_rl = (int32_t) servoValuesStraight[1] - pid_val_dist;
+		servo_val_rr = (int32_t) servoValuesStraight[3] - pid_val_dist;
+	} else if (parc_a_back) {
+		servo_val_fl = (int32_t) servoValuesStraight[0] + pid_val_dist;
+		servo_val_fr = (int32_t) servoValuesStraight[2] + pid_val_dist;
+		servo_val_rl = (int32_t) servoValuesStraight[1] + pid_val_dist
+				- pid_val_diff;
+		servo_val_rr = (int32_t) servoValuesStraight[3] + pid_val_dist
+				- pid_val_diff;
+	} else if (parc_b_forw) {
+		servo_val_fl = (int32_t) servoValuesStraight[0] + pid_val_dist
+				+ pid_val_diff;
+		servo_val_fr = (int32_t) servoValuesStraight[2] + pid_val_dist
+				+ pid_val_diff;
+		servo_val_rl = (int32_t) servoValuesStraight[1] + pid_val_dist;
+		servo_val_rr = (int32_t) servoValuesStraight[3] + pid_val_dist;
+	} else if (parc_b_back) {
+		servo_val_fl = (int32_t) servoValuesStraight[0] - pid_val_dist;
+		servo_val_fr = (int32_t) servoValuesStraight[2] - pid_val_dist;
+		servo_val_rl = (int32_t) servoValuesStraight[1] - pid_val_dist
+				+ pid_val_diff;
+		servo_val_rr = (int32_t) servoValuesStraight[3] - pid_val_dist
+				+ pid_val_diff;
+	}
+
+	uint8_t res;
+	res = setServoPwm(servoChannels[0], 0, servo_val_fl);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_SERVO);
+	}
+	WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+	res = setServoPwm(servoChannels[1], 0, servo_val_rl);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_SERVO);
+	}
+	WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+	res = setServoPwm(servoChannels[2], 0, servo_val_fr);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_SERVO);
+	}
+	WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+	res = setServoPwm(servoChannels[3], 0, servo_val_rr);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_SERVO);
+	}
+	WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+}
+
 /*
  * internal functions
  */

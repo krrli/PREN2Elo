@@ -521,6 +521,38 @@ Module "MT2_IN4"   (component BitIO)
    - MT2_IN4_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available only if 
                 the direction = _[output]_ or _[input/output]_.
 
+Module "TMOUT1"    (component Timeout)
+   - TMOUT1_GetCounter -Initializes a new timeout counter and returns the handle to it. At the end, use LeaveCounter() to free 
+                up the resource.
+   - TMOUT1_LeaveCounter -To be called to return the counter. Note that a counter always should be returned so it can be reused.
+   - TMOUT1_Value -Return the current value of the counter (in ticks)
+   - TMOUT1_SetCounter -Sets the counter to a new value and returns the value just prior to the call.
+   - TMOUT1_CounterExpired -Returns true if the timeout counter has been expired
+   - TMOUT1_AddTick -Method to be called from a periodic timer or interrupt. It will decrement all current counters by one down 
+                to zero.
+   - TMOUT1_Init -Initialization of the driver
+
+Module "TI1"       (component TimerInt)
+
+Module "TU1"       (component TimerUnit_LDD)
+   - TU1_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the property <"Enable in init. code"> is set to 
+                "yes" value then the device is also enabled (see the description of the <Enable> method). In this case the 
+                <Enable> method is not necessary and needn't to be generated. This method can be called only once. Before the 
+                second call of Init the <Deinit> must be called first.
+   - TU1_SetEventMask -Enables/disables event(s). The events contained within the mask are enabled. Events not contained within 
+                the mask are disabled. The component event masks are defined in the PE_Types.h file. Note: Event that are not 
+                generated (See the "Events" tab in the Component inspector) are not handled by this method. In this case the 
+                method returns ERR_PARAM_MASK error code. See also method <GetEventMask>.
+   - TU1_GetEventMask -Returns current events mask. Note: Event that are not generated (See the "Events" tab in the Component 
+                inspector) are not handled by this method. See also method <SetEventMask>.
+   - TU1_GetCounterValue -Returns the content of counter register. This method can be used both if counter is enabled and if 
+                counter is disabled. The method is not available if HW doesn't allow reading of the counter.
+   - TU1_SetOffsetTicks -Sets the new offset value to channel specified by the parameter ChannelIdx. It is user responsibility 
+                to use value below selected period. This method is available when at least one channel is configured.
+   - TU1_GetOffsetTicks -Returns the number of counter ticks to compare match channel specified by the parameter ChannelIdx. 
+                See also method <SetOffsetTicks>. This method is available when at least one channel is configured.
+
 Module "Cpu"       (component MKL25Z128LK4)
 
 ===================================================================================

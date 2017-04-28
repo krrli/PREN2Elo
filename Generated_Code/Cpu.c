@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-26, 16:34, # CodeGen: 92
+**     Date/Time   : 2017-04-28, 20:58, # CodeGen: 98
 **     Abstract    :
 **
 **     Settings    :
@@ -308,6 +308,10 @@
 #include "BitIoLdd15.h"
 #include "MT2_IN4.h"
 #include "BitIoLdd16.h"
+#include "TMOUT1.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -760,21 +764,6 @@ PE_ISR(Cpu_ivINT_TPM0)
 
 /*
 ** ===================================================================
-**     Method      :  Cpu_Cpu_ivINT_TPM1 (component MKL25Z128LK4)
-**
-**     Description :
-**         This ISR services an unused interrupt/exception vector.
-**         This method is internal. It is used by Processor Expert only.
-** ===================================================================
-*/
-PE_ISR(Cpu_ivINT_TPM1)
-{
-  /* This code can be changed using the CPU component property "Build Options / Unhandled int code" */
-  PE_DEBUGHALT();
-}
-
-/*
-** ===================================================================
 **     Method      :  Cpu_Cpu_ivINT_TPM2 (component MKL25Z128LK4)
 **
 **     Description :
@@ -1140,6 +1129,8 @@ void PE_low_level_init(void)
   (void)PwmLdd3_Init(NULL);
   /* ### PWM_LDD "PwmLdd4" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)PwmLdd4_Init(NULL);
+  /* ### Timeout "TMOUT1" init code ... */
+  TMOUT1_Init();
   /* ### GenericI2C "GenI2C_ToF" init code ... */
   GenI2C_ToF_Init();
   /* ### BitIO_LDD "BitIoLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
@@ -1174,6 +1165,9 @@ void PE_low_level_init(void)
   (void)BitIoLdd15_Init(NULL);
   /* ### BitIO_LDD "BitIoLdd16" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)BitIoLdd16_Init(NULL);
+  /* ### TimerInt_LDD "TimerIntLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)TimerIntLdd1_Init(NULL);
+  /* ### TimerInt "TI1" init code ... */
   __EI();
 }
   /* Flash configuration field */

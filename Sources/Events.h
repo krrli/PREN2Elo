@@ -87,6 +87,10 @@
 #include "BitIoLdd15.h"
 #include "MT2_IN4.h"
 #include "BitIoLdd16.h"
+#include "TMOUT1.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
 
 #ifdef __cplusplus
 extern "C" {

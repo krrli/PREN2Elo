@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-26, 16:34, # CodeGen: 92
+**     Date/Time   : 2017-04-28, 20:58, # CodeGen: 98
 **     Abstract    :
 **
 **     Settings    :
@@ -473,17 +473,6 @@ PE_ISR(Cpu_ivINT_TPM0);
 /*
 ** ===================================================================
 **     Method      :  Cpu_Cpu_ivINT_TPM0 (component MKL25Z128LK4)
-**
-**     Description :
-**         This ISR services an unused interrupt/exception vector.
-**         This method is internal. It is used by Processor Expert only.
-** ===================================================================
-*/
-
-PE_ISR(Cpu_ivINT_TPM1);
-/*
-** ===================================================================
-**     Method      :  Cpu_Cpu_ivINT_TPM1 (component MKL25Z128LK4)
 **
 **     Description :
 **         This ISR services an unused interrupt/exception vector.

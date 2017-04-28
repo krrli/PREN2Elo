@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-26, 16:34, # CodeGen: 92
+**     Date/Time   : 2017-04-28, 21:42, # CodeGen: 105
 **     Abstract    :
 **
 **     Settings    :
@@ -109,6 +109,10 @@
   #include "BitIoLdd15.h"
   #include "MT2_IN4.h"
   #include "BitIoLdd16.h"
+  #include "TMOUT1.h"
+  #include "TI1.h"
+  #include "TimerIntLdd1.h"
+  #include "TU1.h"
   #include "Events.h"
 
 
@@ -162,7 +166,7 @@
     (tIsrFunc)&Cpu_ivINT_ADC0,         /* 0x1F  0x0000007C   -   ivINT_ADC0                    unused by PE */
     (tIsrFunc)&Cpu_ivINT_CMP0,         /* 0x20  0x00000080   -   ivINT_CMP0                    unused by PE */
     (tIsrFunc)&Cpu_ivINT_TPM0,         /* 0x21  0x00000084   -   ivINT_TPM0                    unused by PE */
-    (tIsrFunc)&Cpu_ivINT_TPM1,         /* 0x22  0x00000088   -   ivINT_TPM1                    unused by PE */
+    (tIsrFunc)&TU1_Interrupt,          /* 0x22  0x00000088   1   ivINT_TPM1                    used by PE */
     (tIsrFunc)&Cpu_ivINT_TPM2,         /* 0x23  0x0000008C   -   ivINT_TPM2                    unused by PE */
     (tIsrFunc)&Cpu_ivINT_RTC,          /* 0x24  0x00000090   -   ivINT_RTC                     unused by PE */
     (tIsrFunc)&Cpu_ivINT_RTC_Seconds,  /* 0x25  0x00000094   -   ivINT_RTC_Seconds             unused by PE */

@@ -7,7 +7,7 @@
 **     Version     : Component 01.030, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-26, 16:34, # CodeGen: 92
+**     Date/Time   : 2017-04-28, 21:37, # CodeGen: 103
 **     Abstract    :
 **         This component implements a generic I2C driver wrapper to work both with LDD and non-LDD I2C components.
 **     Settings    :
@@ -19,7 +19,9 @@
 **          non-LDD I2C                                    : Disabled
 **          LDD I2C                                        : Enabled
 **            I2C                                          : I2C_ToF
-**            Timeout                                      : Disabled
+**            Timeout                                      : Enabled
+**              Timeout                                    : TMOUT1
+**              us                                         : 5000
 **          RTOS                                           : Disabled
 **          Init() on startup                              : yes
 **     Contents    :
@@ -88,6 +90,7 @@
 #include "WAIT1.h"
 #include "MCUC1.h"
 #include "I2C_ToF.h"
+#include "TMOUT1.h"
 
 
 #define GenI2C_ToF_WRITE_BUFFER_SIZE 16 /* size of internal buffer used, set in the component properties */

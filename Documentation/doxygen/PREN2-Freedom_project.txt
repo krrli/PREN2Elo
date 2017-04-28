@@ -46,6 +46,8 @@
 - \subpage BitIoLdd14
 - \subpage BitIoLdd15
 - \subpage BitIoLdd16
+- \subpage TU1
+- \subpage TimerIntLdd1
 
 */
 

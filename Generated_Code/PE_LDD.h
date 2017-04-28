@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-26, 16:34, # CodeGen: 92
+**     Date/Time   : 2017-04-28, 20:58, # CodeGen: 98
 **     Abstract    :
 **
 **     Settings    :
@@ -115,6 +115,10 @@
 #include "BitIoLdd15.h"
 #include "MT2_IN4.h"
 #include "BitIoLdd16.h"
+#include "TMOUT1.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
 
 
 /*

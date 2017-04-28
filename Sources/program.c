@@ -26,6 +26,7 @@ volatile uint8_t state0_initialized, state7_initialized, state8_initialized;
 #if NEW_SERIAL_PAUSE_ENABLED
 volatile uint8_t loop_paused;
 #endif
+volatile uint8_t state8_neg_drv_dir;
 
 /*
  * global variables for second round
@@ -41,6 +42,12 @@ int32_t diff_dist, diff_dist_old, P_diff_dist, I_diff_dist, D_diff_dist,
 		PID_diff_dist, PID_minus_dist;
 
 /*
+ * pid both vars
+ */
+
+uint8_t reset_pid;
+
+/*
  * global variables for button pressing
  */
 volatile uint8_t button;
@@ -51,6 +58,7 @@ void loop_pidReset() {
 	I_diff = 0;
 	diff_dist = 0;
 	I_diff_dist = 0;
+	reset_pid = 1;
 }
 void loop_initVars() {
 	/* init variables for serial communication */
@@ -59,7 +67,7 @@ void loop_initVars() {
 
 	/* get parcour type */
 	//type = SW_Parc_GetVal();
-	type = PARCOUR_A; // todo
+	type = PARCOUR_B; // todo
 
 	/* init variables for main loop */
 	state = STOPPED;
@@ -86,6 +94,7 @@ void loop_initVars() {
 	state0_initialized = 0;
 	state7_initialized = 0;
 	state8_initialized = 0;
+	state8_neg_drv_dir = 0;
 #if NEW_SERIAL_PAUSE_ENABLED
 	loop_paused = 0;
 #endif
@@ -94,7 +103,7 @@ void loop_initVars() {
 	loop_pidReset();
 
 	/* init variables for buttons */
-	button = BUTTON3;
+	button = BUTTON1;
 	btnchk = BUTTON_UNCHECKED;
 }
 void loop_setServosStraight() {
@@ -252,6 +261,26 @@ void loop_setMotorHalfSpeed() {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
 	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_HALFSPEED);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
+}
+void loop_setMotorButtonSpeed() {
+	uint8_t res;
+	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_BUTTON_SPEED);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_BUTTON_SPEED);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_BUTTON_SPEED);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_BUTTON_SPEED);
 	if (res != ERR_OK) {
 		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 	}
@@ -881,6 +910,60 @@ void loop_pidDoubleDistCorr(uint16_t val1, uint16_t val2) {
 		loop_setServosStraight();
 #endif
 	}
+}
+void loop_pidBoth(uint16_t val_front, uint16_t val_rear) {
+	static int32_t dist_err_old, diff_err_old, dist_I_err, diff_I_err;
+	int32_t dist_err, diff_err, dist_D_err, diff_D_err, dist_pid_val,
+			diff_pid_val;
+
+	if (reset_pid) {
+		reset_pid = 0;
+		dist_err_old = 0;
+		diff_err_old = 0;
+		dist_I_err = 0;
+		diff_I_err = 0;
+	}
+
+	if (val_front == 0xffff || val_rear == 0xffff) {
+		loop_setServosStraight();
+		return;
+	}
+
+	dist_err = (int32_t) val_front - (int32_t) NEW_DIST_TO_WALL;
+	dist_I_err += dist_err;
+	dist_D_err = dist_err - dist_err_old;
+	dist_pid_val = ((int32_t) PID_BOTH_DIST_P_MULT * dist_err)
+			/ (int32_t) PID_BOTH_DIST_P_DIV
+			+ ((int32_t) PID_BOTH_DIST_I_MULT * dist_I_err)
+					/ (int32_t) PID_BOTH_DIST_I_DIV
+			+ ((int32_t) PID_BOTH_DIST_D_MULT * dist_D_err)
+					/ (int32_t) PID_BOTH_DIST_D_DIV;
+	dist_err_old = dist_err;
+
+	if (dist_pid_val > PID_BOTH_MAX_CORR_VAL) {
+		dist_pid_val = PID_BOTH_MAX_CORR_VAL;
+	} else if ((0 - dist_pid_val) > PID_BOTH_MAX_CORR_VAL) {
+		dist_pid_val = 0 - PID_BOTH_MAX_CORR_VAL;
+	}
+
+	diff_err = (int32_t) val_front - (int32_t) val_rear;
+	diff_I_err += diff_err;
+	diff_D_err = diff_err - diff_err_old;
+	diff_pid_val = ((int32_t) PID_BOTH_DIFF_P_MULT * diff_err)
+			/ (int32_t) PID_BOTH_DIFF_P_DIV
+			+ ((int32_t) PID_BOTH_DIFF_I_MULT * diff_I_err)
+					/ (int32_t) PID_BOTH_DIFF_I_DIV
+			+ ((int32_t) PID_BOTH_DIFF_D_MULT * diff_D_err)
+					/ (int32_t) PID_BOTH_DIFF_D_DIV;
+	diff_err_old = diff_err;
+
+	if (diff_pid_val > PID_BOTH_MAX_CORR_VAL) {
+		diff_pid_val = PID_BOTH_MAX_CORR_VAL;
+	} else if ((0 - diff_pid_val) > PID_BOTH_MAX_CORR_VAL) {
+		diff_pid_val = 0 - PID_BOTH_MAX_CORR_VAL;
+	}
+
+	setServoPidBoth(dist_pid_val, diff_pid_val, type, parcour_state);
 }
 
 void start(void) {
@@ -1770,7 +1853,7 @@ void loop_secondRound() {
 				break;
 			}
 			//loop_pidDistCorr(tof2_val);
-			loop_pidDoubleDistCorr(tof2_val, tof4_val);
+			loop_pidBoth(tof1_val, tof2_val);
 			break;
 		case 2:
 			loop_setMotorStop();
@@ -1839,7 +1922,7 @@ void loop_secondRound() {
 				break;
 			}
 			//loop_pidDistCorr(tof2_val);
-			loop_pidDoubleDistCorr(tof2_val, tof4_val);
+			loop_pidBoth(tof1_val, tof2_val);
 			break;
 		case 6:
 			parcour_state = 7;
@@ -1987,6 +2070,9 @@ void mainLoop2(void) {
 #if NEW_DOUBLE_DIST_CORR_ENABLED
 			loop_pidDoubleDistCorr(tof2_val, tof4_val);
 #endif
+#if NEW_BOTH_CORR_ENABLED
+			loop_pidBoth(tof1_val, tof2_val);
+#endif
 			break;
 		case 3: /* drive sideways blind */
 			loop_setMotorStop();
@@ -2119,6 +2205,9 @@ void mainLoop2(void) {
 #if NEW_DOUBLE_DIST_CORR_ENABLED
 			loop_pidDoubleDistCorr(tof2_val, tof4_val);
 #endif
+#if NEW_BOTH_CORR_ENABLED
+			loop_pidBoth(tof1_val, tof2_val);
+#endif
 			break;
 		case 7: /* stop, get roman number */
 			if (state7_initialized == 0) {
@@ -2141,6 +2230,10 @@ void mainLoop2(void) {
 				serialSend(ROMAN_NUMERAL_REQUEST, RasPi);
 				serialSend(ROMAN_NUMERAL_REQUEST, PC);
 				state7_initialized = 1;
+#if NEW_SERIAL_INT_ENABLED==0
+				WAIT1_Waitms(1000);
+				parcour_state = 8;
+#endif
 			}
 			break;
 		case 8: /* drive sideways for button pressing */
@@ -2154,55 +2247,76 @@ void mainLoop2(void) {
 				switch (button) {
 				case BUTTON1:
 					if (type == PARCOUR_A) {
-						button_dist_val = BUTTON1_A;
+						button_dist_val = NEW_BUTTON1_A;
 					} else {
-						button_dist_val = BUTTON1_B;
+						button_dist_val = NEW_BUTTON1_B;
 					}
+					break;
 				case BUTTON2:
 					if (type == PARCOUR_A) {
-						button_dist_val = BUTTON2_A;
+						button_dist_val = NEW_BUTTON2_A;
 					} else {
-						button_dist_val = BUTTON2_B;
+						button_dist_val = NEW_BUTTON2_B;
 					}
+					break;
 				case BUTTON3:
 					if (type == PARCOUR_A) {
-						button_dist_val = BUTTON3_A;
+						button_dist_val = NEW_BUTTON3_A;
 					} else {
-						button_dist_val = BUTTON3_B;
+						button_dist_val = NEW_BUTTON3_B;
 					}
+					break;
 				case BUTTON4:
 					if (type == PARCOUR_A) {
-						button_dist_val = BUTTON4_A;
+						button_dist_val = NEW_BUTTON4_A;
 					} else {
-						button_dist_val = BUTTON4_B;
+						button_dist_val = NEW_BUTTON4_B;
 					}
+					break;
 				case BUTTON5:
 					if (type == PARCOUR_A) {
-						button_dist_val = BUTTON5_A;
+						button_dist_val = NEW_BUTTON5_A;
 					} else {
-						button_dist_val = BUTTON5_B;
+						button_dist_val = NEW_BUTTON5_B;
 					}
+					break;
 				}
-				loop_setMotorHalfSpeed();
+				if (button_dist_val < tof2_val) {
+					if (type == PARCOUR_A) {
+						loop_setMotorDirLeft();
+					} else {
+						loop_setMotorDirRight();
+					}
+					state8_neg_drv_dir = 1;
+				}
+				loop_setMotorButtonSpeed();
 				state8_initialized = 1;
 			}
-			if (tof2_val >= button_dist_val) {
-				loop_setMotorStop();
-				parcour_state = 9;
-				break;
+			if (state8_neg_drv_dir) {
+				if (tof2_val <= button_dist_val) {
+					loop_setMotorStop();
+					parcour_state = 9;
+					break;
+				}
+			} else {
+				if (tof2_val >= button_dist_val) {
+					loop_setMotorStop();
+					parcour_state = 9;
+					break;
+				}
 			}
 			break;
 		case 9: /* drive into button */
 			loop_setServosStraight();
 			loop_setMotorDirBackward();
-			loop_setMotorMaxSpeed();
+			loop_setMotorButtonSpeed();
 			WAIT1_Waitms(NEW_DRIVE_INTO_BUTTON_TIME);
 			loop_setMotorStop();
 			parcour_state = 10;
 			break;
 		case 10:
 			// todo: do sth. stupid
-			loop_initVars();
+			//loop_initVars();
 			break;
 		}
 	}
