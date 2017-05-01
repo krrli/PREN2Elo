@@ -45,7 +45,9 @@ enum serialDebugLite {
 	DEBUG_ERROR_SET_BRUSHLESS = 0xC7,
 	DEBUG_ERROR_SET_SERVO = 0xC8,
 	DEBUG_ERROR_GET_TOF_VALUE = 0xC9,
-	DEBUG_ERROR_WRONG_BUTTON_NUMBER = 0xCA
+	DEBUG_ERROR_WRONG_BUTTON_NUMBER = 0xCA,
+	DEBUG_ERROR_STOPPING_BECAUSE_I2C_ERROR=0xCB,
+	DEBUG_ERROR_REINIT_I2C=0xCC
 };
 
 /*
@@ -271,6 +273,7 @@ void mainLoop(void);
 void mainLoop2(void);
 
 #define NEW_SERIAL_INT_ENABLED 0
+#define NEW_SERIAL_RASPI_ENABLED 0
 #define NEW_SERIAL_PAUSE_ENABLED 0
 
 #define NEW_MAIN_LOOP 1
@@ -338,7 +341,9 @@ enum NewMotorSpeed {
 #define PID_CORR_SIMPLE 0 // drive away from wall, if too near, else drive towards wall
 #define PID_CORR_SET_SPEED 0 // regulate motor speed directly
 
-#define PID_WAIT_TIME_SERVO_CORR 20
+#define PID_WAIT_TIME_SERVO_CORR 0
+#define PID_STOP_ON_I2C_ERROR 1
+
 #define PID_CORR_SIMPLE_CORR_PERCENT 30
 #define PID_CORR_SIMPLE_MIN_PID_VAL 5
 

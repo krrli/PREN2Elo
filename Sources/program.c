@@ -1006,18 +1006,25 @@ void start(void) {
 }
 
 void serialRxInt(uint8_t ch, uint8_t port) {
-#if NEW_SERIAL_INT_ENABLED
+#if NEW_SERIAL_INT_ENABLED==0
+	return;
+#endif
+#if NEW_SERIAL_RASPI_ENABLED==0
+	if (port == RasPi) {
+		return;
+	}
+#endif
 	switch (ch) {
-		/* commands from raspi */
-		case START:
+	/* commands from raspi */
+	case START:
 		serialSend(ACKNOWLEDGE, port);
 		if (state == STOPPED)
-		state = DRIVE_FORWARD;
+			state = DRIVE_FORWARD;
 		if (parcour_state == 0) {
 			parcour_state = 1;
 		}
 		break;
-		case PAUSE:
+	case PAUSE:
 		serialSend(ACKNOWLEDGE, port);
 #if NEW_SERIAL_PAUSE_ENABLED
 		stateBak = state;
@@ -1026,7 +1033,7 @@ void serialRxInt(uint8_t ch, uint8_t port) {
 		loop_setMotorStop();
 #endif
 		break;
-		case RESUME:
+	case RESUME:
 		serialSend(ACKNOWLEDGE, port);
 #if NEW_SERIAL_PAUSE_ENABLED
 		state = stateBak;
@@ -1055,16 +1062,16 @@ void serialRxInt(uint8_t ch, uint8_t port) {
 		break;
 
 		/* answers from raspi */
-		case ACKNOWLEDGE:
+	case ACKNOWLEDGE:
 		break;
-		case ERROR:
+	case ERROR:
 		serialSend(lastSentCmd[port], port);
 		break;
-		case BUTTON1:
-		case BUTTON2:
-		case BUTTON3:
-		case BUTTON4:
-		case BUTTON5:
+	case BUTTON1:
+	case BUTTON2:
+	case BUTTON3:
+	case BUTTON4:
+	case BUTTON5:
 		if (lastSentCmd[port] == ROMAN_NUMERAL_REQUEST || parcour_state == 7) {
 			serialSend(ACKNOWLEDGE, port);
 			button = ch;
@@ -1077,12 +1084,11 @@ void serialRxInt(uint8_t ch, uint8_t port) {
 		break;
 
 		/* illegal commands from raspi */
-		case ROMAN_NUMERAL_REQUEST:
-		case CURVE:
-		default:
+	case ROMAN_NUMERAL_REQUEST:
+	case CURVE:
+	default:
 		serialSend(ERROR, port);
 	}
-#endif
 }
 
 void serialSend(uint8_t ch, uint8_t port) {
@@ -1102,6 +1108,19 @@ void serialSend(uint8_t ch, uint8_t port) {
 
 void serialDebugLite(uint8_t ch) {
 	serialSend(ch, PC);
+	if (ch == DEBUG_ERROR_GET_TOF_VALUE || ch == DEBUG_ERROR_SET_SERVO) {
+		if (PID_STOP_ON_I2C_ERROR) {
+			loop_setMotorStop();
+			serialSend(DEBUG_ERROR_STOPPING_BECAUSE_I2C_ERROR, PC);
+			for (;;) {
+			}
+		}
+		serialSend(DEBUG_ERROR_REINIT_I2C, PC);
+		GenI2C_ToF_Deinit();
+		WAIT1_Waitms(5);
+		GenI2C_ToF_Init();
+		WAIT1_Waitms(5);
+	}
 }
 
 void mainLoop(void) {
