@@ -46,8 +46,10 @@ enum serialDebugLite {
 	DEBUG_ERROR_SET_SERVO = 0xC8,
 	DEBUG_ERROR_GET_TOF_VALUE = 0xC9,
 	DEBUG_ERROR_WRONG_BUTTON_NUMBER = 0xCA,
-	DEBUG_ERROR_STOPPING_BECAUSE_I2C_ERROR=0xCB,
-	DEBUG_ERROR_REINIT_I2C=0xCC
+	DEBUG_ERROR_STOPPING_BECAUSE_I2C_ERROR = 0xCB,
+	DEBUG_ERROR_REINIT_I2C = 0xCC,
+	DEBUG_TRY_INIT_MOTOR = 0xD1,
+	DEBUG_TRY_INIT_SERVO_AND_TOF = 0xD2,
 };
 
 /*
@@ -297,7 +299,11 @@ enum newDriveDistance {
 };
 
 enum NewMotorSpeed {
-	NEW_MOTOR_CORRSPEED = 25, NEW_MOTOR_MAXSPEED = 100, NEW_MOTOR_HALFSPEED=50, NEW_MOTOR_BUTTON_SPEED=10
+	NEW_MOTOR_CORRSPEED = 25,
+	NEW_MOTOR_MAXSPEED = 100,
+	NEW_MOTOR_HALFSPEED = 50,
+	NEW_MOTOR_BUTTON_SPEED = 10,
+	NEW_MOTOR_BUTTON_SPEED_2 = 25
 };
 
 #define NEW_CORR_ENABLED 1
@@ -430,7 +436,8 @@ uint8_t setServo(uint8_t ser, enum ServoDirection dir); // ser = 0...3
 uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
 		uint16_t corr_val);
 
-void setServoPidBoth(int32_t pid_val_dist,int32_t pid_val_diff,enum parcourType type,uint8_t state);
+void setServoPidBoth(int32_t pid_val_dist, int32_t pid_val_diff,
+		enum parcourType type, uint8_t state);
 
 /* internal functions */
 

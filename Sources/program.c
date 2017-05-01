@@ -286,6 +286,26 @@ void loop_setMotorButtonSpeed() {
 	}
 	WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
 }
+void loop_setMotorButtonSpeed2() {
+	uint8_t res;
+	res = setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_BUTTON_SPEED_2);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	res = setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_BUTTON_SPEED_2);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	res = setMotorSpeed(MOTOR_REAR_LEFT, NEW_MOTOR_BUTTON_SPEED_2);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	res = setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_BUTTON_SPEED_2);
+	if (res != ERR_OK) {
+		serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+	}
+	WAIT1_Waitms(NEW_WAIT_TIME_DEFAULT);
+}
 void loop_setMotorStop() {
 	uint8_t res;
 	res = setMotorSpeed(MOTOR_FRONT_LEFT, 0);
@@ -1107,8 +1127,10 @@ void serialSend(uint8_t ch, uint8_t port) {
 }
 
 void serialDebugLite(uint8_t ch) {
+	uint8_t res;
 	serialSend(ch, PC);
-	if (ch == DEBUG_ERROR_GET_TOF_VALUE || ch == DEBUG_ERROR_SET_SERVO) {
+	if (ch == DEBUG_ERROR_GET_TOF_VALUE || ch == DEBUG_ERROR_SET_SERVO
+			|| ch == DEBUG_ERROR_SET_BRUSHLESS) {
 		if (PID_STOP_ON_I2C_ERROR) {
 			loop_setMotorStop();
 			serialSend(DEBUG_ERROR_STOPPING_BECAUSE_I2C_ERROR, PC);
@@ -1120,6 +1142,29 @@ void serialDebugLite(uint8_t ch) {
 		WAIT1_Waitms(5);
 		GenI2C_ToF_Init();
 		WAIT1_Waitms(5);
+	} else if (ch == DEBUG_ERROR_INIT_MOTOR) {
+		serialSend(DEBUG_TRY_INIT_MOTOR, PC);
+		do {
+			res = initMotor();
+		} while (res != ERR_OK);
+	} else if (ch == DEBUG_ERROR_INIT_SERVO || ch == DEBUG_ERROR_INIT_TOF) {
+		serialSend(DEBUG_TRY_INIT_SERVO_AND_TOF, PC);
+		GenI2C_ToF_Deinit();
+		WAIT1_Waitms(5);
+		GenI2C_ToF_Init();
+		WAIT1_Waitms(5);
+		do {
+			res = initServo();
+		} while (res != ERR_OK);
+		do {
+			res = initToF();
+		} while (res != ERR_OK);
+	} else if (ch == DEBUG_ERROR_SET_MOTOR_DIRECTION
+			|| ch == DEBUG_ERROR_SET_MOTOR_SPEED) {
+		serialSend(DEBUG_TRY_INIT_MOTOR, PC);
+		do {
+			res = initMotor();
+		} while (res != ERR_OK);
 	}
 }
 
@@ -2328,7 +2373,7 @@ void mainLoop2(void) {
 		case 9: /* drive into button */
 			loop_setServosStraight();
 			loop_setMotorDirBackward();
-			loop_setMotorButtonSpeed();
+			loop_setMotorButtonSpeed2();
 			WAIT1_Waitms(NEW_DRIVE_INTO_BUTTON_TIME);
 			loop_setMotorStop();
 			parcour_state = 10;
