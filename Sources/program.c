@@ -65,10 +65,6 @@ void loop_initVars() {
 	lastSentCmd[PC] = 0x00;
 	lastSentCmd[RasPi] = 0x00;
 
-	/* get parcour type */
-	//type = SW_Parc_GetVal();
-	type = PARCOUR_B; // todo
-
 	/* init variables for main loop */
 	state = STOPPED;
 	stateBak = STOPPED;
@@ -79,17 +75,6 @@ void loop_initVars() {
 	distance = CURVE_DIST;
 
 	/* init variables for new main loop */
-	if (type == PARCOUR_A) {
-		tof1 = TOF_LEFT_FRONT;
-		tof2 = TOF_LEFT_REAR;
-		tof3 = TOF_REAR;
-		tof4 = TOF_RIGHT_REAR;
-	} else {
-		tof1 = TOF_RIGHT_FRONT;
-		tof2 = TOF_RIGHT_REAR;
-		tof3 = TOF_REAR;
-		tof4 = TOF_LEFT_REAR;
-	}
 	parcour_state = 0;
 	state0_initialized = 0;
 	state7_initialized = 0;
@@ -1011,13 +996,17 @@ void start(void) {
 		serialDebugLite(DEBUG_ERROR_INIT_TOF);
 	}
 
+	for (;;) {
 #if NEW_MAIN_LOOP
-	/* start new main loop */
-	mainLoop2();
+		/* start new main loop */
+		mainLoop2();
 #else
-	/* start mainloop */
-	mainLoop();
+		/* start mainloop */
+		mainLoop();
 #endif
+		cent_switch_old = CENT_OFF;
+		loop_initVars();
+	}
 
 	for (;;) {
 		/* fallback loop, should never be reached */
@@ -1134,8 +1123,7 @@ void serialDebugLite(uint8_t ch) {
 		if (PID_STOP_ON_I2C_ERROR) {
 			loop_setMotorStop();
 			serialSend(DEBUG_ERROR_STOPPING_BECAUSE_I2C_ERROR, PC);
-			for (;;) {
-			}
+			//for (;;);
 		}
 		serialSend(DEBUG_ERROR_REINIT_I2C, PC);
 		GenI2C_ToF_Deinit();
@@ -2013,6 +2001,7 @@ void mainLoop2(void) {
 
 		/* check centrifuge state */
 		if (parcour_state == 0) {
+			//cent_switch = CENT_ON;
 			cent_switch = SW_Zent_GetVal();
 			if (cent_switch != cent_switch_old) {
 				if (cent_switch == CENT_ON) {
@@ -2022,16 +2011,16 @@ void mainLoop2(void) {
 						serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
 					}
 #endif
-				}
-				cent_switch_old = cent_switch;
-			} else {
+					cent_switch_old = cent_switch;
+				} else {
 #if NEW_CENT_ENABLED
-				res = setBrushless(BRUSHLESS_OFF);
-				if (res != ERR_OK) {
-					serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
-				}
+					res = setBrushless(BRUSHLESS_OFF);
+					if (res != ERR_OK) {
+						serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
+					}
 #endif
-				cent_switch_old = cent_switch;
+					cent_switch_old = cent_switch;
+				}
 			}
 		}
 
@@ -2049,6 +2038,21 @@ void mainLoop2(void) {
 #endif
 			break;
 		case 1: /* drive blind */
+			/* get parcour type */
+			type = SW_Parc_GetVal();
+			//type = PARCOUR_B; // todo
+			if (type == PARCOUR_A) {
+				tof1 = TOF_LEFT_FRONT;
+				tof2 = TOF_LEFT_REAR;
+				tof3 = TOF_REAR;
+				tof4 = TOF_RIGHT_REAR;
+			} else {
+				tof1 = TOF_RIGHT_FRONT;
+				tof2 = TOF_RIGHT_REAR;
+				tof3 = TOF_REAR;
+				tof4 = TOF_LEFT_REAR;
+			}
+
 #if NEW_CENT_WITHOUT_SWITCH_ENABLED
 			setBrushless(BRUSHLESS_ON);
 			WAIT1_Waitms(2000);
@@ -2276,10 +2280,8 @@ void mainLoop2(void) {
 		case 7: /* stop, get roman number */
 			if (state7_initialized == 0) {
 				loop_setMotorStop();
-#if NEW_CENT_WITHOUT_SWITCH_ENABLED
 				setBrushless(BRUSHLESS_OFF);
 				WAIT1_Waitms(4000);
-#endif
 #if NEW_SECOND_ROUND_ENABLED
 				// todo: check, if dist to wall big enough
 				loop_secondRound();
@@ -2380,7 +2382,7 @@ void mainLoop2(void) {
 			break;
 		case 10:
 			// todo: do sth. stupid
-			//loop_initVars();
+			return;
 			break;
 		}
 	}

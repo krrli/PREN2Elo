@@ -11,6 +11,11 @@ DEBUG_ERROR_SET_SERVO=b'\xC8'
 DEBUG_ERROR_GET_TOF_VALUE=b'\xC9'
 DEBUG_ERROR_WRONG_BUTTON_NUMBER=b'\xCA'
 
+DEBUG_ERROR_STOPPING_BECAUSE_I2C_ERROR=b'\xCB'
+DEBUG_ERROR_REINIT_I2C=b'\xCC'
+DEBUG_TRY_INIT_MOTOR=b'\xD1'
+DEBUG_TRY_INIT_SERVO_AND_TOF=b'\xD2'
+
 ACKNOWLEDGE=b'\x20'
 ERROR=b'\x10'
 BUTTON1=b'\x01'
@@ -83,6 +88,8 @@ def getError():
         elif res==RESUME:
         	print('RESUME')
         else:
-        	print('unknown code: '+str(res))
+            print('unknown code: '+str(res))
+            print("DEBUG_ERROR_STOPPING_BECAUSE_I2C_ERROR=b'\xCB' DEBUG_ERROR_REINIT_I2C=b'\xCC' DEBUG_TRY_INIT_MOTOR=b'\xD1' DEBUG_TRY_INIT_SERVO_AND_TOF=b'\xD2'")
+
 
 getError()

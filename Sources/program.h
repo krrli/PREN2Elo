@@ -33,7 +33,7 @@ enum serialCommands {
 	CURVE = 0x08, // FD to RPi
 	SECOND_ROUND = 0x09, // FD to RPi
 	PAUSE = 0xB0, // RPi to FD
-	RESUME = 0x70 // RPi to FD
+	RESUME = 0x70, // RPi to FD
 };
 enum serialDebugLite {
 	DEBUG_ERROR_INIT_MOTOR = 0xC1,
@@ -274,7 +274,7 @@ void mainLoop(void);
 /* new main loop */
 void mainLoop2(void);
 
-#define NEW_SERIAL_INT_ENABLED 0
+#define NEW_SERIAL_INT_ENABLED 1
 #define NEW_SERIAL_RASPI_ENABLED 0
 #define NEW_SERIAL_PAUSE_ENABLED 0
 
@@ -286,7 +286,7 @@ void mainLoop2(void);
 #define NEW_DIST_TO_WALL_MAX 142
 
 enum newDriveDistance {
-	NEW_CURVE_DIST = 260, NEW_DIST_END = 400, NEW_BUTTON1_A = 100, // todo: change values
+	NEW_CURVE_DIST = 280, NEW_DIST_END = 600, NEW_BUTTON1_A = 100, // todo: change values
 	NEW_BUTTON2_A = 110,
 	NEW_BUTTON3_A = 130,
 	NEW_BUTTON4_A = 150,
@@ -316,7 +316,7 @@ enum NewMotorSpeed {
 
 #define NEW_CORR_EXPERIMANTAL_ENABLED 0
 
-#define NEW_CENT_ENABLED 0 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#define NEW_CENT_ENABLED 1 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #define NEW_CENT_WITHOUT_SWITCH_ENABLED 0 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 #define NEW_CORR_TIME 100 // value in ms
@@ -327,17 +327,17 @@ enum NewMotorSpeed {
 
 #define NEW_CURVE_DRIVE_OVER_TIME 0 // value in ms
 #define NEW_CURVE_DETECT_DISTANCE 300
-#define NEW_CURVE_DETECT_TOF4_ENABLED 1
+#define NEW_CURVE_DETECT_TOF4_ENABLED 1 // todo
 
 #define NEW_SECOND_ROUND_ENABLED 0
 #define NEW_SECOND_ROUND_TURN_TIME 2000
 #define NEW_SECOND_ROUND_DRIVE_TO_START_TIME 2000
 
-#define NEW_DRIVE_INTO_BUTTON_TIME 1000 // value in ms
+#define NEW_DRIVE_INTO_BUTTON_TIME 500 // value in ms
 
 #define NEW_WAIT_TIME_DEFAULT 0 // value in ms
 
-#define NEW_WAIT_TIME_SERVO 300 // value in ms
+#define NEW_WAIT_TIME_SERVO 200 // value in ms
 
 // chose only one!
 #define PID_CORR_SPEED 0 // regulated over time

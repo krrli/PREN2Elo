@@ -251,12 +251,12 @@ void testBrushlessSwitch(void) {
 
 void testBrushless() {
 	initServo();
-	//for(;;){
+	for(;;){
 	WAIT1_Waitms(5000);
 	setBrushless(BRUSHLESS_ON);
 	WAIT1_Waitms(5000);
 	setBrushless(BRUSHLESS_OFF);
-	//}
+	}
 }
 
 void servoCalib(void) {

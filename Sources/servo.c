@@ -203,6 +203,10 @@ uint8_t setBrushless(enum BrushlessState state) {
 			}
 			WAIT1_Waitms(1);
 		}
+		res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
+		if (res != ERR_OK) {
+			setServoPwm(brushlessChannel, 0, brushlessValueOff);
+		}
 		return res;
 	case BRUSHLESS_OFF:
 		return setServoPwm(brushlessChannel, 0, brushlessValueOff);

@@ -17,7 +17,7 @@ void starttest(void);
 #define TEST_SERVO_BOARD 0 // !!! brushless !!!
 #define TEST_BRUSHLESS_SWITCH 0// !!! brushless !!!
 #define TEST_BRUSHLESS 0 // !!! brushless !!!
-#define SERVO_CALIB 0 // !!! brushless !!!
+#define SERVO_CALIB 0 // !! brushless !!!
 #define TEST_SERVO_CORR 0
 #define TEST_MOTOR 0
 #define TEST_MOTOR_DIRECTION 0
