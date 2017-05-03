@@ -1004,7 +1004,7 @@ void start(void) {
 		/* start mainloop */
 		mainLoop();
 #endif
-		cent_switch_old = CENT_OFF;
+		//cent_switch_old = CENT_OFF;
 		loop_initVars();
 	}
 
@@ -2280,8 +2280,6 @@ void mainLoop2(void) {
 		case 7: /* stop, get roman number */
 			if (state7_initialized == 0) {
 				loop_setMotorStop();
-				setBrushless(BRUSHLESS_OFF);
-				WAIT1_Waitms(4000);
 #if NEW_SECOND_ROUND_ENABLED
 				// todo: check, if dist to wall big enough
 				loop_secondRound();
@@ -2293,6 +2291,8 @@ void mainLoop2(void) {
 				} else {
 					loop_setMotorDirLeft();
 				}
+				setBrushless(BRUSHLESS_OFF);
+				WAIT1_Waitms(4000);
 				serialSend(ROMAN_NUMERAL_REQUEST, RasPi);
 				serialSend(ROMAN_NUMERAL_REQUEST, PC);
 				state7_initialized = 1;

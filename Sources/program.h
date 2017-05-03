@@ -286,7 +286,7 @@ void mainLoop2(void);
 #define NEW_DIST_TO_WALL_MAX 142
 
 enum newDriveDistance {
-	NEW_CURVE_DIST = 280, NEW_DIST_END = 600, NEW_BUTTON1_A = 100, // todo: change values
+	NEW_CURVE_DIST = 300, NEW_DIST_END = 400, NEW_BUTTON1_A = 100, // todo: change values
 	NEW_BUTTON2_A = 110,
 	NEW_BUTTON3_A = 130,
 	NEW_BUTTON4_A = 150,
