@@ -20,7 +20,7 @@ volatile enum driveDistance distance;
  * global variables for new main loop
  */
 volatile uint8_t cent_switch, cent_switch_old;
-volatile uint8_t tof1, tof2, tof3, tof4;
+volatile uint8_t tof1, tof2, tof3, tof4, tof5;
 volatile uint8_t parcour_state;
 volatile uint8_t state0_initialized, state7_initialized, state8_initialized;
 #if NEW_SERIAL_PAUSE_ENABLED
@@ -1023,6 +1023,11 @@ void serialRxInt(uint8_t ch, uint8_t port) {
 		return;
 	}
 #endif
+#if NEW_SERIAL_INT_DEBUG_ENABLED
+	serialSend(0xee, PC);
+	serialSend(port, PC);
+	serialSend(ch, PC);
+#endif
 	switch (ch) {
 	/* commands from raspi */
 	case START:
@@ -1117,19 +1122,20 @@ void serialSend(uint8_t ch, uint8_t port) {
 
 void serialDebugLite(uint8_t ch) {
 	uint8_t res;
+	uint16_t val;
 	serialSend(ch, PC);
 	if (ch == DEBUG_ERROR_GET_TOF_VALUE || ch == DEBUG_ERROR_SET_SERVO
 			|| ch == DEBUG_ERROR_SET_BRUSHLESS) {
-		if (PID_STOP_ON_I2C_ERROR) {
+		serialSend(DEBUG_ERROR_REINIT_I2C, PC);
+		GenI2C_ToF_Deinit();
+		WAIT1_Waitms(10);
+		GenI2C_ToF_Init();
+		WAIT1_Waitms(10);
+		if (PID_STOP_ON_I2C_ERROR && getToFValueMillimeters(0, &val) != ERR_OK) {
 			loop_setMotorStop();
 			serialSend(DEBUG_ERROR_STOPPING_BECAUSE_I2C_ERROR, PC);
 			//for (;;);
 		}
-		serialSend(DEBUG_ERROR_REINIT_I2C, PC);
-		GenI2C_ToF_Deinit();
-		WAIT1_Waitms(5);
-		GenI2C_ToF_Init();
-		WAIT1_Waitms(5);
 	} else if (ch == DEBUG_ERROR_INIT_MOTOR) {
 		serialSend(DEBUG_TRY_INIT_MOTOR, PC);
 		do {
@@ -1150,9 +1156,9 @@ void serialDebugLite(uint8_t ch) {
 	} else if (ch == DEBUG_ERROR_SET_MOTOR_DIRECTION
 			|| ch == DEBUG_ERROR_SET_MOTOR_SPEED) {
 		serialSend(DEBUG_TRY_INIT_MOTOR, PC);
-		do {
-			res = initMotor();
-		} while (res != ERR_OK);
+		//do {
+		res = initMotor();
+		//} while (res != ERR_OK);
 	}
 }
 
@@ -1986,7 +1992,7 @@ void loop_secondRound() {
 void mainLoop2(void) {
 #if NEW_MAIN_LOOP
 	/* local variables for tof sensors */
-	uint16_t tof1_val, tof2_val, tof3_val, tof4_val;
+	uint16_t tof1_val, tof2_val, tof3_val, tof4_val, tof5_val;
 	int32_t diff;
 	uint16_t button_dist_val;
 	/* local variable to catch errors */
@@ -2046,11 +2052,13 @@ void mainLoop2(void) {
 				tof2 = TOF_LEFT_REAR;
 				tof3 = TOF_REAR;
 				tof4 = TOF_RIGHT_REAR;
+				tof5 = TOF_RIGHT_FRONT;
 			} else {
 				tof1 = TOF_RIGHT_FRONT;
 				tof2 = TOF_RIGHT_REAR;
 				tof3 = TOF_REAR;
 				tof4 = TOF_LEFT_REAR;
+				tof5 = TOF_LEFT_FRONT;
 			}
 
 #if NEW_CENT_WITHOUT_SWITCH_ENABLED
@@ -2082,6 +2090,10 @@ void mainLoop2(void) {
 				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 			}
 			res = getToFValueMillimeters(tof4, &tof4_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			res = getToFValueMillimeters(tof5, &tof5_val);
 			if (res != ERR_OK) {
 				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 			}
@@ -2139,7 +2151,12 @@ void mainLoop2(void) {
 			loop_pidDoubleDistCorr(tof2_val, tof4_val);
 #endif
 #if NEW_BOTH_CORR_ENABLED
-			loop_pidBoth(tof1_val, tof2_val);
+			if (tof1_val < NEW_CURVE_DETECT_DISTANCE
+					|| tof5_val < NEW_CURVE_DETECT_DISTANCE) { // todo
+				loop_pidBoth(tof1_val, tof2_val);
+			} else {
+				loop_setServosStraight();
+			}
 #endif
 			break;
 		case 3: /* drive sideways blind */
