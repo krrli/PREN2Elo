@@ -76,6 +76,10 @@ void starttest(void) {
 		testTofServo();
 	}
 
+	if (TEST_MOTOR_FEDER) {
+		testMotorFeder();
+	}
+
 	/* end loop */
 	for (;;) {
 
@@ -251,11 +255,11 @@ void testBrushlessSwitch(void) {
 
 void testBrushless() {
 	initServo();
-	for(;;){
-	WAIT1_Waitms(5000);
-	setBrushless(BRUSHLESS_ON);
-	WAIT1_Waitms(5000);
-	setBrushless(BRUSHLESS_OFF);
+	for (;;) {
+		WAIT1_Waitms(5000);
+		setBrushless(BRUSHLESS_ON);
+		WAIT1_Waitms(5000);
+		setBrushless(BRUSHLESS_OFF);
 	}
 }
 
@@ -500,11 +504,11 @@ void testTofServo() {
 	initToF();
 	initServo();
 	/*initMotor();
-	WAIT1_Waitms(500);
-	for (uint8_t i = 0; i < 4; i++) {
-		res=setMotorDirection(i, MOTOR_FORWARD);
-		res=setMotorSpeed(i, 100);
-	}*/
+	 WAIT1_Waitms(500);
+	 for (uint8_t i = 0; i < 4; i++) {
+	 res=setMotorDirection(i, MOTOR_FORWARD);
+	 res=setMotorSpeed(i, 100);
+	 }*/
 	for (;;) {
 		getToFValueMillimeters(0, &tof_val);
 		getToFValueMillimeters(1, &tof_val);
@@ -517,5 +521,32 @@ void testTofServo() {
 		}
 		setServoPID(SERVO_STRAIGHT, 0, val);
 		WAIT1_Waitms(50);
+	}
+}
+
+void testMotorFeder() {
+	initMotor();
+	WAIT1_Waitms(1000);
+	setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+	setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+	setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+	setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+	WAIT1_Waitms(1000);
+	setMotorSpeed(MOTOR_FRONT_RIGHT, 30);
+	setMotorSpeed(MOTOR_REAR_RIGHT, 30);
+	setMotorSpeed(MOTOR_FRONT_LEFT, 30);
+	setMotorSpeed(MOTOR_REAR_LEFT, 30);
+	//for (uint8_t i = 0; i < 10; i++) {
+	for (;;) {
+		WAIT1_Waitms(300);
+		setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+		setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+		setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+		setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+		WAIT1_Waitms(300);
+		setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+		setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+		setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+		setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
 	}
 }

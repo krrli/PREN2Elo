@@ -25,6 +25,7 @@ void starttest(void);
 #define TEST_MOTOR_AND_SERVO 0 // !!! brushless !!!
 #define TEST_SERVO_CIRCLE 0
 #define TEST_TOF_SERVO 0
+#define TEST_MOTOR_FEDER 0
 
 void doNothing(void);
 
@@ -53,5 +54,7 @@ void testMotorAndServo();
 void testServoCircle();
 
 void testTofServo();
+
+void testMotorFeder();
 
 #endif /* SOURCES_TEST_H_ */

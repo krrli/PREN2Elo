@@ -27,6 +27,7 @@ volatile uint8_t state0_initialized, state7_initialized, state8_initialized;
 volatile uint8_t loop_paused;
 #endif
 volatile uint8_t state8_neg_drv_dir;
+volatile uint8_t feder_en;
 
 /*
  * global variables for second round
@@ -83,6 +84,8 @@ void loop_initVars() {
 #if NEW_SERIAL_PAUSE_ENABLED
 	loop_paused = 0;
 #endif
+
+	feder_en = 0;
 
 	/* init vars for pid */
 	loop_pidReset();
@@ -2016,7 +2019,9 @@ void mainLoop2(void) {
 					if (res != ERR_OK) {
 						serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
 					}
+					WAIT1_Waitms(5000);
 #endif
+					feder_en = 1;
 					cent_switch_old = cent_switch;
 				} else {
 #if NEW_CENT_ENABLED
@@ -2025,6 +2030,8 @@ void mainLoop2(void) {
 						serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
 					}
 #endif
+					feder_en = 0;
+					state0_initialized = 0;
 					cent_switch_old = cent_switch;
 				}
 			}
@@ -2038,12 +2045,37 @@ void mainLoop2(void) {
 				loop_setMotorStop();
 				state0_initialized = 1;
 			}
+			if (feder_en) {
+				setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+				setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+				setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+				setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+				WAIT1_Waitms(100);
+				setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_FEDER_SPEED);
+				setMotorSpeed(MOTOR_REAR_RIGHT, NEW_FEDER_SPEED);
+				setMotorSpeed(MOTOR_FRONT_LEFT, NEW_FEDER_SPEED);
+				setMotorSpeed(MOTOR_REAR_LEFT, NEW_FEDER_SPEED);
+				for (;;) {
+					WAIT1_Waitms(NEW_FEDER_TIME);
+					setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+					setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+					setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+					setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+					WAIT1_Waitms(NEW_FEDER_TIME);
+					setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+					setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+					setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+					setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+				}
+			}
 #if NEW_SERIAL_INT_ENABLED == 0
 			WAIT1_Waitms(1000);
 			parcour_state = 1;
 #endif
 			break;
 		case 1: /* drive blind */
+			loop_setMotorDirForward();
+			loop_setMotorMaxSpeed();
 			/* get parcour type */
 			type = SW_Parc_GetVal();
 			//type = PARCOUR_B; // todo
@@ -2065,7 +2097,6 @@ void mainLoop2(void) {
 			setBrushless(BRUSHLESS_ON);
 			WAIT1_Waitms(2000);
 #endif
-			loop_setMotorMaxSpeed();
 #if NEW_SERIAL_PAUSE_ENABLED
 			for (uint8_t i = 0; i < 10; i++) {
 				while (loop_paused) {
@@ -2222,12 +2253,12 @@ void mainLoop2(void) {
 #endif
 			loop_pidReset();
 			parcour_state = 6;
-			break;
-		case 6: /* drive backwards with corr */
 #if NEW_CENT_WITHOUT_SWITCH_ENABLED
 			WAIT1_Waitms(1000);
 			setBrushless(BRUSHLESS_ON);
 #endif
+			break;
+		case 6: /* drive backwards with corr */
 			/* get tof values */
 			res = getToFValueMillimeters(tof1, &tof1_val);
 			if (res != ERR_OK) {
@@ -2309,9 +2340,9 @@ void mainLoop2(void) {
 					loop_setMotorDirLeft();
 				}
 				setBrushless(BRUSHLESS_OFF);
-				WAIT1_Waitms(4000);
 				serialSend(ROMAN_NUMERAL_REQUEST, RasPi);
 				serialSend(ROMAN_NUMERAL_REQUEST, PC);
+				WAIT1_Waitms(5000);
 				state7_initialized = 1;
 #if NEW_SERIAL_INT_ENABLED==0
 				WAIT1_Waitms(1000);
