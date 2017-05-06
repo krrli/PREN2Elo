@@ -440,6 +440,8 @@ uint8_t setBrushless(enum BrushlessState state);
 /* set servos */
 uint8_t setServo(uint8_t ser, enum ServoDirection dir); // ser = 0...3
 
+uint8_t setServoDriveBack(enum parcourType type);
+
 uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
 		uint16_t corr_val);
 
@@ -475,5 +477,9 @@ uint8_t setMotorDirection(uint8_t motor, enum MotorDirection val);
 
 /* set motor speed */
 uint8_t setMotorSpeed(uint8_t motor, uint8_t val);
+
+uint8_t blockMotor(uint8_t motor);
+
+uint8_t unblockMotor(uint8_t motor);
 
 #endif /* SOURCES_PROGRAM_H_ */

@@ -1851,13 +1851,13 @@ even (hw or sw)
     <Enabled v="Y" />
     <Properties>
       <Component_name v="SW_Parc" />
-      <Pin_for_I_O v="CMP0_IN3/PTC9/I2C0_SDA/TPM0_CH5" />
+      <Pin_for_I_O v="ADC0_SE8/TSI0_CH0/PTB0/LLWU_P5/I2C0_SCL/TPM1_CH0" />
       <inhrbean type="BitIO_LDD">
         <Enabled v="Y" />
         <Template v="BitIO_LDD" />
         <Properties>
           <Component_name v="BitIoLdd7" />
-          <Pin_for_I_O v="CMP0_IN3/PTC9/I2C0_SDA/TPM0_CH5" />
+          <Pin_for_I_O v="ADC0_SE8/TSI0_CH0/PTB0/LLWU_P5/I2C0_SCL/TPM1_CH0" />
           <Direction v="Input" />
           <group name="Initialization">
             <Init__direction v="Input" />
@@ -1914,13 +1914,13 @@ even (hw or sw)
     <Enabled v="Y" />
     <Properties>
       <Component_name v="SW_Zent" />
-      <Pin_for_I_O v="CMP0_IN2/PTC8/I2C0_SCL/TPM0_CH4" />
+      <Pin_for_I_O v="ADC0_SE9/TSI0_CH6/PTB1/I2C0_SDA/TPM1_CH1" />
       <inhrbean type="BitIO_LDD">
         <Enabled v="Y" />
         <Template v="BitIO_LDD" />
         <Properties>
           <Component_name v="BitIoLdd8" />
-          <Pin_for_I_O v="CMP0_IN2/PTC8/I2C0_SCL/TPM0_CH4" />
+          <Pin_for_I_O v="ADC0_SE9/TSI0_CH6/PTB1/I2C0_SDA/TPM1_CH1" />
           <Direction v="Input" />
           <group name="Initialization">
             <Init__direction v="Input" />

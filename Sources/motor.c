@@ -94,3 +94,53 @@ uint8_t setMotorSpeed(uint8_t motor, uint8_t val) {
 	} else
 		return ERR_RANGE;
 }
+
+uint8_t blockMotor(uint8_t motor) {
+	if (motor >= 0 && motor < NUMBER_OF_MOTOR) {
+		switch (motor) {
+		case 0:
+			MT1_IN1_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT1_IN2_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT1_PWM1_SetRatio16(0);
+			break;
+		case 1:
+			MT1_IN1_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT1_IN2_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT1_PWM2_SetRatio16(0);
+			break;
+		case 2:
+			MT1_IN1_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT1_IN2_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT2_PWM1_SetRatio16(0);
+			break;
+		case 3:
+			MT1_IN1_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT1_IN2_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT2_PWM2_SetRatio16(0);
+			break;
+		}
+		return ERR_OK;
+	} else
+		return ERR_RANGE;
+}
+
+uint8_t unblockMotor(uint8_t motor) {
+	if (motor >= 0 && motor < NUMBER_OF_MOTOR) {
+		switch (motor) {
+		case 0:
+			MT1_PWM1_SetRatio16(0xFFFF);
+			break;
+		case 1:
+			MT1_PWM2_SetRatio16(0xFFFF);
+			break;
+		case 2:
+			MT2_PWM1_SetRatio16(0xFFFF);
+			break;
+		case 3:
+			MT2_PWM2_SetRatio16(0xFFFF);
+			break;
+		}
+		return ERR_OK;
+	} else
+		return ERR_RANGE;
+}

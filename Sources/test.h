@@ -26,6 +26,8 @@ void starttest(void);
 #define TEST_SERVO_CIRCLE 0
 #define TEST_TOF_SERVO 0
 #define TEST_MOTOR_FEDER 0
+#define TEST_MOTOR_FEDER_BLOCKING 0
+#define TEST_DRIVE_TO_START 0
 
 void doNothing(void);
 
@@ -56,5 +58,9 @@ void testServoCircle();
 void testTofServo();
 
 void testMotorFeder();
+
+void testMotorFederBlocking();
+
+void testDriveToStart();
 
 #endif /* SOURCES_TEST_H_ */

@@ -80,6 +80,14 @@ void starttest(void) {
 		testMotorFeder();
 	}
 
+	if (TEST_MOTOR_FEDER_BLOCKING) {
+		testMotorFederBlocking();
+	}
+
+	if (TEST_DRIVE_TO_START) {
+		testDriveToStart();
+	}
+
 	/* end loop */
 	for (;;) {
 
@@ -548,5 +556,83 @@ void testMotorFeder() {
 		setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
 		setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
 		setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+	}
+}
+
+void testMotorFederBlocking() {
+	initMotor();
+	WAIT1_Waitms(1000);
+	setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+	setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+	setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+	setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+	WAIT1_Waitms(1000);
+	setMotorSpeed(MOTOR_FRONT_RIGHT, 30);
+	setMotorSpeed(MOTOR_REAR_RIGHT, 30);
+	setMotorSpeed(MOTOR_FRONT_LEFT, 30);
+	setMotorSpeed(MOTOR_REAR_LEFT, 30);
+	for (uint8_t i = 0; i < 5; i++) {
+		WAIT1_Waitms(300);
+		setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+		setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+		setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+		setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+		WAIT1_Waitms(300);
+		setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+		setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+		setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+		setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+	}
+	for (uint8_t i = 0; i < 4; i++) {
+		blockMotor(i);
+	}
+	WAIT1_Waitms(10000);
+	for (uint8_t i = 0; i < 4; i++) {
+		unblockMotor(i);
+	}
+}
+
+void testDriveToStart() {
+	initMotor();
+	initServo();
+	initToF();
+	WAIT1_Waitms(1000);
+	for (uint8_t i = 0; i < 4; i++) {
+		setServo(i, SERVO_STRAIGHT);
+	}
+	WAIT1_Waitms(2000);
+	for (;;) {
+		setServoDriveBack(PARCOUR_A);
+		setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+		setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+		setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+		setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+		for (uint8_t i = 0; i < 4; i++) {
+			setMotorSpeed(i, 10);
+		}
+		WAIT1_Waitms(5000);
+		for (uint8_t i = 0; i < 4; i++) {
+			setMotorSpeed(i, 0);
+		}
+		for (uint8_t i = 0; i < 4; i++) {
+			setServo(i, SERVO_STRAIGHT);
+		}
+		WAIT1_Waitms(10000);
+		setServoDriveBack(PARCOUR_B);
+		setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+		setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+		setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+		setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+		for (uint8_t i = 0; i < 4; i++) {
+			setMotorSpeed(i, 10);
+		}
+		WAIT1_Waitms(5000);
+		for (uint8_t i = 0; i < 4; i++) {
+			setMotorSpeed(i, 0);
+		}
+		for (uint8_t i = 0; i < 4; i++) {
+			setServo(i, SERVO_STRAIGHT);
+		}
+		WAIT1_Waitms(10000);
 	}
 }

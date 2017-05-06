@@ -1797,6 +1797,7 @@ void loop_secondRound() {
 	uint8_t res;
 	uint16_t tof1_val, tof2_val, tof3_val, tof4_val;
 	int32_t diff;
+	loop_setServosSideways();
 	serialSend(SECOND_ROUND, RasPi);
 	WAIT1_Waitms(WAIT_TIME_DEFAULT);
 	serialSend(SECOND_ROUND, PC);
@@ -1804,7 +1805,7 @@ void loop_secondRound() {
 	parcour_state2 = 0;
 	/* disable brushless */
 	setBrushless(BRUSHLESS_OFF);
-	WAIT1_Waitms(4000);
+	WAIT1_Waitms(5000);
 	/* set servo dir */
 	for (uint8_t i = 0; i < 4; i++) {
 		res = setServo(i, SERVO_CIRCLE);
@@ -2031,6 +2032,9 @@ void mainLoop2(void) {
 					}
 #endif
 					feder_en = 0;
+					for (uint8_t i = 0; i < 4; i++) {
+						unblockMotor(i);
+					}
 					state0_initialized = 0;
 					cent_switch_old = cent_switch;
 				}
@@ -2050,12 +2054,12 @@ void mainLoop2(void) {
 				setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
 				setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
 				setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
-				WAIT1_Waitms(100);
+				WAIT1_Waitms(500);
 				setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_FEDER_SPEED);
 				setMotorSpeed(MOTOR_REAR_RIGHT, NEW_FEDER_SPEED);
 				setMotorSpeed(MOTOR_FRONT_LEFT, NEW_FEDER_SPEED);
 				setMotorSpeed(MOTOR_REAR_LEFT, NEW_FEDER_SPEED);
-				for (;;) {
+				for (uint8_t i = 0; i < 5; i++) {
 					WAIT1_Waitms(NEW_FEDER_TIME);
 					setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
 					setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
@@ -2067,6 +2071,10 @@ void mainLoop2(void) {
 					setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
 					setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
 				}
+				for (uint8_t i = 0; i < 4; i++) {
+					blockMotor(i);
+				}
+				feder_en = 0;
 			}
 #if NEW_SERIAL_INT_ENABLED == 0
 			WAIT1_Waitms(1000);
@@ -2074,6 +2082,10 @@ void mainLoop2(void) {
 #endif
 			break;
 		case 1: /* drive blind */
+			for (uint8_t i = 0; i < 4; i++) {
+				unblockMotor(i);
+			}
+			WAIT1_Waitms(100); //todo
 			loop_setMotorDirForward();
 			loop_setMotorMaxSpeed();
 			/* get parcour type */

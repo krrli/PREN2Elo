@@ -7,7 +7,7 @@
 **     Version     : Component 02.611, Driver 01.01, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-25, 12:58, # CodeGen: 24
+**     Date/Time   : 2017-05-06, 20:36, # CodeGen: 122
 **     Abstract    :
 **         This component "AsynchroSerial" implements an asynchronous serial
 **         communication. The component supports different settings of
@@ -31,7 +31,7 @@
 **              CTS                                        : Disabled
 **              RTS                                        : Disabled
 **          Settings                                       : 
-**            Parity                                       : even (hw or sw)
+**            Parity                                       : none
 **            Width                                        : 8 bits
 **            Stop bit                                     : 1
 **            Receiver                                     : Enabled

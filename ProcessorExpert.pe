@@ -3,7 +3,7 @@
   <Header>
     <Name>PREN2-Freedom</Name>
     <SavedBy>pirmin</SavedBy>
-    <ModificationStamp>59</ModificationStamp>
+    <ModificationStamp>60</ModificationStamp>
     <Date>2017-03-23</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1550-0615</PEversion>
@@ -6724,7 +6724,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Index>4</Index>
+        <Index>0</Index>
       </ItemState>
       <ItemState>
         <ItemSymbol>MCF_CondGrp2</ItemSymbol>

@@ -170,6 +170,46 @@ uint8_t setServo(uint8_t ser, enum ServoDirection dir) { // ser = 0...3
 	}
 }
 
+uint8_t setServoDriveBack(enum parcourType type) {
+	uint8_t res;
+	if (type == PARCOUR_A) {
+		res = setServoPwm(0, 0, 455 + 50); //FL
+		if (res != ERR_OK) {
+			return res;
+		}
+		res = setServoPwm(0, 0, 260 - 50); //RL
+		if (res != ERR_OK) {
+			return res;
+		}
+		res = setServoPwm(0, 0, 245 - 50); //FR
+		if (res != ERR_OK) {
+			return res;
+		}
+		res = setServoPwm(0, 0, 450 + 50); //RR
+		if (res != ERR_OK) {
+			return res;
+		}
+	} else {
+		res = setServoPwm(0, 0, 455 - 50); //FL
+		if (res != ERR_OK) {
+			return res;
+		}
+		res = setServoPwm(0, 0, 260 + 50); //RL
+		if (res != ERR_OK) {
+			return res;
+		}
+		res = setServoPwm(0, 0, 245 + 50); //FR
+		if (res != ERR_OK) {
+			return res;
+		}
+		res = setServoPwm(0, 0, 450 - 50); //RR
+		if (res != ERR_OK) {
+			return res;
+		}
+	}
+	return ERR_OK;
+}
+
 uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
 		uint16_t corr_val) {
 	uint8_t res;
