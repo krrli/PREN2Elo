@@ -514,7 +514,7 @@
     </GenFiles>
     <SignalListFile>Documentation\PREN2-Freedom_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>60</ProjectModificationStamp>
+    <ProjectModificationStamp>62</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>
@@ -3331,8 +3331,8 @@
     <GenComponentVersion>02.611</GenComponentVersion>
     <GenDriverVersion>01.01</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1249482045</HeaderAge>
-    <CodeAge>1249482045</CodeAge>
+    <HeaderAge>1252807949</HeaderAge>
+    <CodeAge>1252807949</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>24</GenNumMethods>
     <Enable>false</Enable>
@@ -3534,8 +3534,8 @@
       <GenComponentVersion>01.188</GenComponentVersion>
       <GenDriverVersion>01.12</GenDriverVersion>
       <GenEventModule>Events</GenEventModule>
-      <HeaderAge>1249482045</HeaderAge>
-      <CodeAge>1251632905</CodeAge>
+      <HeaderAge>1252807949</HeaderAge>
+      <CodeAge>1252807949</CodeAge>
       <AsemblAge>-1</AsemblAge>
       <GenNumMethods>36</GenNumMethods>
       <Init>true</Init>
@@ -4904,8 +4904,8 @@
     <GenComponentVersion>01.016</GenComponentVersion>
     <GenDriverVersion>01.07</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1251781973</HeaderAge>
-    <CodeAge>1251781973</CodeAge>
+    <HeaderAge>1252803717</HeaderAge>
+    <CodeAge>1252803718</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>33</GenNumMethods>
     <Init>true</Init>

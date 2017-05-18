@@ -104,18 +104,18 @@ uint8_t blockMotor(uint8_t motor) {
 			MT1_PWM1_SetRatio16(0);
 			break;
 		case 1:
-			MT1_IN1_PutVal(INIT_MOTOR_DIRECTION_1);
-			MT1_IN2_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT1_IN3_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT1_IN4_PutVal(INIT_MOTOR_DIRECTION_1);
 			MT1_PWM2_SetRatio16(0);
 			break;
 		case 2:
-			MT1_IN1_PutVal(INIT_MOTOR_DIRECTION_1);
-			MT1_IN2_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT2_IN1_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT2_IN2_PutVal(INIT_MOTOR_DIRECTION_1);
 			MT2_PWM1_SetRatio16(0);
 			break;
 		case 3:
-			MT1_IN1_PutVal(INIT_MOTOR_DIRECTION_1);
-			MT1_IN2_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT2_IN3_PutVal(INIT_MOTOR_DIRECTION_1);
+			MT2_IN4_PutVal(INIT_MOTOR_DIRECTION_1);
 			MT2_PWM2_SetRatio16(0);
 			break;
 		}

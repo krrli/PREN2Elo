@@ -2071,8 +2071,10 @@ void mainLoop2(void) {
 					setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
 					setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
 				}
+				WAIT1_Waitms(5000);
 				for (uint8_t i = 0; i < 4; i++) {
 					blockMotor(i);
+					//WAIT1_Waitms(10);
 				}
 				feder_en = 0;
 			}
@@ -2086,6 +2088,9 @@ void mainLoop2(void) {
 				unblockMotor(i);
 			}
 			WAIT1_Waitms(100); //todo
+			setMotorDirection(MOTOR_REAR_RIGHT,MOTOR_FORWARD);
+			setMotorSpeed(MOTOR_REAR_RIGHT,NEW_MOTOR_MAXSPEED);
+			WAIT1_Waitms(300);
 			loop_setMotorDirForward();
 			loop_setMotorMaxSpeed();
 			/* get parcour type */

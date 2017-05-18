@@ -7,7 +7,7 @@
 **     Version     : Component 01.188, Driver 01.12, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-26, 12:56, # CodeGen: 77
+**     Date/Time   : 2017-05-12, 10:40, # CodeGen: 128
 **     Abstract    :
 **         This component "Serial_LDD" implements an asynchronous serial
 **         communication. The component supports different settings of
@@ -27,7 +27,7 @@
 **            Interrupt Error priority                     : medium priority
 **          Settings                                       : 
 **            Data width                                   : 8 bits
-**            Parity                                       : Even
+**            Parity                                       : None
 **            Stop bits                                    : 1
 **            Loop mode                                    : Normal
 **            Baud rate                                    : 9600 baud
@@ -204,8 +204,8 @@ LDD_TDeviceData* ASerialLdd2_Init(LDD_TUserData *UserDataPtr)
   UART_PDD_EnableReceiver(UART1_BASE_PTR, PDD_DISABLE); /* Disable receiver. */
   DeviceDataPrv->SerFlag = 0x00U;      /* Reset flags */
   DeviceDataPrv->ErrFlag = 0x00U;      /* Reset error flags */
-  /* UART1_C1: LOOPS=0,UARTSWAI=0,RSRC=0,M=1,WAKE=0,ILT=0,PE=1,PT=0 */
-  UART1_C1 = (UART_C1_M_MASK | UART_C1_PE_MASK); /*  Set the C1 register */
+  /* UART1_C1: LOOPS=0,UARTSWAI=0,RSRC=0,M=0,WAKE=0,ILT=0,PE=0,PT=0 */
+  UART1_C1 = 0x00U;                    /*  Set the C1 register */
   /* UART1_C3: R8=0,T8=0,TXDIR=0,TXINV=0,ORIE=0,NEIE=0,FEIE=0,PEIE=0 */
   UART1_C3 = 0x00U;                    /*  Set the C3 register */
   /* UART1_S2: LBKDIF=0,RXEDGIF=0,??=0,RXINV=0,RWUID=0,BRK13=0,LBKDE=0,RAF=0 */

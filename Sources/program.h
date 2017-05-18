@@ -275,9 +275,9 @@ void mainLoop(void);
 void mainLoop2(void);
 
 #define NEW_SERIAL_INT_ENABLED 1
-#define NEW_SERIAL_RASPI_ENABLED 0
+#define NEW_SERIAL_RASPI_ENABLED 1
 #define NEW_SERIAL_PAUSE_ENABLED 0
-#define NEW_SERIAL_INT_DEBUG_ENABLED 1
+#define NEW_SERIAL_INT_DEBUG_ENABLED 0
 
 #define NEW_MAIN_LOOP 1
 
@@ -338,7 +338,7 @@ enum NewMotorSpeed {
 
 #define NEW_FEDER_ENABLED 1
 #define NEW_FEDER_SPEED 30
-#define NEW_FEDER_TIME 300
+#define NEW_FEDER_TIME 600
 
 #define NEW_DRIVE_INTO_BUTTON_TIME 500 // value in ms
 

@@ -350,12 +350,7 @@ PE_DEBUGHALT();
         </group>
       </boolgroup>
       <group name="Settings">
-        <Parity sel_value="even">
-          
-even (hw or sw)
-
-          <EmptySection_DummyValue />
-        </Parity>
+        <Parity v="none" />
         <Width v="8 bits" />
         <Stop_bit v="1" />
         <boolgroup name="Receiver" v="Enabled">
@@ -398,7 +393,7 @@ even (hw or sw)
             </boolgroup>
             <group name="Settings">
               <Data_width v="8 bits" />
-              <Parity v="Even" />
+              <Parity v="None" />
               <Stop_bits v="1" />
               <Loop_mode v="Normal" />
               <Baud_rate v="9600 baud" />
@@ -1386,12 +1381,12 @@ even (hw or sw)
           <Input_Glitch_filter v="0" />
         </group>
         <Internal_frequency__multiplier_factor_ v="24 MHz" />
-        <Bits_0_2_of_Frequency_divider_register v="011" />
+        <Bits_0_2_of_Frequency_divider_register v="111" />
         <Bits_3_5_of_Frequency_divider_register v="100" />
-        <SCL_frequency v="93.75 kHz" />
-        <SDA_Hold v="1.375 us" />
-        <SCL_start_Hold v="5.25 us" />
-        <SCL_stop_Hold v="5.375 us" />
+        <SCL_frequency v="50 kHz" />
+        <SDA_Hold v="2.708 us" />
+        <SCL_start_Hold v="9.917 us" />
+        <SCL_stop_Hold v="10.042 us" />
         <boolgroup name="Control acknowledge bit" v="Disabled" />
         <boolgroup name="Low timeout" v="Disabled" />
       </group>

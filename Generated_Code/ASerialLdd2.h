@@ -7,7 +7,7 @@
 **     Version     : Component 01.188, Driver 01.12, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-24, 13:10, # CodeGen: 10
+**     Date/Time   : 2017-05-12, 10:40, # CodeGen: 128
 **     Abstract    :
 **         This component "Serial_LDD" implements an asynchronous serial
 **         communication. The component supports different settings of
@@ -27,7 +27,7 @@
 **            Interrupt Error priority                     : medium priority
 **          Settings                                       : 
 **            Data width                                   : 8 bits
-**            Parity                                       : Even
+**            Parity                                       : None
 **            Stop bits                                    : 1
 **            Loop mode                                    : Normal
 **            Baud rate                                    : 9600 baud

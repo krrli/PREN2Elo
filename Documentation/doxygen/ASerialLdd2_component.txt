@@ -34,7 +34,7 @@ by the component.
 <td class="regNotResetVal">0x00003000</td>
  <td>NVIC_ISER register, peripheral ASerialLdd2.</td></tr>
 <tr><td>0x4006B002</td><td>UART1_C1</td>
-<td class="regNotResetVal">0x00000012</td>
+<td class="regResetVal">0x00000000</td>
  <td>UART1_C1 register, peripheral ASerialLdd2.</td></tr>
 <tr><td>0x4006B006</td><td>UART1_C3</td>
 <td class="regResetVal">0x00000000</td>
@@ -331,16 +331,16 @@ registers of the peripheral(s) configured by the component.
         
 </div>
 <table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x4006B002</td></tr>
-<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00000012</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00000000</td></tr>
 <tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
 <tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
 <tr><td>7</td><td>LOOPS</td><td>0x00</td><td>Loop Mode Select</td>
 <tr><td>6</td><td>UARTSWAI</td><td>0x00</td><td>UART Stops in Wait Mode</td>
 <tr><td>5</td><td>RSRC</td><td>0x00</td><td>Receiver Source Select</td>
-<tr><td>4</td><td>M</td><td>0x01</td><td>9-Bit or 8-Bit Mode Select</td>
+<tr><td>4</td><td>M</td><td>0x00</td><td>9-Bit or 8-Bit Mode Select</td>
 <tr><td>3</td><td>WAKE</td><td>0x00</td><td>Receiver Wakeup Method Select</td>
 <tr><td>2</td><td>ILT</td><td>0x00</td><td>Idle Line Type Select</td>
-<tr><td>1</td><td>PE</td><td>0x01</td><td>Parity Enable</td>
+<tr><td>1</td><td>PE</td><td>0x00</td><td>Parity Enable</td>
 <tr><td>0</td><td>PT</td><td>0x00</td><td>Parity Type</td>
 </tr></table>
 <div class="reghdr1">UART1_C3</div>
@@ -425,7 +425,7 @@ registers of the peripheral(s) configured by the component.
 **            Interrupt Error priority                     : medium priority
 **          Settings                                       : 
 **            Data width                                   : 8 bits
-**            Parity                                       : Even
+**            Parity                                       : None
 **            Stop bits                                    : 1
 **            Loop mode                                    : Normal
 **            Baud rate                                    : 9600 baud
