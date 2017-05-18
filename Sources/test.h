@@ -5,7 +5,7 @@
 
 void starttest(void);
 
-#define ENABLE_TEST 0
+#define ENABLE_TEST 0x
 
 #define WAIT_BEFORE_TEST 0
 #define WAIT_MINUTES 0

@@ -618,12 +618,7 @@ PE_DEBUGHALT();
         </group>
       </boolgroup>
       <group name="Settings">
-        <Parity sel_value="even">
-          
-even (hw or sw)
-
-          <EmptySection_DummyValue />
-        </Parity>
+        <Parity v="none" />
         <Width v="8 bits" />
         <Stop_bit v="1" />
         <boolgroup name="Receiver" v="Enabled">
@@ -666,7 +661,7 @@ even (hw or sw)
             </boolgroup>
             <group name="Settings">
               <Data_width v="8 bits" />
-              <Parity v="Even" />
+              <Parity v="None" />
               <Stop_bits v="1" />
               <Loop_mode v="Normal" />
               <Baud_rate v="9600 baud" />
