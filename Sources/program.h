@@ -289,7 +289,7 @@ void mainLoop2(void);
 
 enum newDriveDistance {
 	NEW_CURVE_DIST = 270,
-	NEW_DIST_END = 400,
+	NEW_DIST_END = 300,
 	NEW_BUTTON1_A = 355,
 	NEW_BUTTON2_A = 294,
 	NEW_BUTTON3_A = 233,

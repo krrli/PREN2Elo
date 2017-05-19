@@ -2088,8 +2088,8 @@ void mainLoop2(void) {
 				unblockMotor(i);
 			}
 			WAIT1_Waitms(100); //todo
-			setMotorDirection(MOTOR_REAR_RIGHT,MOTOR_FORWARD);
-			setMotorSpeed(MOTOR_REAR_RIGHT,NEW_MOTOR_MAXSPEED);
+			setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+			setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED);
 			WAIT1_Waitms(300);
 			loop_setMotorDirForward();
 			loop_setMotorMaxSpeed();
@@ -2360,14 +2360,71 @@ void mainLoop2(void) {
 				serialSend(ROMAN_NUMERAL_REQUEST, RasPi);
 				serialSend(ROMAN_NUMERAL_REQUEST, PC);
 				WAIT1_Waitms(5000);
+				/* fix position */ // todo
+				res = getToFValueMillimeters(tof2, &tof2_val);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+				}
+				res = getToFValueMillimeters(tof1, &tof1_val);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+				}
+				res = getToFValueMillimeters(tof2, &tof2_val);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+				}
+				res = getToFValueMillimeters(tof1, &tof1_val);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+				}
+				while (tof1_val > tof2_val + 3 || tof1_val < tof2_val - 3) {
+					if (tof1_val < tof2_val) {
+						setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+						setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+						setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+						setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+					} else {
+						setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+						setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+						setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+						setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+					}
+					WAIT1_Waitms(100);
+					for (uint8_t i = 0; i < 4; i++) {
+						setMotorSpeed(i, 10);
+					}
+					WAIT1_Waitms(100);
+					for (uint8_t i = 0; i < 4; i++) {
+						setMotorSpeed(i, 0);
+					}
+					WAIT1_Waitms(100);
+					res = getToFValueMillimeters(tof2, &tof2_val);
+					if (res != ERR_OK) {
+						serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+					}
+					res = getToFValueMillimeters(tof1, &tof1_val);
+					if (res != ERR_OK) {
+						serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+					}
+					res = getToFValueMillimeters(tof2, &tof2_val);
+					if (res != ERR_OK) {
+						serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+					}
+					res = getToFValueMillimeters(tof1, &tof1_val);
+					if (res != ERR_OK) {
+						serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+					}
+				}
+				/* */
 				state7_initialized = 1;
-#if NEW_SERIAL_INT_ENABLED==0
-				WAIT1_Waitms(1000);
-				parcour_state = 8;
-#endif
 			}
+#if NEW_SERIAL_INT_ENABLED==0
+			WAIT1_Waitms(1000);
+			parcour_state = 8;
+#endif
 			break;
-		case 8: /* drive sideways for button pressing */
+		case 8:
+			/* drive sideways for button pressing */
 			/* get tof value */
 			res = getToFValueMillimeters(tof2, &tof2_val);
 			if (res != ERR_OK) {
@@ -2437,7 +2494,8 @@ void mainLoop2(void) {
 				}
 			}
 			break;
-		case 9: /* drive into button */
+		case 9:
+			/* drive into button */
 			loop_setServosStraight();
 			loop_setMotorDirBackward();
 			loop_setMotorButtonSpeed2();
