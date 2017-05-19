@@ -105,6 +105,7 @@ enum MotorSpeed {
 /*
  * declarations for the tof sensors
  */
+#define TOF_MEASURE_CONTINUOUS 1
 #define NUMBER_OF_SENSORS 5 // max 6
 enum ToF_Sensors {
 	TOF_LEFT_FRONT = 0,

@@ -220,18 +220,23 @@ uint8_t initToF(void) {
 		}
 	}
 
-	// todo
-	/*for (i = 0; i < NUMBER_OF_SENSORS; i++) {
+#if TOF_MEASURE_CONTINUOUS
+	for (i = 0; i < NUMBER_OF_SENSORS; i++) {
 		res = writeRegister8bit(address[i], SYSRANGE__INTERMEASUREMENT_PERIOD,
-				3);
+				3); // todo
 		if (res != ERR_OK) {
 			return res;
 		}
+		WAIT1_Waitms(1);
 		res = writeRegister8bit(address[i], SYSRANGE__START, 0x03);
 		if (res != ERR_OK) {
 			return res;
 		}
-	}*/
+		WAIT1_Waitms(1);
+	}
+#else
+	// nothing
+#endif
 	return ERR_OK;
 }
 
@@ -243,19 +248,22 @@ uint8_t getToFValueMillimeters(uint8_t sens, uint16_t * val) {
 	if (sens < 0 || sens >= NUMBER_OF_SENSORS) {
 		return ERR_RANGE;
 	}
+	WAIT1_Waitms(1);
 
 	/* start measurement */
-	//WAIT1_Waitms(1);
-	// todo
+#if TOF_MEASURE_CONTINUOUS
+	// nothing
+#else
 	res = writeRegister8bit(address[sens], SYSRANGE__START, 0x01);
 	if (res != ERR_OK) {
 		return res;
 	}
+	WAIT1_Waitms(1);
+#endif
 
 	/* wait until measurement finished */
 	uint8_t timeoutms = 100;
 	uint8_t tmp;
-	WAIT1_Waitms(1);
 	do {
 		/* check if measurement has finished */
 		res = readRegister8bit(address[sens], RESULT__INTERRUPT_STATUS_GPIO,
@@ -272,7 +280,6 @@ uint8_t getToFValueMillimeters(uint8_t sens, uint16_t * val) {
 		timeoutms--;
 	} while ((tmp & 0x04) == 0);
 
-	//WAIT1_Waitms(1);
 	/* read range */
 	uint8_t range;
 	res = readRegister8bit(address[sens], RESULT__RANGE_VAL, &range);
@@ -293,8 +300,6 @@ uint8_t getToFValueMillimeters(uint8_t sens, uint16_t * val) {
 	} else {
 		*val = 0xffff;
 	}
-
-	//WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
 
 	return ERR_OK;
 }
