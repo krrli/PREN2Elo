@@ -1018,6 +1018,11 @@ void start(void) {
 }
 
 void serialRxInt(uint8_t ch, uint8_t port) {
+	if (port == PC) {
+		if (testSerialInt(ch)) {
+			return;
+		}
+	}
 #if NEW_SERIAL_INT_ENABLED==0
 	return;
 #endif
@@ -1118,7 +1123,7 @@ void serialSend(uint8_t ch, uint8_t port) {
 		CLS2_SendChar(ch);
 		break;
 	}
-
+	//WAIT1_Waitms(1); // todo
 	/* save char ch as last sent command */
 	lastSentCmd[port] = ch;
 }
@@ -1908,7 +1913,7 @@ void loop_secondRound() {
 			if (tof2_val >= NEW_CURVE_DETECT_DISTANCE
 					&& tof4_val >= NEW_CURVE_DETECT_DISTANCE) {
 #else
-				if (tof2_val >= NEW_CURVE_DETECT_DISTANCE) {
+			if (tof2_val >= NEW_CURVE_DETECT_DISTANCE) {
 #endif
 				parcour_state2 = 2;
 				WAIT1_Waitms(4 * NEW_CURVE_DRIVE_OVER_TIME);
@@ -2203,7 +2208,12 @@ void mainLoop2(void) {
 					|| tof5_val < NEW_CURVE_DETECT_DISTANCE) { // todo
 				loop_pidBoth(tof1_val, tof2_val);
 			} else {
-				loop_setServosStraight();
+				for (uint8_t i = 0; i < 4; i++) {
+					res = setServo(i, SERVO_STRAIGHT);
+					if (res != ERR_OK) {
+						serialDebugLite(DEBUG_ERROR_SET_SERVO);
+					}
+				}
 			}
 #endif
 			break;
@@ -2378,16 +2388,32 @@ void mainLoop2(void) {
 					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 				}
 				while (tof1_val > tof2_val + 3 || tof1_val < tof2_val - 3) {
-					if (tof1_val < tof2_val) {
-						setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
-						setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
-						setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
-						setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+					if (type == PARCOUR_A) {
+						if (tof1_val < tof2_val) {
+							setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+							setMotorDirection(MOTOR_FRONT_RIGHT,
+									MOTOR_BACKWARD);
+							setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+							setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+						} else {
+							setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+							setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+							setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+							setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+						}
 					} else {
-						setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
-						setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
-						setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
-						setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+						if (tof1_val < tof2_val) {
+							setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+							setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+							setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+							setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+						} else {
+							setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+							setMotorDirection(MOTOR_FRONT_RIGHT,
+									MOTOR_BACKWARD);
+							setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+							setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+						}
 					}
 					WAIT1_Waitms(100);
 					for (uint8_t i = 0; i < 4; i++) {
@@ -2476,6 +2502,13 @@ void mainLoop2(void) {
 						loop_setMotorDirRight();
 					}
 					state8_neg_drv_dir = 1;
+				} else {
+					if (type == PARCOUR_A) {
+						loop_setMotorDirRight();
+					} else {
+						loop_setMotorDirLeft();
+					}
+					state8_neg_drv_dir = 0;
 				}
 				loop_setMotorButtonSpeed();
 				state8_initialized = 1;

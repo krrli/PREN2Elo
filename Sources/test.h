@@ -11,6 +11,8 @@ void starttest(void);
 #define WAIT_MINUTES 0
 
 #define DO_NOTHING 0
+#define TEST_SET_PID_VALUES 0
+#define TEST_SET_BUTTON_DIST 0
 #define TEST_SERIAL 0
 #define TEST_TOF_SENSORS 0
 #define TEST_TOF_SENSORS_CONTINUOUS 0
@@ -30,6 +32,10 @@ void starttest(void);
 #define TEST_DRIVE_TO_START 0
 
 void doNothing(void);
+
+uint8_t testSerialInt(uint8_t ch);
+void testSetPIDValues(void);
+void testSetButtonDist(void);
 
 void testSerial(void);
 
