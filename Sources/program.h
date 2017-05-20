@@ -283,7 +283,7 @@ void mainLoop2(void);
 #define NEW_MAIN_LOOP 1
 
 #define NEW_DIFF_MAX 10
-#define NEW_DIST_TO_WALL 132 //todo
+#define NEW_DIST_TO_WALL 132
 #define NEW_DIST_TO_WALL_MIN 122
 #define NEW_DIST_TO_WALL_MAX 142
 
@@ -330,8 +330,8 @@ enum NewMotorSpeed {
 #define NEW_CURVE_BLIND_TIME 100
 
 #define NEW_CURVE_DRIVE_OVER_TIME 0 // value in ms
-#define NEW_CURVE_DETECT_DISTANCE 300
-#define NEW_CURVE_DETECT_TOF4_ENABLED 1 // todo
+#define NEW_CURVE_DETECT_DISTANCE 250
+#define NEW_CURVE_DETECT_TOF5_ENABLED 1 // todo
 
 #define NEW_SECOND_ROUND_ENABLED 0
 #define NEW_SECOND_ROUND_TURN_TIME 2000

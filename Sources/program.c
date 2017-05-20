@@ -2148,11 +2148,11 @@ void mainLoop2(void) {
 			/* get tof diff */
 			diff = tof1_val - tof2_val;
 			/* check if curve reached */
-#if NEW_CURVE_DETECT_TOF4_ENABLED
-			if (tof2_val >= NEW_CURVE_DETECT_DISTANCE
-					&& tof4_val >= NEW_CURVE_DETECT_DISTANCE) { // todo: can tof4 be ignored?
+#if NEW_CURVE_DETECT_TOF5_ENABLED
+			if (tof1_val >= NEW_CURVE_DETECT_DISTANCE
+					&& tof5_val >= NEW_CURVE_DETECT_DISTANCE) { // todo: can tof5 be ignored?
 #else
-			if (tof2_val >= NEW_CURVE_DETECT_DISTANCE) {
+			if (tof1_val >= NEW_CURVE_DETECT_DISTANCE) {
 #endif
 				parcour_state = 3;
 				WAIT1_Waitms(NEW_CURVE_DRIVE_OVER_TIME);

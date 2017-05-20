@@ -213,8 +213,15 @@ uint8_t initToF(void) {
 	}
 
 	/* set scaling to 3 (60cm) */
-	for (i = 0; i < NUMBER_OF_SENSORS; i++) {
+	/*for (i = 0; i < NUMBER_OF_SENSORS; i++) {
 		res = setToFScaling(i, 3);
+		if (res != ERR_OK) {
+			return res;
+		}
+	}*/
+	/* set scaling to 2 (40cm) */ // todo
+	for (i = 0; i < NUMBER_OF_SENSORS; i++) {
+		res = setToFScaling(i, 2);
 		if (res != ERR_OK) {
 			return res;
 		}
@@ -222,8 +229,18 @@ uint8_t initToF(void) {
 
 #if TOF_MEASURE_CONTINUOUS
 	for (i = 0; i < NUMBER_OF_SENSORS; i++) {
+		/*res = writeRegister8bit(address[i], SYSRANGE__MAX_CONVERGENCE_TIME,
+				0x31); // 49ms */
+		res = writeRegister8bit(address[i], SYSRANGE__MAX_CONVERGENCE_TIME,
+				0x1e); // 30ms // todo
+		if (res != ERR_OK) {
+			return res;
+		}
+		WAIT1_Waitms(1);
+		/*res = writeRegister8bit(address[i], SYSRANGE__INTERMEASUREMENT_PERIOD,
+				5); // 60ms */
 		res = writeRegister8bit(address[i], SYSRANGE__INTERMEASUREMENT_PERIOD,
-				3); // todo
+				3); // 40ms // todo
 		if (res != ERR_OK) {
 			return res;
 		}
@@ -289,7 +306,8 @@ uint8_t getToFValueMillimeters(uint8_t sens, uint16_t * val) {
 
 	WAIT1_Waitms(1);
 	/* clear interrupt */
-	res = writeRegister8bit(address[sens], SYSTEM__INTERRUPT_CLEAR, 0x01);
+	//res = writeRegister8bit(address[sens], SYSTEM__INTERRUPT_CLEAR, 0x01);
+	res = writeRegister8bit(address[sens], SYSTEM__INTERRUPT_CLEAR, 0x07); // todo
 	if (res != ERR_OK) {
 		return res;
 	}
@@ -427,7 +445,6 @@ uint8_t setToFScaling(uint8_t sens, uint8_t new_scaling) {
 		return ERR_RANGE;
 	}
 
-	WAIT1_Waitms(1);
 	/* check for valid argument */
 	if (new_scaling < 1 || new_scaling > 3) {
 		return ERR_VALUE;
