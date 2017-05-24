@@ -3,9 +3,9 @@
 #if TEST_SET_PID_VALUES
 /* set pid vars */
 volatile uint8_t pid_dist_p_mult, pid_dist_p_div, pid_dist_i_mult,
-		pid_dist_i_div, pid_dist_d_mult, pid_dist_d_div;
+pid_dist_i_div, pid_dist_d_mult, pid_dist_d_div;
 volatile uint8_t pid_diff_p_mult, pid_diff_p_div, pid_diff_i_mult,
-		pid_diff_i_div, pid_diff_d_mult, pid_diff_d_div;
+pid_diff_i_div, pid_diff_d_mult, pid_diff_d_div;
 volatile uint8_t pid_set_val_mode;
 volatile uint8_t tmp_val;
 uint8_t tof1, tof2, tof4, tof5;
@@ -26,173 +26,279 @@ uint8_t testSerialInt(uint8_t ch) {
 #if ENABLE_TEST
 #if TEST_SET_PID_VALUES
 	switch (ch) {
-	case 'p': // pid dist
+		case 'p': // pid dist
 		pid_set_val_mode = 1;
 		tmp_val = 0;
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		serialSend('p', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend('d', PC);
+		WAIT1_Waitms(1);
 		serialSend('i', PC);
+		WAIT1_Waitms(1);
 		serialSend('s', PC);
+		WAIT1_Waitms(1);
 		serialSend('t', PC);
+		WAIT1_Waitms(1);
 		serialSend(':', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend(pid_dist_p_div / 100 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_dist_p_div % 100) / 10 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_dist_p_div % 10) + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		break;
-	case 'i':
+		case 'i':
 		pid_set_val_mode = 2;
 		tmp_val = 0;
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		serialSend('i', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend('d', PC);
+		WAIT1_Waitms(1);
 		serialSend('i', PC);
+		WAIT1_Waitms(1);
 		serialSend('s', PC);
+		WAIT1_Waitms(1);
 		serialSend('t', PC);
+		WAIT1_Waitms(1);
 		serialSend(':', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend(pid_dist_i_div / 100 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_dist_i_div % 100) / 10 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_dist_i_div % 10) + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		break;
-	case 'd':
+		case 'd':
 		pid_set_val_mode = 3;
 		tmp_val = 0;
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		serialSend('d', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend('d', PC);
+		WAIT1_Waitms(1);
 		serialSend('i', PC);
+		WAIT1_Waitms(1);
 		serialSend('s', PC);
+		WAIT1_Waitms(1);
 		serialSend('t', PC);
+		WAIT1_Waitms(1);
 		serialSend(':', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend(pid_dist_d_div / 100 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_dist_d_div % 100) / 10 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_dist_d_div % 10) + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		break;
-	case 'P': // pid diff
+		case 'P':// pid diff
 		pid_set_val_mode = 4;
 		tmp_val = 0;
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		serialSend('p', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend('d', PC);
+		WAIT1_Waitms(1);
 		serialSend('i', PC);
+		WAIT1_Waitms(1);
 		serialSend('f', PC);
+		WAIT1_Waitms(1);
 		serialSend('f', PC);
+		WAIT1_Waitms(1);
 		serialSend(':', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend(pid_diff_p_div / 100 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_diff_p_div % 100) / 10 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_diff_p_div % 10) + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		break;
-	case 'I':
+		case 'I':
 		pid_set_val_mode = 5;
 		tmp_val = 0;
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		serialSend('i', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend('d', PC);
+		WAIT1_Waitms(1);
 		serialSend('i', PC);
+		WAIT1_Waitms(1);
 		serialSend('f', PC);
+		WAIT1_Waitms(1);
 		serialSend('f', PC);
+		WAIT1_Waitms(1);
 		serialSend(':', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend(pid_diff_i_div / 100 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_diff_i_div % 100) / 10 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_diff_i_div % 10) + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		break;
-	case 'D':
+		case 'D':
 		pid_set_val_mode = 6;
 		tmp_val = 0;
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		serialSend('d', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend('d', PC);
+		WAIT1_Waitms(1);
 		serialSend('i', PC);
+		WAIT1_Waitms(1);
 		serialSend('f', PC);
+		WAIT1_Waitms(1);
 		serialSend('f', PC);
+		WAIT1_Waitms(1);
 		serialSend(':', PC);
+		WAIT1_Waitms(1);
 		serialSend(' ', PC);
+		WAIT1_Waitms(1);
 		serialSend(pid_diff_d_div / 100 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_diff_d_div % 100) / 10 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((pid_diff_d_div % 10) + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		break;
-	case 'r':
+		case 'r':
 		pid_set_val_mode = 0;
 		tmp_val = 0;
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		serialSend('r', PC);
+		WAIT1_Waitms(1);
 		serialSend('e', PC);
+		WAIT1_Waitms(1);
 		serialSend('s', PC);
+		WAIT1_Waitms(1);
 		serialSend('e', PC);
+		WAIT1_Waitms(1);
 		serialSend('t', PC);
+		WAIT1_Waitms(1);
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		break;
-	case '0':
-	case '1':
-	case '2':
-	case '3':
-	case '4':
-	case '5':
-	case '6':
-	case '7':
-	case '8':
-	case '9':
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
 		tmp_val = (tmp_val * 10) + (ch - 48);
 		break;
-	case 's':
+		case 's':
 		switch (pid_set_val_mode) {
-		case 1:
+			case 1:
 			pid_dist_p_div = tmp_val;
 			break;
-		case 2:
+			case 2:
 			pid_dist_i_div = tmp_val;
 			break;
-		case 3:
+			case 3:
 			pid_dist_d_div = tmp_val;
 			break;
-		case 4:
+			case 4:
 			pid_diff_p_div = tmp_val;
 			break;
-		case 5:
+			case 5:
 			pid_diff_i_div = tmp_val;
 			break;
-		case 6:
+			case 6:
 			pid_diff_d_div = tmp_val;
 			break;
 		}
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		serialSend(tmp_val / 100 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((tmp_val % 100) / 10 + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend((tmp_val % 10) + 48, PC);
+		WAIT1_Waitms(1);
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		tmp_val = 0;
 		break;
 	}
@@ -203,14 +309,23 @@ uint8_t testSerialInt(uint8_t ch) {
 		case 'r':
 		tmp_val = 0;
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		serialSend('r', PC);
+		WAIT1_Waitms(1);
 		serialSend('e', PC);
+		WAIT1_Waitms(1);
 		serialSend('s', PC);
+		WAIT1_Waitms(1);
 		serialSend('e', PC);
+		WAIT1_Waitms(1);
 		serialSend('t', PC);
+		WAIT1_Waitms(1);
 		serialSend('\r', PC);
+		WAIT1_Waitms(1);
 		serialSend('\n', PC);
+		WAIT1_Waitms(1);
 		break;
 		case '0':
 		case '1':
@@ -228,22 +343,38 @@ uint8_t testSerialInt(uint8_t ch) {
 		if (tmp_val > 0 && tmp_val < 400) {
 			button_dist_val = tmp_val;
 			serialSend('\r', PC);
+			WAIT1_Waitms(1);
 			serialSend('\n', PC);
+			WAIT1_Waitms(1);
 			serialSend(tmp_val / 100 + 48, PC);
+			WAIT1_Waitms(1);
 			serialSend((tmp_val % 100) / 10 + 48, PC);
+			WAIT1_Waitms(1);
 			serialSend((tmp_val % 10) + 48, PC);
+			WAIT1_Waitms(1);
 			serialSend('\r', PC);
+			WAIT1_Waitms(1);
 			serialSend('\n', PC);
+			WAIT1_Waitms(1);
 		} else {
 			serialSend('\r', PC);
+			WAIT1_Waitms(1);
 			serialSend('\n', PC);
+			WAIT1_Waitms(1);
 			serialSend('e', PC);
+			WAIT1_Waitms(1);
 			serialSend('r', PC);
+			WAIT1_Waitms(1);
 			serialSend('r', PC);
+			WAIT1_Waitms(1);
 			serialSend('o', PC);
+			WAIT1_Waitms(1);
 			serialSend('r', PC);
+			WAIT1_Waitms(1);
 			serialSend('\r', PC);
+			WAIT1_Waitms(1);
 			serialSend('\n', PC);
+			WAIT1_Waitms(1);
 		}
 		tmp_val = 0;
 		break;
@@ -273,11 +404,11 @@ void starttest(void) {
 	}
 
 	if (TEST_SET_PID_VALUES) {
-		void testSetPIDValues(void);
+		testSetPIDValues();
 	}
 
 	if (TEST_SET_BUTTON_DIST) {
-		void testSetButtonDist(void);
+		testSetButtonDist();
 	}
 
 	/* test serial communication */
@@ -366,7 +497,7 @@ void doNothing(void) {
 void test_loop_pidBoth(uint16_t val_front, uint16_t val_rear) {
 	static int32_t dist_err_old, diff_err_old, dist_I_err, diff_I_err;
 	int32_t dist_err, diff_err, dist_D_err, diff_D_err, dist_pid_val,
-			diff_pid_val;
+	diff_pid_val;
 
 	if (reset_pid) {
 		reset_pid = 0;
@@ -402,11 +533,11 @@ void test_loop_pidBoth(uint16_t val_front, uint16_t val_rear) {
 	dist_I_err += dist_err;
 	dist_D_err = dist_err - dist_err_old;
 	dist_pid_val = ((int32_t) pid_dist_p_mult * dist_err)
-			/ (int32_t) pid_dist_p_div
-			+ ((int32_t) pid_dist_i_mult * dist_I_err)
-					/ (int32_t) pid_dist_i_div
-			+ ((int32_t) pid_dist_d_mult * dist_D_err)
-					/ (int32_t) pid_dist_d_div;
+	/ (int32_t) pid_dist_p_div
+	+ ((int32_t) pid_dist_i_mult * dist_I_err)
+	/ (int32_t) pid_dist_i_div
+	+ ((int32_t) pid_dist_d_mult * dist_D_err)
+	/ (int32_t) pid_dist_d_div;
 	dist_err_old = dist_err;
 
 	if (dist_pid_val > PID_BOTH_MAX_CORR_VAL) {
@@ -419,11 +550,11 @@ void test_loop_pidBoth(uint16_t val_front, uint16_t val_rear) {
 	diff_I_err += diff_err;
 	diff_D_err = diff_err - diff_err_old;
 	diff_pid_val = ((int32_t) pid_diff_p_mult * diff_err)
-			/ (int32_t) pid_diff_p_div
-			+ ((int32_t) pid_diff_i_mult * diff_I_err)
-					/ (int32_t) pid_diff_i_div
-			+ ((int32_t) pid_diff_d_mult * diff_D_err)
-					/ (int32_t) pid_diff_d_div;
+	/ (int32_t) pid_diff_p_div
+	+ ((int32_t) pid_diff_i_mult * diff_I_err)
+	/ (int32_t) pid_diff_i_div
+	+ ((int32_t) pid_diff_d_mult * diff_D_err)
+	/ (int32_t) pid_diff_d_div;
 	diff_err_old = diff_err;
 
 	if (diff_pid_val > PID_BOTH_MAX_CORR_VAL) {
@@ -601,9 +732,9 @@ void testSetButtonDist(void) {
 			}
 			WAIT1_Waitms(100);
 			for (uint8_t i = 0; i < 4; i++) {
-				setMotorSpeed(i, 10);
+				setMotorSpeed(i, 20);
 			}
-			WAIT1_Waitms(100);
+			WAIT1_Waitms(200); // todo
 			for (uint8_t i = 0; i < 4; i++) {
 				setMotorSpeed(i, 0);
 			}

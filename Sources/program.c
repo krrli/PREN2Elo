@@ -932,8 +932,11 @@ void loop_pidBoth(uint16_t val_front, uint16_t val_rear) {
 		diff_I_err = 0;
 	}
 
-	if (val_front == 0xffff || val_rear == 0xffff) {
-		loop_setServosStraight();
+	if (val_front > NEW_CURVE_DETECT_DISTANCE
+			|| val_rear > NEW_CURVE_DETECT_DISTANCE) {
+		for (uint8_t i = 0; i < 4; i++) {
+			setServo(i, SERVO_STRAIGHT);
+		}
 		return;
 	}
 
@@ -1950,9 +1953,16 @@ void loop_secondRound() {
 			if (res != ERR_OK) {
 				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 			}
-			if (tof2_val < NEW_CURVE_DIST) {
-				parcour_state2 = 4;
-				break;
+			if (type == PARCOUR_A) {
+				if (tof2_val < NEW_CURVE_DIST_A) {
+					parcour_state2 = 4;
+					break;
+				}
+			} else {
+				if (tof2_val < NEW_CURVE_DIST_B) {
+					parcour_state2 = 4;
+					break;
+				}
 			}
 			loop_pidDiffCorr(tof1_val, tof2_val);
 			break;
@@ -2205,7 +2215,7 @@ void mainLoop2(void) {
 #endif
 #if NEW_BOTH_CORR_ENABLED
 			if (tof1_val < NEW_CURVE_DETECT_DISTANCE
-					|| tof5_val < NEW_CURVE_DETECT_DISTANCE) { // todo
+					&& tof5_val < NEW_CURVE_DETECT_DISTANCE) { // todo
 				loop_pidBoth(tof1_val, tof2_val);
 			} else {
 				for (uint8_t i = 0; i < 4; i++) {
@@ -2249,9 +2259,16 @@ void mainLoop2(void) {
 			/* get tof diff */
 			diff = tof1_val - tof2_val;
 			/* check if curve end dist is reached */
-			if (tof2_val < NEW_CURVE_DIST) {
-				parcour_state = 5;
-				break;
+			if (type == PARCOUR_A) {
+				if (tof2_val < NEW_CURVE_DIST_A) {
+					parcour_state = 5;
+					break;
+				}
+			} else {
+				if (tof2_val < NEW_CURVE_DIST_B) {
+					parcour_state = 5;
+					break;
+				}
 			}
 			/* drive straight */
 #if NEW_CURVE_CORR_ENABLED
@@ -2387,7 +2404,8 @@ void mainLoop2(void) {
 				if (res != ERR_OK) {
 					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 				}
-				while (tof1_val > tof2_val + 3 || tof1_val < tof2_val - 3) {
+				//while (tof1_val > tof2_val + 3 || tof1_val < tof2_val - 3) {
+				while (tof1_val > tof2_val || tof1_val < tof2_val) {
 					if (type == PARCOUR_A) {
 						if (tof1_val < tof2_val) {
 							setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
@@ -2417,13 +2435,13 @@ void mainLoop2(void) {
 					}
 					WAIT1_Waitms(100);
 					for (uint8_t i = 0; i < 4; i++) {
-						setMotorSpeed(i, 10);
+						setMotorSpeed(i, 20);
 					}
-					WAIT1_Waitms(100);
+					WAIT1_Waitms(300);
 					for (uint8_t i = 0; i < 4; i++) {
 						setMotorSpeed(i, 0);
 					}
-					WAIT1_Waitms(100);
+					WAIT1_Waitms(500);
 					res = getToFValueMillimeters(tof2, &tof2_val);
 					if (res != ERR_OK) {
 						serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
