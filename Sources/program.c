@@ -2248,16 +2248,16 @@ void mainLoop2(void) {
 			break;
 		case 4: /* drive sideways with corr */
 			/* get tof values */
-			res = getToFValueMillimeters(tof1, &tof1_val);
+			/*res = getToFValueMillimeters(tof1, &tof1_val); // todo
 			if (res != ERR_OK) {
 				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
-			}
+			}*/
 			res = getToFValueMillimeters(tof2, &tof2_val);
 			if (res != ERR_OK) {
 				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 			}
 			/* get tof diff */
-			diff = tof1_val - tof2_val;
+			//diff = tof1_val - tof2_val;
 			/* check if curve end dist is reached */
 			if (type == PARCOUR_A) {
 				if (tof2_val < NEW_CURVE_DIST_A) {
@@ -2277,7 +2277,7 @@ void mainLoop2(void) {
 			 } else if (diff > NEW_DIFF_MAX) {
 			 loop_corrRear();
 			 }*/
-			loop_pidDiffCorr(tof1_val, tof2_val);
+			//loop_pidDiffCorr(tof1_val, tof2_val);
 #endif
 			break;
 		case 5: /* drive backwards blind */

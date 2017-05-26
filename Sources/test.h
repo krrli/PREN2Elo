@@ -23,7 +23,7 @@ void starttest(void);
 #define TEST_SERVO_CORR 0
 #define TEST_MOTOR 0
 #define TEST_MOTOR_DIRECTION 0
-#define TEST_MOTOR_DIRECTION_MOTOR 3 // number of motor to test
+#define TEST_MOTOR_DIRECTION_MOTOR 0 // number of motor to test
 #define TEST_MOTOR_AND_SERVO 0 // !!! brushless !!!
 #define TEST_SERVO_CIRCLE 0
 #define TEST_TOF_SERVO 0
