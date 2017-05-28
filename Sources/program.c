@@ -1142,7 +1142,11 @@ void serialDebugLite(uint8_t ch) {
 		WAIT1_Waitms(10);
 		GenI2C_ToF_Init();
 		WAIT1_Waitms(10);
-		if (PID_STOP_ON_I2C_ERROR && getToFValueMillimeters(0, &val) != ERR_OK) {
+		if (PID_STOP_ON_I2C_ERROR && getToFValueMillimeters(0, &val) != ERR_OK
+				&& getToFValueMillimeters(1, &val) != ERR_OK
+				&& getToFValueMillimeters(2, &val) != ERR_OK
+				&& getToFValueMillimeters(3, &val) != ERR_OK
+				&& getToFValueMillimeters(4, &val) != ERR_OK) {
 			loop_setMotorStop();
 			serialSend(DEBUG_ERROR_STOPPING_BECAUSE_I2C_ERROR, PC);
 			//for (;;);
@@ -2160,6 +2164,13 @@ void mainLoop2(void) {
 			if (res != ERR_OK) {
 				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 			}
+			if (tof1_val < 0xFFFF && tof1_val > 20) {
+				if (type == PARCOUR_A) {
+					tof1_val += TOF1_A_OFFSET;
+				} else {
+					tof1_val += TOF1_B_OFFSET;
+				}
+			}
 			/* get tof diff */
 			diff = tof1_val - tof2_val;
 			/* check if curve reached */
@@ -2249,9 +2260,9 @@ void mainLoop2(void) {
 		case 4: /* drive sideways with corr */
 			/* get tof values */
 			/*res = getToFValueMillimeters(tof1, &tof1_val); // todo
-			if (res != ERR_OK) {
-				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
-			}*/
+			 if (res != ERR_OK) {
+			 serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			 }*/
 			res = getToFValueMillimeters(tof2, &tof2_val);
 			if (res != ERR_OK) {
 				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
@@ -2319,6 +2330,13 @@ void mainLoop2(void) {
 			res = getToFValueMillimeters(tof4, &tof4_val);
 			if (res != ERR_OK) {
 				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			if (tof1_val < 0xFFFF && tof1_val > 20) {
+				if (type == PARCOUR_A) {
+					tof1_val += TOF1_A_OFFSET;
+				} else {
+					tof1_val += TOF1_B_OFFSET;
+				}
 			}
 			/* get tof diff */
 			diff = tof1_val - tof2_val;
@@ -2404,6 +2422,13 @@ void mainLoop2(void) {
 				if (res != ERR_OK) {
 					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 				}
+				if (tof1_val < 0xFFFF && tof1_val > 20) {
+					if (type == PARCOUR_A) {
+						tof1_val += TOF1_A_OFFSET;
+					} else {
+						tof1_val += TOF1_B_OFFSET;
+					}
+				}
 				//while (tof1_val > tof2_val + 3 || tof1_val < tof2_val - 3) {
 				while (tof1_val > tof2_val || tof1_val < tof2_val) {
 					if (type == PARCOUR_A) {
@@ -2457,6 +2482,13 @@ void mainLoop2(void) {
 					res = getToFValueMillimeters(tof1, &tof1_val);
 					if (res != ERR_OK) {
 						serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+					}
+					if (tof1_val < 0xFFFF && tof1_val > 20) {
+						if (type == PARCOUR_A) {
+							tof1_val += TOF1_A_OFFSET;
+						} else {
+							tof1_val += TOF1_B_OFFSET;
+						}
 					}
 				}
 				/* */

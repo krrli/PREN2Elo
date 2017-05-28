@@ -224,6 +224,7 @@ enum ServoDirection {
 	SERVO_CORR_REAR,
 	SERVO_CIRCLE
 };
+#define USE_SERVO_SHIELD 0
 
 /*
  * declarations for the motor driver boards
@@ -289,9 +290,9 @@ void mainLoop2(void);
 #define NEW_DIST_TO_WALL_MAX 142
 
 enum newDriveDistance {
-	NEW_CURVE_DIST_A = 280,
-	NEW_CURVE_DIST_B=310,
-	NEW_DIST_END = 300,
+	NEW_CURVE_DIST_A = 290,
+	NEW_CURVE_DIST_B=290,
+	NEW_DIST_END = 350,
 	NEW_BUTTON1_A = 345,
 	NEW_BUTTON2_A = 294,
 	NEW_BUTTON3_A = 243,
@@ -394,6 +395,9 @@ enum NewMotorSpeed {
 #define PID_BOTH_DIFF_D_DIV 1//20//10
 
 #define PID_BOTH_MAX_CORR_VAL 20
+
+#define TOF1_A_OFFSET 0//(-6)
+#define TOF1_B_OFFSET 0//(-6)
 
 /*
  * tof.c

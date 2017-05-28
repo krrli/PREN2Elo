@@ -7,7 +7,7 @@
 **     Version     : Component 01.014, Driver 01.03, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-26, 12:56, # CodeGen: 77
+**     Date/Time   : 2017-05-28, 10:18, # CodeGen: 140
 **     Abstract    :
 **          This component implements a pulse-width modulation generator
 **          that generates signal with variable duty and fixed cycle.
@@ -21,15 +21,18 @@
 **          Output pin                                     : ADC0_SE6b/PTD5/SPI1_SCK/UART2_TX/TPM0_CH5
 **          Output pin signal                              : 
 **          Counter                                        : TPM0_CNT
-**          Interrupt service/event                        : Disabled
-**          Period                                         : 25 ms
+**          Interrupt service/event                        : Enabled
+**            Interrupt                                    : INT_TPM0
+**            Interrupt priority                           : medium priority
+**            Iterations before action/event               : 1
+**          Period                                         : 20 ms
 **          Starting pulse width                           : 0 µs
 **          Initial polarity                               : low
 **          Initialization                                 : 
 **            Enabled in init. code                        : yes
 **            Auto initialization                          : yes
 **            Event mask                                   : 
-**              OnEnd                                      : Disabled
+**              OnEnd                                      : Enabled
 **          CPU clock/configuration selection              : 
 **            Clock configuration 0                        : This component enabled
 **            Clock configuration 1                        : This component disabled
@@ -95,6 +98,7 @@
 
 /* MODULE PwmLdd1. */
 
+#include "MT1_PWM1.h"
 #include "PwmLdd1.h"
 /* {Default RTOS Adapter} No RTOS includes */
 
@@ -115,6 +119,7 @@ typedef PwmLdd1_TDeviceData *PwmLdd1_TDeviceDataPtr; /* Pointer to the device da
 static PwmLdd1_TDeviceData DeviceDataPrv__DEFAULT_RTOS_ALLOC;
 
 #define CHANNEL 0x00U
+#define AVAILABLE_EVENTS_MASK (LDD_TEventMask)(LDD_PWM_ON_END)
 /* Internal method prototypes */
 static void SetRatio(LDD_TDeviceData *DeviceDataPtr);
 /*
@@ -230,10 +235,10 @@ LDD_TError PwmLdd1_SetDutyUS(LDD_TDeviceData *DeviceDataPtr, uint16_t Time)
 
   /* Time test - this test can be disabled by setting the "Ignore range checking"
      property to the "yes" value in the "Configuration inspector" */
-  if (Time > 0x61A8U) {                /* Is the given value out of range? */
+  if (Time > 0x4E20U) {                /* Is the given value out of range? */
     return ERR_PARAM_RANGE;            /* If yes then error */
   }
-  rtval = Time * 2.62144F;             /* Multiply given value and actual clock configuration coefficient */
+  rtval = Time * 3.2768F;              /* Multiply given value and actual clock configuration coefficient */
   if (rtval > 0xFFFFUL) {              /* Is the result greater than 65535 ? */
     DeviceDataPrv->RatioStore = 0xFFFFU; /* If yes then use maximal possible value */
   }
@@ -276,10 +281,10 @@ LDD_TError PwmLdd1_SetDutyMS(LDD_TDeviceData *DeviceDataPtr, uint16_t Time)
 
   /* Time test - this test can be disabled by setting the "Ignore range checking"
      property to the "yes" value in the "Configuration inspector" */
-  if (Time > 0x19U) {                  /* Is the given value out of range? */
+  if (Time > 0x14U) {                  /* Is the given value out of range? */
     return ERR_PARAM_RANGE;            /* If yes then error */
   }
-  rtval = Time * 2621.44F;             /* Multiply given value and actual clock configuration coefficient */
+  rtval = Time * 3276.8F;              /* Multiply given value and actual clock configuration coefficient */
   if (rtval > 0xFFFFUL) {              /* Is the result greater than 65535 ? */
     DeviceDataPrv->RatioStore = 0xFFFFU; /* If yes then use maximal possible value */
   }
@@ -288,6 +293,30 @@ LDD_TError PwmLdd1_SetDutyMS(LDD_TDeviceData *DeviceDataPtr, uint16_t Time)
   }
   SetRatio(DeviceDataPtr);             /* Calculate and set up new appropriate values of the duty register */
   return ERR_OK;                       /* OK */
+}
+
+/*
+** ===================================================================
+**     Method      :  PwmLdd1_OnCounterRestart (component PWM_LDD)
+**
+**     Description :
+**         Called if counter overflow/underflow or counter is 
+**         reinitialized by modulo or compare register matching. 
+**         OnCounterRestart event and Timer unit must be enabled. See <a 
+**         href="UntitledMethods.html#SetEventMask">SetEventMask</a> and 
+**         <a href="UntitledMethods.html#GetEventMask">GetEventMask</a> 
+**         methods.This event is available only if a <a 
+**         href="UntitledProperties.html#IntServiceCounter">Interrupt</a> 
+**         is enabled. The event services the event of the inherited 
+**         component and eventually invokes other events.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+void TPM0_OnCounterRestart0(LDD_TUserData *UserDataPtr)
+{
+  PwmLdd1_TDeviceData *DeviceDataPrv = PE_LDD_DeviceDataList[PE_LDD_COMPONENT_PwmLdd1_ID];
+
+  PwmLdd1_OnEnd(DeviceDataPrv->UserDataPtr); /* Invoke OnEnd event */
 }
 
 /*

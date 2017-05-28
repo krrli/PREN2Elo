@@ -1,15 +1,10 @@
-/*
- * todo:
- * - init brushless
- * - servo values
- */
-
 #include "program.h"
 
 /*
  * variables
  */
 
+#if USE_SERVO_SHIELD
 /*
  * T=1/f=1/60=0.016667
  * tick=T/4095=4.0700e-06
@@ -17,18 +12,24 @@
  * 2*ticksperms=491.40 --> 180°
  */
 // todo values: 100..630, 90°: 246,491
-uint16_t servoValuesStraight[] = { 200, 500, 500, 200 }; // 0...4095; 246 --> 0°; 491 --> 180°
-uint16_t servoValuesSideways[] = { 455, 260, 245, 450 }; // 0...4095; 246 --> 0°; 491 --> 180°
-uint16_t servoValuesCorrLeft[] = { 185, 515, 485, 215 };
-uint16_t servoValuesCorrRight[] = { 215, 485, 515, 185 };
-uint16_t servoValuesCorrFront[] = { 470, 275, 230, 435 };
-uint16_t servoValuesCorrRear[] = { 440, 245, 260, 465 };
-uint16_t servoValuesCircle[] = { 342, 365, 357, 340 };
-uint8_t servoChannels[] = { 0, 1, 2, 3 }; // 0...15
+uint16_t servoValuesStraight[] = {200, 500, 500, 200}; // 0...4095; 246 --> 0°; 491 --> 180°
+uint16_t servoValuesSideways[] = {455, 260, 245, 450}; // 0...4095; 246 --> 0°; 491 --> 180°
+uint16_t servoValuesCorrLeft[] = {185, 515, 485, 215};
+uint16_t servoValuesCorrRight[] = {215, 485, 515, 185};
+uint16_t servoValuesCorrFront[] = {470, 275, 230, 435};
+uint16_t servoValuesCorrRear[] = {440, 245, 260, 465};
+uint16_t servoValuesCircle[] = {342, 365, 357, 340};
+uint8_t servoChannels[] = {0, 1, 2, 3}; // 0...15
 uint16_t brushlessValueOff = 246;
-uint16_t brushlessValueOn = 300; //min 300
-uint16_t brushlessValueInit = 491; // todo
+uint16_t brushlessValueOn = 300;//min 300
+uint16_t brushlessValueInit = 491;// todo
 uint8_t brushlessChannel = 4;
+#else
+uint16_t straight_val[] = { 3200, 8000, 8000, 3200 };
+uint16_t sideways_val[] = { 7280, 4160, 3920, 7200 };
+uint16_t brushless_off = 3936;
+uint16_t brushless_on = 4800;
+#endif
 
 /*
  * VL,HL,VR,HR
@@ -41,7 +42,7 @@ uint8_t brushlessChannel = 4;
 /* init servos and brushless */
 uint8_t initServo(void) {
 	uint8_t res;
-
+#if USE_SERVO_SHIELD
 	/* reset servo board */
 	res = resetServo();
 	if (res != ERR_OK) {
@@ -53,7 +54,7 @@ uint8_t initServo(void) {
 	if (res != ERR_OK) {
 		return res;
 	}
-
+#endif
 	/* init brushless */
 	res = setBrushless(BRUSHLESS_OFF);
 	if (res != ERR_OK) {
@@ -74,9 +75,10 @@ uint8_t initServo(void) {
 
 /* set brushless */
 uint8_t setBrushless(enum BrushlessState state) {
+#if USE_SERVO_SHIELD
 	uint8_t res;
 	switch (state) {
-	case BRUSHLESS_ON:
+		case BRUSHLESS_ON:
 		for (uint8_t i = 0; i < 2; i++) {
 			res = setServoPwm(brushlessChannel, 0, brushlessValueOn);
 			if (res != ERR_OK) {
@@ -138,39 +140,131 @@ uint8_t setBrushless(enum BrushlessState state) {
 			setServoPwm(brushlessChannel, 0, brushlessValueOff);
 		}
 		return res;
-	case BRUSHLESS_OFF:
+		case BRUSHLESS_OFF:
 		return setServoPwm(brushlessChannel, 0, brushlessValueOff);
-	case BRUSHLESS_INIT:
+		case BRUSHLESS_INIT:
 		//return setServoPwm(brushlessChannel, 0, brushlessValueInit);
 		return ERR_VALUE;
+		default:
+		return ERR_VALUE;
+	}
+#else
+	switch (state) {
+	case BRUSHLESS_ON:
+		for (uint8_t i = 0; i < 2; i++) {
+			// on
+			Zent_PWM_SetRatio16(0xFFFF - brushless_on);
+			WAIT1_Waitms(50);
+			// off
+			Zent_PWM_SetRatio16(0xFFFF - brushless_off);
+			WAIT1_Waitms(200);
+		}
+		for (uint8_t i = 0; i < 2; i++) {
+			//on
+			Zent_PWM_SetRatio16(0xFFFF - brushless_on);
+			WAIT1_Waitms(100);
+			//off
+			Zent_PWM_SetRatio16(0xFFFF - brushless_off);
+			WAIT1_Waitms(150);
+		}
+		for (uint8_t i = 0; i < 2; i++) {
+			//on
+			Zent_PWM_SetRatio16(0xFFFF - brushless_on);
+			WAIT1_Waitms(150);
+			//off
+			Zent_PWM_SetRatio16(0xFFFF - brushless_off);
+			WAIT1_Waitms(100);
+		}
+		for (uint8_t i = 0; i < 2; i++) {
+			//on
+			Zent_PWM_SetRatio16(0xFFFF - brushless_on);
+			WAIT1_Waitms(200);
+			//off
+			Zent_PWM_SetRatio16(0xFFFF - brushless_off);
+			WAIT1_Waitms(50);
+		}
+		//on
+		Zent_PWM_SetRatio16(0xFFFF - brushless_on);
+		break;
+	case BRUSHLESS_OFF:
+		//off
+		Zent_PWM_SetRatio16(0xFFFF - brushless_off);
+		break;
 	default:
 		return ERR_VALUE;
 	}
+	return ERR_OK;
+#endif
 }
 
 /* set servos */
 uint8_t setServo(uint8_t ser, enum ServoDirection dir) { // ser = 0...3
+#if USE_SERVO_SHIELD
+switch (dir) {
+	case SERVO_STRAIGHT:
+	return setServoPwm(servoChannels[ser], 0, servoValuesStraight[ser]);
+	case SERVO_SIDEWAYS:
+	return setServoPwm(servoChannels[ser], 0, servoValuesSideways[ser]);
+	case SERVO_CORR_LEFT:
+	return setServoPwm(servoChannels[ser], 0, servoValuesCorrLeft[ser]);
+	case SERVO_CORR_RIGHT:
+	return setServoPwm(servoChannels[ser], 0, servoValuesCorrRight[ser]);
+	case SERVO_CORR_FRONT:
+	return setServoPwm(servoChannels[ser], 0, servoValuesCorrFront[ser]);
+	case SERVO_CORR_REAR:
+	return setServoPwm(servoChannels[ser], 0, servoValuesCorrRear[ser]);
+	case SERVO_CIRCLE:
+	return setServoPwm(servoChannels[ser], 0, servoValuesCircle[ser]);
+	default:
+	return ERR_VALUE;
+}
+#else
 	switch (dir) {
 	case SERVO_STRAIGHT:
-		return setServoPwm(servoChannels[ser], 0, servoValuesStraight[ser]);
+		switch (ser) {
+		case 0:
+			Servo_VL_SetRatio16(0xFFFF - straight_val[ser]);
+			break;
+		case 1:
+			Servo_HL_SetRatio16(0xFFFF - straight_val[ser]);
+			break;
+		case 2:
+			Servo_VR_SetRatio16(0xFFFF - straight_val[ser]);
+			break;
+		case 3:
+			Servo_HR_SetRatio16(0xFFFF - straight_val[ser]);
+			break;
+		default:
+			return ERR_VALUE;
+		}
+		break;
 	case SERVO_SIDEWAYS:
-		return setServoPwm(servoChannels[ser], 0, servoValuesSideways[ser]);
-	case SERVO_CORR_LEFT:
-		return setServoPwm(servoChannels[ser], 0, servoValuesCorrLeft[ser]);
-	case SERVO_CORR_RIGHT:
-		return setServoPwm(servoChannels[ser], 0, servoValuesCorrRight[ser]);
-	case SERVO_CORR_FRONT:
-		return setServoPwm(servoChannels[ser], 0, servoValuesCorrFront[ser]);
-	case SERVO_CORR_REAR:
-		return setServoPwm(servoChannels[ser], 0, servoValuesCorrRear[ser]);
-	case SERVO_CIRCLE:
-		return setServoPwm(servoChannels[ser], 0, servoValuesCircle[ser]);
+		switch (ser) {
+		case 0:
+			Servo_VL_SetRatio16(0xFFFF - sideways_val[ser]);
+			break;
+		case 1:
+			Servo_HL_SetRatio16(0xFFFF - sideways_val[ser]);
+			break;
+		case 2:
+			Servo_VR_SetRatio16(0xFFFF - sideways_val[ser]);
+			break;
+		case 3:
+			Servo_HR_SetRatio16(0xFFFF - sideways_val[ser]);
+			break;
+		default:
+			return ERR_VALUE;
+		}
+		break;
 	default:
 		return ERR_VALUE;
 	}
+	return ERR_OK;
+#endif
 }
 
 uint8_t setServoDriveBack(enum parcourType type) {
+#if USE_SERVO_SHIELD
 	uint8_t res;
 	if (type == PARCOUR_A) {
 		res = setServoPwm(0, 0, 455 + 50); //FL
@@ -208,18 +302,23 @@ uint8_t setServoDriveBack(enum parcourType type) {
 		}
 	}
 	return ERR_OK;
+#else
+	// todo
+	return ERR_NOTAVAIL;
+#endif
 }
 
 uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
 		uint16_t corr_val) {
+#if USE_SERVO_SHIELD
 	uint8_t res;
 	// VL,HL,VR,HR
 	// 200, 500, 500, 200
 	// corr_dir: 0 right/front, 1 left/back
 	switch (dir) {
-	case SERVO_STRAIGHT:
+		case SERVO_STRAIGHT:
 		switch (corr_dir) {
-		case 0: //right
+			case 0: //right
 			res = setServoPwm(servoChannels[0], 0,
 					servoValuesStraight[0] + corr_val);
 			if (res != ERR_OK) {
@@ -245,7 +344,7 @@ uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
 			}
 			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
 			break;
-		case 1: //left
+			case 1: //left
 			res = setServoPwm(servoChannels[0], 0,
 					servoValuesStraight[0] - corr_val);
 			if (res != ERR_OK) {
@@ -271,16 +370,16 @@ uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
 			}
 			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
 			break;
-		default:
+			default:
 			return ERR_VALUE;
 		}
 		return ERR_OK;
 		// VL,HL,VR,HR
 		// 455, 260, 245, 450
 		// corr_dir: 0 right/front, 1 left/back
-	case SERVO_SIDEWAYS:
+		case SERVO_SIDEWAYS:
 		switch (corr_dir) {
-		case 0: //front
+			case 0: //front
 			res = setServoPwm(servoChannels[0], 0,
 					servoValuesSideways[0] + corr_val);
 			if (res != ERR_OK) {
@@ -306,7 +405,7 @@ uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
 			}
 			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
 			break;
-		case 1: //back
+			case 1: //back
 			res = setServoPwm(servoChannels[0], 0,
 					servoValuesSideways[0] - corr_val);
 			if (res != ERR_OK) {
@@ -332,13 +431,17 @@ uint8_t setServoPID(enum ServoDirection dir, uint8_t corr_dir,
 			}
 			WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
 			break;
-		default:
+			default:
 			return ERR_VALUE;
 		}
 		return ERR_OK;
-	default:
+		default:
 		return ERR_VALUE;
 	}
+#else
+	// todo
+	return ERR_NOTAVAIL;
+#endif
 }
 
 void setServoPidBoth(int32_t pid_val_dist, int32_t pid_val_diff,
@@ -357,36 +460,36 @@ void setServoPidBoth(int32_t pid_val_dist, int32_t pid_val_diff,
 			parc_b_back = 1;
 		}
 	}
-
+#if USE_SERVO_SHIELD
 	int32_t servo_val_fl, servo_val_fr, servo_val_rl, servo_val_rr;
 	if (parc_a_forw) {
 		servo_val_fl = (int32_t) servoValuesStraight[0] - pid_val_dist
-				- pid_val_diff;
+		- pid_val_diff;
 		servo_val_fr = (int32_t) servoValuesStraight[2] - pid_val_dist
-				- pid_val_diff;
+		- pid_val_diff;
 		servo_val_rl = (int32_t) servoValuesStraight[1] - pid_val_dist;
 		servo_val_rr = (int32_t) servoValuesStraight[3] - pid_val_dist;
 	} else if (parc_a_back) {
 		servo_val_fl = (int32_t) servoValuesStraight[0] + pid_val_dist;
 		servo_val_fr = (int32_t) servoValuesStraight[2] + pid_val_dist;
 		servo_val_rl = (int32_t) servoValuesStraight[1] + pid_val_dist
-				- pid_val_diff;
+		- pid_val_diff;
 		servo_val_rr = (int32_t) servoValuesStraight[3] + pid_val_dist
-				- pid_val_diff;
+		- pid_val_diff;
 	} else if (parc_b_forw) {
 		servo_val_fl = (int32_t) servoValuesStraight[0] + pid_val_dist
-				+ pid_val_diff;
+		+ pid_val_diff;
 		servo_val_fr = (int32_t) servoValuesStraight[2] + pid_val_dist
-				+ pid_val_diff;
+		+ pid_val_diff;
 		servo_val_rl = (int32_t) servoValuesStraight[1] + pid_val_dist;
 		servo_val_rr = (int32_t) servoValuesStraight[3] + pid_val_dist;
 	} else if (parc_b_back) {
 		servo_val_fl = (int32_t) servoValuesStraight[0] - pid_val_dist;
 		servo_val_fr = (int32_t) servoValuesStraight[2] - pid_val_dist;
 		servo_val_rl = (int32_t) servoValuesStraight[1] - pid_val_dist
-				+ pid_val_diff;
+		+ pid_val_diff;
 		servo_val_rr = (int32_t) servoValuesStraight[3] - pid_val_dist
-				+ pid_val_diff;
+		+ pid_val_diff;
 	}
 
 	uint8_t res;
@@ -410,6 +513,35 @@ void setServoPidBoth(int32_t pid_val_dist, int32_t pid_val_diff,
 		serialDebugLite(DEBUG_ERROR_SET_SERVO);
 	}
 	WAIT1_Waitms(PID_WAIT_TIME_SERVO_CORR);
+#else
+	int32_t servo_val_fl, servo_val_fr, servo_val_rl, servo_val_rr;
+	if (parc_a_forw) {
+		servo_val_fl = (int32_t) straight_val[0] - pid_val_dist - pid_val_diff;
+		servo_val_fr = (int32_t) straight_val[2] - pid_val_dist - pid_val_diff;
+		servo_val_rl = (int32_t) straight_val[1] - pid_val_dist;
+		servo_val_rr = (int32_t) straight_val[3] - pid_val_dist;
+	} else if (parc_a_back) {
+		servo_val_fl = (int32_t) straight_val[0] + pid_val_dist;
+		servo_val_fr = (int32_t) straight_val[2] + pid_val_dist;
+		servo_val_rl = (int32_t) straight_val[1] + pid_val_dist - pid_val_diff;
+		servo_val_rr = (int32_t) straight_val[3] + pid_val_dist - pid_val_diff;
+	} else if (parc_b_forw) {
+		servo_val_fl = (int32_t) straight_val[0] + pid_val_dist + pid_val_diff;
+		servo_val_fr = (int32_t) straight_val[2] + pid_val_dist + pid_val_diff;
+		servo_val_rl = (int32_t) straight_val[1] + pid_val_dist;
+		servo_val_rr = (int32_t) straight_val[3] + pid_val_dist;
+	} else if (parc_b_back) {
+		servo_val_fl = (int32_t) straight_val[0] - pid_val_dist;
+		servo_val_fr = (int32_t) straight_val[2] - pid_val_dist;
+		servo_val_rl = (int32_t) straight_val[1] - pid_val_dist + pid_val_diff;
+		servo_val_rr = (int32_t) straight_val[3] - pid_val_dist + pid_val_diff;
+	}
+	Servo_VL_SetRatio16(0xFFFF-(uint16_t)servo_val_fl);
+	Servo_HL_SetRatio16(0xFFFF-(uint16_t)servo_val_rl);
+	Servo_VR_SetRatio16(0xFFFF-(uint16_t)servo_val_fr);
+	Servo_HR_SetRatio16(0xFFFF-(uint16_t)servo_val_rr);
+	WAIT1_Waitms(1);
+#endif
 }
 
 /*

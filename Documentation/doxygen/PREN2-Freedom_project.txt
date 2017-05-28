@@ -46,8 +46,13 @@
 - \subpage BitIoLdd14
 - \subpage BitIoLdd15
 - \subpage BitIoLdd16
-- \subpage TU1
-- \subpage TimerIntLdd1
+- \subpage PwmLdd5
+- \subpage TPM2
+- \subpage PwmLdd6
+- \subpage PwmLdd7
+- \subpage TPM1
+- \subpage PwmLdd8
+- \subpage PwmLdd9
 
 */
 

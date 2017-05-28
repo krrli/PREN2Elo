@@ -88,9 +88,18 @@
 #include "MT2_IN4.h"
 #include "BitIoLdd16.h"
 #include "TMOUT1.h"
-#include "TI1.h"
-#include "TimerIntLdd1.h"
-#include "TU1.h"
+#include "Zent_PWM.h"
+#include "PwmLdd5.h"
+#include "Servo_VL.h"
+#include "PwmLdd6.h"
+#include "TPM2.h"
+#include "Servo_HL.h"
+#include "PwmLdd7.h"
+#include "Servo_VR.h"
+#include "PwmLdd8.h"
+#include "TPM1.h"
+#include "Servo_HR.h"
+#include "PwmLdd9.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -208,19 +217,93 @@ void AS2_OnTxChar(void);
 
 /*
 ** ===================================================================
-**     Event       :  TI1_OnInterrupt (module Events)
+**     Event       :  Zent_PWM_OnEnd (module Events)
 **
-**     Component   :  TI1 [TimerInt]
+**     Component   :  Zent_PWM [PWM]
 **     Description :
-**         When a timer interrupt occurs this event is called (only
-**         when the component is enabled - <Enable> and the events are
-**         enabled - <EnableEvent>). This event is enabled only if a
-**         <interrupt service/event> is enabled.
+**         This event is called when the specified number of cycles has
+**         been generated. (Only when the component is enabled -
+**         <Enable> and the events are enabled - <EnableEvent>). The
+**         event is available only when the <Interrupt service/event>
+**         property is enabled and selected peripheral supports
+**         appropriate interrupt.
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
 */
-void TI1_OnInterrupt(void);
+void Zent_PWM_OnEnd(void);
+
+/*
+** ===================================================================
+**     Event       :  MT2_PWM2_OnEnd (module Events)
+**
+**     Component   :  MT2_PWM2 [PWM]
+**     Description :
+**         This event is called when the specified number of cycles has
+**         been generated. (Only when the component is enabled -
+**         <Enable> and the events are enabled - <EnableEvent>). The
+**         event is available only when the <Interrupt service/event>
+**         property is enabled and selected peripheral supports
+**         appropriate interrupt.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void MT2_PWM2_OnEnd(void);
+
+/*
+** ===================================================================
+**     Event       :  MT2_PWM1_OnEnd (module Events)
+**
+**     Component   :  MT2_PWM1 [PWM]
+**     Description :
+**         This event is called when the specified number of cycles has
+**         been generated. (Only when the component is enabled -
+**         <Enable> and the events are enabled - <EnableEvent>). The
+**         event is available only when the <Interrupt service/event>
+**         property is enabled and selected peripheral supports
+**         appropriate interrupt.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void MT2_PWM1_OnEnd(void);
+
+/*
+** ===================================================================
+**     Event       :  MT1_PWM2_OnEnd (module Events)
+**
+**     Component   :  MT1_PWM2 [PWM]
+**     Description :
+**         This event is called when the specified number of cycles has
+**         been generated. (Only when the component is enabled -
+**         <Enable> and the events are enabled - <EnableEvent>). The
+**         event is available only when the <Interrupt service/event>
+**         property is enabled and selected peripheral supports
+**         appropriate interrupt.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void MT1_PWM2_OnEnd(void);
+
+/*
+** ===================================================================
+**     Event       :  MT1_PWM1_OnEnd (module Events)
+**
+**     Component   :  MT1_PWM1 [PWM]
+**     Description :
+**         This event is called when the specified number of cycles has
+**         been generated. (Only when the component is enabled -
+**         <Enable> and the events are enabled - <EnableEvent>). The
+**         event is available only when the <Interrupt service/event>
+**         property is enabled and selected peripheral supports
+**         appropriate interrupt.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void MT1_PWM1_OnEnd(void);
 
 /* END Events */
 

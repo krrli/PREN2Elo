@@ -175,22 +175,108 @@ void AS2_OnTxChar(void)
 
 /*
 ** ===================================================================
-**     Event       :  TI1_OnInterrupt (module Events)
+**     Event       :  Zent_PWM_OnEnd (module Events)
 **
-**     Component   :  TI1 [TimerInt]
+**     Component   :  Zent_PWM [PWM]
 **     Description :
-**         When a timer interrupt occurs this event is called (only
-**         when the component is enabled - <Enable> and the events are
-**         enabled - <EnableEvent>). This event is enabled only if a
-**         <interrupt service/event> is enabled.
+**         This event is called when the specified number of cycles has
+**         been generated. (Only when the component is enabled -
+**         <Enable> and the events are enabled - <EnableEvent>). The
+**         event is available only when the <Interrupt service/event>
+**         property is enabled and selected peripheral supports
+**         appropriate interrupt.
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
 */
-void TI1_OnInterrupt(void)
+void Zent_PWM_OnEnd(void)
 {
   /* Write your code here ... */
 	TMOUT1_AddTick();
+}
+
+/*
+** ===================================================================
+**     Event       :  MT2_PWM2_OnEnd (module Events)
+**
+**     Component   :  MT2_PWM2 [PWM]
+**     Description :
+**         This event is called when the specified number of cycles has
+**         been generated. (Only when the component is enabled -
+**         <Enable> and the events are enabled - <EnableEvent>). The
+**         event is available only when the <Interrupt service/event>
+**         property is enabled and selected peripheral supports
+**         appropriate interrupt.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void MT2_PWM2_OnEnd(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  MT2_PWM1_OnEnd (module Events)
+**
+**     Component   :  MT2_PWM1 [PWM]
+**     Description :
+**         This event is called when the specified number of cycles has
+**         been generated. (Only when the component is enabled -
+**         <Enable> and the events are enabled - <EnableEvent>). The
+**         event is available only when the <Interrupt service/event>
+**         property is enabled and selected peripheral supports
+**         appropriate interrupt.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void MT2_PWM1_OnEnd(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  MT1_PWM2_OnEnd (module Events)
+**
+**     Component   :  MT1_PWM2 [PWM]
+**     Description :
+**         This event is called when the specified number of cycles has
+**         been generated. (Only when the component is enabled -
+**         <Enable> and the events are enabled - <EnableEvent>). The
+**         event is available only when the <Interrupt service/event>
+**         property is enabled and selected peripheral supports
+**         appropriate interrupt.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void MT1_PWM2_OnEnd(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  MT1_PWM1_OnEnd (module Events)
+**
+**     Component   :  MT1_PWM1 [PWM]
+**     Description :
+**         This event is called when the specified number of cycles has
+**         been generated. (Only when the component is enabled -
+**         <Enable> and the events are enabled - <EnableEvent>). The
+**         event is available only when the <Interrupt service/event>
+**         property is enabled and selected peripheral supports
+**         appropriate interrupt.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void MT1_PWM1_OnEnd(void)
+{
+  /* Write your code here ... */
 }
 
 /* END Events */

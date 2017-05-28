@@ -7,7 +7,7 @@
 **     Version     : Component 01.164, Driver 01.11, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-26, 12:56, # CodeGen: 77
+**     Date/Time   : 2017-05-28, 10:18, # CodeGen: 140
 **     Abstract    :
 **          This TimerUnit component provides a low level API for unified hardware access across
 **          various timer devices using the Prescaler-Counter-Compare-Capture timer structure.
@@ -22,9 +22,11 @@
 **            Counter frequency                            : Auto select
 **          Counter restart                                : On-match
 **            Period device                                : TPM0_MOD
-**            Period                                       : 25 ms
-**            Interrupt                                    : Disabled
-**          Channel list                                   : 4
+**            Period                                       : 20 ms
+**            Interrupt                                    : Enabled
+**              Interrupt                                  : INT_TPM0
+**              Interrupt priority                         : medium priority
+**          Channel list                                   : 5
 **            Channel 0                                    : 
 **              Mode                                       : Compare
 **                Compare                                  : TPM0_C5V
@@ -65,11 +67,21 @@
 **                  Output pin                             : PTD3/SPI0_MISO/UART2_TX/TPM0_CH3/SPI0_MOSI
 **                  Output pin signal                      : 
 **                Interrupt                                : Disabled
+**            Channel 4                                    : 
+**              Mode                                       : Compare
+**                Compare                                  : TPM0_C1V
+**                Offset                                   : 0 ms
+**                Output on compare                        : Set
+**                  Output on overrun                      : Clear
+**                  Initial state                          : Low
+**                  Output pin                             : ADC0_SE5b/PTD1/SPI0_SCK/TPM0_CH1
+**                  Output pin signal                      : 
+**                Interrupt                                : Disabled
 **          Initialization                                 : 
 **            Enabled in init. code                        : yes
 **            Auto initialization                          : no
 **            Event mask                                   : 
-**              OnCounterRestart                           : Disabled
+**              OnCounterRestart                           : Enabled
 **              OnChannel0                                 : Disabled
 **              OnChannel1                                 : Disabled
 **              OnChannel2                                 : Disabled
@@ -162,17 +174,18 @@ extern "C" {
 #define __BWUserType_TPM0_TValueType
   typedef uint16_t TPM0_TValueType ;   /* Type for data parameters of methods */
 #endif
-#define TPM0_CNT_INP_FREQ_U_0 0x0016E360UL /* Counter input frequency in Hz */
-#define TPM0_CNT_INP_FREQ_R_0 1499999.2500003749F /* Counter input frequency in Hz */
+#define TPM0_CNT_INP_FREQ_U_0 0x002DC6C0UL /* Counter input frequency in Hz */
+#define TPM0_CNT_INP_FREQ_R_0 3000003.000003F /* Counter input frequency in Hz */
 #define TPM0_CNT_INP_FREQ_COUNT 0U     /* Count of predefined counter input frequencies */
-#define TPM0_PERIOD_TICKS  0x927CUL    /* Initialization value of period in 'counter ticks' */
-#define TPM0_NUMBER_OF_CHANNELS 0x04U  /* Count of predefined channels */
+#define TPM0_PERIOD_TICKS  0xEA60UL    /* Initialization value of period in 'counter ticks' */
+#define TPM0_NUMBER_OF_CHANNELS 0x05U  /* Count of predefined channels */
 #define TPM0_COUNTER_WIDTH 0x10U       /* Counter width in bits  */
 #define TPM0_COUNTER_DIR   DIR_UP      /* Direction of counting */
 #define TPM0_OFFSET_0_TICKS 0x00ul     /* Initialization value of offset as 'counter ticks' for channel 0 */
 #define TPM0_OFFSET_1_TICKS 0x00ul     /* Initialization value of offset as 'counter ticks' for channel 1 */
 #define TPM0_OFFSET_2_TICKS 0x00ul     /* Initialization value of offset as 'counter ticks' for channel 2 */
 #define TPM0_OFFSET_3_TICKS 0x00ul     /* Initialization value of offset as 'counter ticks' for channel 3 */
+#define TPM0_OFFSET_4_TICKS 0x00ul     /* Initialization value of offset as 'counter ticks' for channel 4 */
 /*! Peripheral base address of a device allocated by the component. This constant can be used directly in PDD macros. */
 #define TPM0_PRPH_BASE_ADDRESS  0x40038000U
   
@@ -185,6 +198,7 @@ extern "C" {
 #define TPM0_SelectOutputAction_METHOD_ENABLED /*!< SelectOutputAction method of the component TPM0 is enabled (generated) */
 
 /* Events configuration constants - generated for all enabled component's events */
+#define TPM0_OnCounterRestart_EVENT_ENABLED /*!< OnCounterRestart event of the component TPM0 is enabled (generated) */
 
 
 
@@ -359,6 +373,19 @@ LDD_TError TPM0_GetOffsetTicks(LDD_TDeviceData *DeviceDataPtr, uint8_t ChannelId
 */
 /* ===================================================================*/
 LDD_TError TPM0_SelectOutputAction(LDD_TDeviceData *DeviceDataPtr, uint8_t ChannelIdx, LDD_TimerUnit_TOutAction CompareAction, LDD_TimerUnit_TOutAction CounterAction);
+
+/*
+** ===================================================================
+**     Method      :  TPM0_Interrupt (component TimerUnit_LDD)
+**
+**     Description :
+**         The method services the interrupt of the selected peripheral(s)
+**         and eventually invokes event(s) of the component.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+/* {Default RTOS Adapter} ISR function prototype */
+PE_ISR(TPM0_Interrupt);
 
 /* END TPM0. */
 

@@ -7,7 +7,7 @@
 **     Version     : Component 02.241, Driver 01.01, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-26, 11:30, # CodeGen: 72
+**     Date/Time   : 2017-05-28, 10:18, # CodeGen: 140
 **     Abstract    :
 **         This component implements a pulse-width modulation generator
 **         that generates signal with variable duty and fixed cycle. 
@@ -18,8 +18,13 @@
 **          Output pin                                     : PTD2/SPI0_MOSI/UART2_RX/TPM0_CH2/SPI0_MISO
 **          Output pin signal                              : 
 **          Counter                                        : TPM0_CNT
-**          Interrupt service/event                        : Disabled
-**          Period                                         : 25 ms
+**          Interrupt service/event                        : Enabled
+**            Interrupt                                    : INT_TPM0
+**            Interrupt on duty                            : 
+**            Interrupt overflow                           : INT_TPM0
+**            Interrupt priority                           : medium priority
+**            Iterations before action/event               : 1
+**          Period                                         : 20 ms
 **          Starting pulse width                           : 0 µs
 **          Initial polarity                               : low
 **          Same period in modes                           : no
@@ -83,11 +88,26 @@
 
 /* MODULE MT2_PWM1. */
 
+#include "Events.h"
 #include "MT2_PWM1.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif 
+
+/*
+** ===================================================================
+**     Method      :  MT2_PWM1_OnEnd (component PWM)
+**
+**     Description :
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+void PwmLdd3_OnEnd(LDD_TUserData *UserDataPtr)
+{
+  (void)UserDataPtr;                   /* Parameter is not used, suppress unused argument warning */
+  MT2_PWM1_OnEnd();                    /* Invoke OnEnd event */
+}
 
 /*
 ** ===================================================================
@@ -151,7 +171,7 @@ byte MT2_PWM1_SetDutyUS(word Time)
 **     Parameters  :
 **         NAME            - DESCRIPTION
 **         Time            - Duty to set [in milliseconds]
-**                      (0 to 25 ms in high speed mode)
+**                      (0 to 20 ms in high speed mode)
 **     Returns     :
 **         ---             - Error code, possible codes:
 **                           ERR_OK - OK

@@ -7,7 +7,7 @@
 **     Version     : Component 01.037, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-28, 21:05, # CodeGen: 100
+**     Date/Time   : 2017-05-28, 10:15, # CodeGen: 138
 **     Abstract    :
 **
 The module implements timeout functionality. With this implementation,
@@ -18,7 +18,7 @@ a periodic interrupt.
 **          SDK                                            : MCUC1
 **          Critical Section                               : CS1
 **          Maximum counters                               : 1
-**          Counter tick period (ms)                       : 1
+**          Counter tick period (ms)                       : 20
 **          RTOS                                           : Disabled
 **     Contents    :
 **         GetCounter     - TMOUT1_CounterHandle TMOUT1_GetCounter(TMOUT1_CounterType nofTicks);

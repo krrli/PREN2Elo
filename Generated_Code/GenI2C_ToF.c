@@ -7,7 +7,7 @@
 **     Version     : Component 01.030, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-04-28, 21:37, # CodeGen: 103
+**     Date/Time   : 2017-05-28, 10:15, # CodeGen: 138
 **     Abstract    :
 **         This component implements a generic I2C driver wrapper to work both with LDD and non-LDD I2C components.
 **     Settings    :
@@ -21,7 +21,7 @@
 **            I2C                                          : I2C_ToF
 **            Timeout                                      : Enabled
 **              Timeout                                    : TMOUT1
-**              us                                         : 5000
+**              us                                         : 60000
 **          RTOS                                           : Disabled
 **          Init() on startup                              : yes
 **     Contents    :
@@ -94,7 +94,7 @@ typedef struct {
 
 static GenI2C_ToF_TDataState GenI2C_ToF_deviceData;
 
-#define GenI2C_ToF_TIMEOUT_US  ((uint32_t)5000)  /* number of microseconds as specified in properties */
+#define GenI2C_ToF_TIMEOUT_US  ((uint32_t)60000)  /* number of microseconds as specified in properties */
 #define GenI2C_ToF_TIMEOUT_NOF_TICKS(factor) ((GenI2C_ToF_TIMEOUT_US*(factor))/1000/TMOUT1_TICK_PERIOD_MS)
 #define GenI2C_ToF_TIMEOUT_TICKS(factor) (GenI2C_ToF_TIMEOUT_NOF_TICKS(factor)>0?GenI2C_ToF_TIMEOUT_NOF_TICKS(factor):1)  /* at least one tick */
 /*
