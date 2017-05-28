@@ -380,21 +380,21 @@ enum NewMotorSpeed {
 #define PID_DIST_D_DIV 3
 #define PID_DIST_MAX_CORR_TIME 30 // max corr time / max servo corr val
 
-#define PID_BOTH_DIST_P_MULT 1
+#define PID_BOTH_DIST_P_MULT 16//1
 #define PID_BOTH_DIST_P_DIV 1
 #define PID_BOTH_DIST_I_MULT 0
-#define PID_BOTH_DIST_I_DIV 1//60//30
+#define PID_BOTH_DIST_I_DIV 1
 #define PID_BOTH_DIST_D_MULT 0
-#define PID_BOTH_DIST_D_DIV 1//6//3
+#define PID_BOTH_DIST_D_DIV 1
 
-#define PID_BOTH_DIFF_P_MULT 1
+#define PID_BOTH_DIFF_P_MULT 16//1
 #define PID_BOTH_DIFF_P_DIV 1
 #define PID_BOTH_DIFF_I_MULT 0
-#define PID_BOTH_DIFF_I_DIV 1//12//6
+#define PID_BOTH_DIFF_I_DIV 1
 #define PID_BOTH_DIFF_D_MULT 0
-#define PID_BOTH_DIFF_D_DIV 1//20//10
+#define PID_BOTH_DIFF_D_DIV 1
 
-#define PID_BOTH_MAX_CORR_VAL 20
+#define PID_BOTH_MAX_CORR_VAL 320
 
 #define TOF1_A_OFFSET 0//(-6)
 #define TOF1_B_OFFSET 0//(-6)
