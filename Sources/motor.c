@@ -73,6 +73,8 @@ uint8_t setMotorSpeed(uint8_t motor, uint8_t val) {
 		uint16_t tmp;
 		if (val == 0) {
 			tmp = 0xFFFF;
+		} else if (val == 100) {
+			tmp = 0;
 		} else {
 			tmp = 0xFFFF / 100 * (100 - val);
 		}

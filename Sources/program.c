@@ -2250,7 +2250,13 @@ void mainLoop2(void) {
 			} else {
 				loop_setMotorDirRight();
 			}
-			loop_setMotorMaxSpeed();
+			//loop_setMotorMaxSpeed();
+			for (uint8_t i = 0; i < 4; i++) {
+				res = setMotorSpeed(i, NEW_MOTOR_CURVE_SPEED);
+				if (res != ERR_OK) {
+					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
+				}
+			}
 			serialSend(CURVE, RasPi);
 			serialSend(CURVE, PC);
 			WAIT1_Waitms(NEW_CURVE_BLIND_TIME);
