@@ -25,8 +25,8 @@ uint16_t brushlessValueOn = 300;//min 300
 uint16_t brushlessValueInit = 491;// todo
 uint8_t brushlessChannel = 4;
 #else
-uint16_t straight_val[] = { 3200, 8000, 8000, 3200 };
-uint16_t sideways_val[] = { 7280, 4160, 3920, 7200 };
+uint16_t straight_val[] = { 3300, 6450, 6450, 3000 };
+uint16_t sideways_val[] = { 6550, 3300, 3200, 6350 };
 uint16_t brushless_off = 3936;
 uint16_t brushless_on = 4800;
 #endif
