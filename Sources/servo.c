@@ -27,8 +27,9 @@ uint8_t brushlessChannel = 4;
 #else
 uint16_t straight_val[] = { 3300, 6450, 6450, 3000 };
 uint16_t sideways_val[] = { 6550, 3300, 3200, 6350 };
-uint16_t brushless_off = 3936;
-uint16_t brushless_on = 4800;
+uint16_t circle_val[]={5500,4400,4300,5100};
+uint16_t brushless_off = 3300;
+uint16_t brushless_on = 3800;
 #endif
 
 /*
@@ -251,6 +252,24 @@ switch (dir) {
 			break;
 		case 3:
 			Servo_HR_SetRatio16(0xFFFF - sideways_val[ser]);
+			break;
+		default:
+			return ERR_VALUE;
+		}
+		break;
+	case SERVO_CIRCLE:
+		switch (ser) {
+		case 0:
+			Servo_VL_SetRatio16(0xFFFF - circle_val[ser]);
+			break;
+		case 1:
+			Servo_HL_SetRatio16(0xFFFF - circle_val[ser]);
+			break;
+		case 2:
+			Servo_VR_SetRatio16(0xFFFF - circle_val[ser]);
+			break;
+		case 3:
+			Servo_HR_SetRatio16(0xFFFF - circle_val[ser]);
 			break;
 		default:
 			return ERR_VALUE;
@@ -536,10 +555,10 @@ void setServoPidBoth(int32_t pid_val_dist, int32_t pid_val_diff,
 		servo_val_rl = (int32_t) straight_val[1] - pid_val_dist + pid_val_diff;
 		servo_val_rr = (int32_t) straight_val[3] - pid_val_dist + pid_val_diff;
 	}
-	Servo_VL_SetRatio16(0xFFFF-(uint16_t)servo_val_fl);
-	Servo_HL_SetRatio16(0xFFFF-(uint16_t)servo_val_rl);
-	Servo_VR_SetRatio16(0xFFFF-(uint16_t)servo_val_fr);
-	Servo_HR_SetRatio16(0xFFFF-(uint16_t)servo_val_rr);
+	Servo_VL_SetRatio16(0xFFFF - (uint16_t )servo_val_fl);
+	Servo_HL_SetRatio16(0xFFFF - (uint16_t )servo_val_rl);
+	Servo_VR_SetRatio16(0xFFFF - (uint16_t )servo_val_fr);
+	Servo_HR_SetRatio16(0xFFFF - (uint16_t )servo_val_rr);
 	WAIT1_Waitms(1);
 #endif
 }

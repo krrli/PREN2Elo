@@ -1,6 +1,15 @@
 #include "program.h"
 
 /*
+ #define GOING_TO_FAIL 0
+
+
+ #if GOING_TO_FAIL
+ DON'T;
+ #endif
+ */
+
+/*
  * global variables for serial communication
  */
 volatile uint8_t lastSentCmd[NUMBER_OF_SERIAL_PORTS];
@@ -2039,7 +2048,7 @@ void mainLoop2(void) {
 					if (res != ERR_OK) {
 						serialDebugLite(DEBUG_ERROR_SET_BRUSHLESS);
 					}
-					WAIT1_Waitms(5000);
+					WAIT1_Waitms(100);
 #endif
 					feder_en = 1;
 					cent_switch_old = cent_switch;
@@ -2069,6 +2078,7 @@ void mainLoop2(void) {
 				state0_initialized = 1;
 			}
 			if (feder_en) {
+#if NEW_FEDER_ENABLED
 				setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
 				setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
 				setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
@@ -2090,11 +2100,12 @@ void mainLoop2(void) {
 					setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
 					setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
 				}
-				WAIT1_Waitms(5000);
+				WAIT1_Waitms(3000);
 				for (uint8_t i = 0; i < 4; i++) {
 					blockMotor(i);
 					//WAIT1_Waitms(10);
 				}
+#endif
 				feder_en = 0;
 			}
 #if NEW_SERIAL_INT_ENABLED == 0
@@ -2103,13 +2114,15 @@ void mainLoop2(void) {
 #endif
 			break;
 		case 1: /* drive blind */
+#if NEW_FEDER_ENABLED
 			for (uint8_t i = 0; i < 4; i++) {
 				unblockMotor(i);
 			}
 			WAIT1_Waitms(100); //todo
 			setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
 			setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED);
-			WAIT1_Waitms(300);
+			WAIT1_Waitms(200);
+#endif
 			loop_setMotorDirForward();
 			loop_setMotorMaxSpeed();
 			/* get parcour type */
@@ -2252,7 +2265,7 @@ void mainLoop2(void) {
 			}
 			//loop_setMotorMaxSpeed();
 			for (uint8_t i = 0; i < 4; i++) {
-				res = setMotorSpeed(i, NEW_MOTOR_CURVE_SPEED);
+				res = setMotorSpeed(i, NEW_MOTOR_CURVE_BLIND_SPEED);
 				if (res != ERR_OK) {
 					serialDebugLite(DEBUG_ERROR_SET_MOTOR_SPEED);
 				}
@@ -2265,16 +2278,16 @@ void mainLoop2(void) {
 			break;
 		case 4: /* drive sideways with corr */
 			/* get tof values */
-			/*res = getToFValueMillimeters(tof1, &tof1_val); // todo
-			 if (res != ERR_OK) {
-			 serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
-			 }*/
+			res = getToFValueMillimeters(tof1, &tof1_val); // todo
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
 			res = getToFValueMillimeters(tof2, &tof2_val);
 			if (res != ERR_OK) {
 				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 			}
 			/* get tof diff */
-			//diff = tof1_val - tof2_val;
+			diff = (int32_t) tof1_val - (int32_t) tof2_val;
 			/* check if curve end dist is reached */
 			if (type == PARCOUR_A) {
 				if (tof2_val < NEW_CURVE_DIST_A) {
@@ -2289,11 +2302,36 @@ void mainLoop2(void) {
 			}
 			/* drive straight */
 #if NEW_CURVE_CORR_ENABLED
-			/*if (diff < (0 - NEW_DIFF_MAX)) {
-			 loop_corrFront();
-			 } else if (diff > NEW_DIFF_MAX) {
-			 loop_corrRear();
-			 }*/
+			if (diff < (0 - NEW_DIFF_MAX) && tof1_val != 0xFFFF
+					&& tof2_val != 0xFFFF) {
+				//loop_corrFront();
+				setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_CURVE_SPEED);
+				setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_CURVE_SPEED);
+				setMotorSpeed(MOTOR_REAR_LEFT,
+						NEW_MOTOR_CURVE_SPEED + NEW_REAR_MOTOR_OFFSET
+								+ NEW_MOTOR_CURVE_CORR_VAL);
+				setMotorSpeed(MOTOR_REAR_RIGHT,
+						NEW_MOTOR_CURVE_SPEED + NEW_REAR_MOTOR_OFFSET
+								+ NEW_MOTOR_CURVE_CORR_VAL);
+			} else if (diff > NEW_DIFF_MAX && tof1_val != 0xFFFF
+					&& tof2_val != 0xFFFF) {
+				//loop_corrRear();
+				setMotorSpeed(MOTOR_REAR_LEFT,
+						NEW_MOTOR_CURVE_SPEED + NEW_REAR_MOTOR_OFFSET);
+				setMotorSpeed(MOTOR_REAR_RIGHT,
+						NEW_MOTOR_CURVE_SPEED + NEW_REAR_MOTOR_OFFSET);
+				setMotorSpeed(MOTOR_FRONT_LEFT,
+						NEW_MOTOR_CURVE_SPEED + NEW_MOTOR_CURVE_CORR_VAL);
+				setMotorSpeed(MOTOR_FRONT_RIGHT,
+						NEW_MOTOR_CURVE_SPEED + NEW_MOTOR_CURVE_CORR_VAL);
+			} else {
+				setMotorSpeed(MOTOR_FRONT_LEFT, NEW_MOTOR_CURVE_SPEED);
+				setMotorSpeed(MOTOR_FRONT_RIGHT, NEW_MOTOR_CURVE_SPEED);
+				setMotorSpeed(MOTOR_REAR_LEFT,
+						NEW_MOTOR_CURVE_SPEED + NEW_REAR_MOTOR_OFFSET);
+				setMotorSpeed(MOTOR_REAR_RIGHT,
+						NEW_MOTOR_CURVE_SPEED + NEW_REAR_MOTOR_OFFSET);
+			}
 			//loop_pidDiffCorr(tof1_val, tof2_val);
 #endif
 			break;
@@ -2310,7 +2348,7 @@ void mainLoop2(void) {
 				WAIT1_Waitms(NEW_BLIND_TIME_BACK / 10);
 			}
 #else
-			WAIT1_Waitms(NEW_BLIND_TIME);
+			WAIT1_Waitms(NEW_BLIND_TIME_BACK);
 #endif
 			loop_pidReset();
 			parcour_state = 6;
@@ -2402,16 +2440,31 @@ void mainLoop2(void) {
 				loop_setMotorStop();
 #endif
 				loop_setServosSideways();
+				WAIT1_Waitms(500);
+				loop_setServosStraight();
+				for (uint8_t i = 0; i < 4; i++) {
+					setMotorDirection(i, MOTOR_FORWARD);
+				}
+				for (uint8_t i = 0; i < 4; i++) {
+					setMotorSpeed(i, 10);
+				}
+				getToFValueMillimeters(tof3, &tof3_val);
+				getToFValueMillimeters(tof3, &tof3_val);
+				getToFValueMillimeters(tof3, &tof3_val);
+				do {
+					getToFValueMillimeters(tof3, &tof3_val);
+				} while (tof3_val < NEW_DIST_END_2);
+				loop_setMotorStop();
+				loop_setServosSideways();
 				if (type == PARCOUR_A) {
 					loop_setMotorDirRight();
 				} else {
 					loop_setMotorDirLeft();
 				}
-				setBrushless(BRUSHLESS_OFF);
 				serialSend(ROMAN_NUMERAL_REQUEST, RasPi);
 				serialSend(ROMAN_NUMERAL_REQUEST, PC);
-				WAIT1_Waitms(5000);
 				/* fix position */ // todo
+				WAIT1_Waitms(1000);
 				res = getToFValueMillimeters(tof2, &tof2_val);
 				if (res != ERR_OK) {
 					serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
@@ -2472,7 +2525,7 @@ void mainLoop2(void) {
 					for (uint8_t i = 0; i < 4; i++) {
 						setMotorSpeed(i, 0);
 					}
-					WAIT1_Waitms(500);
+					WAIT1_Waitms(1000);
 					res = getToFValueMillimeters(tof2, &tof2_val);
 					if (res != ERR_OK) {
 						serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
@@ -2509,6 +2562,10 @@ void mainLoop2(void) {
 			/* drive sideways for button pressing */
 			/* get tof value */
 			res = getToFValueMillimeters(tof2, &tof2_val);
+			if (res != ERR_OK) {
+				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
+			}
+			res = getToFValueMillimeters(tof5, &tof5_val);
 			if (res != ERR_OK) {
 				serialDebugLite(DEBUG_ERROR_GET_TOF_VALUE);
 			}
@@ -2551,35 +2608,71 @@ void mainLoop2(void) {
 					}
 					break;
 				}
-				if (button_dist_val < tof2_val) {
-					if (type == PARCOUR_A) {
-						loop_setMotorDirLeft();
+				if ((button <= 3 && type == PARCOUR_B)
+						|| (button >= 3 && type == PARCOUR_A)) {
+					if (button_dist_val < tof2_val) {
+						if (type == PARCOUR_A) {
+							loop_setMotorDirLeft();
+						} else {
+							loop_setMotorDirRight();
+						}
+						state8_neg_drv_dir = 1;
 					} else {
-						loop_setMotorDirRight();
+						if (type == PARCOUR_A) {
+							loop_setMotorDirRight();
+						} else {
+							loop_setMotorDirLeft();
+						}
+						state8_neg_drv_dir = 0;
 					}
-					state8_neg_drv_dir = 1;
 				} else {
-					if (type == PARCOUR_A) {
-						loop_setMotorDirRight();
+					if (button_dist_val < tof5_val) {
+						if (type == PARCOUR_A) {
+							loop_setMotorDirRight();
+						} else {
+							loop_setMotorDirLeft();
+						}
+						state8_neg_drv_dir = 1;
 					} else {
-						loop_setMotorDirLeft();
+						if (type == PARCOUR_A) {
+							loop_setMotorDirLeft();
+						} else {
+							loop_setMotorDirRight();
+						}
+						state8_neg_drv_dir = 0;
 					}
-					state8_neg_drv_dir = 0;
 				}
 				loop_setMotorButtonSpeed();
 				state8_initialized = 1;
 			}
-			if (state8_neg_drv_dir) {
-				if (tof2_val <= button_dist_val) {
-					loop_setMotorStop();
-					parcour_state = 9;
-					break;
+			if ((button <= 3 && type == PARCOUR_B)
+					|| (button >= 3 && type == PARCOUR_A)) {
+				if (state8_neg_drv_dir) {
+					if (tof2_val <= button_dist_val) {
+						loop_setMotorStop();
+						parcour_state = 9;
+						break;
+					}
+				} else {
+					if (tof2_val >= button_dist_val) {
+						loop_setMotorStop();
+						parcour_state = 9;
+						break;
+					}
 				}
 			} else {
-				if (tof2_val >= button_dist_val) {
-					loop_setMotorStop();
-					parcour_state = 9;
-					break;
+				if (state8_neg_drv_dir) {
+					if (tof5_val <= button_dist_val) {
+						loop_setMotorStop();
+						parcour_state = 9;
+						break;
+					}
+				} else {
+					if (tof5_val >= button_dist_val) {
+						loop_setMotorStop();
+						parcour_state = 9;
+						break;
+					}
 				}
 			}
 			break;
@@ -2593,7 +2686,67 @@ void mainLoop2(void) {
 			parcour_state = 10;
 			break;
 		case 10:
-			// todo: do sth. stupid
+			WAIT1_Waitms(1000);
+			loop_setMotorDirForward();
+			loop_setMotorButtonSpeed();
+			WAIT1_Waitms(300);
+			loop_setMotorStop();
+			loop_setServosSideways();
+			WAIT1_Waitms(1000);
+			uint16_t dist_to_wall = 250;
+			getToFValueMillimeters(tof2, &tof2_val);
+			getToFValueMillimeters(tof2, &tof2_val);
+			if ((tof2_val > dist_to_wall && type == PARCOUR_A)
+					|| (tof2_val < dist_to_wall && type == PARCOUR_B)) {
+				loop_setMotorDirLeft();
+			} else {
+				loop_setMotorDirRight();
+			}
+			loop_setMotorButtonSpeed();
+			uint8_t drive_to_wall = 0;
+			if (tof2_val > dist_to_wall) {
+				drive_to_wall = 1;
+			}
+			do {
+				getToFValueMillimeters(tof2, &tof2_val);
+				getToFValueMillimeters(tof2, &tof2_val);
+			} while ((drive_to_wall && tof2_val > dist_to_wall)
+					|| (!drive_to_wall && tof2_val < dist_to_wall));
+			loop_setMotorStop();
+			loop_setServosStraight();
+			loop_setMotorDirForward();
+			loop_setMotorButtonSpeed();
+			do {
+				getToFValueMillimeters(tof3, &tof3_val);
+				getToFValueMillimeters(tof3, &tof3_val);
+			} while (tof3_val < 200);
+			loop_setMotorStop();
+			//loop_setServosSideways();
+			for (uint8_t i = 0; i < 4; i++) {
+				setServo(i, SERVO_CIRCLE);
+			}
+			WAIT1_Waitms(500);
+			setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+			setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+			setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+			setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+			for (uint8_t i = 0; i < 4; i++) {
+				setMotorSpeed(i, 100);
+			}
+			WAIT1_Waitms(5000);
+			loop_setMotorStop();
+			WAIT1_Waitms(1000);
+			setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+			setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+			setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+			setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+			for (uint8_t i = 0; i < 4; i++) {
+				setMotorSpeed(i, 100);
+			}
+			WAIT1_Waitms(5000);
+			loop_setMotorStop();
+			setBrushless(BRUSHLESS_OFF);
+			WAIT1_Waitms(10000);
 			return;
 			break;
 		}
