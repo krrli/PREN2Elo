@@ -27,7 +27,7 @@ uint8_t brushlessChannel = 4;
 #else
 uint16_t straight_val[] = { 3300, 6450, 6450, 3000 };
 uint16_t sideways_val[] = { 6550, 3300, 3200, 6350 };
-uint16_t circle_val[]={5500,4400,4300,5100};
+uint16_t circle_val[]={5000,4800,4800,4700};
 uint16_t brushless_off = 3300;
 uint16_t brushless_on = 3800;
 #endif
