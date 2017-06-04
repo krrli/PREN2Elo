@@ -349,6 +349,7 @@ enum NewMotorSpeed {
 #define NEW_FEDER_ENABLED 0
 #define NEW_FEDER_SPEED 30
 #define NEW_FEDER_TIME 600
+#define NEW_GO_DOWN_ENABLED 1
 
 #define NEW_DRIVE_INTO_BUTTON_TIME 500 // value in ms
 

@@ -2050,6 +2050,22 @@ void mainLoop2(void) {
 					}
 					WAIT1_Waitms(100);
 #endif
+#if NEW_GO_DOWN_ENABLED
+					WAIT1_Waitms(1000);
+					setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+					setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+					setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+					setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+					for (uint8_t i = 0; i < 4; i++) {
+						setMotorSpeed(i, 50);
+					}
+					WAIT1_Waitms(500);
+					//loop_setMotorStop();
+					for (uint8_t i = 0; i < 4; i++) {
+						blockMotor(i);
+					}
+					WAIT1_Waitms(100);
+#endif
 					feder_en = 1;
 					cent_switch_old = cent_switch;
 				} else {
@@ -2122,6 +2138,17 @@ void mainLoop2(void) {
 			setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
 			setMotorSpeed(MOTOR_REAR_RIGHT, NEW_MOTOR_MAXSPEED);
 			WAIT1_Waitms(200);
+#endif
+#if NEW_GO_DOWN_ENABLED
+			for (uint8_t i = 0; i < 4; i++) {
+				unblockMotor(i);
+			}
+			WAIT1_Waitms(100);
+			setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+			setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+			setMotorSpeed(MOTOR_REAR_LEFT, 100);
+			setMotorSpeed(MOTOR_REAR_RIGHT, 100);
+			WAIT1_Waitms(100);
 #endif
 			loop_setMotorDirForward();
 			loop_setMotorMaxSpeed();
@@ -2740,7 +2767,7 @@ void mainLoop2(void) {
 			setMotorSpeed(MOTOR_FRONT_RIGHT, 100);
 			setMotorSpeed(MOTOR_REAR_LEFT, 100);
 			setMotorSpeed(MOTOR_REAR_RIGHT, 25);
-			WAIT1_Waitms(5000);
+			WAIT1_Waitms(3000);
 			loop_setMotorStop();
 			loop_setServosStraight();
 			setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
@@ -2780,8 +2807,35 @@ void mainLoop2(void) {
 			setMotorSpeed(MOTOR_FRONT_RIGHT, 25);
 			setMotorSpeed(MOTOR_REAR_LEFT, 25);
 			setMotorSpeed(MOTOR_REAR_RIGHT, 100);
-			WAIT1_Waitms(5000);
+			WAIT1_Waitms(3000);
 			loop_setMotorStop();
+			loop_setServosStraight();
+			setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+			setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+			setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+			setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+			for (uint8_t i = 0; i < 4; i++) {
+				setMotorSpeed(i, 50);
+			}
+			for (uint8_t i = 0; i < 3; i++) {
+				setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+				setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+				setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+				setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+				WAIT1_Waitms(500);
+				setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_FORWARD);
+				setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_FORWARD);
+				setMotorDirection(MOTOR_REAR_LEFT, MOTOR_BACKWARD);
+				setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_BACKWARD);
+				WAIT1_Waitms(500);
+			}
+			setMotorDirection(MOTOR_FRONT_LEFT, MOTOR_BACKWARD);
+			setMotorDirection(MOTOR_FRONT_RIGHT, MOTOR_BACKWARD);
+			setMotorDirection(MOTOR_REAR_LEFT, MOTOR_FORWARD);
+			setMotorDirection(MOTOR_REAR_RIGHT, MOTOR_FORWARD);
+			WAIT1_Waitms(400);
+			loop_setMotorStop();
+			loop_setServosSideways();
 			setBrushless(BRUSHLESS_OFF);
 			WAIT1_Waitms(10000);
 			return;
