@@ -72,7 +72,7 @@
       <File Name="Documentation/doxygen/TPM2_component.txt" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="91" />
       <File Name="Generated_Code/BitIoLdd4.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="48" />
       <File Name="Generated_Code/MT1_IN4.h" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="63" />
-      <File Name="Documentation/PREN2-Freedom_SIGNALS.txt" FileDate="2017-06-04, 11:01:47" FileAge="1496566907000" FileType="3072" />
+      <File Name="Documentation/PREN2-Freedom_SIGNALS.txt" FileDate="2017-06-08, 15:00:03" FileAge="1496926803000" FileType="3072" />
       <File Name="Generated_Code/BitIoLdd4.c" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="48" />
       <File Name="Static_Code/PDD/CMP_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
       <File Name="Generated_Code/BitIoLdd2.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="44" />
@@ -171,49 +171,49 @@
       <File Name="Documentation/doxygen/BitIoLdd13_component.txt" FileDate="2017-05-03, 15:34:24" FileAge="1493818464000" FileType="45637" CompNumb="66" />
       <File Name="Static_Code/PDD/MCG_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
       <File Name="Generated_Code/SW_Parc.h" FileDate="2017-05-03, 15:34:24" FileAge="1493818464000" FileType="45637" CompNumb="53" />
-      <File Name="Generated_Code/BitIoLdd9.h" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="58" />
       <File Name="Generated_Code/AS1.h" FileDate="2017-05-06, 20:36:52" FileAge="1494095812000" FileType="45637" CompNumb="10" />
+      <File Name="Generated_Code/BitIoLdd9.h" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="58" />
       <File Name="Documentation/doxygen/BitIoLdd16_component.txt" FileDate="2017-05-03, 15:34:24" FileAge="1493818464000" FileType="45637" CompNumb="72" />
-      <File Name="Static_Code/PDD/UART0_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
       <File Name="Generated_Code/SW_Parc.c" FileDate="2017-05-03, 15:34:24" FileAge="1493818464000" FileType="45637" CompNumb="53" />
-      <File Name="Generated_Code/BitIoLdd9.c" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="58" />
+      <File Name="Static_Code/PDD/UART0_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
       <File Name="Generated_Code/AS1.c" FileDate="2017-05-06, 20:36:52" FileAge="1494095812000" FileType="45637" CompNumb="10" />
+      <File Name="Generated_Code/BitIoLdd9.c" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="58" />
       <File Name="Generated_Code/BitIoLdd7.h" FileDate="2017-05-03, 15:34:24" FileAge="1493818464000" FileType="45637" CompNumb="54" />
       <File Name="Generated_Code/BitIoLdd7.c" FileDate="2017-05-03, 15:34:24" FileAge="1493818464000" FileType="45637" CompNumb="54" />
-      <File Name="Static_Code/PDD/TSI_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
       <File Name="Static_Code/PDD/I2C_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
+      <File Name="Static_Code/PDD/TSI_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
       <File Name="Generated_Code/BitIoLdd5.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="50" />
       <File Name="Generated_Code/BitIoLdd5.c" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="50" />
       <File Name="Documentation/doxygen/BitIoLdd10_component.txt" FileDate="2017-05-03, 15:34:24" FileAge="1493818464000" FileType="45637" CompNumb="60" />
       <File Name="Generated_Code/BitIoLdd3.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="46" />
       <File Name="Static_Code/PDD/TPM_PDD.h" FileDate="2017-03-25, 18:41:59" FileAge="1490463719000" FileType="1048576" />
-      <File Name="Static_Code/PDD/PORT_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
       <File Name="Generated_Code/MT1_IN3.h" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="61" />
+      <File Name="Static_Code/PDD/PORT_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
       <File Name="Generated_Code/BitIoLdd3.c" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="46" />
       <File Name="Generated_Code/BitIoLdd1.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="42" />
-      <File Name="Generated_Code/MT2_IN3.h" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="69" />
       <File Name="Generated_Code/MT1_IN3.c" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="61" />
+      <File Name="Generated_Code/MT2_IN3.h" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="69" />
       <File Name="Generated_Code/MT1_IN1.h" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="57" />
       <File Name="Generated_Code/BitIoLdd1.c" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="42" />
-      <File Name="Generated_Code/MT2_PWM1.h" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="28" />
       <File Name="Generated_Code/MT2_IN3.c" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="69" />
+      <File Name="Generated_Code/MT2_PWM1.h" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="28" />
       <File Name="Generated_Code/TPM1.h" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="96" />
-      <File Name="Generated_Code/MT2_IN1.h" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="65" />
       <File Name="Generated_Code/MT1_IN1.c" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="57" />
+      <File Name="Generated_Code/MT2_IN1.h" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="65" />
       <File Name="Generated_Code/MT2_PWM1.c" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="28" />
       <File Name="Generated_Code/TPM1.c" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="96" />
       <File Name="Generated_Code/MT2_IN1.c" FileDate="2017-03-30, 09:52:38" FileAge="1490860358000" FileType="45637" CompNumb="65" />
-      <File Name="Generated_Code/PwmLdd9.h" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="98" />
-      <File Name="Generated_Code/WAIT1.h" FileDate="2017-04-07, 15:31:36" FileAge="1491571896000" FileType="45637" CompNumb="4" />
       <File Name="Generated_Code/PE_Error.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" />
-      <File Name="Generated_Code/CS1config.h" FileDate="2017-04-07, 15:31:36" FileAge="1491571896000" FileType="45637" CompNumb="9" />
+      <File Name="Generated_Code/WAIT1.h" FileDate="2017-04-07, 15:31:36" FileAge="1491571896000" FileType="45637" CompNumb="4" />
+      <File Name="Generated_Code/PwmLdd9.h" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="98" />
       <File Name="Sources/main.c" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="128" />
+      <File Name="Generated_Code/CS1config.h" FileDate="2017-04-07, 15:31:36" FileAge="1491571896000" FileType="45637" CompNumb="9" />
       <File Name="Documentation/doxygen/PwmLdd1_component.txt" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="24" />
-      <File Name="Generated_Code/PwmLdd9.c" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="98" />
-      <File Name="Generated_Code/WAIT1.c" FileDate="2017-04-07, 15:31:36" FileAge="1491571896000" FileType="45637" CompNumb="4" />
       <File Name="Generated_Code/CLS1.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="3" />
-      <File Name="Generated_Code/PwmLdd7.h" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="93" />
+      <File Name="Generated_Code/WAIT1.c" FileDate="2017-04-07, 15:31:36" FileAge="1491571896000" FileType="45637" CompNumb="4" />
+      <File Name="Generated_Code/PwmLdd9.c" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="98" />
       <File Name="Static_Code/PDD/COP_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
+      <File Name="Generated_Code/PwmLdd7.h" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="93" />
       <File Name="Generated_Code/CLS1.c" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="3" />
       <File Name="Documentation/doxygen/PwmLdd4_component.txt" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="31" />
       <File Name="Generated_Code/PwmLdd7.c" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="93" />
@@ -223,27 +223,27 @@
       <File Name="Documentation/doxygen/BitIoLdd3_component.txt" FileDate="2017-04-07, 15:31:36" FileAge="1491571896000" FileType="45637" CompNumb="46" />
       <File Name="Documentation/doxygen/PwmLdd7_component.txt" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="93" />
       <File Name="Generated_Code/PwmLdd5.c" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="88" />
-      <File Name="Generated_Code/PE_LDD.h" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="2" />
       <File Name="Generated_Code/Cpu.h" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/PE_LDD.h" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="2" />
       <File Name="Generated_Code/PwmLdd3.h" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="29" />
       <File Name="Documentation/doxygen/BitIoLdd6_component.txt" FileDate="2017-04-07, 15:31:36" FileAge="1491571896000" FileType="45637" CompNumb="52" />
-      <File Name="Generated_Code/PE_LDD.c" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="2" />
       <File Name="Generated_Code/Cpu.c" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="2" />
-      <File Name="Generated_Code/TMOUT1.h" FileDate="2017-05-28, 10:15:14" FileAge="1495959314000" FileType="45637" CompNumb="82" />
+      <File Name="Generated_Code/PE_LDD.c" FileDate="2017-05-28, 10:27:43" FileAge="1495960063000" FileType="45637" CompNumb="2" />
       <File Name="Generated_Code/PwmLdd3.c" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="29" />
+      <File Name="Generated_Code/TMOUT1.h" FileDate="2017-05-28, 10:15:14" FileAge="1495959314000" FileType="45637" CompNumb="82" />
       <File Name="Generated_Code/PwmLdd1.h" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="24" />
       <File Name="Documentation/doxygen/BitIoLdd9_component.txt" FileDate="2017-05-03, 15:34:24" FileAge="1493818464000" FileType="45637" CompNumb="58" />
       <File Name="Generated_Code/TMOUT1.c" FileDate="2017-05-28, 10:15:14" FileAge="1495959314000" FileType="45637" CompNumb="82" />
       <File Name="Generated_Code/PwmLdd1.c" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="24" />
       <File Name="Generated_Code/MT1_PWM2.h" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="26" />
       <File Name="Documentation/doxygen/RoutingReport_component.txt" FileDate="2017-04-07, 15:31:36" FileAge="1491571896000" FileType="45637" CompNumb="2" />
-      <File Name="Generated_Code/MT1_PWM2.c" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="26" />
       <File Name="Static_Code/PDD/DMA_PDD.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="1048576" />
+      <File Name="Generated_Code/MT1_PWM2.c" FileDate="2017-05-28, 10:18:40" FileAge="1495959520000" FileType="45637" CompNumb="26" />
       <File Name="Generated_Code/Zent_PWM.h" FileDate="2017-05-28, 10:30:26" FileAge="1495960226000" FileType="45637" CompNumb="87" />
-      <File Name="Generated_Code/Zent_PWM.c" FileDate="2017-05-28, 10:30:26" FileAge="1495960226000" FileType="45637" CompNumb="87" />
       <File Name="Generated_Code/UTIL1.h" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="7" />
+      <File Name="Generated_Code/Zent_PWM.c" FileDate="2017-05-28, 10:30:26" FileAge="1495960226000" FileType="45637" CompNumb="87" />
       <File Name="Generated_Code/UTIL1.c" FileDate="2017-03-25, 18:41:58" FileAge="1490463718000" FileType="45637" CompNumb="7" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>155</CodeGenReference>
+  <CodeGenReference>156</CodeGenReference>
 </CodeGenerationInfo>
