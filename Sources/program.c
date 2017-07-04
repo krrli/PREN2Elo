@@ -2062,7 +2062,8 @@ void mainLoop2(void) {
 					WAIT1_Waitms(500);
 					//loop_setMotorStop();
 					for (uint8_t i = 0; i < 4; i++) {
-						blockMotor(i);
+						//blockMotor(i);
+						setMotorSpeed(i,10); // todo
 					}
 					WAIT1_Waitms(100);
 #endif

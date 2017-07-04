@@ -30,6 +30,7 @@ void starttest(void);
 #define TEST_MOTOR_FEDER 0
 #define TEST_MOTOR_FEDER_BLOCKING 0
 #define TEST_DRIVE_TO_START 0
+#define DEMO_PRESI 0
 
 void doNothing(void);
 
@@ -68,5 +69,7 @@ void testMotorFeder();
 void testMotorFederBlocking();
 
 void testDriveToStart();
+
+void demoPresi();
 
 #endif /* SOURCES_TEST_H_ */
